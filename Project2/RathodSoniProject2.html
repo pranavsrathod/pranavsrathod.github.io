@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Rathod-Soni VR Project</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+</head>
+<style>
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+        transform: rotate(270deg);
+      }
+    .rotate_image {
+        -webkit-transform: rotate(270deg);
+        -moz-transform: rotate(270deg);
+        -ms-transform: rotate(270deg);
+        -o-transform: rotate(270deg);
+        transform: rotate(270deg);
+    }
+</style>
+<body class="w3-light-grey">
+    <!-- Navigation -->
+<nav class="w3-bar w3-black">
+    <a href="../index.html" class="w3-button w3-bar-item">About</a>
+    <a href="../cs428.html" class="w3-button w3-bar-item">CS 428</a>
+    <a href="../cs428Proj1Pratho2.html" class="w3-button w3-bar-item">Project 1</a> 
+    <a href="RathodSoniProject2.html" class="w3-button w3-bar-item">Project 2</a>
+    <a href="../studentsChoice.html" class="w3-button w3-bar-item">Student's Choice</a>
+  </nav>
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding"></div>
+
+
+  <div class="w3-container w3-card w3-white w3-margin-bottom">
+    <div class="w3-container">
+        <h1 style="text-align: center;" class="w3-text-black w3-padding-16"><i class='fas fa-laptop-code' style='font-size:48px;color:red'></i>CS 428 Fall 2022</h1>
+        <h2 style="text-align: center;" class="w3-text-black w3-padding-16">PROJECT 2 - Pow! A Virtual Comic Shop and Arcade</h2>
+        <h3 style="text-align: center;">A Virtual Reality Project made using Unity and Virtual Reality Toolkit(VRTK), to give an immersive experice to interact with objects sold and displayed in an imaginary, vitual comic shop and arcade in the future CS building at UIC</h3>
+        <h3 style="text-align: center;" class="w3-text-black w3-padding-16">Pranav Rathod and Ish Soni</h3>
+        <div class="w3-container">
+          <h5 style="text-align: center;" class="w3-opacity"><b>Project 2</b></h5>
+          <h6 style="text-align: center;" class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>October 17, 2022</h6>
+        </div>
+    </div>
+  </div>
+  
+  <div class="w3-container w3-card w3-white w3-margin-bottom">
+    <div class="w3-container">
+        <p>To use this app you must have Unity 2021.3.6f1 (go here https://unity3d.com/get-unity/download/archive and find the version and download via unity hub) and VRTK version 4 (it is already included in the files so no need to worry about installing this) and download the app files from the git repository </p>
+        <p> Link To The Project : <u><a href="Project Link" rel="nofollow">https://github.com/Dragon0715/Ish-Soni-Pranav-Rathod-Project-2</a></u></p>
+        <p>After extracting the zip file, open the file in unity and go into assets/CoffeeShopStarterPack/Scenes and open up the CoffeeShop Scene. From here you can see all the files that we used and you can begin using the app in the editor. The scene is of a comic/game kiosk in the new CS building that’s selling various game and comic related items.</p>
+        <p>To be able to run the app, make sure you have CameraRigs.UnityXRPluginFramework disabled and you have CameraRigs.SpatialSimulator enabled. Once the scene builds, use WASD to move around and the mouse to look around. You can also use 2 and 3 to take control of the left and right controllers respectively and move them around with WASD and the mouse. You can grab and interact with various objects in the scene as well. To run the app in VR, first you need to have CameraRigs.UnityXRPluginFramework enabled and CameraRigs.SpatialSimulator disabled.</p>
+        <p>Then connect your oculus headset and under Unity Build Settings make sure you are building for the Android Platform and the particular Quest you connected should show up under the Run Device list of compatible connected devices. If the Quest headset does not show up in the list you may need to unplug and re-plug the USB cable and again tell the quest to accept the connection to the laptop. You may also need to make sure USB debugging is enabled on the quest. </p>
+        <p>You can check this by clicking on the Quick Settings menu on the left side of the thin menu, then clicking on the settings menu on the upper right, then scrolling down in the menu on the left to Developer and turning on the USB Connection Dialog. After clicking build and run, wait for the app to build and it should start automatically on the quest. From there you can experience the scene in VR either via walking around the scene or teleporting around, being able to interact with the same objects as you could when running the scene in the editor with the oculus touch controllers. </p>
+    </div>
+</div>
+
+<div class="w3-container w3-card w3-white w3-margin-bottom">
+    <div class="w3-container">
+        <h2>Project Video</h2>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/zbqwE6YaNyE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
+<div class="w3-container w3-card w3-white w3-margin-bottom">
+    <div class="w3-container">
+        <h1>Pow! - The Comic Shop and Arcade</h1>
+        <p><img src = "images/ssFront.jpg" width="600" height="600" /><img src = "images/sFrontClose.jpg" width="600" height="600" /></p>
+        <p><img src = "images/ssLeft.jpg" width="600" height="600" /><img src = "images/ssRight.jpg" width="600" height="600" /></p>
+        <p><img src = "images/ssClockVendGame.jpg" width="600" height="600" /></p>
+        
+    </div>
+</div>
+<div class="w3-container w3-card w3-white w3-margin-bottom">
+       
+    <div class="w3-container">
+        <h1>How viewing and interacting with your world is different in the simulator and the headset?</h1>
+        <div class="w3-container w3-card w3-white w3-margin-bottom">
+       
+            <div class="w3-container">
+                <h2>Ish Soni :</h2>
+                <p>Viewing and interacting with the kiosk in VR is vastly different than when you are doing the same thing via the Unity simulator. In the simulator it is similar to playing a normal pc game where you can use WASD to move around the world. It then becomes very different as you have to use the 2 and 3 keys to switch between the player and the oculus controllers. After switching to them you can use the same controls to move the controllers around the scene and rotate them with the mouse. By clicking the left mouse button you can grab objects that are interesting with your controller. It is kind of jarring to play in the simulator as it becomes difficult at times to move the controllers into the right spot to interact with certain items in the scene. </p>
+                <p>The experience in VR is a lot smoother and easier to interact with the scene. The first main difference is that you can teleport around the scene as well as walk around the space by walking in the real world. It is also much easier to interact with the various items in the scene because you can just move your hand to that location and not have to deal with trying to have the controller point in the right direction with your mouse and then move it with the WASD keys. Playing in VR also gives you a sense of scale with the scene. You can easily see the different sizes of the items in comparison to your own height which is something that cannot be replicated via the simulator. It also gives you a sense of spatial awareness as well as you can see everything around you as if you were actually there. The 3D sounds help this too since you can physically get closer to the objects playing these sounds and hear them get louder as you do. This is something you can experience in the simulator as well but I personally think it has a bigger impact on your spatial awareness in the VR headset rather than in the editor. Playing the scene in VR lets you experience the physics of the objects much better than in the simulator. While the simulator lets you pick up objects, move them around, and bump them into other objects it doesn’t give you a full sense of the physics. Whereas when you are in VR you can do all of the things in the simulator as well as toss things around among other things that will display the physics much more than you can fully simulate with the controllers in the simulator.
+                </p>
+                <p>Because of all of these reasons I believe that being able to view our project in VR makes it a much better experience overall than just being able to view it in the simulator. While the simulator does a good job of mimicking the VR headset and the controllers it is best for testing out the scene. The full experience should be saved for the VR headset as it will give you the best feel of the scene that you have created.
+                </p>
+            </div>
+        </div>
+        <div class="w3-container w3-card w3-white w3-margin-bottom">
+            <div class="w3-container">
+                <h2>Pranav Rathod :</h2>
+                <p>Through the process of working on this project we were able to gain understanding about how space constraints can hinder the experience of interacting with a virtual world. 
+                </p>
+                <p>I was reminded of when I started learning to drive as soon as I turned 18 years old. I had joined a driving school that taught me the basic concepts of driving on a simulator, which was just like the ones we used to have in mall arcades. </p>
+                <p>When learning on a simulator, I learnt how to change gears in a manual (stick shift) car and understood how different speeds are affected by gears and the importance of having control over your vehicle when speeding up and slowing down. This played a crucial part in my learning before I started practicing driving in the real world which would have been dangerous when learning how to drive in a crowded city that also has bad traffic. But the basics that were taught on the simulator were very limited. </p>
+                <p>When I started driving on roads I had a hard time having spatial awareness of what is going around me because until then I was confined to the knowledge that I learnt on 3 screens that was not immersive and intuitive at all. I was thrown off by how, in real life you need to be hyperware of your surroundings to be the best at driving. The cars that you can drive past can be super close and only experience can enhance the judgment for you while driving in real time.</p>
+                <p>This was a similar difference that we noticed when working on both the simulator and the headset. Working on the simulator helped us save time in placing the models in the given space, but using the headset helped us understand the scale of the objects with respect to each other, we understood that purpose of the headset was to place our own self into the environment and interact with the objects, like grab them, toss them hold them closer to listen what sound they make with respect to their distance from you, this kind of immersive experience was not achievable when using a simulator as it was not immersive, we were confined to the dimension of our laptop screen and the interactions that we made did not feel organic.</p>
+                <p>Using the headset we were able to move around the environment but also had its cons, such as we were only able to test the application after making major changes, since building and running the project on the Oculus Quest was time consuming, so using the simulator to see test the project after making quick changes came in handy in saving time.</p>
+                <p>I feel there is a huge difference when it comes to using simulators and placing ourselves in real world scenarios. Simulators may help us brace ourselves and give us a conceptual understanding on how things are, but it is actually being in place that makes it realistic, immersive and interesting.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+  <div class="w3-container w3-card w3-white w3-margin-bottom">
+       
+    <div class="w3-container">
+        <h3><strong>10 Custom Models</strong></h3>
+        <ol>
+            <li> <h5>Soda Can by Pranav</h5>
+                <h6 class="w3-opacity">Interactiveness : Can be grabbed</h6>
+                <h6 class="w3-opacity">Sound : No sound</h6>
+                <h6 class="w3-opacity">Animation : No animation</h6>
+                <p><img src="images/ishSoda.png" width="300" height="400" /> <img src="images/pranavSoda.png" width="300" height="400" /></p>
+                <!-- <p><img src="images/pranavSoda.png" width="300" height="400" /></p> -->
+            </li>
+            
+            <li> <h5>Comic Book by Pranav</h5>
+                <h6 class="w3-opacity">Interactiveness : Can be grabbed</h6>
+                <h6 class="w3-opacity">Sound : No sound</h6>
+                <h6 class="w3-opacity">Animation : No animation</h6>
+                <p><img src="images/houseOfMComic.png" width="300" height="400" /> </p>
+            </li>
+            
+            <li> <h5>D4 by Ish</h5>
+                <h6 class="w3-opacity">Interactiveness : Can be grabbed</h6>
+                <h6 class="w3-opacity">Sound : No sound</h6>
+                <h6 class="w3-opacity">Animation : No animation</h6>
+                <p><img src="images/d4.png" width="410" height="400" /> </p>
+            </li>
+            
+            <li> <h5>D6 by Ish</h5>
+                <h6 class="w3-opacity">Interactiveness : Can be grabbed</h6>
+                <h6 class="w3-opacity">Sound : No sound</h6>
+                <h6 class="w3-opacity">Animation : No animation</h6>
+                <p><img src="images/d6.PNG" width="410" height="400" /> </p>
+
+            </li>
+            
+            <li> <h5>D12 by Ish</h5>
+                <h6 class="w3-opacity">Interactiveness : Can be grabbed</h6>
+                <h6 class="w3-opacity">Sound : No sound</h6>
+                <h6 class="w3-opacity">Animation : No animation</h6>
+                <p><img src="images/d12.PNG" width="410" height="400" /> </p>
+            </li>
+            
+            <li> <h5>Vending Machine Buttons by Pranav</h5>
+                <h6 class="w3-opacity">Interactiveness : Can be touched to spawn soda can in the vending machine</h6>
+                <h6 class="w3-opacity">Sound : One of the buttons beeps when you touch it. Beep-07 from https://www.soundjay.com/beep-sounds-1.html#google_vignette (https://www.soundjay.com/buttons/sounds/beep-07a.mp3)</h6>
+                <h6 class="w3-opacity">Animation : No animation</h6>
+                <p><img src="images/ishButton.png" width="300" height="400" /> <img src="images/pranavButton.png" width="300" height="400" /></p>
+            </li>
+            
+            <li> <h5>Mario Star By Ish</h5>
+                <h6 class="w3-opacity">Interactiveness : Can be grabbed</h6>
+                <h6 class="w3-opacity">Sound : Plays mario star power theme that gets louder when you get closer (3d sound) mario star power sound from https://djlunatique.com/mario-star-power-sound-effect/</h6>
+                <h6 class="w3-opacity">Animation : No animation</h6>
+                <p><img src="images/mario star.PNG" width="410" height="400" /> </p>
+            </li>
+            
+            <li> <h5>Regular Stack of Books by Pranav</h5>
+                <h6 class="w3-opacity">Interactiveness : No interaction</h6>
+                <h6 class="w3-opacity">Sound : No sound</h6>
+                <h6 class="w3-opacity">Animation : No animation</h6>
+                <p><img src="images/stackOfBooks.png" width="600" height="400" /> </p>
+            </li>
+            
+            <!-- <li> <h5>Comic Book by Pranav</h5>
+                <h6 class="w3-opacity">Interactiveness : Can be grabbed</h6>
+                <h6 class="w3-opacity">Sound : No sound</h6>
+                <h6 class="w3-opacity">Animation : No animation</h6>
+            </li> -->
+            
+            <li> <h5>Earth by Pranav</h5>
+                <h6 class="w3-opacity">Interactiveness : Can be grabbed</h6>
+                <h6 class="w3-opacity">Sound : No sound</h6>
+                <h6 class="w3-opacity">Animation : Spins on top of the arcade machine</h6>
+                <p><img src="images/spinningEarth.png" width="410" height="400" /> </p>
+            </li>
+        </ol>
+
+            
+        </div>
+        
+    </div>  
+  <div class="w3-container w3-card w3-white w3-margin-bottom">
+       
+        <div class="w3-container">
+                <h2><strong>Citations</strong></h2>
+                <h3><strong>30 Models Sourced From the Internet</strong></h3>
+                <ol>
+                <li> <h5>Thrasher Playing Cards" (https://skfb.ly/6XVu6) by rentless is licensed under Creative Commons Attribution (<u><a href="http://creativecommons.org/licenses/by/4.0/" rel="nofollow">http://creativecommons.org/licenses/by/4.0/</a></u>).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Can be Grabbed</h6>
+                    <h6 class="w3-opacity">Sound : No sound.</h6>
+                    <h6 class="w3-opacity">Animation : No Animation</h6>
+                </li>
+                <li> <h5>"Board Game Piece - Wolf" (https://skfb.ly/oqsQW) by PerishBtw is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Can be Grabbed</h6>
+                    <h6 class="w3-opacity">Sound : No sound.</h6>
+                    <h6 class="w3-opacity">No Animation</h6>
+                </li>
+                <li> <h5>"[Stylized] Vending machine" (https://skfb.ly/6YuWO) by metrosp is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : There are two buttons that when collided with makes the vending machine produce different kinds of soda cans (Each named after the team worked on this project)</h6>
+                    <h6 class="w3-opacity">Sound : Sound of a vending machine running that gets louder as you get closer to the vending machine (3d sound) taken from https://samplefocus.com/samples/recording-humming-vending-machine</h6>
+                    <h6 class="w3-opacity">Animation : No Animation</h6>
+                </li>
+                <li> <h5>"PS4 Games Collection" (https://skfb.ly/6R8Mn) by Paul is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Not interactive</h6>
+                    <h6 class="w3-opacity">Sound: No Sound</h6>
+                    <h6 class="w3-opacity">Animation: No Animation</h6>
+                </li>
+                <li> <h5>"Lego Iron Man minifigure" (https://skfb.ly/o6Gpv) by Neut2000 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Can be Grabbed</h6>
+                    <h6 class="w3-opacity">Sound : No sound.</h6>
+                    <h6 class="w3-opacity">Animation: No Animation</h6>
+                </li>
+                <li> <h5>"Marvels Future Fight  Doctor Strange" (https://skfb.ly/ooZBK) by Nyilonelycompany is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Can be Grabbed</h6>
+                    <h6 class="w3-opacity">Sound : No sound.</h6>
+                    <h6 class="w3-opacity">Animation: No Animation</h6>
+                </li>
+                <li> <h5>"Captain Marvel" (https://skfb.ly/6QSXs) by Shivam.Yadav is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Can be Grabbed</h6>
+                    <h6 class="w3-opacity">Sound : No sound.</h6>
+                    <h6 class="w3-opacity">Animation: No Animation</h6>
+                </li>
+                <li> <h5>"Infinity Ultron" (https://skfb.ly/osJyr) by shouryahaldkar is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Can be Grabbed</h6>
+                    <h6 class="w3-opacity">Sound : No sound.</h6>
+                    <h6 class="w3-opacity">Animation: No Animation</h6>
+                </li>
+                <li> <h5>"Vecna's Clock (read description)" (https://skfb.ly/ovMJI) by Pedro Confusoes is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <p>The Skin Replaced with Ish’s Minecraft Character Skin to give it a personal touch.</p>
+                    <h6 class="w3-opacity">Interactiveness : Not interactive</h6>
+                    <h6 class="w3-opacity">Sound : Model inspired by the Clock as Shown in Stranger Things Season 4. Makes the chime sound as heard in the show before the villain attacks as you get closer (3d sound). Sound taken from https://www.youtube.com/watch?v=f53Swo18XzU </h6>
+                    <h6 class="w3-opacity">Animation : No Animation</h6>
+                </li>
+                <li> <h5>"Minecraft - Steve" (https://skfb.ly/6RsFO) by Vincent Yanez is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Can be Grabbed</h6>
+                    <h6 class="w3-opacity">Sound : No sound.</h6>
+                    <h6 class="w3-opacity">Animation: No Animation</h6>
+                </li>
+                <li> <h5>"Minecraft Cat Lying" (https://skfb.ly/6UOHF) by Pneuma01 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Can be Grabbed, </h6>
+                    <h6 class="w3-opacity">Sound : No sound.</h6>
+                    <h6 class="w3-opacity">Animation : No Animation</h6>
+                </li>
+                <li> <h5>"Palace Arcade" (https://skfb.ly/6VBoz) by Batuhan13 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Can be Grabbed,</h6>
+                    <h6 class="w3-opacity">Sound: No Sound</h6>
+                    <h6 class="w3-opacity">Animation : The Sign of the arcade spins.</h6>
+                </li>
+                <li> <h5>"ps5 controller" (https://skfb.ly/6RGLZ) by Fred Drabble is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Can be Grabbed, </h6>
+                    <h6 class="w3-opacity">Sound : No sound.</h6>
+                    <h6 class="w3-opacity">Animation : No Animation</h6>
+                </li>
+                <li> <h5>"XBox 360 controller" (https://skfb.ly/6WIWK) by Carlos Nava is licensed under Creative Commons Attribution-ShareAlike (http://creativecommons.org/licenses/by-sa/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Can be Grabbed</h6>
+                    <h6 class="w3-opacity">Sound : No sound.</h6>
+                    <h6 class="w3-opacity">Animation : No Animation</h6>
+                </li>
+                <li> <h5>"Retro Voxel Video Game Machine" (https://skfb.ly/KEMy) by Sparky3D is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Not Interactive</h6>
+                    <h6 class="w3-opacity">Sound : A generic sound of an old 8-Bit Game is played that gets louder as you get closer (3d sound) to the Arcade Game Machine, taken from https://pixabay.com/sound-effects/8bit-music-for-game-68698/ </h6>
+                    <h6 class="w3-opacity">Animation: No Animation</h6>
+                </li>
+                <li> <h5>"xbox_one PBR" (https://skfb.ly/o89wp) by 101Zeus101 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Can be Grabbed </h6>
+                    <h6 class="w3-opacity">Sound : No sound</h6>
+                    <h6 class="w3-opacity">Animation : No Animation</h6>
+                </li>
+                
+                <li> <h5>"Cash Register" (https://skfb.ly/orBWs) by nathanielmoore is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Not Interactive</h6>
+                    <h6 class="w3-opacity">Sound : No sound</h6>
+                    <h6 class="w3-opacity">Animation : No Animation</h6>
+                </li>
+                
+                
+                <li> <h5>"Chicken - Crossy Road" (https://skfb.ly/onCvA) by micaela.reyes0059 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Can be Grabbed</h6>
+                    <h6 class="w3-opacity">Sound : Plays a chick chirping sound that gets louder as you get closer (3d sound).Chick Chirping by jsbarrett from https://pixabay.com/sound-effects/chick-chirping-75543/</h6>
+                    <h6 class="w3-opacity">Animation : No Animation</h6>
+                </li>
+                
+                
+                <li> <h5>"Players Handbook And Dungeon Masters Guide" (https://skfb.ly/6wV8u) by JayDesigns3D is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Not Interactive</h6>
+                    <h6 class="w3-opacity">Sound : No sound</h6>
+                    <h6 class="w3-opacity">Animation : No Animation</h6>
+                </li>
+                
+                
+                <li> <h5>"Switch - Blockbench" (https://skfb.ly/6QSMS) by CookiesNom is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Can be Grabbed</h6>
+                    <h6 class="w3-opacity">Sound : No sound</h6>
+                    <h6 class="w3-opacity">Animation : No Animation</h6>
+                </li>
+                
+                
+                <li> <h5>"Comic Book / Super Hero Action Words, pack 1" (https://skfb.ly/owYqz) by np-dev is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Not Interactive</h6>
+                    <h6 class="w3-opacity">Sound : No sound</h6>
+                    <h6 class="w3-opacity">Animation : No Animation</h6>
+                </li>
+                
+                
+                <li> <h5>"PS5" (https://skfb.ly/6T7JX) by rtql8d is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/)</h5>
+                    <h6 class="w3-opacity">Interactiveness : Can be Grabbed</h6>
+                    <h6 class="w3-opacity">Sound : No sound</h6>
+                    <h6 class="w3-opacity">Animation : No Animation</h6>
+                </li>
+                
+                
+                <li> <h5>"Nintendo DS Lite" (https://skfb.ly/6ZDvQ) by Cianon is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Can be Grabbed</h6>
+                    <h6 class="w3-opacity">Sound : No sound</h6>
+                    <h6 class="w3-opacity">Animation : No Animation</h6>
+                </li>
+                
+                
+                <li> <h5>"Dark Souls: New Leaf - VGRemix Knight Model" (https://skfb.ly/m5k42fecb) by PolygonCherub is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Can be Grabbed</h6>
+                    <h6 class="w3-opacity">Sound : No sound</h6>
+                    <h6 class="w3-opacity">Animation : No Animation</h6>
+                </li>
+                
+                
+                <li> <h5>"Animal crossing Gyroid" (https://skfb.ly/ovAto) by Fnalex is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Can be Grabbed</h6>
+                    <h6 class="w3-opacity">Sound : No sound</h6>
+                    <h6 class="w3-opacity">Animation : No Animation</h6>
+                </li>
+                
+                
+                <li> <h5>"Coin - Super Mario Odyssey" (https://skfb.ly/o7zWN) by Islide is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Can be Grabbed, spawns when you interact with the Mario Mystery Box</h6>
+                    <h6 class="w3-opacity">Sound : Makes coin sound from mario when it spawns when interacting with the mystery box. mario coin sound by ALEXANDER https://orangefreesounds.com/mario-coin-sound/</h6>
+                    <h6 class="w3-opacity">Animation : No Animation</h6>
+                </li>
+                
+                
+                <li> <h5>"Mystery Block - Super Mario Odyssey" (https://skfb.ly/o7DoX) by Islide is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : When Interacted with makes a coin fall down and the coin makes sound as shown in the Super Mario Game.</h6>
+                    <h6 class="w3-opacity">Sound : No sound</h6>
+                    <h6 class="w3-opacity">Animation : No Animation</h6>
+                </li>
+                
+                
+                <li> <h5>"Mario super mario sunshine" (https://skfb.ly/6RnJI) by hieronymusbp is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Not Interactive</h6>
+                    <h6 class="w3-opacity">Sound : Plays original super mario bros theme which gets louder as you get closer (3d sound). Sound from https://www.youtube.com/watch?v=NTa6Xbzfq1U</h6>
+                    <h6 class="w3-opacity">Animation : No Animation</h6>
+                </li>
+                
+                
+                <li> <h5>"Diamondhead - Ben 10" (https://skfb.ly/6C9su) by thanhtp is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : Can be grabbed</h6>
+                    <h6 class="w3-opacity">Sound : Plays Ben 10 theme sound that gets louder as you get closer (3d sound). Taken From https://www.youtube.com/watch?v=ids4KYzDnkY</h6>
+                    <h6 class="w3-opacity">Animation : No Animation</h6>
+                </li>
+                
+                
+                <li> <h5>"Low Poly Spinning Heart!" (https://skfb.ly/YsvQ) by mano1creative is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</h5>
+                    <h6 class="w3-opacity">Interactiveness : No interaction</h6>
+                    <h6 class="w3-opacity">Sound : No sound.</h6>
+                    <h6 class="w3-opacity">Animation : Spins</h6>
+                </li>
+                
+            </ol>
+        </div>
+        
+    </div>
+    <div class="w3-container w3-card w3-white w3-margin-bottom">
+       
+        <div class="w3-container">
+            <h3><strong>Sounds/Music Citations</strong></h3>
+            <ol>
+                <li> <h5>8bit Music for Game by annoyedCactus</h5>
+                    <h6 class="w3-opacity">Link: https://pixabay.com/sound-effects/8bit-music-for-game-68698/</h6>
+                </li>
+                
+                <li> <h5>Recording - Vending Machine Humming by TM_Tobias</h5>
+                    <h6 class="w3-opacity">Link: https://samplefocus.com/samples/recording-humming-vending-machine</h6>
+                </li>
+                
+                <li> <h5>Chick Chirping by jsbarrett</h5>
+                    <h6 class="w3-opacity">Link: https://pixabay.com/sound-effects/chick-chirping-75543/</h6>
+                </li>
+                
+                <li> <h5>Super Mario Bros Theme</h5>
+                    <h6 class="w3-opacity">Link: https://www.youtube.com/watch?v=NTa6Xbzfq1U</h6>
+                </li>
+                
+                <li> <h5>Stranger Things 4 - Vecna Grandfather Clock Kill Chime Sound</h5>
+                    <h6 class="w3-opacity">Link: https://www.youtube.com/watch?v=f53Swo18XzU</h6>
+                </li>
+                
+                <li> <h5>mario coin sound by ALEXANDER</h5>
+                    <h6 class="w3-opacity">Link: https://orangefreesounds.com/mario-coin-sound/</h6>
+                </li>
+                
+                <li> <h5>mario star power sound</h5>
+                    <h6 class="w3-opacity">Link: https://djlunatique.com/mario-star-power-sound-effect/</h6>
+                </li>
+                
+                <li> <h5>Beep-07</h5>
+                    <h6 class="w3-opacity">Link: https://www.soundjay.com/beep-sounds-1.html#google_vignette</h6>
+                </li>
+                
+                <li> <h5>Ben 10 theme (instrumental)</h5>
+                    <h6 class="w3-opacity">Link: https://www.youtube.com/watch?v=ids4KYzDnkY</h6>
+                </li>
+                
+                <li> <h5>WandaVision Theme</h5>
+                    <h6 class="w3-opacity">Description: Music video by Kristen Anderson-Lopez, Sara Mann, Jessica Rotter, Cindy Bourquin, Elyse Willis, Laura Dickinson, Robert Lopez, Eric Bradley, Greg Whipple, Jasper Randall, Gerald White performing WandaVision! (From "WandaVision: Episode 2"/Audio Only). © 2021 Marvel Music, Inc.</h6>
+                    <h6 class="w3-opacity">Link: https://www.youtube.com/watch?v=pdqUli1OIXU</h6>
+                </li>
+                
+                <li> <h5>Crowd Chatter - Ambient</h5>
+                    <h6 class="w3-opacity">Link: https://www.youtube.com/watch?v=IJQdnHT3MCA</h6>
+                </li>
+                
+            </ol>
+
+                
+        </div>
+        
+    </div>
+    
+
+    <!-- End Right Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+  <!-- End Page Container -->
+</div>
+
+<footer class="w3-container w3-black w3-center w3-margin-top">
+  <p>Find Me On :</p>
+  <i href="https://github.com/pranavsrathod" class="fa fa-github w3-hover-opacity" style="font-size:36px"></i>
+  <i class="fa fa-linkedin w3-hover-opacity" style="font-size:36px"></i>
+  <i class="fa fa-instagram w3-hover-opacity" style="font-size:36px"></i>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
+</html>
