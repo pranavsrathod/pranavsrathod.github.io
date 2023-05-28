@@ -1,1 +1,0 @@
-# pranavsrathod.github.io

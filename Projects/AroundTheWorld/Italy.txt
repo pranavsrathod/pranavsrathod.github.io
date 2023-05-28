@@ -1,0 +1,7 @@
+Italy is a country that is very special to me. It was the first country that me and my family visited when I was in Middle School. None of my family members had ever traveled outside our home country before and it was the first time we got to explore an unfamiliar place, to get to experience their culture, food and the people. It was interesting to see how my parents navigated a foreign country, because they were as new to being in a new place as I was with the same scarcity of intel. Before visiting we prepared by watching travel channels and learning how to ask directions to the nearest restaurant or a rest stop.
+
+The Models Shown on the Merge Cube are a representation of the time I spent in Pisa, the things I got to see, eat, and the vehicle we got to ride.
+
+I have displayed the leaning tower of Pisa, a Vespa (italian scooter), and the best creation that Italy has shared with the world, a PIZZA! These models are sourced from artists online and are cited below. I have also made two separate models using the Unity Game Engine which are the Table and the Italian Flag
+
+The Sides of the Cube Showcase the Location (Pisa, Italy), The Current Time (in AM/PM) and Weather in *F that is fetched using http://worldtimeapi.org and https://openweathermap.org/ respectively as well as the Logo of the Ferrari Automobile Company.
