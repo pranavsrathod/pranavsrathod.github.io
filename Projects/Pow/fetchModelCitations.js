@@ -37,13 +37,15 @@ function parseCSV(csv) {
       `;
   
       li.appendChild(title);
+      // console.log("Girly Pop");
       li.appendChild(details);
+      // console.log("Pop off");
       citationList.appendChild(li);
     });
   }
   
   // Read the CSV file
-  const file = "citations.csv";
+  const file = "Pow/citations.csv";
   const xhr = new XMLHttpRequest();
   xhr.open("GET", file, true);
   xhr.onreadystatechange = function () {
