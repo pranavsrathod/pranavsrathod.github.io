@@ -43,7 +43,7 @@ function parseCSV(csv) {
   }
   
   // Read the CSV file
-  const file = "citations.csv";
+  const file = "/Users/pranavrathod/Desktop/Resume and Stuff/Website/Projects/Pow/citations.csv";
   const xhr = new XMLHttpRequest();
   xhr.open("GET", file, true);
   xhr.onreadystatechange = function () {
@@ -54,4 +54,3 @@ function parseCSV(csv) {
     }
   };
   xhr.send();
-  
