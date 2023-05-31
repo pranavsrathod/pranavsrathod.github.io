@@ -1,0 +1,99 @@
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Work Experience</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../css/styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+      <div class="container">
+          <a class="navbar-brand" href="../index.html#page-top">Pranav Rathod</a>
+          <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              Menu
+              <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../index.html#about">About</a></li>
+                  <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../index.html#portfolio">Portfolio</a></li>
+                  <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../index.html#contact">Contact</a></li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+  
+  <div style="height: 100px;"></div>
+  <div class="d-flex flex-column">
+    <div class="mx-auto p-2" style="width: 90%">
+        <div class="card">
+        <div class="card-body">
+            <h1 class="card-title" style="text-align: center;">Undergraduate Research Assistant</h1>
+            <h2 class="card-subtitle mb-2 text-muted" style="text-align: center;">ELiCit Lab at the University of Illinois at Chicago</h2>
+            <h5 class="card-subtitle text-success text-center"> 
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar-event-fill" viewBox="0 0 16 16">
+                <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-3.5-7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/>
+            </svg>
+            June 2022 - Present
+            </h5>
+            <div id="work-experience"></div>
+
+            <script>
+                fetch('researchEssay.txt')
+                .then(response => response.text())
+                .then(data => {
+                    const workExperienceDiv = document.getElementById('work-experience');
+                    workExperienceDiv.innerText = data;
+                })
+                .catch(error => console.error(error));
+            </script>
+            
+            </div>
+        
+        </div>
+    </div>
+    <div class="mx-auto p-2" style="width: 90%">
+        <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">Activities</h2>
+            <div class="card">
+                <div class="card-body">
+                    
+                    <h3 class="card-subtitle mb-2">Undergraduate Research Forum</h3>
+                    <h5 class="card-subtitle text-success"> 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar-event-fill" viewBox="0 0 16 16">
+                        <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-3.5-7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/>
+                    </svg>
+                    April 18, 2023
+                    </h5>
+                    <div class="mx-auto p-2" id="urf-essay"></div>
+                    <script>
+                        fetch('urf.txt')
+                        .then(response => response.text())
+                        .then(data => {
+                            const workExperienceDiv = document.getElementById('urf-essay');
+                            workExperienceDiv.innerText = data;
+                        })
+                        .catch(error => console.error(error));
+                    </script>
+                </div>
+                <img class="card-img-bottom p-2" src="images/URF.JPG" alt="URF Forum">
+                <img class="card-img-bottom p-2" src="images/ForumPoster.jpg" alt="Presentation Poster">
+              </div>
+            
+            </div>
+        
+        </div>
+    </div>
+    </div>
+    <!-- </div> -->
+  </body>

@@ -1,0 +1,12 @@
+Name,Author,Interactiveness,Sound,Animation,ImageAddress
+"Soda Can by Pranav",Pranav,"Can be grabbed","No sound","No animation","images/ishSoda.png"
+"Soda Can by Pranav",Pranav,"Can be grabbed","No sound","No animation","images/pranavSoda.png"
+"Comic Book by Pranav",Pranav,"Can be grabbed","No sound","No animation","images/houseOfMComic.png"
+"D4 by Ish",Ish,"Can be grabbed","No sound","No animation","images/d4.png"
+"D6 by Ish",Ish,"Can be grabbed","No sound","No animation","images/d6.PNG"
+"D12 by Ish",Ish,"Can be grabbed","No sound","No animation","images/d12.PNG"
+"Vending Machine Buttons by Pranav",Pranav,"Can be touched to spawn soda can in the vending machine","One of the buttons beeps when you touch it. Beep-07 from https://www.soundjay.com/beep-sounds-1.html#google_vignette (https://www.soundjay.com/buttons/sounds/beep-07a.mp3)","No animation","images/ishButton.png"
+"Vending Machine Buttons by Pranav",Pranav,"Can be touched to spawn soda can in the vending machine","One of the buttons beeps when you touch it. Beep-07 from https://www.soundjay.com/beep-sounds-1.html#google_vignette (https://www.soundjay.com/buttons/sounds/beep-07a.mp3)","No animation","images/pranavButton.png"
+"Mario Star By Ish",Ish,"Can be grabbed","Plays mario star power theme that gets louder when you get closer (3d sound) mario star power sound from https://djlunatique.com/mario-star-power-sound-effect/","No animation","images/mario star.PNG"
+"Regular Stack of Books by Pranav",Pranav,"No interaction","No sound","No animation","images/stackOfBooks.png"
+"Earth by Pranav",Pranav,"Can be grabbed","No sound","Spins on top of the arcade machine","images/spinningEarth.png"
