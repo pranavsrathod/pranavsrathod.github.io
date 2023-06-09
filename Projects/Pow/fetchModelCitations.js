@@ -45,7 +45,7 @@ function parseCSV(csv) {
   }
   
   // Read the CSV file
-  const file = "Pow/citations.csv";
+  file = "Pow/citations.csv";
   xhr = new XMLHttpRequest();
   xhr.open("GET", file, true);
   xhr.onreadystatechange = function () {
