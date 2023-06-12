@@ -1,0 +1,8 @@
+Title,Interactiveness,Sound,Animation,ImageAddress
+Showcase,Not Interactive,No sound,No animation,images/Showcase.png
+Teleporting Button,When Touched Teleports you to another place in the atrium,No sound,No animation,images/TeleButton.png
+Lever,Can be grabbed, Moved To Make the Wall Disappear,No sound,No animation,images/Lever.png
+Magic Carpet,Not Interactive,No sound,Moves Back and Forth,images/Magic Carpet.png
+Television,Not Interactive,When Come Near, Plays "Friend Like Me" from Aladdin,No animation,images/Movie.png
+Pop Corn Machine Buttons,Can be touched to spawn Popcorn Bucket in the Pop Corn Machine Button,When Touched, plays Ding Sound,No animation,images/popButton.png
+Table,Cannot be Grabbed but able to keep things on, stand on,No Sound,No animation,images/Table.png

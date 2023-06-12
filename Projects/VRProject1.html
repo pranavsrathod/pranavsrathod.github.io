@@ -27,7 +27,7 @@
               <ul class="navbar-nav ms-auto">
                   <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../index.html#about">About</a></li>
                   <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../index.html#portfolio">Portfolio</a></li>
-                  <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../index.html#contact">Contact</a></li>
+                  <!-- <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../index.html#contact">Contact</a></li> -->
               </ul>
           </div>
       </div>
@@ -78,6 +78,76 @@
               </div>
             </div>
         </div>
+        <div>
+          <div class="mx-auto p-2" style="width: 90%; height: 100%">
+              <div class="card">
+                <h1 class="card-title p-2" style="text-align: center;">
+                    Project Setup
+                </h1>
+                <div class="card-body">
+                  <ol>
+                      <li>
+                          <p>To use this app, you need to follow these setup instructions:</p>
+                          <ol type="a">
+                              <li>
+                                  <p>Ensure you have Unity 2021.3.6f1 installed. If you don't have this version, you can download it
+                                      from the <a href="https://unity3d.com/get-unity/download/archive">Unity website's archive
+                                          section</a> and find the version you need.</p>
+                              </li>
+                              <li>
+                                  <p>The VRTK version 4 is already included in the files, so you don't need to worry about installing
+                                      it separately.</p>
+                              </li>
+                              <li>
+                                  <p>Download the app files from the GitHub repository: <a
+                                          href="https://github.com/Dragon0715/Ish-Soni-Pranav-Rathod-Project-2">Link to the Project</a>.</p>
+                              </li>
+                              <li>
+                                  <p>After extracting the zip file, open the project in Unity. Navigate to
+                                      <code>Assets/CoffeeShopStarterPack/Scenes</code> and open the <code>CoffeeShop</code> scene. In
+                                      this scene, you will find all the files used in the app, and you can start using the app within
+                                      the Unity editor. The scene represents a comic/game kiosk in the new CS building, offering
+                                      various game and comic related items.</p>
+                              </li>
+                              <li>
+                                  <p>To run the app, make sure that <code>CameraRigs.UnityXRPluginFramework</code> is disabled and
+                                      <code>CameraRigs.SpatialSimulator</code> is enabled. Once the scene is built, you can use the
+                                      following controls:</p>
+                                  <ul>
+                                      <li>WASD keys to move around.</li>
+                                      <li>Mouse to look around.</li>
+                                      <li>Press 2 and 3 to control the left and right controllers, respectively. Use WASD and the
+                                          mouse to move them around.</li>
+                                      <li>You can interact with objects in the scene by grabbing and manipulating them.</li>
+                                  </ul>
+                              </li>
+                              <li>
+                                  <p>To run the app in VR, follow these additional steps:</p>
+                                  <ul>
+                                      <li>Enable <code>CameraRigs.UnityXRPluginFramework</code> and disable
+                                          <code>CameraRigs.SpatialSimulator</code>.</li>
+                                      <li>Connect your Oculus headset.</li>
+                                      <li>In Unity Build Settings, ensure you are building for the Android platform.</li>
+                                      <li>The connected Oculus Quest device should appear in the list of compatible devices under the
+                                          Run Device list. If it doesn't, try unplugging and re-plugging the USB cable and confirming
+                                          the connection on the Quest.</li>
+                                      <li>Make sure USB debugging is enabled on the Quest. You can check this by accessing the Quick
+                                          Settings menu on the left side of the thin menu, then clicking on the settings menu in the
+                                          upper right. Scroll down to Developer and enable the USB Connection Dialog.</li>
+                                      <li>Click on "Build and Run" in Unity. Wait for the app to build, and it should automatically
+                                          start on the Quest.</li>
+                                      <li>You can now experience the scene in VR, either by walking around or teleporting. You can
+                                          interact with objects using the Oculus Touch controllers, just like you did when running the
+                                          scene in the editor.</li>
+                                  </ul>
+                              </li>
+                          </ol>
+                      </li>
+                  </ol>
+                </div>
+              </div>
+          </div>
+      </div>
         <div class="mx-auto p-2" style="width: 90%">
           <div class="card">
             <h1 class="card-title" style="text-align: center;">Project Demonstration</h1>
@@ -90,9 +160,9 @@
             <div class="card">
               <h1 class="card-title p-2" style="text-align: center;">Custom Models using Blender</h1>
               <div id="custom-list" class="d-flex justify-content-around flex-wrap p-2">
-                <ol>
+                <div class="row">
                   <script src="Pow/fetchCustomModels.js"></script>
-                </ol>
+                </div>
               </div>
               
               <!-- <ol id="citation-list">  
@@ -139,4 +209,19 @@
 
     </div>
   </div>
+  <footer class="footer text-center">
+    <div class="d-flex justify-content-center">
+        <div class="col-lg-4 mb-5 mb-lg-0 ">
+            <h4 class="text-uppercase mb-4">Around the Web</h4>
+            <a class="btn btn-outline-light btn-social mx-1" href="https://github.com/pranavsrathod/"><i class="fab fa-fw fa-github"></i></a>
+            <a class="btn btn-outline-light btn-social mx-1" href="https://www.linkedin.com/in/pranavsrathod"><i class="fab fa-fw fa-linkedin-in"></i></a>
+            <a class="btn btn-outline-light btn-social mx-1" href="https://www.instagram.com/pranavsrathod/"><i class="fab fa-fw fa-instagram"></i></a>
+        </div>
+        
+    </div>
+</footer>
+<!-- Copyright Section-->
+<div class="copyright py-4 text-center text-white">
+    <div class="container"><small>Copyright &copy; Pranav Rathod 2023</small></div>
+</div>
   </body>
