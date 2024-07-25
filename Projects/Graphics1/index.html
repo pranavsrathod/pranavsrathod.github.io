@@ -39,23 +39,32 @@
         <table>
             <tr>
                 <td>Rotate</td>
-                <td><input type = "range" min = 0 max = 360 id = "rotate" oninput="updateRotate()" ></td>
+                <td><input type="range" min="0" max="360" id="rotate" oninput="updateRotate()"></td>
             </tr>
             <tr>
                 <td>Zoom</td>
-                <td><input type = "range" min = 1 max = 100 id = "zoom" oninput="updateZoom()"></td>
+                <td><input type="range" min="1" max="100" id="zoom" oninput="updateZoom()"></td>
             </tr>
             <tr>
                 <td>Projection</td>
-                <td><select id="Projection" onchange="updateProjection()">
-                    <!-- <option value="">--Please choose an option--</option> -->
-                    <option value="perspective">Perspective</option>
-                    <option value="orthographic">Orthographic</option>
-                </select></td>
+                <td>
+                    <select id="Projection" onchange="updateProjection()">
+                        <option value="perspective">Perspective</option>
+                        <option value="orthographic">Orthographic</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>Layers</td>
-                <td><input type="file" id="Layers" name="layers" accept=".json" onchange="handleFile(event)"></td>
+                <td>
+                    <input type="file" id="Layers" name="layers" accept=".json" onchange="handleFile(event)">
+                </td>
+            </tr>
+            <tr>
+                <td>Load City</td>
+                <td>
+                    <button onclick="loadCityJson()">Load city.json</button>
+                </td>
             </tr>
         </table>
     </div>
