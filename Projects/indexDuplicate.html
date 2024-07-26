@@ -51,7 +51,7 @@
   
                       <p class="card-text text-center">This project focuses on rendering an urban environment using WebGL, incorporating various layers like buildings, parks, water, and surface. The data for these layers is loaded from a JSON file.</p>
                   </div>
-                  <img class="card-img-bottom" src="Graphics1/assignment1.gif" alt="Urban Renderer Demonstration">
+                  <img class="card-img-bottom" src="Graphics1/assignment-1.gif" alt="Urban Renderer Demonstration">
               </div>
           </div>
   
@@ -59,43 +59,32 @@
               <div class="card">
                   <h1 class="card-title p-2 text-center">Project Overview</h1>
                   <div class="card-body">
-                      <p>This project involves handling user interactions through a control panel, allowing users to upload their own JSON files, adjust the view, and select different projection types. Each layer is rendered using different shader programs to achieve the desired visual effects.</p>
-                  </div>
-              </div>
-          </div>
-  
-          <div class="mx-auto p-2 text-center" style="width: 90%; height: 100%">
-              <div class="card">
-                  <h1 class="card-title p-2 text-center">Demonstration</h1>
-                  <div class="card-body">
-                      <p>To see the project in action, download the sample file <a href="Graphics1/city.json" download="city.json">city.json</a>. Upload this file using the control panel on the project page to visualize the urban environment.</p>
-                      <div class="text-center">
-                          <a href="Graphics1/index.html" target="_blank" class="btn btn-lg btn-primary" style="font-size: 1.5em; padding: 10px 20px; margin-top: 20px;">View Demonstration</a>
-                      </div>
-                      <p class="mt-4">In the demonstration, you can interact with the 3D model using your mouse:</p>
-                      <ul class="list-unstyled">
-                          <li><strong>Rotate:</strong> Click and drag to rotate the view around the model.</li>
-                          <li><strong>Zoom:</strong> Use the mouse wheel to zoom in and out.</li>
-                          <li><strong>Pan:</strong> Hold the right mouse button and drag to pan the view.</li>
-                      </ul>
+                      <p>This project showcases a 3D rendering of an urban environment using WebGL, built on layers that include buildings, parks, water, and surface. Users can interact with these layers through a control panel that allows uploading custom JSON files, changing views, and selecting projection types.</p>
+                      <p>Each layer is rendered using different shader programs to achieve specific visual effects. The 'Buildings' layer, for instance, uses normals for realistic shading, while the 'Water' layer employs flat shading techniques to represent bodies of water.</p>
+                      <p>The project employs Vertex Array Objects (VAOs) and buffers for efficient rendering, with each layer having its own VAO and buffer setup. This separation allows for smooth rendering and easy management of different elements within the scene.</p>
+                      <p>Additionally, the application provides interactive controls such as rotation, zoom, and pan, allowing users to explore the 3D scene from different perspectives. These interactions are made possible through mouse events and JavaScript functions that update the view and projection matrices dynamically.</p>
+                      <p>The rendering process is initiated upon loading a JSON file, which defines the geometry, indices, and color of each element. The JSON file format is flexible and can be extended to include additional details like textures or advanced lighting settings.</p>
                   </div>
               </div>
           </div>
   
           <div class="mx-auto p-2" style="width: 90%; height: 100%">
-              <div class="card">
-                  <h1 class="card-title p-2 text-center">Setting Up the Environment</h1>
-                  <div class="card-body">
-                      <p>To run the project, you need to set up a local web server to serve the files. The application requires WebGL support and works best in modern browsers like Firefox or Chrome.</p>
-                      <p>Here are the steps to set up the environment:</p>
-                      <ol>
-                          <li>Clone the project repository from GitHub.</li>
-                          <li>Set up a local server using tools like XAMPP, WAMP, or a simple HTTP server in Python.</li>
-                          <li>Ensure the browser supports WebGL and the required extensions.</li>
-                      </ol>
-                  </div>
-              </div>
-          </div>
+            <div class="card">
+                <h1 class="card-title p-2 text-center">Demonstration</h1>
+                <div class="card-body">
+                    <p>To see the project in action, download the sample file <a href="Graphics1/city.json" download="city.json">city.json</a>. Upload this file using the control panel on the project page to visualize the urban environment.</p>
+                    <div class="text-center">
+                        <a href="Graphics1/index.html" target="_blank" class="btn btn-lg btn-primary" style="font-size: 1.5em; padding: 10px 20px; margin-top: 20px;">View Demonstration</a>
+                    </div>
+                    <p class="mt-4">In the demonstration, you can interact with the 3D model using your mouse:</p>
+                    <ul>
+                        <li><strong>Rotate:</strong> Click and drag to rotate the view around the model.</li>
+                        <li><strong>Zoom:</strong> Use the mouse wheel to zoom in and out.</li>
+                        <li><strong>Pan:</strong> Hold the right mouse button and drag to pan the view.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
   
           <div class="mx-auto p-2" style="width: 90%; height: 100%">
               <div class="card">
