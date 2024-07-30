@@ -1,0 +1,119 @@
+<meta name="author" content="" />
+<title>Around the World</title>
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+<!-- Font Awesome icons (free version)-->
+<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+<!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="../css/styles.css" rel="stylesheet" />
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+  <div class="container">
+      <a class="navbar-brand" href="../index.html#page-top">Pranav Rathod</a>
+      <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-auto">
+              <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../index.html#about">About</a></li>
+              <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../index.html#portfolio">Portfolio</a></li>
+              <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="https://photos.pranavrathod.com/">Photos</a></li>
+              <!-- <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../index.html#contact">Contact</a></li> -->
+          </ul>
+      </div>
+  </div>
+</nav>
+
+<div style="height: 110px;"></div>
+
+<div class="container-fluid">
+    <div class="d-flex flex-column">
+        <div class="mx-auto p-2" style="width: 90%">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title text-center">Procedural Geometries</h1>
+                    <h2 class="card-subtitle mb-2 text-muted text-center">Pranav Rathod</h2>
+                    <h5 class="card-subtitle text-success text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar-event-fill" viewBox="0 0 16 16">
+                            <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-3.5-7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/>
+                        </svg>
+                        Spring 2022
+                    </h5>
+
+                    <p class="card-text text-center">This project demonstrates procedural generation of 3D building geometries using WebGL. The height and size of the buildings are determined by the pixel values of an input PNG image, allowing for a visual representation of data-driven urban landscapes.</p>
+                </div>
+                <img class="card-img-bottom" src="Graphics3/assignment-4-example.png" alt="Procedural Geometries Demonstration">
+            </div>
+        </div>
+
+        <div class="mx-auto p-2" style="width: 90%; height: 100%">
+            <div class="card">
+                <h1 class="card-title p-2 text-center">Project Overview</h1>
+                <div class="card-body">
+                    <p>This project focuses on generating 3D building geometries based on an input PNG image, where each pixel's color determines the building's height. The procedural generation process involves the following key steps:</p>
+                    <ul>
+                        <li><strong>Building Geometries:</strong> The function `buildGeometries` reads pixel data from the input image, using it to create buildings with varying heights and sizes. The `createBuilding` function generates the actual 3D geometry for each building.</li>
+                        <li><strong>Normals Calculation:</strong> Normals for each vertex are computed to provide realistic shading, enhancing the visual appearance of the buildings.</li>
+                        <li><strong>Random Noise:</strong> To add variability and realism, noise is introduced in the building heights and sizes using `Math.random`, creating a more organic urban landscape.</li>
+                    </ul>
+                    <p>The project also includes optional functionality for shadow mapping, allowing for more dynamic lighting effects. This feature can be implemented by porting the shadow map functionalities from previous assignments.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mx-auto p-2" style="width: 90%; height: 100%">
+            <div class="card">
+                <h1 class="card-title p-2 text-center">Demonstration</h1>
+                <div class="card-body">
+                    <p>To see the project in action, download one of the example PNG images like <a href="Graphics3/example-1.png" download="example-1.png">example-1.png</a>. Upload this file using the control panel on the project page to visualize the procedural geometries.</p>
+                    <div>
+                        <a href="Graphics3/index.html" target="_blank" class="btn btn-lg btn-primary" style="font-size: 1.5em; padding: 10px 20px; margin-top: 20px;">View Demonstration</a>
+                    </div>
+                    <p class="mt-4">In the demonstration, you can interact with the 3D model using your mouse:</p>
+                    <ul class="list-unstyled">
+                        <li><strong>Rotate:</strong> Click and drag to rotate the view around the model.</li>
+                        <li><strong>Zoom:</strong> Use the mouse wheel to zoom in and out.</li>
+                        <li><strong>Pan:</strong> Hold the right mouse button and drag to pan the view.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mx-auto p-2" style="width: 90%; height: 100%">
+            <div class="card">
+                <h1 class="card-title p-2 text-center">Citations</h1>
+                <div class="card-body">
+                    <p>Special thanks to the following resources:</p>
+                    <ul>
+                        <li>WebGL Fundamentals by Gregg Tavares for foundational concepts.</li>
+                        <li>Three.js documentation for additional techniques and utilities.</li>
+                        <li>OpenGL Shading Language Cookbook for shader techniques.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer text-center">
+    <div class="d-flex justify-content-center">
+        <div class="col-lg-4 mb-5 mb-lg-0 ">
+            <h4 class="text-uppercase mb-4">Around the Web</h4>
+            <a class="btn btn-outline-light btn-social mx-1" href="https://github.com/pranavsrathod/"><i class="fab fa-fw fa-github"></i></a>
+            <a class="btn btn-outline-light btn-social mx-1" href="https://www.linkedin.com/in/pranavsrathod"><i class="fab fa-fw fa-linkedin-in"></i></a>
+            <a class="btn btn-outline-light btn-social mx-1" href="https://www.instagram.com/pranavsrathod/"><i class="fab fa-fw fa-instagram"></i></a>
+        </div>
+        
+    </div>
+  </footer>
+  <!-- Copyright Section-->
+  <div class="copyright py-4 text-center text-white">
+    <div class="container"><small>Copyright &copy; Pranav Rathod 2023</small></div>
+  </div>
+  
+  </body>
