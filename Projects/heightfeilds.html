@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Height Fields</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../css/styles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html#page-top">Pranav Rathod</a>
+            <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../index.html#about">About</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../index.html#portfolio">Portfolio</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="https://photos.pranavrathod.com/">Photos</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div style="height: 110px;"></div>
+
+    <div class="container-fluid">
+        <div class="d-flex flex-column">
+            <div class="mx-auto p-2" style="width: 90%">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title text-center">Height Fields Using Shaders</h1>
+                        <h2 class="card-subtitle mb-2 text-muted text-center">Pranav Rathod</h2>
+                        <div class="text-center mt-4">
+                            <img src="CS420/heightFields.gif" alt="Height Fields Demonstration" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;">
+                        </div>
+                        <h5 class="card-subtitle text-success text-center mt-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar-event-fill" viewBox="0 0 16 16">
+                                <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-3.5-7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/>
+                            </svg>
+                            February 21, 2024
+                        </h5>
+    
+                        <p class="card-text text-center">For this project, I created a program that utilizes OpenGL's core profile to generate and manipulate a 3D height field from user-specified image data. The grayscale values of the image are interpreted as elevation, rendering the height field as a visually stunning terrain. I also implemented advanced transformation controls, smooth shading, and interactive rendering modes to enhance user experience.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mx-auto p-2" style="width: 90%; height: 100%">
+                <div class="card">
+                    <h1 class="card-title p-2 text-center">Source Code</h1>
+                    <div class="card-body">
+                        <p>If you'd like to explore the source code for this project, you can find it on my GitHub repository: <a href="https://github.com/pranavsrathod/Height-Fields/" target="_blank">https://github.com/pranavsrathod/Height-Fields/</a>.</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="mx-auto p-2" style="width: 90%; height: 100%">
+                <div class="card">
+                    <h1 class="card-title p-2 text-center">Project Overview</h1>
+                    <div class="card-body">
+                        <p>This project was an opportunity to explore shader programming and 3D graphics using OpenGL. The application reads grayscale image data to construct a height field, where pixel intensity determines the elevation. I integrated several features to make the application versatile and interactive, including:</p>
+                        <ul>
+                            <li><strong>Render Modes:</strong> Switch between three distinct render modes:
+                                <ul>
+                                    <li>Point rendering (`1`): Displays the height field as individual points.</li>
+                                    <li>Wireframe rendering (`2`): Displays the height field using lines, giving a skeletal structure.</li>
+                                    <li>Solid rendering (`3`): Renders the height field as a continuous surface of triangles.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Transformation Controls:</strong> I implemented comprehensive transformation features:
+                                <ul>
+                                    <li>Rotate: Use the mouse to rotate the model along different axes.</li>
+                                    <li>Scale: Hold `Shift` and use the mouse to scale the model up or down.</li>
+                                    <li>Translate: Hold `t` and use the mouse to move the model across the plane.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Smoothing Mode:</strong> By pressing `4`, users can activate a smoothing shader, which refines the terrain geometry and color:
+                                <ul>
+                                    <li>Adjust terrain scale with `+` and `-` keys.</li>
+                                    <li>Modify terrain color intensity with `9` and `0` keys.</li>
+                                </ul>
+                            </li>
+                            <li><strong>JetColorMap:</strong> I implemented the JetColorMap function in the vertex shader. It transforms grayscale colors into a visually rich colormap while allowing dynamic adjustments using exponents.</li>
+                        </ul>
+                        <p>Overall, the project highlights the power of OpenGL for real-time 3D rendering and user interaction.</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="mx-auto p-2" style="width: 90%; height: 100%">
+                <div class="card">
+                    <h1 class="card-title p-2 text-center">Citations</h1>
+                    <div class="card-body">
+                        <p>Special thanks to the following resources:</p>
+                        <ul>
+                            <li>OpenGL Tutorials by Khronos Group for foundational concepts.</li>
+                            <li>WebGL documentation for understanding shaders and rendering pipelines.</li>
+                            <li>Grayscale image processing examples for 3D height field generation.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+  <footer class="footer text-center">
+    <div class="d-flex justify-content-center">
+        <div class="col-lg-4 mb-5 mb-lg-0 ">
+            <h4 class="text-uppercase mb-4">Around the Web</h4>
+            <a class="btn btn-outline-light btn-social mx-1" href="https://github.com/pranavsrathod/"><i class="fab fa-fw fa-github"></i></a>
+            <a class="btn btn-outline-light btn-social mx-1" href="https://www.linkedin.com/in/pranavsrathod"><i class="fab fa-fw fa-linkedin-in"></i></a>
+            <a class="btn btn-outline-light btn-social mx-1" href="https://www.instagram.com/pranavsrathod/"><i class="fab fa-fw fa-instagram"></i></a>
+        </div>
+        
+    </div>
+  </footer>
+  <!-- Copyright Section-->
+  <div class="copyright py-4 text-center text-white">
+    <div class="container"><small>Copyright &copy; Pranav Rathod 2024</small></div>
+  </div>
+  
+  </body>
