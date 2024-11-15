@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Roller Coaster</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../css/styles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html#page-top">Pranav Rathod</a>
+            <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../index.html#about">About</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../index.html#portfolio">Portfolio</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="https://photos.pranavrathod.com/">Photos</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div style="height: 110px;"></div>
+
+<div class="container-fluid">
+    <div class="d-flex flex-column">
+        <div class="mx-auto p-2" style="width: 90%">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title text-center">Simulating a Roller Coaster via Splines</h1>
+                    <h2 class="card-subtitle mb-2 text-muted text-center">Pranav Rathod</h2>
+                    <div class="text-center mt-4">
+                        <video controls style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;">
+                            <source src="CS420/rollerCoaster.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <h5 class="card-subtitle text-success text-center mt-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar-event-fill" viewBox="0 0 16 16">
+                            <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-3.5-7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5.5 0 0 1 .5-.5z"/>
+                        </svg>
+                        March 27, 2024
+                    </h5>
+
+                    <p class="card-text text-center">In this project, I developed a 3D roller coaster simulation using OpenGL and Catmull-Rom splines. The simulation provides a first-person perspective of the ride while showcasing smooth curves, realistic lighting, and texturing.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mx-auto p-2" style="width: 90%; height: 100%">
+            <div class="card">
+                <h1 class="card-title p-2 text-center">Source Code</h1>
+                <div class="card-body">
+                    <p>You can explore the source code for this project on my GitHub repository: <a href="https://github.com/pranavsrathod/roller-coaster-splines" target="_blank">https://github.com/pranavsrathod/roller-coaster-splines</a>.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mx-auto p-2" style="width: 90%; height: 100%">
+            <div class="card">
+                <h1 class="card-title p-2 text-center">Project Overview</h1>
+                <div class="card-body">
+                    <p>This project was a significant step in understanding and implementing Catmull-Rom splines and OpenGL core profile techniques. It allowed me to create a dynamic and immersive roller coaster simulation in a first-person view. Below are the key aspects of the project:</p>
+                    <ul>
+                        <li><strong>Spline-Based Track Generation:</strong> I used Catmull-Rom splines to design a realistic and smooth roller coaster track. The spline interpolation ensures the coaster follows a natural and visually appealing curve, using defined control points to generate continuous and smooth paths.</li>
+                        <li><strong>Shader Programming:</strong>
+                            <ul>
+                                <li><strong>Texture Mapping:</strong> A custom texture shader was applied to the ground to enhance realism, simulating terrain textures effectively.</li>
+                                <li><strong>Phong Shading:</strong> The roller coaster rails were rendered with a Phong shading shader, which provided per-pixel lighting for depth and realism.</li>
+                            </ul>
+                        </li>
+                        <li><strong>First-Person Perspective:</strong> The program simulates the experience of riding the roller coaster with a first-person camera. I implemented this using the Frenet Frame approach, dynamically adjusting the camera’s tangent, normal, and binormal vectors to ensure smooth and accurate orientation along the track.</li>
+                        <li><strong>Customizable Track Files:</strong> Users can load different spline files (e.g., `goodRide.sp`, `rollerCoaster.sp`) to experience various track designs. Each file modifies the control points, resulting in unique roller coaster experiences.</li>
+                        <li><strong>Animation Features:</strong> The project includes a pre-rendered animation of the roller coaster to showcase its functionality and aesthetics. Screenshots from the animation have been saved in the `AnimationFrames` folder.</li>
+                    </ul>
+                    <p><strong>Note:</strong> Due to specific tangent calculations (Sloan method), certain spline files like `circle.sp` and `lefturn.sp` may require manual adjustments in the `computeUpVector()` function for correct camera movement and orientation.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mx-auto p-2" style="width: 90%; height: 100%">
+            <div class="card">
+                <h1 class="card-title p-2 text-center">Citations</h1>
+                <div class="card-body">
+                    <p>Special thanks to the following resources:</p>
+                    <ul>
+                        <li>OpenGL Programming Guide for foundational rendering concepts.</li>
+                        <li>WebGL documentation for shader programming insights.</li>
+                        <li>Mathematics for 3D Game Programming and Computer Graphics for spline implementation guidance.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+  <footer class="footer text-center">
+    <div class="d-flex justify-content-center">
+        <div class="col-lg-4 mb-5 mb-lg-0 ">
+            <h4 class="text-uppercase mb-4">Around the Web</h4>
+            <a class="btn btn-outline-light btn-social mx-1" href="https://github.com/pranavsrathod/"><i class="fab fa-fw fa-github"></i></a>
+            <a class="btn btn-outline-light btn-social mx-1" href="https://www.linkedin.com/in/pranavsrathod"><i class="fab fa-fw fa-linkedin-in"></i></a>
+            <a class="btn btn-outline-light btn-social mx-1" href="https://www.instagram.com/pranavsrathod/"><i class="fab fa-fw fa-instagram"></i></a>
+        </div>
+        
+    </div>
+  </footer>
+  <!-- Copyright Section-->
+  <div class="copyright py-4 text-center text-white">
+    <div class="container"><small>Copyright &copy; Pranav Rathod 2024</small></div>
+  </div>
+  
+  </body>
