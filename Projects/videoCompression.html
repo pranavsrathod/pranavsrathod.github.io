@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Roller Coaster</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../css/styles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html#page-top">Pranav Rathod</a>
+            <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../index.html#about">About</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../index.html#portfolio">Portfolio</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="https://photos.pranavrathod.com/">Photos</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div style="height: 110px;"></div>
+
+    <div class="container-fluid">
+        <div class="d-flex flex-column">
+            <div class="mx-auto p-2" style="width: 90%">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title text-center">Segmented Video Compression</h1>
+                        <h2 class="card-subtitle mb-2 text-muted text-center">Pranav Rathod</h2>
+                        <p class="card-text text-center">
+                            A project designed to compress and playback video files by segmenting frames into foreground 
+                            and background regions, leveraging motion estimation, DCT, and advanced segmentation tools like 
+                            Detectron2 and optical flow.
+                        </p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="mx-auto p-2" style="width: 90%; height: 100%">
+                <div class="card">
+                    <h1 class="card-title p-2 text-center">Project Overview</h1>
+                    <div class="card-body">
+                        <p>This project showcases a robust pipeline for video compression and playback, developed for the Multimedia Systems Design course. Below is a detailed breakdown of the key aspects:</p>
+                        <ul>
+                            <li>
+                                <strong>Compression Pipeline:</strong> 
+                                Designed a system to encode `.rgb` videos by dividing frames into foreground and background using motion estimation 
+                                and advanced segmentation techniques. Macroblocks were compressed using DCT (Discrete Cosine Transform) 
+                                and quantized with adaptive parameters for efficient storage.
+                            </li>
+                            <li>
+                                <strong>Advanced Segmentation:</strong> 
+                                Applied Detectron2 and optical flow to segment foreground and background regions dynamically, achieving 
+                                95% accuracy in classification. This enhanced compression by prioritizing visual quality in regions of interest.
+                            </li>
+                            <li>
+                                <strong>Custom Video Player:</strong> 
+                                Developed a real-time video player capable of decoding `.cmp` files, reconstructing frames with IDCT (Inverse Discrete Cosine Transform), and 
+                                synchronizing playback at 30 FPS with audio.
+                            </li>
+                            <li>
+                                <strong>Performance Optimization:</strong> 
+                                Achieved a ~70% reduction in file size by using motion estimation (Three-Step Search) and adaptive quantization for background regions.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="mx-auto p-2" style="width: 90%; height: 100%">
+                <div class="card">
+                    <h1 class="card-title p-2 text-center">Technical Details</h1>
+                    <div class="card-body">
+                        <ul>
+                            <li><strong>Technologies:</strong> Python, OpenCV, Detectron2, PyTorch, Numpy, PyAudio</li>
+                            <li><strong>File Formats:</strong> `.rgb` (raw video input), `.cmp` (compressed output), `.wav` (audio)</li>
+                            <li><strong>Segmentation Tools:</strong> Detectron2 for object detection and optical flow for motion-based analysis.</li>
+                            <li><strong>Playback Controls:</strong> Interactive player with support for pause, resume, step-forward, and quit functionalities.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="mx-auto p-2" style="width: 90%">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title text-center">Project Features</h1>
+                        <p class="card-text">
+                            The video compression system integrates classical compression techniques with modern segmentation tools. 
+                            By classifying macroblocks into foreground and background, the system ensures efficient storage while maintaining 
+                            visual fidelity. The player provides seamless playback, with real-time decoding and synchronized audio.
+                        </p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="mx-auto p-2" style="width: 90%">
+                <div class="card">
+                    <h1 class="card-title p-2 text-center">GitHub Repository</h1>
+                    <div class="card-body">
+                        <p>You can view the complete source code for this project on my GitHub: 
+                            <a href="https://github.com/pranavsrathod/segmented-video-compression" target="_blank">
+                                https://github.com/pranavsrathod/segmented-video-compression
+                            </a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="mx-auto p-2" style="width: 90%">
+                <div class="card">
+                    <h1 class="card-title p-2 text-center">Demonstration</h1>
+                    <div class="card-body">
+                        <p class="text-center">Watch the segmentation and playback demonstration below:</p>
+                        <div class="text-center">
+                            <video controls style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;">
+                                <source src="CS576/segmentedVideoDemo.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer text-center">
+    <div class="d-flex justify-content-center">
+        <div class="col-lg-4 mb-5 mb-lg-0 ">
+            <h4 class="text-uppercase mb-4">Around the Web</h4>
+            <a class="btn btn-outline-light btn-social mx-1" href="https://github.com/pranavsrathod/"><i class="fab fa-fw fa-github"></i></a>
+            <a class="btn btn-outline-light btn-social mx-1" href="https://www.linkedin.com/in/pranavsrathod"><i class="fab fa-fw fa-linkedin-in"></i></a>
+            <a class="btn btn-outline-light btn-social mx-1" href="https://www.instagram.com/pranavsrathod/"><i class="fab fa-fw fa-instagram"></i></a>
+        </div>
+        
+    </div>
+  </footer>
+  <!-- Copyright Section-->
+  <div class="copyright py-4 text-center text-white">
+    <div class="container"><small>Copyright &copy; Pranav Rathod 2025</small></div>
+  </div>
+  
+  </body>
