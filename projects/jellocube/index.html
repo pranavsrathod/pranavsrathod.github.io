@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="en" class="antialiased break-words"> <head><!-- High Priority Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jello Cube Simulation | Pranav Rathod</title><meta name="generator" content="Astro v5.6.1"><!-- Fonts --><link rel="preload" as="font" type="font/woff2" href="/_astro/inter-latin-wght-normal.C2S99t-D.woff2" crossorigin="anonymous"><link rel="preload" as="font" type="font/woff2" href="/_astro/newsreader-latin-wght-normal.B8UkT1nD.woff2" crossorigin="anonymous"><!-- Low Priority Global Metadata --><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS"><!-- Page Metadata --><link rel="canonical" href="https://pranavsrathod.github.io/projects/jellocube/"><meta name="description" content="A physically based simulation of a Jello Cube using a mass-spring system. The cube deforms, oscillates, and reacts realistically to forces based on Newton's laws, Hooke's law, and damping forces."><!-- Open Graph / Facebook --><meta property="og:type" content="article"><meta property="og:url" content="https://pranavsrathod.github.io/projects/jellocube/"><meta property="og:title" content="Jello Cube Simulation | Pranav Rathod"><meta property="og:description" content="A physically based simulation of a Jello Cube using a mass-spring system. The cube deforms, oscillates, and reacts realistically to forces based on Newton's laws, Hooke's law, and damping forces."><meta property="og:image" content="https://pranavsrathod.github.io/CS420/rollerCoasterPoster.png"><meta property="og:image:alt" content="Roller Coaster Simulation Poster"><!-- X/Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://pranavsrathod.github.io/projects/jellocube/"><meta property="twitter:title" content="Jello Cube Simulation | Pranav Rathod"><meta property="twitter:description" content="A physically based simulation of a Jello Cube using a mass-spring system. The cube deforms, oscillates, and reacts realistically to forces based on Newton's laws, Hooke's law, and damping forces."><meta property="twitter:image" content="https://pranavsrathod.github.io/CS420/rollerCoasterPoster.png"><meta name="twitter:image:alt" content="Roller Coaster Simulation Poster"><script type="module">localStorage.theme==="dark"&&document.documentElement.classList.add("dark");</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.Dfz7QWtE.js"></script><link rel="stylesheet" href="/_astro/_id_.C47JjJ8_.css"></head> <body class="bg-main text-main"> <!-- Fixed logo: fills left half of screen with right half of image --> <div class="fixed top-0 left-[-50vw] z-0 pointer-events-none h-screen w-screen overflow-hidden"> <img src="/PR_LOGO.PNG" alt="PR Logo" class="h-screen w-[200vw] object-cover opacity-30"> </div> <!-- Actual page content --> <div class="flex flex-col min-h-screen px-4 md:px-8 relative z-10"> <nav class="min-h-10 pt-4 pb-12 relative sm:min-h-14 sm:pb-24 md:pt-8" data-astro-cid-dmqpwcec> <div class="w-full max-w-3xl mx-auto relative" data-astro-cid-dmqpwcec> <button class="menu-toggle w-8 h-8 -ml-1 flex items-center justify-center relative z-30 md:hidden" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items" data-astro-cid-dmqpwcec> <span class="menu-toggle-icon w-6 h-px relative bg-current" data-astro-cid-dmqpwcec></span> </button> <ul id="menu-items" class="menu flex gap-6" data-astro-cid-dmqpwcec> <li class="py-1" data-astro-cid-dmqpwcec> <a class="text-xl font-serif text-main hover:underline hover:underline-offset-2 hover:decoration-1 md:text-base" href="/" data-astro-cid-dmqpwcec="true"> Home </a> </li><li class="py-1" data-astro-cid-dmqpwcec> <a class="text-xl font-serif text-main hover:underline hover:underline-offset-2 hover:decoration-1 md:text-base" href="/projects" data-astro-cid-dmqpwcec="true"> Projects </a> </li><li class="py-1" data-astro-cid-dmqpwcec> <a class="text-xl font-serif text-main hover:underline hover:underline-offset-2 hover:decoration-1 md:text-base" href="/blog" data-astro-cid-dmqpwcec="true"> Blog </a> </li><li class="py-1" data-astro-cid-dmqpwcec> <a class="text-xl font-serif text-main hover:underline hover:underline-offset-2 hover:decoration-1 md:text-base" href="/tags" data-astro-cid-dmqpwcec="true"> Tags </a> </li> </ul> </div> <div class="absolute right-0 top-4 z-10 md:top-8" data-astro-cid-dmqpwcec> <button id="theme-toggle" class="w-8 h-8 -mr-2 flex items-center justify-center" aria-label="Change color scheme"> <svg class="w-4 h-4 fill-current" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"> <circle cx="8" cy="8" r="8"></circle> </svg> </button> <script type="module">document.addEventListener("astro:after-swap",()=>{localStorage.theme==="dark"&&document.documentElement.classList.add("dark")});</script> <script type="module">document.addEventListener("astro:page-load",()=>{const e=typeof localStorage<"u"&&localStorage.getItem("theme")?localStorage.getItem("theme")||"light":window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";e==="light"?document.documentElement.classList.remove("dark"):document.documentElement.classList.add("dark"),window.localStorage.setItem("theme",e);const o=()=>{const t=document.documentElement;t.classList.toggle("dark");const a=t.classList.contains("dark");localStorage.setItem("theme",a?"dark":"light")};document.getElementById("theme-toggle")?.addEventListener("click",o)});</script> </div> </nav>  <script type="module">function n(){const s=document.querySelector(".menu"),e=document.querySelector(".menu-toggle");e?.addEventListener("click",()=>{const t=e.getAttribute("aria-expanded")==="true";e.classList.toggle("is-active"),e.setAttribute("aria-expanded",t?"false":"true"),e.setAttribute("aria-label",t?"Open Menu":"Close Menu"),s?.classList.toggle("is-visible")})}n();document.addEventListener("astro:after-swap",n);</script>  <main class="grow w-full max-w-3xl mx-auto">  <article class="mb-16 sm:mb-24"> <header class="mb-8"> <h1 class="text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">Jello Cube Simulation</h1> </header> <div class="max-w-none prose prose-dante sm:prose-lg"> <p><strong>Simulating a Mass-Spring System</strong><br>
+<em>Pranav Rathod</em></p>
+<p><strong>Date:</strong> February 19, 2025</p>
+<p>For this assignment, I successfully implemented a physically based simulation of a Jello Cube using a mass-spring system. The cube deforms, oscillates, and reacts realistically to forces based on Newton’s laws of motion, Hooke’s law, and damping forces.</p>
+<h2 id="video-demonstration">Video Demonstration</h2>
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/vRUP-VQ6AoE?si=YIpI7DMxvZcHq29A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<h3 id="core-features-implemented">Core Features Implemented:</h3>
+<ul>
+<li>
+<p><strong>Acceleration Computation (<code>computeAcceleration()</code> in <code>physics.cpp</code>)</strong>:</p>
+<ul>
+<li>Structural, shear, and bend spring forces</li>
+<li>External force field (if present)</li>
+<li>Collision response with the bounding box</li>
+</ul>
+<p>The elasticity of the Jello Cube is modeled using a mass-spring system, where forces follow <strong>Hooke’s Law</strong>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#E1E4E8">F </span><span style="color:#F97583">=</span><span style="color:#F97583"> -</span><span style="color:#E1E4E8">k </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> (x </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> x0)</span></span></code></pre>
+<ul>
+<li><strong>F</strong>: restoring force</li>
+<li><strong>k</strong>: spring constant</li>
+<li><strong>x</strong>: current length</li>
+<li><strong>x0</strong>: rest length</li>
+</ul>
+<p>Each mass point connects to others via structural, shear, and bend springs, allowing the cube to deform and recover naturally.</p>
+</li>
+<li>
+<p><strong>Damping Forces</strong>:
+To stabilize the system and reduce oscillations, damping forces are computed as:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#E1E4E8">F_d </span><span style="color:#F97583">=</span><span style="color:#F97583"> -</span><span style="color:#E1E4E8">k_d </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> ((v_A </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> v_B) . L) </span><span style="color:#F97583">/</span><span style="color:#F97583"> |</span><span style="color:#E1E4E8">L</span><span style="color:#F97583">|</span></span></code></pre>
+<ul>
+<li><strong>k_d</strong>: damping coefficient</li>
+<li><strong>(v_A - v_B)</strong>: velocity difference</li>
+<li><strong>L</strong>: displacement vector between connected points</li>
+</ul>
+</li>
+<li>
+<p><strong>Euler and RK4 Integration</strong>:
+Both integration methods were implemented to advance the simulation over time with tunable timestep values.</p>
+</li>
+<li>
+<p><strong>Collision Detection &#x26; Penalty Response (Bounding Box)</strong>:
+Ensures all control points stay within <code>[-2, 2]</code> by applying a spring force when out of bounds.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#E1E4E8">F_c </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> k_c </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> (p_boundary </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> p)</span></span></code></pre>
+</li>
+<li>
+<p><strong>External Force Field</strong>:
+Trilinear interpolation was used to calculate external force values from a 3D grid defined in the <code>.w</code> file.</p>
+<ol>
+<li><strong>Grid Indexing</strong> – mapping position to force grid</li>
+<li><strong>Interpolation</strong> – blending 8 surrounding vectors</li>
+</ol>
+</li>
+<li>
+<p><strong>OpenGL Visualization</strong>:</p>
+<ul>
+<li>Wireframe and shaded surface rendering modes</li>
+<li>Real-time camera controls</li>
+<li>Toggle visibility for structural, shear, and bend springs</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="extra-credit-implemented">Extra Credit Implemented</h2>
+<h3 id="inclined-plane-collision">Inclined Plane Collision</h3>
+<ul>
+<li>
+<p>Supported via user-defined coefficients in the world file:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#E1E4E8">a </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> x </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> b </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> y </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> c </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> z </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> d </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span></span></code></pre>
+</li>
+<li>
+<p><strong>Rendering</strong>:
+Drawn dynamically in <code>showInclinedPlane()</code> using 4 corners based on the plane equation.</p>
+</li>
+<li>
+<p><strong>Collision Detection &#x26; Response</strong>:</p>
+<ul>
+<li>Each control point is checked against the plane.</li>
+<li>If below, a penalty force pushes it above the surface.</li>
+<li>Includes damping opposite to velocity to absorb energy.</li>
+</ul>
+</li>
+<li>
+<p>Implemented in <code>applyCollisionForces()</code> inside <code>physics.cpp</code>.</p>
+</li>
+</ul>
+<p>The inclined plane adds more complexity and realism to the cube’s motion and response.</p>
+<hr>
+<h2 id="development-environment">Development Environment</h2>
+<ul>
+<li><strong>OS</strong>: MacOS</li>
+<li><strong>Editor</strong>: Visual Studio Code</li>
+<li><strong>Compiler</strong>: Clang++ (C++17)</li>
+<li><strong>Build System</strong>: Makefile</li>
+<li><strong>Libraries</strong>: OpenGL, GLUT (Mac Frameworks)</li>
+</ul>
+<hr>
+<h2 id="compilation-instructions">Compilation Instructions</h2>
+<ol>
+<li>
+<p><strong>Build the project</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">make</span></span></code></pre>
+</li>
+<li>
+<p><strong>Run the simulation with a world file</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">./jello</span><span style="color:#9ECBFF"> world/jello.w</span></span></code></pre>
+</li>
+<li>
+<p><strong>Create a world file</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">./createWorld</span></span></code></pre>
+</li>
+<li>
+<p><strong>Clean build artifacts</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">make</span><span style="color:#9ECBFF"> clean</span></span></code></pre>
+</li>
+</ol>
+<p>Note: The Makefile auto-detects MacOS and links the correct OpenGL/GLUT frameworks.</p>
+<hr>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>The simulation was tested using multiple world files including custom-generated ones.</li>
+<li>Performance is interactive with frame rates > 15fps at 640x480.</li>
+<li>A Mac executable is included, but the grader may recompile on Windows as needed.</li>
+</ul> </div> </article> <div class="my-16 sm:my-24"> <h2 class="mb-12 text-xl font-serif italic sm:mb-16 sm:text-2xl">View Next</h2> <a class="flex flex-col sm:flex-row items-center gap-8 group mb-10 sm:mb-12" href="/projects/motioncapture/"> <figure class="sm:w-1/2"> <img class="w-full object-cover mx-auto" src="/CS520/2/motionCapture.png" alt="Project Poster" loading="lazy" decoding="async"> </figure> <div class="sm:w-1/2 sm:pl-4 text-center"> <h3 class="text-xl leading-tight font-serif font-medium group-hover:underline group-hover:decoration-dashed group-hover:underline-offset-4 group-hover:decoration-1 sm:text-2xl">Motion Capture Interpolation</h3> <div class="mt-1 text-sm leading-normal">Applied advanced interpolation techniques to reconstruct missing motion capture data using both Euler and quaternion methods, and compared their performance through detailed graphs and videos.</div> <div class="mt-4 font-serif italic opacity-0 transition group-hover:opacity-100 sm:block">
+View Project <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="fill-current w-4 h-4 inline-block"> <path d="M4.286 12c0-0.533 0.432-0.964 0.964-0.964v0h11.172l-4.14-4.138c-0.175-0.175-0.283-0.416-0.283-0.683 0-0.533 0.432-0.965 0.965-0.965 0.267 0 0.508 0.108 0.683 0.283v0l5.785 5.785c0.175 0.175 0.283 0.416 0.283 0.683s-0.108 0.508-0.283 0.683l-5.785 5.785c-0.175 0.175-0.416 0.283-0.683 0.283-0.533 0-0.965-0.432-0.965-0.965 0-0.267 0.108-0.508 0.283-0.683v0l4.14-4.138h-11.172c-0.533 0-0.964-0.432-0.964-0.964v0z"></path> </svg> </div> </div> </a> <a class="flex flex-col sm:flex-row items-center gap-8 group mb-10 sm:mb-12" href="/projects/rollercoaster/"> <figure class="sm:w-1/2"> <img class="w-full object-cover mx-auto" src="/CS420/rollerCoasterPoster.png" alt="Project Poster" loading="lazy" decoding="async"> </figure> <div class="sm:w-1/2 sm:pl-4 text-center"> <h3 class="text-xl leading-tight font-serif font-medium group-hover:underline group-hover:decoration-dashed group-hover:underline-offset-4 group-hover:decoration-1 sm:text-2xl">Simulating a Roller Coaster via Splines</h3> <div class="mt-1 text-sm leading-normal">A 3D roller coaster simulation using OpenGL and Catmull-Rom splines, offering a first-person perspective with smooth curves, realistic lighting, and texturing.</div> <div class="mt-4 font-serif italic opacity-0 transition group-hover:opacity-100 sm:block">
+View Project <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="fill-current w-4 h-4 inline-block"> <path d="M4.286 12c0-0.533 0.432-0.964 0.964-0.964v0h11.172l-4.14-4.138c-0.175-0.175-0.283-0.416-0.283-0.683 0-0.533 0.432-0.965 0.965-0.965 0.267 0 0.508 0.108 0.683 0.283v0l5.785 5.785c0.175 0.175 0.283 0.416 0.283 0.683s-0.108 0.508-0.283 0.683l-5.785 5.785c-0.175 0.175-0.416 0.283-0.683 0.283-0.533 0-0.965-0.432-0.965-0.965 0-0.267 0.108-0.508 0.283-0.683v0l4.14-4.138h-11.172c-0.533 0-0.964-0.432-0.964-0.964v0z"></path> </svg> </div> </div> </a> </div> </main> <footer class="w-full max-w-3xl mx-auto pt-12 pb-10 sm:pt-24 sm:pb-14"> <div class="mb-4 flex flex-wrap gap-x-6 gap-y-1"> <a class="font-serif hover:underline hover:underline-offset-2" href="/about"> About </a><a class="font-serif hover:underline hover:underline-offset-2" href="/contact"> Contact </a> </div> <div class="pt-6 flex flex-col gap-4 border-t border-dashed border-main sm:flex-row-reverse sm:justify-between sm:items-center"> <div class="flex flex-wrap gap-x-4 gap-y-1"> <a class="inline-flex items-center justify-center text-sm hover:underline hover:underline-offset-2" href="https://www.linkedin.com/in/pranavsrathod/" target="_blank" rel="noopener noreferer"> LinkedIn </a><a class="inline-flex items-center justify-center text-sm hover:underline hover:underline-offset-2" href="https://github.com/pranavsrathod" target="_blank" rel="noopener noreferer"> Github </a> </div> <p class="text-sm">
+&copy; 2025&nbsp;<a class="hover:underline hover:underline-offset-2" href="/">Pranav Rathod</a>. All rights reserved.
+</p> </div> </footer> </div> </body></html>

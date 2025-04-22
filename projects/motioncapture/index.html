@@ -1,0 +1,96 @@
+<!DOCTYPE html><html lang="en" class="antialiased break-words"> <head><!-- High Priority Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Motion Capture Interpolation | Pranav Rathod</title><meta name="generator" content="Astro v5.6.1"><!-- Fonts --><link rel="preload" as="font" type="font/woff2" href="/_astro/inter-latin-wght-normal.C2S99t-D.woff2" crossorigin="anonymous"><link rel="preload" as="font" type="font/woff2" href="/_astro/newsreader-latin-wght-normal.B8UkT1nD.woff2" crossorigin="anonymous"><!-- Low Priority Global Metadata --><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS"><!-- Page Metadata --><link rel="canonical" href="https://pranavsrathod.github.io/projects/motioncapture/"><meta name="description" content="Applied advanced interpolation techniques to reconstruct missing motion capture data using both Euler and quaternion methods, and compared their performance through detailed graphs and videos."><!-- Open Graph / Facebook --><meta property="og:type" content="article"><meta property="og:url" content="https://pranavsrathod.github.io/projects/motioncapture/"><meta property="og:title" content="Motion Capture Interpolation | Pranav Rathod"><meta property="og:description" content="Applied advanced interpolation techniques to reconstruct missing motion capture data using both Euler and quaternion methods, and compared their performance through detailed graphs and videos."><meta property="og:image" content="https://pranavsrathod.github.io/images/motionCaptureInterpolation.jpg"><meta property="og:image:alt" content="Motion Capture Interpolation"><!-- X/Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://pranavsrathod.github.io/projects/motioncapture/"><meta property="twitter:title" content="Motion Capture Interpolation | Pranav Rathod"><meta property="twitter:description" content="Applied advanced interpolation techniques to reconstruct missing motion capture data using both Euler and quaternion methods, and compared their performance through detailed graphs and videos."><meta property="twitter:image" content="https://pranavsrathod.github.io/images/motionCaptureInterpolation.jpg"><meta name="twitter:image:alt" content="Motion Capture Interpolation"><script type="module">localStorage.theme==="dark"&&document.documentElement.classList.add("dark");</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.Dfz7QWtE.js"></script><link rel="stylesheet" href="/_astro/_id_.C47JjJ8_.css"></head> <body class="bg-main text-main"> <!-- Fixed logo: fills left half of screen with right half of image --> <div class="fixed top-0 left-[-50vw] z-0 pointer-events-none h-screen w-screen overflow-hidden"> <img src="/PR_LOGO.PNG" alt="PR Logo" class="h-screen w-[200vw] object-cover opacity-30"> </div> <!-- Actual page content --> <div class="flex flex-col min-h-screen px-4 md:px-8 relative z-10"> <nav class="min-h-10 pt-4 pb-12 relative sm:min-h-14 sm:pb-24 md:pt-8" data-astro-cid-dmqpwcec> <div class="w-full max-w-3xl mx-auto relative" data-astro-cid-dmqpwcec> <button class="menu-toggle w-8 h-8 -ml-1 flex items-center justify-center relative z-30 md:hidden" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items" data-astro-cid-dmqpwcec> <span class="menu-toggle-icon w-6 h-px relative bg-current" data-astro-cid-dmqpwcec></span> </button> <ul id="menu-items" class="menu flex gap-6" data-astro-cid-dmqpwcec> <li class="py-1" data-astro-cid-dmqpwcec> <a class="text-xl font-serif text-main hover:underline hover:underline-offset-2 hover:decoration-1 md:text-base" href="/" data-astro-cid-dmqpwcec="true"> Home </a> </li><li class="py-1" data-astro-cid-dmqpwcec> <a class="text-xl font-serif text-main hover:underline hover:underline-offset-2 hover:decoration-1 md:text-base" href="/projects" data-astro-cid-dmqpwcec="true"> Projects </a> </li><li class="py-1" data-astro-cid-dmqpwcec> <a class="text-xl font-serif text-main hover:underline hover:underline-offset-2 hover:decoration-1 md:text-base" href="/blog" data-astro-cid-dmqpwcec="true"> Blog </a> </li><li class="py-1" data-astro-cid-dmqpwcec> <a class="text-xl font-serif text-main hover:underline hover:underline-offset-2 hover:decoration-1 md:text-base" href="/tags" data-astro-cid-dmqpwcec="true"> Tags </a> </li> </ul> </div> <div class="absolute right-0 top-4 z-10 md:top-8" data-astro-cid-dmqpwcec> <button id="theme-toggle" class="w-8 h-8 -mr-2 flex items-center justify-center" aria-label="Change color scheme"> <svg class="w-4 h-4 fill-current" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"> <circle cx="8" cy="8" r="8"></circle> </svg> </button> <script type="module">document.addEventListener("astro:after-swap",()=>{localStorage.theme==="dark"&&document.documentElement.classList.add("dark")});</script> <script type="module">document.addEventListener("astro:page-load",()=>{const e=typeof localStorage<"u"&&localStorage.getItem("theme")?localStorage.getItem("theme")||"light":window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";e==="light"?document.documentElement.classList.remove("dark"):document.documentElement.classList.add("dark"),window.localStorage.setItem("theme",e);const o=()=>{const t=document.documentElement;t.classList.toggle("dark");const a=t.classList.contains("dark");localStorage.setItem("theme",a?"dark":"light")};document.getElementById("theme-toggle")?.addEventListener("click",o)});</script> </div> </nav>  <script type="module">function n(){const s=document.querySelector(".menu"),e=document.querySelector(".menu-toggle");e?.addEventListener("click",()=>{const t=e.getAttribute("aria-expanded")==="true";e.classList.toggle("is-active"),e.setAttribute("aria-expanded",t?"false":"true"),e.setAttribute("aria-label",t?"Open Menu":"Close Menu"),s?.classList.toggle("is-visible")})}n();document.addEventListener("astro:after-swap",n);</script>  <main class="grow w-full max-w-3xl mx-auto">  <article class="mb-16 sm:mb-24"> <header class="mb-8"> <h1 class="text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">Motion Capture Interpolation</h1> </header> <div class="max-w-none prose prose-dante sm:prose-lg"> <p><strong>Reconstructing missing motion capture frames using different interpolation techniques</strong><br>
+<em>Pranav Rathod</em></p>
+<p><strong>Date:</strong> March 12, 2025</p>
+<p>In this project for my CSCI 520 course, I set out to improve the smoothness and naturalness of motion capture animations by implementing various interpolation techniques. Working with ASF/AMC motion capture data—where the ASF file defines the skeleton structure and the AMC file records joint rotations and root translations at 120 frames per second—I explored four distinct methods:</p>
+<ul>
+<li><strong>Linear Euler Interpolation</strong></li>
+<li><strong>Bezier Euler Interpolation</strong></li>
+<li><strong>SLERP Quaternion Interpolation</strong></li>
+<li><strong>Bezier SLERP Quaternion Interpolation</strong></li>
+</ul>
+<h2 id="overview">Overview</h2>
+<p>The goal was to generate keyframes by periodically dropping every N-th frame from the original motion data, and then reconstruct the full motion sequence by interpolating between these keyframes. I compared both Euler-based and quaternion-based methods to assess their performance in reducing abrupt transitions and preserving motion continuity. I also created detailed graphs and videos that visually compare the various interpolation techniques.</p>
+<h2 id="video-demonstration-and-source-code">Video Demonstration and Source Code</h2>
+<p>To further validate the results, I created three videos using the martial arts dataset (<code>135_06-martialArts.amc</code>) with N=40:</p>
+<iframe width="100%" height="500" src="https://www.youtube.com/embed/qGeqzX3NPvI?si=zRkqSS1tIEWmvS6j" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<p>Each video uses the default camera settings and distinguishes the input motion (in red) from the interpolated output (in green). You can find all the source code, graphs, and videos in the GitHub repository: <a href="https://github.com/pranavsrathod/MotionCaptureInterpolation">GitHub Repository</a>.</p>
+<h3 id="conversion-routines">Conversion Routines</h3>
+<ul>
+<li>
+<p><strong>Euler to Rotation Matrix &#x26; Back:</strong><br>
+The functions <code>Euler2Rotation()</code> and <code>Rotation2Euler()</code> (implemented in <code>interpolator.cpp</code>) convert between Euler angles (in degrees) and a 3×3 rotation matrix. These routines are critical because the conversion to a rotation matrix is a stepping stone for converting to quaternions while preserving the correct order (XYZ) of rotations.</p>
+</li>
+<li>
+<p><strong>Euler to Quaternion &#x26; Quaternion to Euler:</strong><br>
+The <code>Euler2Quaternion()</code> function first converts Euler angles to a rotation matrix and then uses the provided quaternion library (see <code>quaternion.cpp</code> and <code>quaternion.h</code>) to convert that matrix into a unit quaternion. This approach avoids the pitfalls of gimbal lock that are inherent to Euler representations. Conversely, <code>Quaternion2Euler()</code> converts a quaternion back to Euler angles by first converting the quaternion to a rotation matrix and then applying <code>Rotation2Euler()</code>.</p>
+</li>
+</ul>
+<h3 id="interpolation-methods">Interpolation Methods</h3>
+<ul>
+<li>
+<p><strong>Linear Interpolation:</strong><br>
+In Euler space, linear interpolation is performed by simply taking a weighted sum of the starting and ending Euler angles for each bone (see <code>LinearInterpolationEuler()</code> in <code>interpolator.cpp</code>). However, because Euler angles do not behave linearly under rotation, this method can lead to abrupt changes.<br>
+For quaternion-based linear interpolation, the implementation uses the SLERP (Spherical Linear Interpolation) function. The function <code>Slerp()</code> computes the interpolation by ensuring that the motion follows the shortest path on the unit sphere, thereby maintaining a constant angular velocity and yielding smoother rotations.</p>
+</li>
+<li>
+<p><strong>Bezier Interpolation:</strong><br>
+To further smooth the interpolation, I implemented Bezier interpolation methods for both Euler and quaternion representations.</p>
+<ul>
+<li><strong>Euler Bezier Interpolation:</strong><br>
+The approach computes control points for each segment using a 1/3 factor based on neighboring keyframes. These control points are then used in the De Casteljau algorithm (implemented in <code>DeCasteljauEuler()</code>) to generate a smooth curve between keyframes. This method tends to reduce abrupt transitions compared to linear interpolation, though it is still limited by the properties of Euler angles.</li>
+<li><strong>Quaternion Bezier (Bezier SLERP) Interpolation:</strong><br>
+Here, the idea is extended to quaternion space. Since quaternions represent rotations more naturally, this method applies SLERP at each step of the De Casteljau algorithm (see <code>DeCasteljauQuaternion()</code>) to interpolate between quaternions. Control points in quaternion space are computed using modified SLERP steps as well as a dedicated function <code>Double()</code>, which calculates an intermediate quaternion using the dot product between two quaternions. This careful adjustment of control points helps maintain continuity in acceleration and provides the smoothest transitions among all methods.</li>
+</ul>
+</li>
+</ul>
+<h3 id="driver-and-file-processing">Driver and File Processing</h3>
+<ul>
+<li>
+<p><strong>Motion and Skeleton Classes:</strong><br>
+The <code>Motion</code> and <code>Skeleton</code> classes (see <code>motion.h</code>, <code>motion.cpp</code>, and <code>skeleton.h</code>) handle loading, processing, and writing the ASF and AMC files. The <code>Motion</code> class stores a sequence of postures (each containing root positions and bone rotations) which are then modified by the interpolator.</p>
+</li>
+<li>
+<p><strong>Interpolation Driver:</strong><br>
+The file <code>interpolate.cpp</code> serves as the driver application that combines all components. It parses command-line arguments, loads the appropriate ASF and AMC files, selects the interpolation method based on user input, and writes the interpolated motion back to an AMC file. This modularity makes it straightforward to test different methods (e.g., linear vs. Bezier, Euler vs. Quaternion).</p>
+</li>
+</ul>
+<h3 id="visualization-and-analysis">Visualization and Analysis</h3>
+<p>The <code>mocapPlayer</code> (source files <code>mocapPlayer.cpp</code> and <code>mocapPlayer.h</code>) is used to visualize both the original and interpolated motions. By overlaying the two motions (with distinct colors for clarity), I was able to generate comparative videos that clearly illustrate the smoother transitions achieved by quaternion-based methods over the Euler-based ones.</p>
+<p>Additionally, I plotted four graphs comparing the different techniques:</p>
+<ul>
+<li><strong>Graph #1:</strong> Linear Euler vs. Bezier Euler for the lfemur X-axis (frames 600–800, N=20)</li>
+</ul>
+<div style="text-align: center; margin: 2rem 0;">
+  <img src="/CS520/2/graph1.png" alt="Pranav with friends and their families" style="max-width: 100%; height: auto;">
+</div>
+<ul>
+<li><strong>Graph #2:</strong> SLERP Quaternion vs. Bezier SLERP Quaternion for the lfemur X-axis (frames 600–800, N=20)</li>
+</ul>
+<div style="text-align: center; margin: 2rem 0;">
+  <img src="/CS520/2/graph2.png" alt="Pranav with friends and their families" style="max-width: 100%; height: auto;">
+</div>
+<ul>
+<li><strong>Graph #3:</strong> Linear Euler vs. SLERP Quaternion for root rotation around the Z-axis (frames 200–500, N=20)</li>
+</ul>
+<div style="text-align: center; margin: 2rem 0;">
+  <img src="/CS520/2/graph3.png" alt="Pranav with friends and their families" style="max-width: 100%; height: auto;">
+</div>
+<ul>
+<li><strong>Graph #4:</strong> Bezier Euler vs. Bezier SLERP Quaternion for root rotation around the Z-axis (frames 200–500, N=20)</li>
+</ul>
+<div style="text-align: center; margin: 2rem 0;">
+  <img src="/CS520/2/graph4.png" alt="Pranav with friends and their families" style="max-width: 100%; height: auto;">
+</div>
+<p>The graphs demonstrate that while both Bezier curves smooth the data better than their linear counterparts, the quaternion methods (especially Bezier SLERP) more faithfully preserve the original motion characteristics without the risk of gimbal lock.</p>
+<h2 id="reflections">Reflections</h2>
+<p>This project was both challenging and rewarding. Through the implementation, I gained a deeper understanding of:</p>
+<ul>
+<li>Why Euler-based interpolation can lead to unnatural motion and how the non-linearities in rotation can cause abrupt changes.</li>
+<li>How quaternion-based interpolation, especially when augmented with Bezier smoothing (Bezier SLERP), provides a more natural representation of rotational motion.</li>
+<li>The importance of proper conversion routines between Euler angles, rotation matrices, and quaternions.</li>
+</ul>
+<p>Overall, the exercise not only honed my programming and mathematical skills but also reinforced the importance of leveraging advanced interpolation techniques for realistic computer animations. I look forward to further applying these techniques in future projects.</p>
+<hr> </div> </article> <div class="my-16 sm:my-24"> <h2 class="mb-12 text-xl font-serif italic sm:mb-16 sm:text-2xl">View Next</h2>  <a class="flex flex-col sm:flex-row items-center gap-8 group mb-10 sm:mb-12" href="/projects/jellocube/"> <figure class="sm:w-1/2"> <img class="w-full object-cover mx-auto" src="/CS520/1/jelloCube.png" alt="Project Poster" loading="lazy" decoding="async"> </figure> <div class="sm:w-1/2 sm:pl-4 text-center"> <h3 class="text-xl leading-tight font-serif font-medium group-hover:underline group-hover:decoration-dashed group-hover:underline-offset-4 group-hover:decoration-1 sm:text-2xl">Jello Cube Simulation</h3> <div class="mt-1 text-sm leading-normal">A physically based simulation of a Jello Cube using a mass-spring system. The cube deforms, oscillates, and reacts realistically to forces based on Newton&#39;s laws, Hooke&#39;s law, and damping forces.</div> <div class="mt-4 font-serif italic opacity-0 transition group-hover:opacity-100 sm:block">
+View Project <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="fill-current w-4 h-4 inline-block"> <path d="M4.286 12c0-0.533 0.432-0.964 0.964-0.964v0h11.172l-4.14-4.138c-0.175-0.175-0.283-0.416-0.283-0.683 0-0.533 0.432-0.965 0.965-0.965 0.267 0 0.508 0.108 0.683 0.283v0l5.785 5.785c0.175 0.175 0.283 0.416 0.283 0.683s-0.108 0.508-0.283 0.683l-5.785 5.785c-0.175 0.175-0.416 0.283-0.683 0.283-0.533 0-0.965-0.432-0.965-0.965 0-0.267 0.108-0.508 0.283-0.683v0l4.14-4.138h-11.172c-0.533 0-0.964-0.432-0.964-0.964v0z"></path> </svg> </div> </div> </a> </div> </main> <footer class="w-full max-w-3xl mx-auto pt-12 pb-10 sm:pt-24 sm:pb-14"> <div class="mb-4 flex flex-wrap gap-x-6 gap-y-1"> <a class="font-serif hover:underline hover:underline-offset-2" href="/about"> About </a><a class="font-serif hover:underline hover:underline-offset-2" href="/contact"> Contact </a> </div> <div class="pt-6 flex flex-col gap-4 border-t border-dashed border-main sm:flex-row-reverse sm:justify-between sm:items-center"> <div class="flex flex-wrap gap-x-4 gap-y-1"> <a class="inline-flex items-center justify-center text-sm hover:underline hover:underline-offset-2" href="https://www.linkedin.com/in/pranavsrathod/" target="_blank" rel="noopener noreferer"> LinkedIn </a><a class="inline-flex items-center justify-center text-sm hover:underline hover:underline-offset-2" href="https://github.com/pranavsrathod" target="_blank" rel="noopener noreferer"> Github </a> </div> <p class="text-sm">
+&copy; 2025&nbsp;<a class="hover:underline hover:underline-offset-2" href="/">Pranav Rathod</a>. All rights reserved.
+</p> </div> </footer> </div> </body></html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html><html lang="en" class="antialiased break-words"> <head><!-- High Priority Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Urban Renderer | Pranav Rathod</title><meta name="generator" content="Astro v5.6.1"><!-- Fonts --><link rel="preload" as="font" type="font/woff2" href="/_astro/inter-latin-wght-normal.C2S99t-D.woff2" crossorigin="anonymous"><link rel="preload" as="font" type="font/woff2" href="/_astro/newsreader-latin-wght-normal.B8UkT1nD.woff2" crossorigin="anonymous"><!-- Low Priority Global Metadata --><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS"><!-- Page Metadata --><link rel="canonical" href="https://pranavsrathod.github.io/projects/urbanrenderer/"><meta name="description" content="I developed an interactive WebGL application to render a dynamic 3D urban environment from JSON data. The project features two interactive demos—one for standard urban rendering and another with advanced shadow mapping for realistic lighting."><!-- Open Graph / Facebook --><meta property="og:type" content="article"><meta property="og:url" content="https://pranavsrathod.github.io/projects/urbanrenderer/"><meta property="og:title" content="Urban Renderer | Pranav Rathod"><meta property="og:description" content="I developed an interactive WebGL application to render a dynamic 3D urban environment from JSON data. The project features two interactive demos—one for standard urban rendering and another with advanced shadow mapping for realistic lighting."><meta property="og:image" content="https://pranavsrathod.github.io/Graphics1/assignment-1.gif"><meta property="og:image:alt" content="Urban Renderer Demo"><!-- X/Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://pranavsrathod.github.io/projects/urbanrenderer/"><meta property="twitter:title" content="Urban Renderer | Pranav Rathod"><meta property="twitter:description" content="I developed an interactive WebGL application to render a dynamic 3D urban environment from JSON data. The project features two interactive demos—one for standard urban rendering and another with advanced shadow mapping for realistic lighting."><meta property="twitter:image" content="https://pranavsrathod.github.io/Graphics1/assignment-1.gif"><meta name="twitter:image:alt" content="Urban Renderer Demo"><script type="module">localStorage.theme==="dark"&&document.documentElement.classList.add("dark");</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.Dfz7QWtE.js"></script><link rel="stylesheet" href="/_astro/_id_.C47JjJ8_.css"></head> <body class="bg-main text-main"> <!-- Fixed logo: fills left half of screen with right half of image --> <div class="fixed top-0 left-[-50vw] z-0 pointer-events-none h-screen w-screen overflow-hidden"> <img src="/PR_LOGO.PNG" alt="PR Logo" class="h-screen w-[200vw] object-cover opacity-30"> </div> <!-- Actual page content --> <div class="flex flex-col min-h-screen px-4 md:px-8 relative z-10"> <nav class="min-h-10 pt-4 pb-12 relative sm:min-h-14 sm:pb-24 md:pt-8" data-astro-cid-dmqpwcec> <div class="w-full max-w-3xl mx-auto relative" data-astro-cid-dmqpwcec> <button class="menu-toggle w-8 h-8 -ml-1 flex items-center justify-center relative z-30 md:hidden" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items" data-astro-cid-dmqpwcec> <span class="menu-toggle-icon w-6 h-px relative bg-current" data-astro-cid-dmqpwcec></span> </button> <ul id="menu-items" class="menu flex gap-6" data-astro-cid-dmqpwcec> <li class="py-1" data-astro-cid-dmqpwcec> <a class="text-xl font-serif text-main hover:underline hover:underline-offset-2 hover:decoration-1 md:text-base" href="/" data-astro-cid-dmqpwcec="true"> Home </a> </li><li class="py-1" data-astro-cid-dmqpwcec> <a class="text-xl font-serif text-main hover:underline hover:underline-offset-2 hover:decoration-1 md:text-base" href="/projects" data-astro-cid-dmqpwcec="true"> Projects </a> </li><li class="py-1" data-astro-cid-dmqpwcec> <a class="text-xl font-serif text-main hover:underline hover:underline-offset-2 hover:decoration-1 md:text-base" href="/blog" data-astro-cid-dmqpwcec="true"> Blog </a> </li><li class="py-1" data-astro-cid-dmqpwcec> <a class="text-xl font-serif text-main hover:underline hover:underline-offset-2 hover:decoration-1 md:text-base" href="/tags" data-astro-cid-dmqpwcec="true"> Tags </a> </li> </ul> </div> <div class="absolute right-0 top-4 z-10 md:top-8" data-astro-cid-dmqpwcec> <button id="theme-toggle" class="w-8 h-8 -mr-2 flex items-center justify-center" aria-label="Change color scheme"> <svg class="w-4 h-4 fill-current" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"> <circle cx="8" cy="8" r="8"></circle> </svg> </button> <script type="module">document.addEventListener("astro:after-swap",()=>{localStorage.theme==="dark"&&document.documentElement.classList.add("dark")});</script> <script type="module">document.addEventListener("astro:page-load",()=>{const e=typeof localStorage<"u"&&localStorage.getItem("theme")?localStorage.getItem("theme")||"light":window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";e==="light"?document.documentElement.classList.remove("dark"):document.documentElement.classList.add("dark"),window.localStorage.setItem("theme",e);const o=()=>{const t=document.documentElement;t.classList.toggle("dark");const a=t.classList.contains("dark");localStorage.setItem("theme",a?"dark":"light")};document.getElementById("theme-toggle")?.addEventListener("click",o)});</script> </div> </nav>  <script type="module">function n(){const s=document.querySelector(".menu"),e=document.querySelector(".menu-toggle");e?.addEventListener("click",()=>{const t=e.getAttribute("aria-expanded")==="true";e.classList.toggle("is-active"),e.setAttribute("aria-expanded",t?"false":"true"),e.setAttribute("aria-label",t?"Open Menu":"Close Menu"),s?.classList.toggle("is-visible")})}n();document.addEventListener("astro:after-swap",n);</script>  <main class="grow w-full max-w-3xl mx-auto">  <article class="mb-16 sm:mb-24"> <header class="mb-8"> <h1 class="text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">Urban Renderer</h1> </header> <div class="max-w-none prose prose-dante sm:prose-lg"> <p><strong>Fall 2022</strong><br>
+<strong>Pranav Rathod</strong></p>
+<p>I developed <strong>Urban Renderer</strong>—an interactive WebGL application that brings a 3D urban environment to life using data loaded from external JSON files and a custom configuration panel. The project is split into two main parts: the core urban rendering demo and an enhanced shadow mapping demo that delivers realistic lighting and shadows.</p>
+<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
+  <img src="/UICProjects/Graphics1/assignment-1.gif" alt="Urban Renderer Demo">
+</div>
+<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
+  <img src="/UICProjects/Graphics2/manhattan.gif" alt="Shadow Maps Demo">
+</div>
+<h2 id="overview">Overview</h2>
+<p>The application reads JSON files that describe four distinct layers representing an urban setting:</p>
+<ul>
+<li><strong>Buildings</strong></li>
+<li><strong>Water</strong></li>
+<li><strong>Parks</strong></li>
+<li><strong>Surface</strong></li>
+</ul>
+<p>Each layer includes its own set of coordinates, indices, and (for buildings) normals along with a designated color. I designed the system to use a unique buffer and VAO for each layer, ensuring optimal performance and ease of management. Interactive controls let users dynamically alter the view through rotation, zoom, and pan, as well as switch between perspective and orthographic projections.</p>
+<h2 id="implementation">Implementation</h2>
+<h3 id="interactive-configuration-and-basic-rendering">Interactive Configuration and Basic Rendering</h3>
+<p>I built a configuration panel with:</p>
+<ul>
+<li>A <strong>dropdown menu</strong> to toggle between perspective and orthographic projections.</li>
+<li>A <strong>file input element</strong> for loading a JSON file that defines the urban environment.</li>
+</ul>
+<p>User interactions are handled via mouse events that update a view transformation matrix—allowing the camera to rotate around the scene’s center—and enable zoom functionality to adjust the view seamlessly.</p>
+<p>For rendering:</p>
+<ul>
+<li>The <strong>Building Layer</strong> is shaded using normals and a constant color. This gives the buildings a responsive appearance without needing a full illumination model.</li>
+<li>The <strong>Flat Layers</strong> (water, parks, and surface) are rendered with a uniform color, as they lack normals.</li>
+</ul>
+<p>I leveraged WebGL utilities for creating shaders, programs, buffers, VAOs, and performing matrix operations. These tools allowed me to structure a robust and responsive rendering pipeline.</p>
+<h3 id="advanced-shadow-mapping">Advanced Shadow Mapping</h3>
+<p>Building upon the basic urban rendering, I enhanced the project with an advanced shadow mapping technique to simulate realistic directional lighting and dynamic shadows. Key features include:</p>
+<ul>
+<li>
+<p><strong>Extended Configuration:</strong><br>
+In addition to the basic controls, the panel now includes:</p>
+<ul>
+<li>A <strong>slider</strong> (with values between 0 and 360) to control the rotation of the light around the scene.</li>
+<li>A <strong>checkbox input</strong> to toggle the display of the shadow map texture.</li>
+<li>A separate file input to load an appropriate JSON file for the shadow mapping demo.</li>
+</ul>
+</li>
+<li>
+<p><strong>Shadow Mapping Pipeline:</strong><br>
+The shadow mapping technique is implemented with a two-pass rendering approach:</p>
+<ol>
+<li><strong>First Pass:</strong> Render the scene from the light’s perspective to generate a depth texture (shadow map) using framebuffer objects (FBO) and a dedicated ShadowMapProgram.</li>
+<li><strong>Second Pass:</strong> Use the generated depth texture in the fragment shader to determine shadowed areas while rendering the scene from the camera’s perspective.</li>
+</ol>
+<p>This approach guarantees that the same light transformation matrices are used for both shadow computation and surface shading, ensuring consistency in lighting.</p>
+</li>
+<li>
+<p><strong>Dynamic Light Control:</strong><br>
+The light direction is dynamically updated based on the slider value, and users can immediately see how changes in light orientation affect the shadows throughout the scene.</p>
+</li>
+</ul>
+<h2 id="practical-demonstrations">Practical Demonstrations</h2>
+<p>The project includes two separate interactive demos:</p>
+<h3 id="1-urban-rendering-demo">1. Urban Rendering Demo</h3>
+<p>To experience the core urban rendering:</p>
+<ul>
+<li><strong>Download Sample File:</strong> <a href="/UICProjects/Graphics1/city.json" download="city.json"> city.json</a>.</li>
+<li><strong>View Demo:</strong> Click the button to launch the demo.</li>
+</ul>
+<div style="text-align: center; margin-top: 20px;">
+  <a href="/UICProjects/Graphics1/index.html" class="btn btn-lg btn-primary" style="font-size: 1.5em; padding: 10px 20px;">View Urban Rendering Demo</a>
+</div>
+<p>In this demo, you can:</p>
+<ul>
+<li><strong>Rotate:</strong> Click and drag to rotate the view.</li>
+<li><strong>Zoom:</strong> Use the mouse wheel to zoom in and out.</li>
+<li><strong>Pan:</strong> Hold the right mouse button and drag to pan the scene.</li>
+</ul>
+<h3 id="2-shadow-mapping-demo">2. Shadow Mapping Demo</h3>
+<p>To see the advanced shadow mapping in action:</p>
+<ul>
+<li><strong>Download Sample File:</strong> <a href="/UICProjects/Graphics2/manhattan.json" download="city.json"> manhattan.json</a>..</li>
+<li><strong>View Demo:</strong> Click the button to launch the shadow mapping demo.</li>
+</ul>
+<div style="text-align: center; margin-top: 20px;">
+  <a href="/UICProjects/Graphics2/index.html" class="btn btn-lg btn-primary" style="font-size: 1.5em; padding: 10px 20px;">View Shadow Mapping Demo</a>
+</div>
+<p>In this demo, besides the usual interactive controls (rotate, zoom, pan), you can:</p>
+<ul>
+<li><strong>Adjust Light Direction:</strong> Use the slider in the control panel to rotate the light around the scene.</li>
+<li><strong>Toggle Shadow Map Display:</strong> Use the checkbox to view the depth texture generated by the first pass.</li>
+</ul>
+<h2 id="reflections">Reflections</h2>
+<p>Working on Urban Renderer and extending it with shadow mapping allowed me to dive deep into WebGL, shader programming, and interactive graphics. I learned how to manage complex rendering pipelines with multiple layers and how to implement advanced techniques like shadow mapping to achieve realistic lighting effects. The addition of interactive controls makes the application engaging, and the dual demo setup showcases both the core rendering and the added depth provided by dynamic shadows.</p>
+<p>For more technical details and to view the source code, please visit my <a href="https://github.com/uic-cs425/spring-2022-assignment-2-pranavsrathod">GitHub repository</a>.</p>
+<hr> </div> </article> <div class="my-16 sm:my-24"> <h2 class="mb-12 text-xl font-serif italic sm:mb-16 sm:text-2xl">View Next</h2> <a class="flex flex-col sm:flex-row items-center gap-8 group mb-10 sm:mb-12" href="/projects/aroundtheworld/"> <figure class="sm:w-1/2"> <img class="w-full object-cover mx-auto" src="/UICProjects/AR/AR.png" alt="Project Poster" loading="lazy" decoding="async"> </figure> <div class="sm:w-1/2 sm:pl-4 text-center"> <h3 class="text-xl leading-tight font-serif font-medium group-hover:underline group-hover:decoration-dashed group-hover:underline-offset-4 group-hover:decoration-1 sm:text-2xl">Around The World</h3> <div class="mt-1 text-sm leading-normal">This project showcases two significant places from my life, presented on physical cubes through the magic of Augmented Reality (AR).</div> <div class="mt-4 font-serif italic opacity-0 transition group-hover:opacity-100 sm:block">
+View Project <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="fill-current w-4 h-4 inline-block"> <path d="M4.286 12c0-0.533 0.432-0.964 0.964-0.964v0h11.172l-4.14-4.138c-0.175-0.175-0.283-0.416-0.283-0.683 0-0.533 0.432-0.965 0.965-0.965 0.267 0 0.508 0.108 0.683 0.283v0l5.785 5.785c0.175 0.175 0.283 0.416 0.283 0.683s-0.108 0.508-0.283 0.683l-5.785 5.785c-0.175 0.175-0.416 0.283-0.683 0.283-0.533 0-0.965-0.432-0.965-0.965 0-0.267 0.108-0.508 0.283-0.683v0l4.14-4.138h-11.172c-0.533 0-0.964-0.432-0.964-0.964v0z"></path> </svg> </div> </div> </a>  </div> </main> <footer class="w-full max-w-3xl mx-auto pt-12 pb-10 sm:pt-24 sm:pb-14"> <div class="mb-4 flex flex-wrap gap-x-6 gap-y-1"> <a class="font-serif hover:underline hover:underline-offset-2" href="/about"> About </a><a class="font-serif hover:underline hover:underline-offset-2" href="/contact"> Contact </a> </div> <div class="pt-6 flex flex-col gap-4 border-t border-dashed border-main sm:flex-row-reverse sm:justify-between sm:items-center"> <div class="flex flex-wrap gap-x-4 gap-y-1"> <a class="inline-flex items-center justify-center text-sm hover:underline hover:underline-offset-2" href="https://www.linkedin.com/in/pranavsrathod/" target="_blank" rel="noopener noreferer"> LinkedIn </a><a class="inline-flex items-center justify-center text-sm hover:underline hover:underline-offset-2" href="https://github.com/pranavsrathod" target="_blank" rel="noopener noreferer"> Github </a> </div> <p class="text-sm">
+&copy; 2025&nbsp;<a class="hover:underline hover:underline-offset-2" href="/">Pranav Rathod</a>. All rights reserved.
+</p> </div> </footer> </div> </body></html>
