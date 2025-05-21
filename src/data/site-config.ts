@@ -42,8 +42,8 @@ const siteConfig: SiteConfig = {
     subtitle: 'Software Engineer | Amteure Photographer',
     description: 'Astro.js and Tailwind CSS theme for blog and portfolio by justgoodui.com',
     image: {
-        src: '/pranavintrain.jpg',
-        alt: 'Dante - Astro.js and Tailwind CSS theme'
+        src: '/logoPreview.png',
+        alt: 'Pranav Rathod Logo (Designed using Procreate)'
     },
     headerNavLinks: [
         {
