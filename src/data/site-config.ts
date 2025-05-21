@@ -42,7 +42,7 @@ const siteConfig: SiteConfig = {
     subtitle: 'Software Engineer | Amteure Photographer',
     description: 'Astro.js and Tailwind CSS theme for blog and portfolio by justgoodui.com',
     image: {
-        src: '/dante-preview.jpg',
+        src: '/pranavintrain.jpg',
         alt: 'Dante - Astro.js and Tailwind CSS theme'
     },
     headerNavLinks: [
