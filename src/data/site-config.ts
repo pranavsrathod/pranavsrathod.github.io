@@ -23,7 +23,6 @@ export type Subscribe = {
 };
 
 export type SiteConfig = {
-    website: string;
     logo?: Image;
     title: string;
     subtitle?: string;
@@ -39,9 +38,8 @@ export type SiteConfig = {
 };
 
 const siteConfig: SiteConfig = {
-    website: 'https://example.com',
-    title: 'Dante',
-    subtitle: 'Minimal Astro.js theme',
+    title: 'Pranav Rathod',
+    subtitle: 'Software Engineer | Amteure Photographer',
     description: 'Astro.js and Tailwind CSS theme for blog and portfolio by justgoodui.com',
     image: {
         src: '/dante-preview.jpg',
@@ -73,38 +71,30 @@ const siteConfig: SiteConfig = {
         {
             text: 'Contact',
             href: '/contact'
-        },
-        {
-            text: 'Terms',
-            href: '/terms'
-        },
-        {
-            text: 'Download theme',
-            href: 'https://github.com/JustGoodUI/dante-astro-theme'
         }
     ],
     socialLinks: [
         {
-            text: 'Dribbble',
-            href: 'https://dribbble.com/'
+            text: 'LinkedIn',
+            href: 'https://www.linkedin.com/in/pranavsrathod/'
         },
         {
-            text: 'Instagram',
-            href: 'https://instagram.com/'
-        },
-        {
-            text: 'X/Twitter',
-            href: 'https://twitter.com/'
+            text: 'Github',
+            href: 'https://github.com/pranavsrathod'
         }
     ],
     hero: {
-        title: 'Hi There & Welcome to My Corner of the Web!',
-        text: "I'm **Ethan Donovan**, a web developer at Amazing Studio, dedicated to the realms of collaboration and artificial intelligence. My approach involves embracing intuition, conducting just enough research, and leveraging aesthetics as a catalyst for exceptional products. I have a profound appreciation for top-notch software, visual design, and the principles of product-led growth. Feel free to explore some of my coding endeavors on <a href='https://github.com/JustGoodUI/dante-astro-theme'>GitHub</a> or follow me on <a href='https://twitter.com/justgoodui'>Twitter/X</a>.",
+        title: 'Where Code Meets Creativity',
+        text: "Hello! I'm Pranav, a creative technologist and USC grad student who blends code with art to craft immersive XR experiences and dynamic digital narratives. From browser roller coasters to VR explorations, I push the boundaries of tech and storytelling. Dive in to explore my work and feel free to reach out!",
         image: {
-            src: '/hero.jpeg',
-            alt: 'A person sitting at a desk in front of a computer'
+            src: '/pranavintrain.jpg',
+            alt: 'Pranav Look WTF Hollywood is?'
         },
         actions: [
+            {
+                text: 'View Resume',
+                href: '/Resume/Pranav_Rathod_Resume.pdf'
+            },
             {
                 text: 'Get in Touch',
                 href: '/contact'
@@ -112,7 +102,7 @@ const siteConfig: SiteConfig = {
         ]
     },
     subscribe: {
-        title: 'Subscribe to Dante Newsletter',
+        title: 'Subscribe to Pranav Newsletter',
         text: 'One update per week. All the latest posts directly in your inbox.',
         formUrl: '#'
     },
