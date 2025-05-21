@@ -2,42 +2,45 @@
 title: About
 seo:
   title: About Me
-  description: Learn more about the person behind the website and embark on a journey of inspiration and shared experiences.
+  description: Discover Pranav Rathod – a creative technologist blending computer science, art, and immersive technologies.
   image:
     src: '/about.jpeg'
-    alt: A person sitting at a desk in front of a computer
+    alt: 'Pranav Rathod sitting at a computer'
 ---
 
-![Alt text for image](/about.jpeg)
+![Pranav Rathod](/Profile.JPG)
 
-**Note!:** This about page is entirely fictional and created for the purpose of showcasing [Dante Astro.js theme functionality](https://justgoodui.com/astro-themes/dante/).
+## Hey, I’m Pranav 👋
 
-## Ethan Donovan - Web Developer based in Estonia
+I’m a creative technologist, engineer, and sometimes a quiet observer of the world — currently pursuing my **Master’s in Computer Science** at the **University of Southern California**, specializing in **Multimedia and Creative Technologies**.
 
-**Greetings!** I'm Ethan Donovan, a passionate web developer residing in the picturesque landscapes of [Estonia](https://en.wikipedia.org/wiki/Estonia). With a keen eye for design and a love for crafting seamless digital experiences, I bring a unique blend of creativity and technical expertise to the world of web development.
+Right now, I’m deep into **Computer Animation and Simulation** (shoutout to Professor Barbic) and **Game Engine Development**, sharpening my chops in real-time graphics and systems. When I’m not coding or debugging, I’m probably solving LeetCode problems or editing videos in Premiere Pro — trying to earn that certification and level up both technically and creatively.
 
-## Skills and Expertise
+---
 
-I specialize in front-end and back-end development, utilizing the latest technologies to build responsive and user-friendly websites. My proficiency includes **HTML**, **CSS**, **JavaScript**, and frameworks such as **Astro.js** for dynamic and interactive user interfaces. On the server side, I'm well-versed in Node.js and have experience with database management systems like MongoDB.
+### What I Care About
 
-## Innovation and Problem-Solving
+I’m inspired by urban life, identity, and internal conflict — the things that aren’t always loud but still shape how we move through the world. I love building projects that live at the intersection of emotion and interaction and has driven me to work on projects like city renderers, VR experiences, and mobile tools that mix logic with creativity.
 
-I thrive on solving complex problems and transforming ideas into functional, elegant websites. Whether it's optimizing performance, implementing new features, or troubleshooting issues, I approach each challenge with enthusiasm and a commitment to delivering high-quality solutions.
+Right now, I’m especially interested in:
 
-## Global Perspective, Local Impact
+- Real-time rendering & interactive storytelling  
+- XR interfaces and perception  
+- Systems-level design (especially in games)  
+- Capturing things that make people *pause* — even for a second
 
-Living in Estonia has not only influenced my appreciation for nature and culture but has also shaped my approach to web development. I understand the importance of creating digital solutions that resonate with local audiences while maintaining a global perspective.
+---
 
-## Continuous Learning
+### Beyond Code
 
-The dynamic nature of the tech industry inspires me to stay up-to-date with the latest trends and advancements. I'm always eager to expand my skill set and embrace emerging technologies that enhance the functionality and aesthetics of the websites I create.
+I shoot photos mostly on my iPhone — framing moments from cities I live in or pass through. The plan is to graduate to a proper camera soon (open to recs if you’ve got one). My lens tends to gravitate toward movement, symmetry, and the small dramas of everyday life.
 
-## Collaboration and Communication
+I also love movies. You can find what I’ve been watching over on [Letterboxd](https://letterboxd.com/pranavsrathod/) (yes, I just finished Season 2 of *Severance* — still processing).
 
-I believe in the power of collaboration and effective communication. Whether working with clients, designers, or fellow developers, I value clear communication to ensure the success of every project.
+---
 
-## Get in Touch
+### Let’s Build Together
 
-Are you looking to elevate your online presence or bring your digital ideas to life? I'd love to hear from you! Feel free to reach out for collaboration, consultation, or just a friendly chat about all things web development.
+I’m always open to connecting with people who love to build, design, or explore. Whether you're working on a creative tech idea, want to collaborate, or just want to chat about virtual cities and visual storytelling — I’d love to hear from you.
 
-_Let's build something amazing together!_
+---

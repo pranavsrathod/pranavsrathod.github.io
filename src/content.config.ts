@@ -1,5 +1,5 @@
-import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { defineCollection, z } from 'astro:content';
 
 const seoSchema = z.object({
     title: z.string().min(5).max(120).optional(),
@@ -41,6 +41,7 @@ const projects = defineCollection({
         description: z.string().optional(),
         publishDate: z.coerce.date(),
         isFeatured: z.boolean().default(false),
+        poster: z.string().optional(),
         seo: seoSchema.optional()
     })
 });

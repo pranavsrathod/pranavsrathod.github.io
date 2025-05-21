@@ -1,0 +1,49 @@
+---
+title: "Height Fields Using Shaders"
+description: "A project that utilizes OpenGL's core profile and shaders to generate and manipulate a 3D height field from image data."
+publishDate: "February 21, 2024"
+isFeatured: true
+poster: '/CS420/heightFeilds.png'
+seo:
+  image:
+    src: "/project-2.jpg"
+    alt: "Height Fields Project Preview"
+---
+
+![Height Fields Demonstration](/CS420/heightFields.gif)
+
+**Height Fields Using Shaders**  
+_Pranav Rathod_  
+
+**Date:** February 21, 2024
+
+For this project, I created a program that utilizes OpenGL's core profile to generate and manipulate a 3D height field from user-specified image data. The grayscale values of the image are interpreted as elevation, rendering the height field as a visually stunning terrain. I also implemented advanced transformation controls, smooth shading, and interactive rendering modes to enhance user experience.
+
+## Source Code
+
+If you'd like to explore the source code for this project, you can find it on my GitHub repository: [https://github.com/pranavsrathod/Height-Fields/](https://github.com/pranavsrathod/Height-Fields/).
+
+## Project Overview
+
+This project provided an opportunity to explore shader programming and 3D graphics using OpenGL. The application reads grayscale image data to construct a height field, where pixel intensity determines the elevation. Key features include:
+
+- **Render Modes:**  
+  - **Point Rendering (`1`):** Displays the height field as individual points.
+  - **Wireframe Rendering (`2`):** Uses lines to give a skeletal view of the terrain.
+  - **Solid Rendering (`3`):** Renders the height field as a continuous surface of triangles.
+- **Transformation Controls:**  
+  - **Rotate:** Use the mouse to rotate the model along different axes.
+  - **Scale:** Hold `Shift` and use the mouse to scale the model up or down.
+  - **Translate:** Hold `t` and use the mouse to move the model across the plane.
+- **Smoothing Mode:**  
+  Press `4` to activate a smoothing shader that refines the terrain geometry and color. Adjust terrain scale with the `+` and `-` keys and modify color intensity with the `9` and `0` keys.
+- **JetColorMap:**  
+  The vertex shader transforms grayscale colors into a vibrant colormap with dynamic adjustments via exponents.
+
+## Citations
+
+Special thanks to the following resources for their insights and examples:
+
+- OpenGL Tutorials by the Khronos Group.
+- WebGL documentation for understanding shader programming and rendering pipelines.
+- Grayscale image processing examples for 3D height field generation.

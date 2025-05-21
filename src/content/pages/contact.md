@@ -2,13 +2,13 @@
 title: Get in touch
 seo:
   title: Contact
-  description: Get in touch through email or social media! Let me know how I can help.
+  description: Reach out to me via email or connect on social media. Let’s talk ideas, tech, or collaborations.
 ---
 
-Thank you for reaching out! Whether you have a question, a suggestion, or just want to share your thoughts, I'm all ears. Feel free to get in touch through any of the methods below:
+Thanks for stopping by! Whether you're curious about my projects, want to collaborate, or just want to chat—I'd love to hear from you.
 
 _Email:_
-Feel free to drop me an email at [example@example.com](mailto:example@example.com), and I'll do my best to respond as soon as possible.
+You can reach me at [pranavrathodev@gmail.com](mailto:pranavrathodev@gmail.com). I usually reply within a day or two.
 
 _Social Media:_
-Connect with me on social media as well. Find me on [Twitter](https://twitter.com) or [LinkedIn](https://www.linkedin.com/).
+Feel free to connect with me on [LinkedIn](https://www.linkedin.com/in/pranavsrathod).

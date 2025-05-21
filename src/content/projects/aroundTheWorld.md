@@ -1,0 +1,162 @@
+---
+title: "Around The World"
+description: "This project showcases two significant places from my life, presented on physical cubes through the magic of Augmented Reality (AR)."
+publishDate: "September 19, 2022"
+isFeatured: false
+poster: "/UICProjects/AR/AR.png"
+seo:
+  image:
+    src: "/UICProjects/AR/AR.png"
+    alt: "Around The World Project Cover"
+---
+
+**Pranav Rathod**  
+**Date:** September 19, 2022
+
+This project is designed to showcase two places/attractions that have been significant in my life. They are rendered on physical cubes through the magic of Augmented Reality (AR).
+
+![Project Cover](/UICProjects/AR/cover.jpg)
+
+---
+
+## Why Do I Think AR Will Become Popular in the Future?
+
+AR has gained immense popularity in recent years, and I believe it will continue to flourish in the future. The familiarity of AR among the generation that grew up with social media platforms like Instagram and Snapchat has played a significant role in its widespread adoption. For example, Snapchat’s face filters have evolved from playful animations into powerful tools for self-expression.
+
+Beyond face filters, the phenomenal success of Pokémon Go in 2016 provided a glimpse into AR's potential by seamlessly blending the real and virtual worlds. AR has evolved from a novelty into a practical tool, with applications like using LiDAR for precise spatial mapping—allowing users to visualize how furniture might fit in a room before making a purchase.
+
+The recent announcements from companies like Meta further emphasize AR's promising future. While there are valid concerns about the increasing role of digital experiences, I believe that, when used responsibly, AR can enhance our interaction with the world by merging physical and virtual realities.
+
+---
+
+## Models Displayed
+
+### Merge Cube
+
+Italy holds a special place in my heart—it marks the first international journey my family and I embarked on during my middle school years. In this AR project, the Merge Cube displays meticulously crafted models representing iconic symbols of Pisa:
+
+- **Leaning Tower of Pisa**
+- **Vespa**
+- **Pizza**
+
+Additionally, custom models (a charming table and the Italian flag) have been designed using the Unity Game Engine. When you flip the cube, the directional light changes from red to blue and reverts when flipped back.
+
+<div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+  <img src="/UICProjects/AR/IT1.jpg" width="200" height="400" alt="Merge Cube Model 1" />
+  <img src="/UICProjects/AR/IT2.jpg" width="200" height="400" alt="Merge Cube Model 2" />
+  <img src="/UICProjects/AR/IT3.jpg" width="200" height="400" alt="Merge Cube Model 3" />
+  <img src="/UICProjects/AR/IT4.jpg" width="200" height="400" alt="Merge Cube Model 4" />
+</div>
+
+---
+
+### Class Cube
+
+The Class Cube is designed to represent London, England. It includes models that evoke the British identity, such as:
+
+- **London phone booth**
+- **Tea cup**
+- **Cricket pitch model**
+
+These models capture a nostalgic view of London. For instance, when you flip the cube upside down, a blue spotlight illuminates one of the stumps and then turns off when flipped back.
+
+<div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+  <img src="/UICProjects/AR/UK1.jpg" width="200" height="400" alt="Class Cube Model 1" />
+  <img src="/UICProjects/AR/UK2.jpg" width="200" height="400" alt="Class Cube Model 2" />
+  <img src="/UICProjects/AR/UK3.jpg" width="200" height="400" alt="Class Cube Model 3" />
+  <img src="/UICProjects/AR/UK4.jpg" width="200" height="400" alt="Class Cube Model 4" />
+</div>
+
+---
+
+## Demonstration
+
+To see the project in action, watch the video demonstration below:
+
+<iframe src="https://www.youtube.com/embed/y2Hd0X9s-_s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:500px;"></iframe>
+
+---
+
+## Getting Started with Setting Up the Environment
+
+1. **Download Unity3D:**  
+   Visit [unity.com](https://unity.com/), click "Get Started," select the "Individual" tab, and choose the "Personal" option to download Unity Hub.
+
+2. **Install the Correct Unity Version:**  
+   In Unity Hub, click "Installs" and select **Unity 2021.3.6f1**. Ensure you also install:
+   - Android Build Support (with Android SDK & NDK Tools and OpenJDK)
+   - iOS Build Support (if needed)
+   - A code editor (e.g., Visual Studio Code)
+
+3. **Open the Project:**  
+   Download the project from [GitHub](https://github.com/pranavsrathod/pratho2CS428Project1), unzip it, and open it in Unity Hub. Navigate to `Assets/Scenes` and drag the `RoswellScene` file into your hierarchy. Remove the default scene.
+
+4. **Run the Project:**  
+   Once set up, the scene should display two cubes with the models.  
+   
+![Setup Screenshot](/UICProjects/AR/inst1.png)
+
+---
+
+## Adding Vuforia Package
+
+To add AR capabilities with Vuforia:
+
+1. Create a free developer account on [developer.vuforia.com](https://developer.vuforia.com/).
+2. Download Vuforia 10.9 from [developer.vuforia.com/downloads/sdk](https://developer.vuforia.com/downloads/sdk).
+3. In Unity, go to **Assets → Import Package → Custom Package** and select the downloaded Vuforia package.
+4. Delete the main camera from the scene (Vuforia will add its own camera).
+5. In Unity, open **Window → Vuforia Configuration**, and paste your Vuforia App License Key into the global section.
+6. Save your changes.
+
+---
+
+## Making Physical Cubes
+
+To create the physical cubes for the AR experience:
+
+1. Download the cube templates zip file.
+2. Print out the templates.
+3. Carefully cut and assemble the cubes using school glue (avoid reflective tape).
+4. Use the cubes with your AR app to experience the models in 3D.
+
+![Cubes Template](/UICProjects/AR/cubes.jpg)
+
+_Left – Merge Cube_  
+_Right – Class Cube_
+
+---
+
+## Running the Application on an Android Phone
+
+1. **Connect Your Phone:**  
+   Use the appropriate cable to connect your Android device to your computer. Enable USB debugging on your phone (via Developer Options).
+
+2. **Configure Unity:**  
+   In Unity, go to **Edit → Project Settings → Player → Other Settings** and set the "Minimum API Level" to Android 8.0 KitKat (API level 26).
+
+3. **Build and Run:**  
+   In Unity's Build Settings, click "Build and Run." If prompted, save the APK on your computer. The project should build and automatically run on your device.
+
+---
+
+## Citations
+
+**Models used on Merge Cube:**
+
+- "Leaning Tower of Pisa" ([source](https://skfb.ly/6ZCFH)) by Aglaiapoulida is licensed under Creative Commons Attribution.
+- "Pizza" ([source](https://skfb.ly/6RqYo)) by Rigsters is licensed under Creative Commons Attribution.
+- "Vespa 150 highpoly" ([source](https://skfb.ly/6RDyz)) by Alex_Z is licensed under Creative Commons Attribution.
+
+**Models used on Class Cube:**
+
+- "London phone booth" ([source](https://skfb.ly/DvXU)) by alban is licensed under Creative Commons Attribution.
+- "England Tea Cup" ([source](https://skfb.ly/6WZNH)) by chung_the_artist is licensed under Creative Commons Attribution.
+- "MRF Cricket Bat" ([source](https://skfb.ly/6S76A)) by Rohit Pawar is licensed under Creative Commons Attribution.
+
+**Audio:**  
+- [Audio Source](https://www.youtube.com/shorts/o0I8Iu2yCfU)
+
+---
+
+*Note: This case study is created to demonstrate AR capabilities and is provided for demonstration purposes only.*
