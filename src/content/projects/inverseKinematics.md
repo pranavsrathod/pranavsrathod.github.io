@@ -1,0 +1,75 @@
+---
+title: "Inverse Kinematics and Skeleton Skinning"
+description: "Built an inverse kinematics solver with support for two-bone chains, animation blending, and skinning for deformable characters in real-time using a simple joint system."
+publishDate: "April 20, 2025"
+poster: "/CS520/3/inverseKinematics.png"  # To be added later
+isFeatured: false
+seo:
+  image:
+    src: "/CS520/3/inverseKinematics.png"
+    alt: "Inverse Kinematics Demo"
+---
+
+**Real-time skeletal control using Inverse Kinematics**  
+_Pranav Rathod_
+
+**Date:** April 20, 2025
+
+Inverse Kinematics (IK) plays a fundamental role in animation and character control—whether it's getting a game character's hand to reach a doorknob or a robot's foot to plant properly on uneven terrain. Unlike forward kinematics (FK), where transformations are applied down the joint chain from parent to child, IK solves for joint angles *given a desired end-effector position*. This reverse direction of computation enables more intuitive control and dynamic responsiveness in both games and films.
+
+## Demo Video
+
+Here's a video demonstration of the IK solver in action:
+
+<iframe width=100% height="500" src="https://www.youtube.com/embed/NvYSi-8Ig9E?si=oTxRuuYoLECCvOul" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+## Source Code
+
+You can explore the full implementation and source code here: [GitHub Repository](https://github.com/pranavsrathod/InverseKinematics)
+
+
+## Why Inverse Kinematics Matters
+
+In the real world, we often think in terms of *goals* (“reach this spot,” “look at that object”), and IK enables characters to respond accordingly. For instance, animating a character to place their hand on a wall using FK would require manually adjusting every joint leading to the hand. IK simplifies this by letting the animator specify only the target position, and the system automatically adjusts the joints accordingly.
+
+This principle is critical not just for hands and feet but also for camera control, object manipulation, and procedural animation where behaviors must adapt dynamically.
+
+## The Math Behind IK
+
+In its basic form, the IK problem is to find joint angles 
+$$\theta$$
+such that the position of the end effector 
+$$p(\theta)$$
+matches a target position 
+$$p_{\text{target}}$$
+. That is:
+
+$$
+p(\theta) = p_{\text{target}}
+$$
+
+Since this is often nonlinear, iterative methods are used to find approximate solutions. One of the most common is the **Jacobian transpose method**, which updates the joint parameters in the direction of the gradient:
+
+$$
+\Delta \theta = \alpha J^T (p_{\text{target}} - p_{\text{current}})
+$$
+
+Here:
+- $$J$$ is the Jacobian matrix,
+- $$\alpha$$ is a small step size,
+- $$p_{\text{current}}$$ is the current end effector position.
+
+Other common strategies include Jacobian pseudo-inverse and damped least squares methods, which improve stability and convergence in under-constrained or redundant chains.
+
+## What I Built
+
+-This project involved designing and implementing:
+- A two-joint IK solver that positions the end effector to a given target using iterative Jacobian-based updates.
+- Blending between FK and IK to allow smooth transitions and user control.
+- A skinning system where mesh vertices deform in response to the joint transformations, simulating character movement more realistically.
+
+Rather than focusing on file-level code details, this project emphasized the larger goal: enabling expressive and physically plausible motion through joint constraints and solver feedback.
+
+## Next Steps
+
+Future improvements include support for more complex joint chains, secondary IK constraints (e.g., pole vectors for elbows/knees), and stability improvements through better damping strategies.

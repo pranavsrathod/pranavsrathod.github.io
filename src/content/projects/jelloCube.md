@@ -30,9 +30,9 @@ For this assignment, I successfully implemented a physically based simulation of
 
   The elasticity of the Jello Cube is modeled using a mass-spring system, where forces follow **Hooke's Law**:
 
-  ```cpp
-  F = -k * (x - x0)
-  ```
+  $$
+  F = -k \cdot (x - x_0)
+  $$
 
   - **F**: restoring force
   - **k**: spring constant
@@ -41,26 +41,26 @@ For this assignment, I successfully implemented a physically based simulation of
 
   Each mass point connects to others via structural, shear, and bend springs, allowing the cube to deform and recover naturally.
 
-- **Damping Forces**:
-  To stabilize the system and reduce oscillations, damping forces are computed as:
+  - **Damping Forces**:
+    To stabilize the system and reduce oscillations, damping forces are computed as:
 
-  ```cpp
-  F_d = -k_d * ((v_A - v_B) . L) / |L|
-  ```
+    $$
+    F_d = -k_d \cdot \frac{(v_A - v_B) \cdot L}{|L|}
+    $$
 
-  - **k_d**: damping coefficient
-  - **(v_A - v_B)**: velocity difference
-  - **L**: displacement vector between connected points
+    - **k_d**: damping coefficient
+    - **(v_A - v_B)**: velocity difference
+    - **L**: displacement vector between connected points
 
 - **Euler and RK4 Integration**:
   Both integration methods were implemented to advance the simulation over time with tunable timestep values.
 
-- **Collision Detection & Penalty Response (Bounding Box)**:
-  Ensures all control points stay within `[-2, 2]` by applying a spring force when out of bounds.
+  - **Collision Detection & Penalty Response (Bounding Box)**:
+    Ensures all control points stay within `[-2, 2]` by applying a spring force when out of bounds.
 
-  ```cpp
-  F_c = k_c * (p_boundary - p)
-  ```
+    $$
+    F_c = k_c \cdot (p_{boundary} - p)
+    $$
 
 - **External Force Field**:
   Trilinear interpolation was used to calculate external force values from a 3D grid defined in the `.w` file.
@@ -80,9 +80,9 @@ For this assignment, I successfully implemented a physically based simulation of
 ### Inclined Plane Collision
 
 - Supported via user-defined coefficients in the world file:
-  ```cpp
-  a * x + b * y + c * z + d = 0
-  ```
+  $$
+  a \cdot x + b \cdot y + c \cdot z + d = 0
+  $$
 
 - **Rendering**:
   Drawn dynamically in `showInclinedPlane()` using 4 corners based on the plane equation.
