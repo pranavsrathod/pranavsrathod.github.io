@@ -24,8 +24,18 @@ const { showHeader = true, ...head } = Astro.props;
     </head>
     <body class="bg-main text-main">
         <!-- Fixed logo: fills left half of screen with right half of image -->
-        <div class="fixed top-0 left-[-50vw] z-0 pointer-events-none h-screen w-screen overflow-hidden">
+        <!-- <div class="fixed top-0 left-[-50vw] z-0 pointer-events-none h-screen w-screen overflow-hidden">
             <img src="/PR_LOGO.PNG" alt="PR Logo" class="h-screen w-[200vw] object-cover opacity-30" />
+        </div> -->
+
+        <!-- Desktop Watermark -->
+        <div class="hidden md:block fixed top-0 left-[-50vw] z-0 pointer-events-none h-screen w-screen overflow-hidden">
+            <img src="/PR_LOGO.PNG" alt="PR Logo" class="h-screen w-[200vw] object-cover opacity-30" />
+        </div>
+
+        <!-- Mobile Watermark -->
+        <div class="block md:hidden fixed top-0 left-0 z-0 pointer-events-none h-screen w-screen overflow-hidden">
+            <img src="/PR_LOGO.PNG" alt="PR Logo" class="h-screen w-full object-cover opacity-30" />
         </div>
 
         <!-- Actual page content -->
