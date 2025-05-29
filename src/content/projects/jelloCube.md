@@ -6,8 +6,8 @@ isFeatured: true
 poster: "/CS520/1/jelloCube.png"
 seo:
   image:
-    src: "/CS420/rollerCoasterPoster.png"
-    alt: "Roller Coaster Simulation Poster"
+    src: "/CS520/1/jelloCube.png"
+    alt: "Jello Cube - A Physics Simulation"
 ---
 
 **Simulating a Mass-Spring System**  

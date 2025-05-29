@@ -6,7 +6,7 @@ poster: "/CS520/2/motionCapture.png"
 isFeatured: false
 seo:
   image:
-    src: "/images/motionCaptureInterpolation.jpg"
+    src: "/CS520/2/motionCapture.png"
     alt: "Motion Capture Interpolation"
 ---
 **Reconstructing missing motion capture frames using different interpolation techniques**  

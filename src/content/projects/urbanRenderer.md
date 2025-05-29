@@ -6,8 +6,8 @@ isFeatured: false
 poster: "/UICProjects/Graphics1/UR.png"
 seo:
   image:
-    src: "/Graphics1/assignment-1.gif"
-    alt: "Urban Renderer Demo"
+    src: "/UICProjects/Graphics1/UR.png"
+    alt: "Urban Renderer - A WebGL Project"
 ---
 
 **Fall 2022**  

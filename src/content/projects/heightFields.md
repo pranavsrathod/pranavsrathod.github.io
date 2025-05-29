@@ -6,8 +6,8 @@ isFeatured: true
 poster: '/CS420/heightFeilds.png'
 seo:
   image:
-    src: "/project-2.jpg"
-    alt: "Height Fields Project Preview"
+    src: "/CS420/heightFeilds.png"
+    alt: "Height Fields Project"
 ---
 
 ![Height Fields Demonstration](/CS420/heightFields.gif)

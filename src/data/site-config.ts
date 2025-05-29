@@ -92,10 +92,10 @@ const siteConfig: SiteConfig = {
         }
     ],
     hero: {
-        title: 'Where Code Meets Creativity',
-        text: "Hello! I'm Pranav, a creative technologist and USC grad student who blends code with art to craft immersive XR experiences and dynamic digital narratives. From browser roller coasters to VR explorations, I push the boundaries of tech and storytelling. Dive in to explore my work and feel free to reach out!",
+        title: 'Code, Art, and a Bit of Chaos',
+        text: "Hi, I’m Pranav - a curious mind exploring the world of code, creativity, and beyond. This space is a little glimpse into my journey. Thanks for stopping by!",
         image: {
-            src: '/pranavintrain.jpg',
+            src: '/Profile.JPG',
             alt: 'Pranav Look WTF Hollywood is?'
         },
         actions: [
