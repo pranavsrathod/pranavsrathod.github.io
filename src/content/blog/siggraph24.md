@@ -1,6 +1,6 @@
 ---
 title: From Denver to Tokyo - My First SIGGRAPH Experience
-excerpt: In 2024, I attended my first SIGGRAPH conferences—North America in Denver and Asia in Tokyo—as a Student Volunteer. What started as a recommendation from a professor turned into one of the most memorable experiences of my life.
+excerpt: In 2024, I attended my first SIGGRAPH conferences—North America in Denver and Asia in Tokyo—as a Volunteer. What started as a recommendation from a professor turned into one of the most memorable experiences of my life.
 publishDate: 'December 13, 2024'
 isFeatured: true
 tags:
@@ -18,7 +18,7 @@ seo:
   <img src="/BlogPhotos/Siggraph24/0.jpg" alt="Pranav at SIGGRAPH 2024 with badge and lanyard" style="max-width: 100%; height: auto;" />
 </div>
 
-In 2024, I was lucky enough to attend not just one, but *two* SIGGRAPH conferences—**SIGGRAPH 2024 in Denver** and **SIGGRAPH Asia 2024 in Tokyo**—as a Student Volunteer. What started as an opportunity to give back to the creative tech community ended up being one of the most inspiring, fun, and meaningful experiences of my grad school journey.
+In 2024, I was lucky enough to attend not just one, but *two* SIGGRAPH conferences—**SIGGRAPH 2024 in Denver** and **SIGGRAPH Asia 2024 in Tokyo**—as a Volunteer. What started as an opportunity to give back to the creative tech community ended up being one of the most inspiring, fun, and meaningful experiences of my grad school journey.
 
 ---
 
