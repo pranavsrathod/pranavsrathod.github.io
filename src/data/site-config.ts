@@ -40,7 +40,7 @@ export type SiteConfig = {
 const siteConfig: SiteConfig = {
     title: 'Pranav Rathod',
     subtitle: 'Software Engineering | Photography',
-    description: 'Astro.js and Tailwind CSS theme for blog and portfolio by justgoodui.com',
+    description: 'Pranav Who?',
     image: {
         src: '/logoPreview.png',
         alt: 'Pranav Rathod Logo (Designed using Procreate)'
