@@ -93,9 +93,15 @@ const siteConfig: SiteConfig = {
     ],
     hero: {
         title: 'Code, Art, and a Bit of Chaos',
-        text: "Hi, I’m Pranav - a curious mind exploring the world of code, creativity, and beyond. This space is a little glimpse into my journey. Thanks for stopping by!",
+        text: `I’m a creative technologist, engineer, and sometimes a quiet observer of the world — currently pursuing my Master’s in Computer Science at the University of Southern California, specializing in Multimedia and Creative Technologies.
+
+With a foundation in computer graphics, animation, game engine development, and multimedia systems, my work blends technical depth with visual storytelling. I enjoy building tools and experiences that sit at the intersection of logic and expression.
+
+Some of the areas I'm especially drawn to include real-time rendering, XR design and perception, systems thinking in creative tools, and human-computer interaction in motion and space.
+
+Beyond code, I love exploring and capturing urban architecture and everyday symmetry on my phone, documenting the quiet moments that make a city feel alive.`,
         image: {
-            src: '/Profile.JPG',
+            src: '/atPondCHI.JPG',
             alt: 'Pranav Look WTF Hollywood is?'
         },
         actions: [
