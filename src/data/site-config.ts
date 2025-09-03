@@ -115,11 +115,11 @@ Beyond code, I love exploring and capturing urban architecture and everyday symm
             }
         ]
     },
-    subscribe: {
-        title: 'Subscribe to Pranav Newsletter',
-        text: 'One update per week. All the latest posts directly in your inbox.',
-        formUrl: '#'
-    },
+    // subscribe: {
+    //     title: 'Subscribe to Pranav Newsletter',
+    //     text: 'One update per week. All the latest posts directly in your inbox.',
+    //     formUrl: '#'
+    // },
     postsPerPage: 8,
     projectsPerPage: 8
 };
