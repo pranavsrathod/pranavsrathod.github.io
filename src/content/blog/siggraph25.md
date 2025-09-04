@@ -23,13 +23,13 @@ SIGGRAPH, to me, feels the way people describe Comic-Con — a vibrant, communal
   <img src="/BlogPhotos/Siggraph25/ProudToBeSV.jpg" alt="Proud to Be SV" style="max-width: 100%; height: auto;" />
 </div>
 
-In Denver, I arrived thinking I wouldn’t fit in. I had just started my Master’s in Computer Science, throwing myself in the world of Computer Graphics head first. I knew I loved graphics, animation, and storytelling — but I assumed I’d feel like an outsider among people more experienced or better connected. I imagined myself fumbling through conversations, exposing just how little I knew about computer graphics, and walking away feeling like an imposter.
+Last year, in Denver, I arrived thinking I wouldn’t fit in. I had just started my Master’s in Computer Science, throwing myself into the world of Computer Graphics head first. I knew I loved graphics, animation, and storytelling — but I assumed I’d feel like an outsider among people more experienced or better connected. I imagined myself fumbling through conversations, exposing just how little I knew about computer graphics, and walking away feeling like an imposter.
 
 ## Learning to Show Up
 
 During one of my early shifts, something changed. I had a moment where I could step in, solve a problem, and support a team. I was nervous, but I chose to be present. I turned down the part of me that wanted to retreat and leaned into the part that wanted to connect. And to my surprise, it worked. I got to see what it meant to be useful — to not just “be there,” but to *matter*.
 
-I still remember how Trinity, my supervising Team Leader, stepped in at the right time with calm, care, and the kind of resourcefulness I wanted to emulate. She guided me through challenges, made sure I had what I needed, and gave credit where it was due. When I received recognition from attendees and the SVSC, it wasn’t about being praised — it was about being helpful. That stayed with me.
+I still remember how Trinity, my supervising Team Leader, stepped in at the right time with calmness, care, and the kind of resourcefulness I wanted to emulate. She guided me through challenges, made sure I had what I needed, and gave credit where it was due. When I received recognition from attendees and the SVSC, it wasn’t about being praised — it was about being helpful. That stayed with me.
 
 Tokyo followed, and with it came a few personal and academic challenges. I needed accommodations, and I wasn’t sure I’d be able to handle the demands of the role. But again, the SVSC went out of their way to make it work. They supported me, trusted me, and reminded me that I didn’t have to prove myself to belong. That kind of care doesn’t just help you get through the week — it stays with you. It gives you confidence.
 
