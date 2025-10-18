@@ -59,6 +59,10 @@ const siteConfig: SiteConfig = {
             href: '/blog'
         },
         {
+            text: 'Photos',
+            href: 'https://pratho2.myportfolio.com/'
+        },
+        {
             text: 'About',
             href: '/about'
         },
