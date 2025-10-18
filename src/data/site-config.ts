@@ -60,7 +60,7 @@ const siteConfig: SiteConfig = {
         },
         {
             text: 'Photos',
-            href: 'https://pratho2.myportfolio.com/'
+            href: 'https://pranavrathod.myportfolio.com/'
         },
         {
             text: 'About',
