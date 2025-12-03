@@ -68,5 +68,38 @@ const { showHeader = true, ...head } = Astro.props;
             </main>
             <Footer />
         </div>
+        <script is:inline>
+            document.addEventListener('astro:page-load', () => {
+                const toggleBtn = document.getElementById('companion-toggle');
+
+                function spawnCompanion() {
+                    if (document.getElementById('oneko')) return;
+                    const script = document.createElement('script');
+                    script.src = '/Other/Oneko/oneko.js';
+                    script.dataset.dynamic = 'true';
+                    document.body.appendChild(script);
+                }
+
+                function removeCompanion() {
+                    const cat = document.getElementById('oneko');
+                    if (cat) cat.remove();
+                    document.querySelectorAll('script[data-dynamic="true"]').forEach((s) => s.remove());
+                }
+
+                function updateCompanionState() {
+                    const enabled = localStorage.getItem('companion-enabled') === 'true';
+                    if (enabled) spawnCompanion();
+                    else removeCompanion();
+                }
+
+                toggleBtn?.addEventListener('click', () => {
+                    const currentlyEnabled = localStorage.getItem('companion-enabled') === 'true';
+                    localStorage.setItem('companion-enabled', (!currentlyEnabled).toString());
+                    updateCompanionState();
+                });
+
+                updateCompanionState();
+            });
+        </script>
     </body>
 </html>

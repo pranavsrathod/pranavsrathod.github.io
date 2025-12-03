@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChronoShift Timeline</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400&display=swap');
+    @import url('/@fontsource-variable/inter/index.css');
+    @import url('/@fontsource-variable/newsreader/index.css');
+
+    :root,
+    html.dark {
+      --text-main: var(--text-main);
+      --bg-main: var(--bg-main);
+      --bg-muted: var(--bg-muted);
+      --border-main: var(--border-main);
+    }
+
+    .design-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--bg-main);
+      min-height: 100vh;
+      padding: 100px 0;
+      font-family: 'Inter Variable', sans-serif;
+    }
+
+    .timeline {
+      width: 80%;
+      height: auto;
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .timeline-content {
+      padding: 20px;
+      background: color-mix(in srgb, var(--bg-main) 75%, transparent);
+      backdrop-filter: blur(20px);
+      box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.28),
+        0 6px 12px rgba(0, 0, 0, 0.18),
+        inset 0 0 0 1px var(--border-main / 40%);
+      border-radius: 10px;
+      color: var(--text-main);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow-wrap: break-word !important;
+      margin: 1rem;
+      margin-bottom: 20px;
+    }
+
+    .timeline-content:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 18px 34px rgba(0, 0, 0, 0.32),
+        0 8px 16px rgba(0, 0, 0, 0.22),
+        inset 0 0 0 1px var(--border-main / 30%);
+    }
+
+    .timeline-component {
+      margin: 0px 20px 20px 20px;
+    }
+
+    @media screen and (min-width: 768px) {
+      .timeline {
+        display: grid;
+        grid-template-columns: 1fr 3px 1fr;
+      }
+
+      .timeline-middle {
+        position: relative;
+        background-image: linear-gradient(45deg, #F27121, #E94057, #8A2387);
+        width: 3px;
+        height: 100%;
+      }
+
+      .timeline-circle {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-image: linear-gradient(45deg, #F27121, #E94057, #8A2387);
+        transform: translateX(-50%);
+      }
+    }
+
+    h2,
+    h3 {
+      font-family: 'Newsreader Variable', serif;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    p {
+      font-family: 'Inter Variable', sans-serif;
+      font-weight: 300;
+      line-height: 1.55;
+      color: var(--text-main);
+    }
+
+    html.dark h2,
+    html.dark h3,
+    html.dark p {
+      color: #f2f1ec !important;
+    }
+  </style>
+  <script>
+    // Sync dark mode with site
+    try {
+      const theme = localStorage.getItem('theme');
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) { }
+  </script>
+</head>
+
+<body>
+  <section class="design-section">
+    <div class="timeline">
+
+      <div class="timeline-empty"></div>
+      <div class="timeline-middle">
+        <div class="timeline-circle"></div>
+      </div>
+      <div class="timeline-component timeline-content">
+        <h3>Week 1 — Original Concept</h3>
+        <p>Brainstormed a first‑person escape room and prototyped a tension‑heavy corridor to test pacing.</p>
+      </div>
+
+      <div class="timeline-component timeline-content">
+        <h3>Week 2 — Core Mechanic Pivot</h3>
+        <p>Shifted toward a dimension‑swap runner and validated early platform visibility logic.</p>
+      </div>
+      <div class="timeline-middle">
+        <div class="timeline-circle"></div>
+      </div>
+      <div class="timeline-empty"></div>
+
+      <div class="timeline-empty"></div>
+      <div class="timeline-middle">
+        <div class="timeline-circle"></div>
+      </div>
+      <div class="timeline-component timeline-content">
+        <h3>Week 3 — Tutorial & Fog System</h3>
+        <p>Implemented fog‑based health decay, built the full tutorial flow, and refined dash/HUD UX.</p>
+      </div>
+
+      <div class="timeline-component timeline-content">
+        <h3>Week 4 — Playtest Fixes</h3>
+        <p>Adjusted tutorial cues, fixed WebGL fog issues, and improved overall readability after testing.</p>
+      </div>
+      <div class="timeline-middle">
+        <div class="timeline-circle"></div>
+      </div>
+      <div class="timeline-empty"></div>
+
+      <div class="timeline-empty"></div>
+      <div class="timeline-middle">
+        <div class="timeline-circle"></div>
+      </div>
+      <div class="timeline-component timeline-content">
+        <h3>Week 5 — Enemies & Collectables</h3>
+        <p>Added enemy pushback mechanics, improved collectable loop, and expanded the lane system.</p>
+      </div>
+
+      <div class="timeline-component timeline-content">
+        <h3>Week 6 — Final Polish</h3>
+        <p>Refined lighting, overhauled death UI, polished tutorials, and balanced mechanics using analytics.</p>
+      </div>
+      <div class="timeline-middle">
+        <div class="timeline-circle"></div>
+      </div>
+      <div class="timeline-empty"></div>
+
+    </div>
+  </section>
+</body>
+
+</html>
