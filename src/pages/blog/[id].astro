@@ -7,6 +7,7 @@ import PostPreview from '../../components/PostPreview.astro';
 import Subscribe from '../../components/Subscribe.astro';
 import { sortItemsByDateDesc } from '../../utils/data-utils';
 import { slugify } from '../../utils/common-utils';
+import InteractiveDashboard from '../../components/InteractiveDashboard.astro';
 
 export async function getStaticPaths() {
     const posts = (await getCollection('blog')).sort(sortItemsByDateDesc);
@@ -48,7 +49,7 @@ const { Content } = await render(post);
             </div>
         </header>
         <div class="max-w-none prose sm:prose-lg">
-            <Content />
+            <Content components={{ InteractiveDashboard }} />
         </div>
         <div class="mt-8 flex flex-wrap items-center gap-6 text-sm justify-between sm:mt-12 sm:text-base">
             {

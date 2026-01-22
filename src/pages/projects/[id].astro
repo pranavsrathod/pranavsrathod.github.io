@@ -1,5 +1,6 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
+import InteractiveDashboard from '../../components/InteractiveDashboard.astro';
 import ProjectPreview from '../../components/ProjectPreview.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { sortItemsByDateDesc } from '../../utils/data-utils';
@@ -34,7 +35,7 @@ const { Content } = await render(project);
             <h1 class="text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">{title}</h1>
         </header>
         <div class="max-w-none prose sm:prose-lg">
-            <Content />
+            <Content components={{ InteractiveDashboard }} />
         </div>
     </article>
     {

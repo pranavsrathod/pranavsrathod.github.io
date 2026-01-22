@@ -1,0 +1,317 @@
+---
+title: "ChronoShift: Collapse"
+description: "A dimension-swapping first-person runner refined through telemetry, playtests, and iterative systems design."
+publishDate: "2025-12-01"
+poster: "/CS526/ChronoShift.png"
+isFeatured: true
+seo:
+  title: "ChronoShift: Unity Engineering Case Study"
+  description: "Using Python analytics and Unity telemetry to optimize procedural generation."
+---
+
+## Logline
+
+A fast-paced first-person runner where players swap between Red and Blue realities to reveal platforms, outrun a collapsing world, and make split-second navigation decisions under increasing visual pressure.
+
+<div class="my-8 flex flex-col items-center gap-4">
+  <div class="relative w-full max-w-4xl overflow-hidden rounded-lg" style="padding-top: 56.25%;">
+    <iframe
+      class="absolute inset-0 h-full w-full"
+      src="https://www.youtube.com/embed/NgBUcl6P85Q"
+      title="ChronoShift: Collapse Gameplay"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <a
+    href="https://usc-jmshi.github.io/main-assignment-creepy-nuts-gold-demo/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-2 inline-flex items-center justify-center rounded-md bg-black px-6 py-3 text-white transition hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200"
+  >
+   Play the Game
+  </a>
+</div>
+
+## TL;DR
+
+- **Core hook:** Swap between Red and Blue realities to reveal the path forward  
+- **Pressure system:** Fog and limited visibility intensify as the run continues  
+- **Replayability:** Procedural layout + lane choices encourage varied routes  
+- **Iteration:** Telemetry and survey feedback informed tutorial, balance, and pacing decisions  
+
+## Project Intent
+
+Build a high-clarity runner where difficulty comes from rapid interpretation (what exists in this dimension?) rather than memorization. The game evolved through playtests and instrumentation, using data to pinpoint friction (onboarding, fog pacing, procedural linearity) and guide targeted fixes.
+
+export const teamDashboard = [
+  {
+    id: "team",
+    label: "Team",
+    type: "list",
+    list: [
+      {
+        id: 1,
+        tag: "Captain",
+        title: "Justin Shi",
+        summary: "Team Captain, Level Designer, Mechanic Implementer"
+      },
+      {
+        id: 2,
+        tag: "Gameplay",
+        title: "Harshal Dave",
+        summary: "Gameplay Developer, Analytics"
+      },
+      {
+        id: 3,
+        tag: "Design",
+        title: "Christian Perez",
+        summary: "Level Designer, Mechanic Designer, Gameplay Developer, Product Manager"
+      },
+      {
+        id: 4,
+        tag: "Systems",
+        title: "Pranav Rathod",
+        summary: "Developer / Implementor, UI Design, Mechanic Designer, Stenographer"
+      },
+      {
+        id: 5,
+        tag: "Testing",
+        title: "Udita Mathur",
+        summary: "Gameplay Tester, Analytics Designer / Implementer"
+      },
+      {
+        id: 6,
+        tag: "Level",
+        title: "Zezhong Yang",
+        summary: "Gameplay Developer, Level Designer / Implementer"
+      }
+    ]
+  },
+  {
+    id: "tech-stack",
+    label: "Tech Stack",
+    type: "cards",
+    cards: [
+      {
+        emoji: "🎮",
+        title: "Unity (C#)",
+        desc: "Core gameplay systems, controller logic, platform mechanics, and UI integration."
+      },
+      {
+        emoji: "🌀",
+        title: "HLSL Shaders",
+        desc: "Fog density and color-swap effects supporting gameplay readability."
+      },
+      {
+        emoji: "🐍",
+        title: "Python",
+        desc: "Telemetry parsing, heatmaps, and analytics visualization."
+      },
+      {
+        emoji: "📊",
+        title: "Google Forms / Sheets",
+        desc: "Lightweight telemetry ingestion pipeline for rapid iteration."
+      },
+      {
+        emoji: "🎨",
+        title: "Figma",
+        desc: "UI flow mapping and interface concepts."
+      }
+    ]
+  },
+  {
+    id: "timeline",
+    label: "Development Timeline",
+    type: "steps",
+    steps: [
+      {
+        label: "Phase 1",
+        sub: "Concept & Exploration",
+        detail: "Early weeks explored multiple directions and established the environment and core movement systems."
+      },
+      {
+        label: "Phase 2",
+        sub: "Core Mechanics & Tutorial Foundations",
+        detail: "Dimension swapping, fog, and dash systems were implemented and iterated on, alongside initial tutorial foundations and early UI."
+      },
+      {
+        label: "Phase 3",
+        sub: "Expansion, Systems Tuning & UX Polish",
+        detail: "Onboarding was rebuilt, lanes expanded, WebGL issues addressed, and enemies/collectables/feedback were refined for clarity."
+      },
+      {
+        label: "Phase 4",
+        sub: "Final Polish & Release Preparation",
+        detail: "Tutorial split into focused scenes, procedural path variety improved, models and UI finalized, and playtest feedback integrated for the Gold build."
+      }
+    ]
+  }
+];
+
+---
+
+## What We Set Out To Solve
+
+Early playtests surfaced issues in onboarding clarity, difficulty pacing, and procedural variety. Through telemetry, iterative systems design, and targeted mechanic adjustments, we reshaped the experience to be clearer, fairer, and more replayable.
+
+## Challenge 1: The "Tutorial Cliff"
+
+During Alpha playtests, most players quit in under 60 seconds. To understand why, we logged death events via `UnityWebRequest` to Google Forms and visualized them with a small Python script. The heatmaps showed a huge spike at a single "Dash Gap" in the tutorial, where players were failing 18+ times on average before giving up.
+
+export const retentionData = [
+  {
+    id: 'problem',
+    label: 'The Crash (Alpha)',
+    type: 'chart',
+    chart: {
+      insight: 'The Alpha build (Red) shows a massive death spike at the "Dash Gap". Players were rage-quitting here. The Gold build (Blue) smoothed this out.',
+      labels: ['Start', 'Jump Basics', 'The Dash Gap', 'Color Intro', 'First Checkpoint'],
+      datasets: [
+        { label: 'Alpha Deaths (Avg)', data: [1, 3, 18, 5, 2], color: '#ef4444', dashed: false },
+        { label: 'Gold Deaths (Avg)', data: [0, 0, 2, 3, 1], color: '#3b82f6', dashed: true }
+      ]
+    }
+  },
+  {
+    id: 'solution',
+    label: 'The Fix (UX)',
+    type: 'steps',
+    steps: [
+      { label: 'Step 1: Telemetry', sub: 'Data Collection', detail: 'Implemented a custom C# Event Manager to track player death coordinates and session length.' },
+      { label: 'Step 2: Diagnosis', sub: 'Analysis', detail: 'Heatmaps revealed players didn\'t understand they could "Dash" mid-air. The gap was mathematically possible, but cognitively too hard.' },
+      { label: 'Step 3: Restructuring', sub: 'Implementation', detail: 'We split the Tutorial into 3 isolated scenes. We lowered the first gap distance by 15% and added a "Ghost Runner" visual cue.' }
+    ]
+  },
+  {
+    id: 'stats',
+    label: 'Results',
+    type: 'cards',
+    cards: [
+      { emoji: '📉', title: '-45%', desc: 'Churn Rate Reduction' },
+      { emoji: '⏱️', title: '+2m', desc: 'Avg Session Length' },
+      { emoji: '✅', title: '90%', desc: 'Tutorial Completion' },
+      { emoji: '🐛', title: '120', desc: 'Bugs Squashed' }
+    ]
+  }
+];
+
+<div class="my-10">
+  <h3 class="text-xl font-bold mb-4">Analytics Dashboard: User Retention</h3>
+  <InteractiveDashboard id="churn-dashboard" sections={retentionData} />
+</div>
+
+## Challenge 2: Balancing the "Fog" Mechanic
+
+One of our core systems is a **Health-Visibility link**: as the "Chrono" timer runs out, fog density increases and view distance shrinks. If the fog ramped too fast, players felt cheated; too slow, and there was no tension. We used another round of analytics to tune the curve until it felt fair but still stressful in the final seconds.
+
+export const mechanicsData = [
+  {
+    id: 'fog-curve',
+    label: 'Fog vs Health',
+    type: 'chart',
+    chart: {
+      insight: 'We moved from a Linear Decay (Red) to an Exponential Curve (Blue). This keeps visibility high for longer, creating panic only in the final seconds.',
+      labels: ['100% HP', '75% HP', '50% HP', '25% HP', '10% HP', '0% HP'],
+      datasets: [
+        { label: 'Linear Fog (Bad Feel)', data: [100, 75, 50, 25, 10, 0], color: '#ef4444', dashed: true },
+        { label: 'Exponential Fog (Final)', data: [100, 95, 80, 60, 20, 0], color: '#10b981', dashed: false }
+      ]
+    }
+  },
+  {
+    id: 'mechanics',
+    label: 'System Design',
+    type: 'list',
+    list: [
+      { id: 1, tag: 'Visuals', title: 'Fog Density Shader', summary: 'Wrote a custom HLSL shader that accepts a "Health" float to interpolate fog density.' },
+      { id: 2, tag: 'Gameplay', title: 'The Chrono Timer', summary: 'Health acts as a timer. Collecting "Time Capsules" restores HP and pushes back the fog.' },
+      { id: 3, tag: 'UI', title: 'Diegetic Feedback', summary: 'Removed standard health bars. The screen vignette and fog act as the only health indicators.' }
+    ]
+  }
+];
+
+<div class="my-10">
+  <h3 class="text-xl font-bold mb-4">Analytics Dashboard: Game Balance</h3>
+  <InteractiveDashboard id="mechanics-dashboard" sections={mechanicsData} />
+</div>
+
+## Challenge 3: Fixing Procedural Linearity
+
+The final hurdle was our **procedural generation**. Analytics showed that ~90% of players were taking the same route, meaning our "maze" behaved like a hallway. We rewrote the `PlatformManager` to use a simple graph-based validator that simulates player movement and only accepts chunks that offer at least three distinct, viable paths and require dimension swapping.
+
+```csharp
+// Pseudo-code of the fix implemented in Week 13
+
+public bool ValidateChunk(Chunk chunkData) {
+    // 1. Get all potential paths using A*
+    List<Path> viablePaths = Pathfinding.GetAllRoutes(chunkData);
+
+    // 2. CONSTRAINT: Must have exploration variety
+    if (viablePaths.Count < 3) {
+        return false; // Reject chunk, regenerate
+    }
+
+    // 3. CONSTRAINT: Must utilize Dimension Swap mechanic
+    bool usesRed = viablePaths.Any(p => p.dimension == Dimension.Red);
+    bool usesBlue = viablePaths.Any(p => p.dimension == Dimension.Blue);
+
+    return usesRed && usesBlue;
+}
+```
+
+---
+
+## Gameplay Video
+<span id="gameplay-video"></span>
+
+<div class="relative my-6 w-full overflow-hidden rounded-lg" style="padding-top: 56.25%;">
+  <iframe
+    class="absolute inset-0 h-full w-full"
+    src="https://www.youtube.com/embed/NgBUcl6P85Q"
+    title="ChronoShift: Collapse Gameplay"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+</div>
+
+---
+
+## Play the Game
+<span id="play-build"></span>
+
+<p class="opacity-80">
+  Launch the playable WebGL build in a new tab.
+</p>
+
+<a
+  href="https://usc-jmshi.github.io/main-assignment-creepy-nuts-gold-demo/"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="inline-flex items-center justify-center rounded-md bg-black px-6 py-3 text-white transition hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200"
+>
+  Launch WebGL Build
+</a>
+
+---
+
+## Team & Contributions
+
+### My Role
+
+I contributed as the **Developer / Implementor**, **UI Designer**, **Mechanic Designer**, and **Stenographer**. My work focused on:
+
+- Implementing core gameplay systems including Dimension Swap, Dash, and Fog mechanics  
+- Designing UI and player feedback systems for clarity and responsiveness  
+- Building and analyzing telemetry pipelines to guide iteration  
+- Refining tutorial flow and difficulty progression using analytics  
+- Improving procedural generation to increase path diversity  
+
+### Team
+
+<div class="my-10">
+  <InteractiveDashboard id="team-dashboard" sections={teamDashboard} />
+</div>

@@ -1,0 +1,417 @@
+---
+title: "Robotics: The Autonomous Manipulation Pipeline"
+description: "A systems-level robotics pipeline spanning probabilistic localization, sampling-based motion planning, and constraint-aware manipulation."
+publishDate: "2025-12-11"
+poster: "/CS545/robotics.png"
+isFeatured: true
+seo:
+  title: "Robotics Systems: Autonomous Navigation & Manipulation"
+  description: "Monte Carlo Localization (particle filters), RRT motion planning for a 6-DOF manipulator, and TSR + Jacobian task-space control with real-robot validation."
+---
+export const teamSections = [
+  {
+    id: "people",
+    label: "Robosapiens",
+    type: "team",
+    cards: [
+      {
+        title: "Aryan Parab",
+        desc: "",
+        actions: [
+          { icon: "github", href: "https://github.com/aryanparab", label: "GitHub" },
+          { icon: "linkedin", href: "https://www.linkedin.com/in/aryan-parab-0b44991b2/", label: "LinkedIn" }
+        ]
+      },
+      {
+        title: "Pranav Rathod",
+        desc: "",
+        actions: [
+          { icon: "github", href: "https://github.com/pranavsrathod", label: "GitHub" }
+        ]
+      },
+      {
+        title: "Yutao Cao",
+        desc: "",
+        actions: [
+          { icon: "github", href: "https://github.com/YutaoC24", label: "GitHub" },
+          { icon: "linkedin", href: "https://www.linkedin.com/in/yutaoc77152788/", label: "LinkedIn" }
+        ]
+      },
+      {
+        title: "Katherine Deborah Godwin Gnanaraj",
+        desc: "",
+        actions: [
+          { icon: "github", href: "https://github.com/Katherine-Deborah", label: "GitHub" },
+          { icon: "linkedin", href: "https://www.linkedin.com/in/katherine-deborah/", label: "LinkedIn" }
+        ]
+      },
+      {
+        title: "Harshawn Singh",
+        desc: "",
+        actions: [
+          { icon: "github", href: "https://github.com/harshawns", label: "GitHub" },
+          { icon: "linkedin", href: "https://www.linkedin.com/in/harshawn-singh/", label: "LinkedIn" }
+        ]
+      }
+    ]
+  },
+  {
+    id: "skills",
+    label: "Skills",
+    type: "cards",
+    cards: [
+      {
+        emoji: "",
+        title: "Languages",
+        desc: "Python (NumPy)"
+      },
+      {
+        emoji: "",
+        title: "Frameworks",
+        desc: "ROS2, TF2"
+      },
+      {
+        emoji: "",
+        title: "Algorithms",
+        desc: "Particle Filters, RRT, Jacobian Pseudoinverse"
+      },
+      {
+        emoji: "",
+        title: "Math",
+        desc: "Recursive Bayesian Estimation, Linear Algebra, SE(2)/SE(3) intuition"
+      }
+    ]
+  }
+];
+
+export const mclFlowSections = [
+  {
+    id: "flow",
+    label: "Filter Loop",
+    type: "steps",
+    steps: [
+      {
+        label: "Initialize particle cloud",
+        sub: "Start with many pose hypotheses",
+        detail:
+          "Represent belief as a set of particles (x, y, θ). Initialize broadly when uncertain, or around a prior if available."
+      },
+      {
+        label: "Predict with motion model",
+        sub: "Propagate each hypothesis",
+        detail:
+          "Use odometry to move every particle forward, injecting motion-dependent noise to reflect slip and drift."
+      },
+      {
+        label: "Update with LiDAR likelihood",
+        sub: "Score hypotheses against sensor data",
+        detail:
+          "Simulate expected LiDAR observations from each particle and compare to the real scan using a beam-based likelihood model."
+      },
+      {
+        label: "Resample",
+        sub: "Keep the good hypotheses",
+        detail:
+          "Replace low-weight particles with copies of high-weight particles so the cloud concentrates around the most probable pose(s)."
+      },
+      {
+        label: "Extract pose estimate",
+        sub: "Turn a distribution into a usable pose",
+        detail:
+          "Estimate the dominant mode (e.g., via clustering) instead of averaging incompatible hypotheses when the belief is multi-modal."
+      }
+    ]
+  },
+  {
+    id: "notes",
+    label: "Notes",
+    type: "html",
+    html: `
+      <div class="space-y-3 text-sm opacity-90">
+        <p>
+          This interactive view mirrors the recursive Bayesian estimation loop used by Monte Carlo Localization, where belief over robot pose is continuously refined using motion and sensor updates.
+        </p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Maintained consistency across <strong>map</strong>, <strong>odom</strong>, and <strong>base_link</strong> frames using ROS2 TF2</li>
+          <li>Computed LiDAR likelihoods via ray-based distance queries against the occupancy map for efficiency</li>
+          <li>Vectorized particle propagation and scoring using <strong>NumPy</strong> to avoid per-particle Python loops</li>
+          <li>Designed the filter to recover from large pose uncertainty and kidnapping scenarios without manual reset</li>
+        </ul>
+      </div>
+    `.trim()
+  }
+];
+
+export const rrtFlowSections = [
+  {
+    id: "flow",
+    label: "RRT Loop",
+    type: "steps",
+    steps: [
+      {
+        label: "Sample a configuration",
+        sub: "Explore joint space",
+        detail:
+          "Generate a random joint configuration in C-space. With goal biasing, occasionally sample near the goal to accelerate convergence."
+      },
+      {
+        label: "Find nearest node",
+        sub: "Connect from what you already know",
+        detail:
+          "Identify the closest existing node in the tree to the sampled configuration (using a distance metric in joint space)."
+      },
+      {
+        label: "Steer / extend",
+        sub: "Take a small step",
+        detail:
+          "Move from the nearest node toward the sample by a bounded step size, producing a candidate new configuration."
+      },
+      {
+        label: "Collision check",
+        sub: "Validate feasibility",
+        detail:
+          "Reject edges that cause self-collision or collisions with the environment. Only add collision-free extensions to the tree."
+      },
+      {
+        label: "Connect to goal",
+        sub: "Terminate when close enough",
+        detail:
+          "If the new node is within ε of the goal in C-space (or task-space criteria), backtrack through parents to extract a path."
+      },
+      {
+        label: "Shortcut & smooth",
+        sub: "Turn jerky into usable",
+        detail:
+          "Post-process the raw RRT path by attempting collision-free shortcuts between distant waypoints to reduce zig-zags and joint chatter."
+      }
+    ]
+  },
+  {
+    id: "notes",
+    label: "Notes",
+    type: "html",
+    html: `
+      <div class="space-y-3 text-sm opacity-90">
+        <p>
+          This section focuses on motion planning for a 6-DOF manipulator in cluttered environments using sampling-based planning in configuration space.
+        </p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Planned in <strong>joint space</strong> while goals were defined in <strong>task space</strong>, requiring consistent IK targets and feasibility checks</li>
+          <li>Used <strong>goal biasing</strong> to speed up solutions, while preserving exploration to avoid getting trapped by obstacles</li>
+          <li>Applied <strong>shortcutting</strong> to reduce waypoints and produce smoother motion that is more realistic for actuators</li>
+          <li>Improved goal precision by sampling <em>near</em> the goal with a tuned probability, balancing precision and planning time</li>
+          <li>Performed edge validation with <strong>incremental collision checking</strong> during extension to avoid adding invalid branches to the tree</li>
+          <li>Compared raw versus smoothed trajectories to reduce waypoint count and joint chatter while preserving collision safety</li>
+          <li>Analyzed the precision/runtime tradeoff by tuning <strong>ε</strong> and step size, observing that overly strict precision can dramatically increase planning time</li>
+        </ul>
+      </div>
+    `.trim()
+  }
+];
+
+export const tsrFlowSections = [
+  {
+    id: "flow",
+    label: "Control Loop",
+    type: "steps",
+    steps: [
+      {
+        label: "Define Task-Space Region",
+        sub: "Specify valid end-effector poses",
+        detail:
+          "Define a transformation T_{w,e} and bounds B_w that describe a region of valid grasps rather than a single target pose."
+      },
+      {
+        label: "Compute Jacobian",
+        sub: "Relate joints to Cartesian motion",
+        detail:
+          "Compute the manipulator Jacobian J that maps joint velocities to end-effector velocities in task space."
+      },
+      {
+        label: "Apply pseudoinverse",
+        sub: "Solve for joint updates",
+        detail:
+          "Use the Jacobian pseudoinverse J† to compute the joint velocity update that best achieves the desired task-space motion."
+      },
+      {
+        label: "Integrate small step",
+        sub: "Respect linearization limits",
+        detail:
+          "Apply the joint update with a small step size to ensure the linear approximation of the Jacobian remains valid."
+      },
+      {
+        label: "Monitor drift",
+        sub: "Evaluate execution accuracy",
+        detail:
+          "Observe deviations from the intended trajectory caused by large step sizes, near-singularities, or numerical integration error."
+      }
+    ]
+  },
+  {
+    id: "notes",
+    label: "Notes",
+    type: "html",
+    html: `
+      <div class=\"space-y-3 text-sm opacity-90\">
+        <p>
+          This phase focuses on precise end-effector control using differential kinematics and constrained task-space motion.
+        </p>
+        <ul class=\"list-disc pl-5 space-y-1\">
+          <li>Used <strong>Task-Space Regions (TSRs)</strong> to represent sets of valid grasps instead of single target poses</li>
+          <li>Applied <strong>Jacobian pseudoinverse control</strong> to translate Cartesian motion commands into joint updates</li>
+          <li>Observed <strong>linearization error</strong> when step sizes were too large, causing unintended lateral drift</li>
+          <li>Identified <strong>near-singular configurations</strong> as a source of instability in differential control</li>
+          <li>Improved trajectory fidelity by reducing step size and enforcing incremental integration</li>
+        </ul>
+      </div>
+    `.trim()
+  }
+];
+
+## The Autonomous Manipulation Pipeline
+
+A systems-level exploration of how robots **sense**, **plan**, and **act** under uncertainty — spanning probabilistic localization, motion planning, and constraint-aware manipulation.
+
+<div class="not-prose my-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+  <div class="border border-dashed border-main bg-main/60 p-4">
+    <div class="font-serif text-lg">Sense</div>
+    <div class="mt-1 text-sm opacity-90">Where am I? What does the world look like?</div>
+  </div>
+  <div class="border border-dashed border-main bg-main/60 p-4">
+    <div class="font-serif text-lg">Plan</div>
+    <div class="mt-1 text-sm opacity-90">How do I reach a goal safely and feasibly?</div>
+  </div>
+  <div class="border border-dashed border-main bg-main/60 p-4">
+    <div class="font-serif text-lg">Act</div>
+    <div class="mt-1 text-sm opacity-90">How do I execute precise motion with constraints?</div>
+  </div>
+  <div class="border border-dashed border-main bg-main/60 p-4">
+    <div class="font-serif text-lg">Evidence</div>
+    <div class="mt-1 text-sm opacity-90">Demos, plots, and reports linked below each phase.</div>
+  </div>
+</div>
+
+---
+
+## 01. Probabilistic Self-Localization
+
+Built an indoor localization system that enables a mobile robot to infer its pose from noisy motion and planar LiDAR data using probabilistic reasoning.
+
+Indoor robots operate without GPS and must continuously reason about uncertainty. Small motion errors accumulate quickly, and raw sensor data is often ambiguous. This project explores how probabilistic inference can turn unreliable inputs into a stable estimate of where a robot actually is.
+
+### The Particle Filter Loop
+
+<InteractiveDashboard id="mcl-flow" sections={mclFlowSections} />
+
+### Engineering Choices & Tradeoffs
+
+- Implemented **motion-dependent noise** and a **beam-based sensor model** for robustness to dropouts and spurious readings
+- Identified ~**2,000 particles** as an effective balance between accuracy and runtime performance
+- Used **K-Means clustering** to extract a reliable pose estimate when the belief distribution became multi-modal
+
+### Seeing It in Action
+
+<div class="not-prose my-6 w-full overflow-hidden rounded-xl border border-slate-200 dark:border-zinc-700 bg-black aspect-video">
+  <iframe
+    class="w-full h-full"
+    src="https://www.youtube.com/embed/bHAPavGcFZM?si=50vdy721x_NPDeVA"
+    title="Monte Carlo Localization – Particle Filter Convergence"
+    loading="lazy"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen
+  ></iframe>
+</div>
+
+**Links**  
+- Code: [View GitHub Repository](https://github.com/pranavsrathod/robotics-monte-carlo-localization)  
+- Technical Report (PDF): [Read Report](https://github.com/pranavsrathod/robotics-monte-carlo-localization/blob/main/lab2.pdf)  
+
+---
+
+## 02. High-Dimensional Motion Planning
+
+Planned collision-free motion for a 6-DOF manipulator using RRT in configuration space, then improved trajectory quality with shortcut-based smoothing.
+
+Robotic arms operate in high-dimensional configuration spaces, where even a simple “reach the goal” problem becomes a search over joint angles under strict collision constraints. This phase focuses on sampling-based planning for a 6-DOF manipulator and the practical steps needed to turn a valid path into usable motion.
+
+Planning happens in **joint space** (angles), but targets are specified in **task space** (end-effector poses), so feasibility depends on consistent IK targets and collision-aware validation. I focused on making the planner not just find *a* path, but produce motion that would be reasonable to execute on a real arm.
+
+### The RRT Planning Loop
+
+<InteractiveDashboard id="rrt-flow" sections={rrtFlowSections} />
+
+### Engineering Choices & Tradeoffs
+
+- Used **goal biasing** to accelerate convergence while keeping enough exploration to navigate around obstacles
+- Implemented **shortcutting / smoothing** to reduce zig-zags and improve motion quality for actuators
+- Tuned **goal precision (ε)** and introduced **near-goal sampling** to improve accuracy without exploding runtime
+- Performed edge validation with **incremental collision checking** during extension to avoid adding invalid branches to the tree
+- Compared raw versus smoothed trajectories to reduce waypoint count and joint chatter while preserving collision safety
+
+### Seeing It in Action
+
+<div class="not-prose my-6 w-full overflow-hidden rounded-xl border border-slate-200 dark:border-zinc-700 bg-black aspect-video">
+  <iframe
+    class="w-full h-full"
+    src="https://www.youtube.com/embed/tAIQ1Q1j6Y8?si=OQQN79ksONVOP6qA"
+    title="Motion Planning – RRT with Path Smoothing"
+    loading="lazy"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen
+  ></iframe>
+</div>
+
+**Links**  
+- Code: [View GitHub Repository](https://github.com/USC-Fall-2025-CSCI-545/lab-3-motion-planning-with-a-6-dof-manipulator-robosapiens)  
+- Technical Report (PDF): [Read Report](https://github.com/USC-Fall-2025-CSCI-545/lab-3-motion-planning-with-a-6-dof-manipulator-robosapiens/blob/main/CSCI_545_Fall_2025_Lab_3__Motion_Planning_with_a_6_DOF_Manipulator__Solutions.pdf)  
+- Demo / Plots: *(add link)*
+
+---
+
+## 03. Constraint-Aware Manipulation
+
+Executed precise, constraint-aware manipulation by defining valid task-space regions and controlling end-effector motion using Jacobian-based differential kinematics.
+
+Grasping and manipulating objects requires more than reaching a point in space. The end-effector must approach objects from valid orientations and follow constrained paths to avoid slippage, collision, or instability. This phase explores how task-space constraints and differential control enable precise, physically meaningful manipulation.
+
+### Task-Space Control Loop
+
+<InteractiveDashboard id="tsr-flow" sections={tsrFlowSections} />
+
+### Engineering Choices & Tradeoffs
+
+- Defined grasp constraints using <strong>TSRs</strong> to allow flexibility around cylindrical objects while enforcing orientation bounds
+- Used the <strong>Jacobian pseudoinverse</strong> to convert Cartesian motion commands into coordinated joint updates
+- Observed that large task-space steps violate the Jacobian’s linear approximation, introducing lateral drift
+- Mitigated integration error by reducing step size and emphasizing incremental, closed-loop motion
+
+### Seeing It in Action
+
+<div class="not-prose my-6 w-full overflow-hidden rounded-xl border border-slate-200 dark:border-zinc-700 bg-black aspect-video">
+  <iframe
+    class="w-full h-full"
+    src="https://www.youtube.com/embed/wBP5RBL4Qsw"
+    title="Constraint-Aware Manipulation – Real Robot Task-Space Control"
+    loading="lazy"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen
+  ></iframe>
+</div>
+
+<p class="mt-2 text-sm opacity-80">
+  Physical execution of task-space constrained motion, demonstrating stable Jacobian-based control under real-world dynamics.
+</p>
+
+**Links**  
+- Code: [View GitHub Repository](https://github.com/pranavsrathod/Task-Space-Control-on-a-Real-Robot-Arm)  
+- Technical Report (PDF): [Read Report](https://github.com/pranavsrathod/Task-Space-Control-on-a-Real-Robot-Arm/blob/main/answers.pdf)  
+
+---
+
+
+## Contributors & Technical Scope
+
+<InteractiveDashboard id="robotics-team" sections={teamSections} />

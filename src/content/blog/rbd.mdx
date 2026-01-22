@@ -1,0 +1,204 @@
+---
+title: "Interactive Guide: Rigid Body Dynamics Research"
+excerpt: "A 5-year review of the shift from classical mechanics to differentiable physics in robotics."
+publishDate: "2025-12-04"
+isFeatured: true
+tags:
+  - Research
+  - Physics
+  - Simulation
+  - Interactive
+seo:
+  image:
+    src: "/dante-preview.jpg"
+    alt: "Wireframe simulation of rigid bodies"
+---
+## Rigid Body Dynamics for Beginners
+
+Rigid Body Dynamics (RBD) describes the motion of solid, non-deforming bodies.  
+Every rigid body has **six degrees of freedom**—three for position and three for orientation—
+and its motion is determined by the Newton–Euler equations.
+
+Traditionally, RBD has been taught in mechanical engineering and computer graphics,  
+but from **2020 to 2025**, the field changed dramatically:
+
+- Deep Learning became tightly integrated with physics simulation  
+- GPU-parallel engines emerged  
+- Differentiable simulators turned physical models into trainable systems  
+
+This article bridges classical concepts with the trends driving modern robotics research.
+
+
+---
+
+## Why This Report Exists
+
+Over the past five years, RBD has shifted from a purely analytical discipline to a hybrid field
+where physics engines, reinforcement learning, and differentiable computation interact deeply.
+
+This report is designed for computer science students entering robotics and simulation.
+It provides:
+
+- A gentle conceptual introduction  
+- A breakdown of the classical simulation loop  
+- An interactive dashboard summarizing key ideas  
+- Research trends from top conferences  
+- A curated bibliography with explanations  
+
+By the end, you should understand both **how** RBD works and **why** the research community
+is rapidly moving toward differentiable, GPU-accelerated pipelines.
+
+
+---
+
+## The Classical Simulation Loop
+
+Before exploring research trends, it's important to understand the three-stage loop used
+by almost every RBD engine:
+
+### **1. Forward Integration**  
+Updates velocities and positions based on forces like gravity and actuators.  
+Modern engines avoid explicit Euler integration due to instability and use
+**semi-implicit** or **variational integrators** that preserve energy better.
+
+### **2. Collision Detection**  
+Determines whether two shapes intersect.  
+Recent work uses **CUDA-accelerated broad-phase checks** and **Signed Distance Fields (SDFs)**  
+for real-time performance in large environments.
+
+### **3. Constraint Resolution**  
+Ensures bodies do not penetrate by solving a **Linear Complementarity Problem (LCP)**.  
+Differentiable solvers allow gradients to pass through this step, enabling learning-based
+manipulation and control policies.
+
+This loop forms the computational backbone of both classical and differentiable simulators.
+
+
+---
+
+## Interactive Dashboard
+
+This interactive module summarizes the core concepts, simulation loop, research trends, and annotated papers.
+The detailed references are now moved to a separate **References** section below.
+
+export const rbdData = [
+  {
+    id: "concepts",
+    label: "Concepts",
+    type: "cards",
+    cards: [
+      {
+        emoji: "🧊",
+        title: "Rigid Body",
+        desc: "Objects do not deform. Motion is determined by Newton–Euler equations over 6 DOF."
+      },
+      {
+        emoji: "🤖",
+        title: "Sim-to-Real",
+        desc: "Accurate simulation allows learned policies to transfer directly to real robots."
+      },
+      {
+        emoji: "🧠",
+        title: "Differentiable",
+        desc: "Physics engines that expose gradients for learning physical parameters and controllers."
+      }
+    ]
+  },
+
+  {
+    id: "loop",
+    label: "Simulation Loop",
+    type: "steps",
+    steps: [
+      {
+        label: "1. Forward Integration",
+        sub: "Time Stepping",
+        detail:
+          "Modern simulators avoid explicit Euler and use semi-implicit or variational integrators for stability."
+      },
+      {
+        label: "2. Collision Detection",
+        sub: "Broad & Narrow Phase",
+        detail:
+          "Recent research replaces mesh checks with Signed Distance Fields and GPU-accelerated primitives."
+      },
+      {
+        label: "3. Constraint Resolution",
+        sub: "Contacts & LCP",
+        detail:
+          "Solvers compute impulses to prevent interpenetration; differentiable variants allow gradient flow."
+      }
+    ]
+  },
+
+  {
+    id: "trend",
+    label: "Trends",
+    type: "chart",
+    chart: {
+      labels: ["2020", "2021", "2022", "2023", "2024", "2025"],
+      datasets: [
+        {
+          label: "Differentiable Physics",
+          data: [15, 35, 55, 75, 85, 95],
+          color: "#805AD5"
+        },
+        {
+          label: "Traditional Solvers",
+          data: [80, 75, 70, 65, 60, 55],
+          color: "#A0AEC0",
+          dashed: true
+        }
+      ],
+      insight:
+        "Differentiable simulators grow rapidly as RL and GPU-based training pipelines become mainstream."
+    }
+  }
+];
+
+<InteractiveDashboard id="rbd-report-1" sections={rbdData} />
+
+---
+
+## Understanding the Trends
+
+From 2020–2025, keyword frequencies in leading venues (ICRA, RSS, SIGGRAPH, CoRL)
+show a clear shift in focus:
+
+- **Differentiable physics** experienced explosive growth  
+- **GPU-parallel simulation** became standard for reinforcement learning  
+- **Traditional CPU solvers** steadily declined  
+- **Sim-to-Real transfer** became a defining research benchmark  
+
+These trends reflect a move away from handcrafted models toward **scalable,
+trainable physics pipelines** where speed and differentiability are essential.
+
+
+---
+
+## Summary & Closing Thoughts
+
+Rigid Body Dynamics remains essential, but its tools and applications are rapidly evolving.
+The rise of GPU-accelerated and differentiable engines has redefined simulation:
+
+- Traditional solvers act as **black boxes**.  
+- Differentiable solvers let models **look inside the physics** and compute gradients.  
+- GPU-parallel simulation enables **massive scaling** for reinforcement learning.  
+
+The next era of RBD blends analytical physics with learned models—combining the stability of classical methods with the flexibility of data-driven approaches.
+
+---
+
+## References
+
+1. **DiffTaichi (ICLR 2020)**  
+   A high-performance differentiable simulation framework bridging HPC and ML.
+
+2. **Isaac Gym (NeurIPS 2021)**  
+   A GPU-based physics simulator enabling massive parallel RL training.
+
+3. **Differentiable Engines Review (2022)**  
+   A survey comparing engines such as Brax and Tiny Differentiable Simulator.
+
+4. **Learning Agile Motor Skills (Science Robotics)**  
+   Demonstrated the importance of actuator modeling for Sim2Real transfer.
