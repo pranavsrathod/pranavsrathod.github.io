@@ -2,7 +2,7 @@
 title: "Height Fields Using Shaders"
 description: "A project that utilizes OpenGL's core profile and shaders to generate and manipulate a 3D height field from image data."
 publishDate: "February 21, 2024"
-isFeatured: true
+isFeatured: false
 poster: '/CS420/heightFeilds.png'
 seo:
   image:

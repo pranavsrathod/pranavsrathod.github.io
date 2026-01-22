@@ -2,7 +2,7 @@
 title: "Custom Game Engine Development"
 description: "A modular C++ game engine built from scratch, featuring real-time rendering, spatial audio, and in-engine debug tools."
 publishDate: "2025-09-25"
-isFeatured: true
+isFeatured: false
 poster: "/CS522/GameEngineDev.png"
 seo:
   image:
