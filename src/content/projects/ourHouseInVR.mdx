@@ -1,0 +1,385 @@
+---
+title: "House of Aladdin"
+description: "A VR experience built in Unity + VRTK to explore an Aladdin-themed land inside UIC’s future CS building atrium."
+publishDate: "2022-11-26"
+poster: "/UICProjects/VR/images/Alladin.png"
+isFeatured: false
+seo:
+  title: "Our House of Aladdin"
+  description: "A VR experience built in Unity + VRTK to explore an Aladdin-themed land inside UIC’s future CS building atrium."
+---
+
+
+A virtual reality project made using Unity and the Virtual Reality Toolkit (VRTK), built to give an immersive way to interact with and explore an Aladdin-themed land inside UIC’s future Computer Science building atrium.
+
+## Video Walkthrough
+
+<iframe
+  class="w-full aspect-video rounded-lg"
+  src="https://www.youtube.com/embed/E5q4Afl5Sts"
+  title="Our House VR Walkthrough"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+/>
+
+
+## Project Setup
+
+### Requirements
+- Unity **2021.3.6f1**
+- VRTK v4 (already included)
+
+### Download & Open
+1. Download the project:  
+   https://github.com/pranavsrathod/OurHouse
+2. Open the project in Unity.
+3. Open the scene: `Assets/Scenes/OurHouseScene.unity`
+
+
+---
+## Why VR for Architectural Previews
+
+Virtual reality offers a compelling way to introduce people to architectural spaces before they exist in the physical world. Growing up, I often saw front-page newspaper advertisements for new property launches, filled with polished renderings of buildings, parks, and shared spaces. Those images felt futuristic and aspirational. Years later, walking past the completed buildings, the spaces often felt very different from what those visuals had promised.
+
+Two-dimensional images are limited in how accurately they convey scale and proportion. They can unintentionally exaggerate size, compress depth, or flatten spatial relationships. Virtual reality moves beyond these limitations by allowing viewers to step inside a space and experience it at a human scale. Circulation, distance, and spatial balance become immediately intuitive in a way that static images or small physical models cannot replicate.
+
+While developing this project, I experienced this shift in perception firsthand. Objects that appeared correctly sized in the Unity editor often felt too small or too large once viewed in VR. Being able to inhabit the environment made it easier to adjust proportions, refine layouts, and translate abstract design ideas into spaces that felt believable and comfortable.
+
+For architects, interior designers, and decision-makers, this capability is especially valuable. VR reduces the mental effort required to interpret drawings, measurements, and renderings. Instead, stakeholders can understand a design by experiencing it directly, leading to clearer communication, stronger feedback, and more confident decisions before construction begins.
+
+The UIC Computer Science building atrium serves as a strong example of this potential. By allowing people to explore the space virtually, the project communicates the scale, ambition, and intent of the building long before it is completed. VR becomes a bridge between vision and reality, transforming architectural concepts into experiences that can be felt rather than simply observed.
+
+## Reflection
+
+This project explores how virtual reality can be used to introduce people to architectural spaces before they are physically built.
+
+VR enables users to perceive **scale, proportion, and spatial relationships** far more accurately than static images or renderings. During development, objects that appeared correctly sized in the editor often felt disproportionate in VR, reinforcing the importance of embodied spatial feedback.
+
+For architects, designers, and decision makers, VR serves as a powerful tool to bridge imagination and reality. The UIC Computer Science building atrium demonstrates how immersive visualization can generate excitement, improve spatial understanding, and communicate intent long before construction is complete.
+
+<InteractiveDashboard
+  sections={[
+    {
+      id: 'custom-models',
+      label: 'Custom Models',
+      type: 'steps',
+      steps: [
+        {
+          label: 'Showcase',
+          sub: 'Static environment element',
+          detail: 'A non-interactive showcase element used for visual grounding in the atrium.',
+          image: { src: '/UICProjects/VR/images/Showcase.png', alt: 'Showcase model' },
+          details: [
+            { label: 'Interactive', value: '❌ Not Interactive' },
+            { label: 'Sound', value: '❌ No sound' },
+            { label: 'Animation', value: '❌ No animation' }
+          ]
+        },
+        {
+          label: 'Teleporting Button',
+          sub: 'Navigation interaction',
+          detail: 'Teleports the user to another location in the atrium when touched.',
+          image: { src: '/UICProjects/VR/images/TeleButton.png', alt: 'Teleporting Button model' },
+          details: [
+            { label: 'Interactive', value: '✅ When touched, teleports you to another place in the atrium' },
+            { label: 'Sound', value: '❌ No sound' },
+            { label: 'Animation', value: '❌ No animation' }
+          ]
+        },
+        {
+          label: 'Lever',
+          sub: 'Puzzle mechanic',
+          detail: 'A grab-based lever that triggers the wall to disappear.',
+          image: { src: '/UICProjects/VR/images/Lever.png', alt: 'Lever model' },
+          details: [
+            { label: 'Interactive', value: '✅ Can be grabbed and moved to make the wall disappear' },
+            { label: 'Sound', value: '❌ No sound' },
+            { label: 'Animation', value: '❌ No animation' }
+          ]
+        },
+        {
+          label: 'Magic Carpet',
+          sub: 'Ambient animation',
+          detail: 'A decorative animated element that moves continuously.',
+          image: { src: '/UICProjects/VR/images/Magic%20Carpet.png', alt: 'Magic Carpet model' },
+          details: [
+            { label: 'Interactive', value: '❌ Not Interactive' },
+            { label: 'Sound', value: '❌ No sound' },
+            { label: 'Animation', value: '✅ Moves back and forth' }
+          ]
+        },
+        {
+          label: 'Television',
+          sub: 'Proximity-based audio',
+          detail: 'Plays an audio clip when the user comes close to the television.',
+          image: { src: '/UICProjects/VR/images/Movie.png', alt: 'Television model' },
+          details: [
+            { label: 'Interactive', value: '❌ Not Interactive' },
+            { label: 'Sound', value: '✅ Plays “Friend Like Me” from Aladdin when nearby' },
+            { label: 'Animation', value: '❌ No animation' }
+          ]
+        },
+        {
+          label: 'Popcorn Machine Buttons',
+          sub: 'Spawn interaction',
+          detail: 'Spawns popcorn buckets when the button is pressed.',
+          image: { src: '/UICProjects/VR/images/popButton.png', alt: 'Popcorn Machine Buttons model' },
+          details: [
+            { label: 'Interactive', value: '✅ Touch spawns popcorn bucket' },
+            { label: 'Sound', value: '✅ Ding sound on press' },
+            { label: 'Animation', value: '❌ No animation' }
+          ]
+        },
+        {
+          label: 'Table',
+          sub: 'Physics surface',
+          detail: 'A static surface that supports placing and standing objects.',
+          image: { src: '/UICProjects/VR/images/Table.png', alt: 'Table model' },
+          details: [
+            { label: 'Interactive', value: '✅ Can place objects on top (not grabbable)' },
+            { label: 'Sound', value: '❌ No sound' },
+            { label: 'Animation', value: '❌ No animation' }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'citations',
+      label: 'Online Models',
+      type: 'cards',
+      cards: [
+        {
+          title: 'Stylized treasure Chest',
+          desc: 'License: Creative Commons Attribution',
+          details: [
+            { label: 'Interactive', value: '❌ Not Interactive' },
+            { label: 'Sound', value: '❌ No sound' },
+            { label: 'Animation', value: '❌ No animation' }
+          ],
+          actions: [{ icon: 'link', href: 'https://skfb.ly/6XxuK', label: 'Source' }]
+        },
+        {
+          title: 'Magic Lamp PS1',
+          desc: 'License: Creative Commons Attribution',
+          details: [
+            { label: 'Interactive', value: '❌ Not Interactive' },
+            { label: 'Sound', value: '❌ No sound' },
+            { label: 'Animation', value: '❌ No animation' }
+          ],
+          actions: [{ icon: 'link', href: 'https://skfb.ly/oysWz', label: 'Source' }]
+        },
+        {
+          title: 'Market Props',
+          desc: 'License: Creative Commons Attribution',
+          details: [
+            { label: 'Interactive', value: '✅ The fruits and pots can be grabbed' },
+            { label: 'Sound', value: '❌ No sound' },
+            { label: 'Animation', value: '❌ No animation' }
+          ],
+          actions: [{ icon: 'link', href: 'https://skfb.ly/oxT7p', label: 'Source' }]
+        },
+        {
+          title: 'Alchemist carpet',
+          desc: 'License: CC Attribution-NonCommercial-NoDerivs',
+          details: [
+            { label: 'Interactive', value: '❌ Not Interactive' },
+            { label: 'Sound', value: '❌ No sound' },
+            { label: 'Animation', value: '❌ No animation' }
+          ],
+          actions: [{ icon: 'link', href: 'https://skfb.ly/orOoE', label: 'Source' }]
+        },
+        {
+          title: 'Golden crown',
+          desc: 'License: Creative Commons Attribution',
+          details: [
+            { label: 'Interactive', value: '❌ Not Interactive' },
+            { label: 'Sound', value: '❌ No sound' },
+            { label: 'Animation', value: '✅ Spins' }
+          ],
+          actions: [{ icon: 'link', href: 'https://skfb.ly/owVrF', label: 'Source' }]
+        },
+        {
+          title: 'Arabic temple diorama',
+          desc: 'License: Creative Commons Attribution',
+          details: [
+            { label: 'Interactive', value: '❌ Not Interactive' },
+            { label: 'Sound', value: '❌ No sound' },
+            { label: 'Animation', value: '❌ No animation' }
+          ],
+          actions: [{ icon: 'link', href: 'https://skfb.ly/o99yZ', label: 'Source' }]
+        },
+        {
+          title: 'Vintage chandelier (Object Capture)',
+          desc: 'License: Creative Commons Attribution',
+          details: [
+            { label: 'Interactive', value: '✅ Can be grabbed' },
+            { label: 'Sound', value: '❌ No sound' },
+            { label: 'Animation', value: '❌ No animation' }
+          ],
+          actions: [{ icon: 'link', href: 'https://skfb.ly/oowZN', label: 'Source' }]
+        },
+        {
+          title: 'Pot With Gold',
+          desc: 'License: Creative Commons Attribution',
+          details: [
+            { label: 'Interactive', value: '❌ Not Interactive' },
+            { label: 'Sound', value: '❌ No sound' },
+            { label: 'Animation', value: '❌ No animation' }
+          ],
+          actions: [{ icon: 'link', href: 'https://skfb.ly/6ZuLI', label: 'Source' }]
+        },
+        {
+          title: 'Popcorn Bucket',
+          desc: 'License: Creative Commons Attribution',
+          details: [
+            { label: 'Interactive', value: '❌ Not Interactive' },
+            { label: 'Sound', value: '❌ The model itself does not make any 3D sound' },
+            { label: 'Animation', value: '❌ No animation' }
+          ],
+          actions: [{ icon: 'link', href: 'https://skfb.ly/oz88A', label: 'Source' }]
+        },
+        {
+          title: 'Popcorn Machine',
+          desc: 'License: Creative Commons Attribution',
+          details: [
+            { label: 'Interactive', value: '✅ Button spawns new popcorn buckets' },
+            { label: 'Sound', value: '✅ Popcorn popping + ding when a new bucket is spawned' },
+            { label: 'Animation', value: '❌ No animation' }
+          ],
+          actions: [{ icon: 'link', href: 'https://skfb.ly/ouGJy', label: 'Source' }]
+        },
+        {
+          title: 'É o Gênio de novo.',
+          desc: 'License: Creative Commons Attribution',
+          details: [
+            { label: 'Interactive', value: '❌ Not Interactive' },
+            { label: 'Sound', value: '❌ No sound' },
+            { label: 'Animation', value: '❌ No animation' }
+          ],
+          actions: [{ icon: 'link', href: 'https://skfb.ly/6D8xS', label: 'Source' }]
+        },
+        {
+          title: 'Monkey- Free',
+          desc: 'License: Creative Commons Attribution',
+          details: [
+            { label: 'Interactive', value: '❌ Not Interactive' },
+            { label: 'Sound', value: '❌ No sound' },
+            { label: 'Animation', value: '✅ Flips around' }
+          ],
+          actions: [{ icon: 'link', href: 'https://skfb.ly/oxBwx', label: 'Source' }]
+        },
+        {
+          title: 'Victorian Two Seat Sofa',
+          desc: 'License: Creative Commons Attribution',
+          details: [
+            { label: 'Interactive', value: '❌ Not Interactive' },
+            { label: 'Sound', value: '❌ No sound' },
+            { label: 'Animation', value: '❌ No animation' }
+          ],
+          actions: [{ icon: 'link', href: 'https://skfb.ly/6T9LO', label: 'Source' }]
+        }
+      ]
+    },
+    {
+      id: 'flat-models',
+      label: 'Flat Models',
+      type: 'list',
+      list: [
+        {
+          id: 'magic-carpet-flat',
+          title: 'Magic Carpet',
+          summary: 'Taken from Pinterest.',
+          tag: 'Texture',
+          href: 'https://in.pinterest.com/pin/153052087324045732/'
+        },
+        {
+          id: 'maroon-carpet',
+          title: 'Maroon Carpet',
+          summary: '"Alchemist carpet" by Jopii. Licensed under CC Attribution-NonCommercial-NoDerivs.',
+          tag: 'Texture',
+          href: 'https://skfb.ly/orOoE'
+        },
+        {
+          id: 'tv-screen',
+          title: 'TV Screen',
+          summary: 'Taken from USA Today article (Aladdin original ending).',
+          tag: 'Image',
+          href: 'https://www.usatoday.com/story/entertainment/movies/2019/08/26/aladdin-watch-original-ending-proving-peddler-robin-williams-genie/2088293001/'
+        },
+        {
+          id: 'jasmine',
+          title: 'Princess Jasmine',
+          summary: 'Taken from Pinterest.',
+          tag: 'Image',
+          href: 'https://in.pinterest.com/pin/459015386998987052/'
+        },
+        {
+          id: 'poster',
+          title: 'Aladdin Movie Poster',
+          summary: 'Taken from Rotten Tomatoes editorial article.',
+          tag: 'Image',
+          href: 'https://editorial.rottentomatoes.com/article/how-robin-williams-genie-in-disneys-aladdin-changed-animated-comedy-forever/'
+        },
+        {
+          id: 'wall',
+          title: 'Disappearing Wall',
+          summary: 'Implemented directly in Unity.',
+          tag: 'Unity',
+        },
+        {
+          id: 'welcome',
+          title: 'Welcome Banner',
+          summary: 'Custom texture created using Procreate.',
+          tag: 'Custom',
+        },
+        {
+          id: 'teleport-instructions',
+          title: 'Teleporting Instructions',
+          summary: 'Custom texture created using Procreate.',
+          tag: 'Custom',
+        },
+        {
+          id: 'labels',
+          title: 'Artifact Labels',
+          summary: 'Custom texture created using Procreate.',
+          tag: 'Custom',
+        }
+      ]
+    },
+    {
+      id: 'audio',
+      label: 'Music & Sound',
+      type: 'list',
+      list: [
+        {
+          id: 'popcorn',
+          title: 'Popcorn Popping Sound',
+          summary: 'Sound effect used for popcorn machine interaction.',
+          tag: 'SFX',
+          href: 'https://www.youtube.com/watch?v=f7gc7oHPfs0'
+        },
+        {
+          id: 'ding',
+          title: 'Ding Sound',
+          summary: 'Sound effect played when spawning a popcorn bucket.',
+          tag: 'SFX',
+          href: 'https://www.youtube.com/watch?v=GVAF07-2Xic'
+        },
+        {
+          id: 'friend-like-me',
+          title: 'Friend Like Me',
+          summary: 'Performed by Michael Kosarin & Will Smith. Walt Disney Records.',
+          tag: 'Music',
+          href: 'https://www.youtube.com/watch?v=1at7kKzBYxI'
+        },
+        {
+          id: 'arabian-nights',
+          title: 'Arabian Nights (Instrumental)',
+          summary: 'Instrumental version from Aladdin (2019). Walt Disney Records.',
+          tag: 'Music',
+          href: 'https://www.youtube.com/watch?v=9jDzEmfv4zM'
+        }
+      ]
+    }
+  ]}
+/>

@@ -8,14 +8,39 @@ interface Section {
     type: SectionType;
     // Dynamic content based on type
     cards?: {
-        emoji: string;
+        // Optional leading visual. Use ONE of: emoji OR image.
+        emoji?: string;
+        image?: { src: string; alt?: string; className?: string };
+
         title: string;
-        desc: string;
+
+        // Simple text description (optional)
+        desc?: string;
+
+        // Optional rich content (rendered as HTML). Use when you need labels, links, lists, etc.
+        html?: string;
+
+        // Optional structured key-value details (compact, readable)
+        details?: { label: string; value: string }[];
+
         actions?: { type?: 'link' | 'button'; icon: 'github' | 'linkedin' | 'link' | string; href?: string; label?: string; onClickId?: string }[];
     }[];
-    steps?: { label: string; sub: string; detail: string }[];
+    steps?: {
+        label: string;
+        sub: string;
+        detail: string;
+        image?: { src: string; alt?: string };
+        details?: { label: string; value: string }[];
+    }[];
     chart?: { labels: string[]; datasets: any[]; insight?: string };
-    list?: { id: string | number; tag?: string; title: string; summary: string }[];
+    list?: {
+        id: string | number;
+        tag?: string;
+        title: string;
+        summary: string;
+        href?: string; // optional external link
+        linkLabel?: string; // optional label (defaults to "Source")
+    }[];
     html?: string; // For completely custom content
 }
 
@@ -29,7 +54,7 @@ const { id, sections } = Astro.props;
 const ICON_SVGS: Record<string, string> = {
     github: `<svg viewBox="0 0 24 24" aria-hidden="true" class="w-4 h-4 fill-current"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.69c-2.77.6-3.35-1.17-3.35-1.17-.45-1.14-1.1-1.44-1.1-1.44-.9-.62.07-.6.07-.6 1 .07 1.52 1.03 1.52 1.03.89 1.52 2.34 1.08 2.91.83.09-.64.35-1.08.63-1.32-2.21-.25-4.54-1.1-4.54-4.9 0-1.08.39-1.97 1.03-2.66-.1-.26-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.6 9.6 0 0 1 12 6.8c.85 0 1.7.12 2.5.34 1.9-1.29 2.74-1.02 2.74-1.02.56 1.38.21 2.39.1 2.65.64.69 1.03 1.58 1.03 2.66 0 3.81-2.34 4.65-4.57 4.89.36.31.68.92.68 1.86v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2z"/></svg>`,
     linkedin: `<svg viewBox="0 0 24 24" aria-hidden="true" class="w-4 h-4 fill-current"><path d="M20.45 20.45h-3.55v-5.53c0-1.32-.03-3.02-1.84-3.02-1.85 0-2.13 1.44-2.13 2.92v5.63H9.38V9h3.4v1.56h.05c.47-.9 1.63-1.84 3.35-1.84 3.58 0 4.24 2.36 4.24 5.43v6.3zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM3.56 20.45h3.55V9H3.56v11.45z"/></svg>`,
-    link: `<svg viewBox="0 0 24 24" aria-hidden="true" class="w-4 h-4 fill-current"><path d="M10.59 13.41a1 1 0 0 0 1.41 1.41l3.54-3.54a3 3 0 0 0-4.24-4.24L9.88 8.46a1 1 0 1 0 1.41 1.41l1.41-1.41a1 1 0 0 1 1.42 1.42l-3.53 3.53z"/><path d="M13.41 10.59a1 1 0 0 0-1.41-1.41l-3.54 3.54a3 3 0 0 0 4.24 4.24l1.41-1.41a1 1 0 1 0-1.41-1.41l-1.41 1.41a1 1 0 0 1-1.42-1.42l3.53-3.53z"/></svg>`
+    link: `<img src="/icons/link.svg" alt="External link" class="w-4 h-4" />`
 };
 
 function getIconSvg(name?: string) {
@@ -65,12 +90,27 @@ function getIconSvg(name?: string) {
                 <div id={`${id}-${section.id}`} class={`tab-section ${index !== 0 ? 'hidden' : ''} space-y-6`}>
                     {/* TYPE: CARDS */}
                     {section.type === 'cards' && section.cards && (
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[420px] overflow-y-auto pr-2 custom-scroll">
                             {section.cards.map((c) => (
                                 <div class="p-4 rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800/50">
                                     <div class="flex items-start justify-between gap-3">
-                                        <div class="text-2xl">
-                                            {c.emoji} {c.title}
+                                        <div class="flex items-start gap-3 min-w-0">
+                                            {c.image?.src ? (
+                                                <img
+                                                    src={c.image.src}
+                                                    alt={c.image.alt || ''}
+                                                    class:list={[
+                                                        'w-16 h-16 rounded-lg object-cover shrink-0 border border-slate-200 dark:border-zinc-700',
+                                                        c.image.className
+                                                    ]}
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                />
+                                            ) : c.emoji ? (
+                                                <div class="text-2xl shrink-0">{c.emoji}</div>
+                                            ) : null}
+
+                                            <div class="text-2xl truncate">{c.title}</div>
                                         </div>
                                         {c.actions && c.actions.length > 0 && (
                                             <div class="flex items-center gap-2 pt-1">
@@ -80,7 +120,7 @@ function getIconSvg(name?: string) {
                                                             href={a.href}
                                                             target="_blank"
                                                             rel="noreferrer"
-                                                            class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-slate-200 dark:border-zinc-700 bg-white/60 dark:bg-zinc-900/40 hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors"
+                                                            class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-slate-200 dark:border-zinc-700 bg-slate-100 dark:bg-zinc-700 hover:bg-slate-200 dark:hover:bg-zinc-600 transition-colors"
                                                             aria-label={a.label || a.icon}
                                                             title={a.label || a.icon}
                                                         >
@@ -89,7 +129,7 @@ function getIconSvg(name?: string) {
                                                     ) : (
                                                         <button
                                                             type="button"
-                                                            class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-slate-200 dark:border-zinc-700 bg-white/60 dark:bg-zinc-900/40 hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors"
+                                                            class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-slate-200 dark:border-zinc-700 bg-slate-100 dark:bg-zinc-700 hover:bg-slate-200 dark:hover:bg-zinc-600 transition-colors"
                                                             aria-label={a.label || a.icon}
                                                             title={a.label || a.icon}
                                                             data-action={a.onClickId || ''}
@@ -101,7 +141,20 @@ function getIconSvg(name?: string) {
                                             </div>
                                         )}
                                     </div>
-                                    <p class="mt-2 text-sm opacity-80">{c.desc}</p>
+                                    {c.desc && <p class="mt-2 text-sm opacity-80">{c.desc}</p>}
+
+                                    {c.html && <div class="mt-2 text-sm opacity-80" set:html={c.html} />}
+
+                                    {c.details && c.details.length > 0 && (
+                                        <dl class="mt-3 text-sm grid grid-cols-1 gap-1">
+                                            {c.details.map((d) => (
+                                                <div class="flex gap-2">
+                                                    <dt class="font-mono text-xs uppercase opacity-70 w-28 shrink-0">{d.label}</dt>
+                                                    <dd class="opacity-85">{d.value}</dd>
+                                                </div>
+                                            ))}
+                                        </dl>
+                                    )}
                                 </div>
                             ))}
                         </div>
@@ -155,19 +208,32 @@ function getIconSvg(name?: string) {
                     {/* TYPE: STEPS (Interactable List) */}
                     {section.type === 'steps' && section.steps && (
                         <>
-                            <div class="flex flex-col gap-3">
+                            <div class="flex flex-col gap-3 max-h-[300px] overflow-y-auto pr-2 custom-scroll">
                                 {section.steps.map((s) => (
                                     <button
-                                        class="step-btn p-3 border rounded-lg text-left hover:bg-blue-50 dark:hover:bg-blue-900/20 border-blue-200 dark:border-blue-800 transition-colors"
+                                        class="step-btn p-3 border rounded-lg text-left hover:bg-blue-50 dark:hover:bg-blue-900/20 border-blue-200 dark:border-blue-800 transition-colors flex gap-3"
                                         data-detail={s.detail}
+                                        data-details={s.details ? JSON.stringify(s.details) : ''}
                                     >
-                                        <span class="text-blue-600 dark:text-blue-400 font-bold block">{s.label}</span>
-                                        <span class="text-xs opacity-70">{s.sub}</span>
+                                        {s.image?.src && (
+                                            <img
+                                                src={s.image.src}
+                                                alt={s.image.alt || ''}
+                                                class="w-20 h-20 rounded-lg object-cover shrink-0 border border-slate-200 dark:border-zinc-700"
+                                                loading="lazy"
+                                                decoding="async"
+                                            />
+                                        )}
+                                        <div class="min-w-0 flex flex-col justify-center">
+                                            <span class="text-blue-600 dark:text-blue-400 font-bold block">{s.label}</span>
+                                            <span class="text-xs opacity-70">{s.sub}</span>
+                                        </div>
                                     </button>
                                 ))}
                             </div>
                             <div class="mt-4 p-4 rounded bg-slate-50 dark:bg-black border-l-4 border-slate-300 loop-detail-box">
                                 <p class="text-sm opacity-90">Click an item above to see details.</p>
+                                <dl class="mt-3 text-sm grid grid-cols-1 gap-1 hidden" />
                             </div>
                         </>
                     )}
@@ -188,7 +254,22 @@ function getIconSvg(name?: string) {
                             {section.list.map((item) => (
                                 <div class="p-3 text-sm border rounded dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800/30">
                                     {item.tag && <span class="text-xs font-mono uppercase text-blue-500 mb-1 block">[{item.tag}]</span>}
-                                    <div class="font-bold">{item.title}</div>
+                                    <div class="flex items-center justify-between gap-2">
+                                        <div class="font-bold">{item.title}</div>
+                                        {item.href && (
+                                            <a
+                                                href={item.href}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                class="inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:underline text-xs bg-slate-100 dark:bg-zinc-700 hover:bg-slate-200 dark:hover:bg-zinc-600 rounded px-2 py-1 transition-colors"
+                                                aria-label={item.linkLabel || 'Source'}
+                                                title={item.linkLabel || 'Source'}
+                                            >
+                                                <span set:html={getIconSvg('link')} />
+                                                {item.linkLabel || 'Source'}
+                                            </a>
+                                        )}
+                                    </div>
                                     <div class="opacity-80 mt-1">{item.summary}</div>
                                 </div>
                             ))}
@@ -261,9 +342,47 @@ function getIconSvg(name?: string) {
         // --- STEPS LOGIC ---
         root.querySelectorAll('.step-btn').forEach((btn) => {
             btn.addEventListener('click', (e) => {
-                const detailText = e.currentTarget.dataset.detail;
-                const detailBox = e.currentTarget.parentElement.nextElementSibling; // The loop-detail-box
-                if (detailBox) detailBox.querySelector('p').textContent = detailText;
+                const el = e.currentTarget;
+                const detailText = el.dataset.detail;
+                const rawDetails = el.dataset.details;
+                const detailBox = el.parentElement.nextElementSibling; // The loop-detail-box
+                if (!detailBox) return;
+
+                // Update main text
+                const p = detailBox.querySelector('p');
+                if (p) p.textContent = detailText;
+
+                // Update structured details
+                const dl = detailBox.querySelector('dl');
+                if (dl) {
+                    dl.innerHTML = '';
+                    if (rawDetails) {
+                        try {
+                            const details = JSON.parse(rawDetails);
+                            details.forEach((d) => {
+                                const row = document.createElement('div');
+                                row.className = 'flex gap-2';
+
+                                const dt = document.createElement('dt');
+                                dt.className = 'font-mono text-xs uppercase opacity-70 w-28 shrink-0';
+                                dt.textContent = d.label;
+
+                                const dd = document.createElement('dd');
+                                dd.className = 'opacity-85';
+                                dd.textContent = d.value;
+
+                                row.appendChild(dt);
+                                row.appendChild(dd);
+                                dl.appendChild(row);
+                            });
+                            dl.classList.remove('hidden');
+                        } catch (err) {
+                            dl.classList.add('hidden');
+                        }
+                    } else {
+                        dl.classList.add('hidden');
+                    }
+                }
             });
         });
 
