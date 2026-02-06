@@ -1,5 +1,5 @@
 ---
-title: "Custom Game Engine Development"
+title: "Prime Engine: Architecture & Optimization"
 description: "A modular C++ game engine built from scratch, featuring real-time rendering, spatial audio, and in-engine debug tools."
 publishDate: "2025-09-25"
 isFeatured: false
