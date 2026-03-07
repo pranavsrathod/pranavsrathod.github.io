@@ -44,14 +44,14 @@ const { showHeader = true, ...head } = Astro.props;
             ></iframe></noscript
         >
         <!-- End Google Tag Manager (noscript) -->
-        <!-- Fixed logo: fills left half of screen with right half of image -->
-        <!-- <div class="fixed top-0 left-[-50vw] z-0 pointer-events-none h-screen w-screen overflow-hidden">
+        <!-- Landscape Watermark -->
+        <div class="watermark-landscape hidden lg:block fixed top-0 left-[-50vw] z-0 pointer-events-none h-screen w-screen overflow-hidden">
             <img src="/PR_LOGO.PNG" alt="PR Logo" class="h-screen w-[200vw] object-cover opacity-30" />
-        </div> -->
+        </div>
 
-        <!-- Desktop Watermark -->
-        <div class="hidden md:block fixed top-0 left-[-50vw] z-0 pointer-events-none h-screen w-screen overflow-hidden">
-            <img src="/PR_LOGO.PNG" alt="PR Logo" class="h-screen w-[200vw] object-cover opacity-30" />
+        <!-- Portrait Watermark -->
+        <div class="watermark-portrait fixed inset-0 z-0 pointer-events-none flex items-center justify-center" aria-hidden="true">
+            <img src="/PR_LOGO.PNG" alt="" class="w-[72vw] h-auto opacity-30" />
         </div>
 
         <!-- Actual page content -->
@@ -96,5 +96,20 @@ const { showHeader = true, ...head } = Astro.props;
                 updateCompanionState();
             });
         </script>
+        <style>
+            .watermark-portrait {
+                display: none;
+            }
+
+            @media (orientation: portrait) and (max-width: 1024px) {
+                .watermark-landscape {
+                    display: none !important;
+                }
+
+                .watermark-portrait {
+                    display: flex;
+                }
+            }
+        </style>
     </body>
 </html>
