@@ -337,7 +337,10 @@ function getIconSvg(name?: string) {
                         KaTeX auto-render will process after mount.
                     */}
                     {section.type === 'html' && (
-                        <div class="custom-html-content katex-content prose-sm dark:prose-invert max-w-none text-sm leading-relaxed" set:html={section.html} />
+                        <div
+                            class="custom-html-content katex-content prose-sm dark:prose-invert max-w-none text-sm leading-relaxed min-w-0 w-full"
+                            set:html={section.html}
+                        />
                     )}
                 </div>
             ))
@@ -362,13 +365,84 @@ function getIconSvg(name?: string) {
         color: rgb(59 130 246);
     }
 
-    /* ── KaTeX block equation centering ── */
-    .katex-content .katex-display {
-        margin: 1.25rem 0;
-        overflow-x: auto;
+    /* ── KaTeX mobile-safe rendering ── */
+
+    /* Content container must not clip */
+    .katex-content {
+        overflow: visible;
     }
-    .katex-content .katex-display > .katex {
-        font-size: 1.05em;
+
+    /* Display equations outside eq-box: fallback self-scroll */
+    .katex-content .katex-display {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.25rem;
+        margin: 1rem 0;
+    }
+
+    /* ── eq-box: self-contained horizontal scroll, never escapes parent ── */
+    .eq-box {
+        /* Critical: constrain width to parent so overflow scrolls inside */
+        display: block;
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+
+        border-radius: 0.5rem;
+        border: 1px solid rgb(226 232 240);
+        background: rgb(248 250 252);
+        padding: 1.25rem;
+    }
+    .dark .eq-box {
+        border-color: rgb(63 63 70);
+        background: rgba(39 39 42 / 0.5);
+    }
+
+    /* KaTeX inside eq-box must NOT scroll itself — render at natural width */
+    .eq-box .katex-display {
+        overflow: visible;
+        margin: 0;
+        padding: 0;
+    }
+    .eq-box .katex-display > .katex,
+    .eq-box .katex-display > .katex > .katex-html {
+        display: inline-block;
+        white-space: nowrap;
+        max-width: none;
+        min-width: 0;
+    }
+
+    /* Thin scrollbar on the eq-box itself */
+    .eq-box::-webkit-scrollbar {
+        height: 3px;
+    }
+    .eq-box::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .eq-box::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.18);
+        border-radius: 2px;
+    }
+    .dark .eq-box::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Legend grids: single col mobile, two col sm+ */
+    .eq-legend {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+    }
+    @media (min-width: 640px) {
+        .eq-legend {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 
     /* ── Subtle scrollbar ── */

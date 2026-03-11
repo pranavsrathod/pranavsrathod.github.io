@@ -76,7 +76,7 @@ The compression system processes raw video frames, identifies moving regions, an
           label: "Foreground Segmentation",
           sub: "Classify blocks by motion consistency",
           detail:
-            "Macroblocks are classified as foreground or background based on the magnitude and directional consistency of their motion vectors. Foreground regions have distinct, contiguous motion; background blocks share a near-zero or globally uniform motion vector (camera motion). Detectron2 + dense optical flow were also explored as an enhanced segmentation path.",
+            "Macroblocks are classified as foreground or background based on the magnitude and directional consistency of their motion vectors. Foreground regions have distinct, contiguous motion; background blocks share a near-zero or globally uniform motion vector. Detectron2 + dense optical flow were also explored as an enhanced segmentation path.",
           details: [
             { label: "Foreground", value: "Distinct, consistent motion vectors" },
             { label: "Background", value: "Near-zero or globally uniform vectors" },
@@ -87,7 +87,7 @@ The compression system processes raw video frames, identifies moving regions, an
           label: "Transform Compression",
           sub: "DCT + uniform quantization",
           detail:
-            "Each 16×16 macroblock is subdivided into 8×8 blocks. A 2D DCT is applied to each block across all three color channels (R, G, B), converting spatial pixel values into frequency coefficients. Coefficients are then uniformly quantized using a step size of 2^n, where n = n1 for foreground blocks and n = n2 for background blocks.",
+            "Each 16×16 macroblock is subdivided into 8×8 blocks. A 2D DCT is applied to each block across all three color channels (R, G, B). Coefficients are then uniformly quantized using a step size of 2^n, where n = n1 for foreground blocks and n = n2 for background blocks.",
           details: [
             { label: "Block size", value: "8 × 8 px" },
             { label: "Transform", value: "2D Discrete Cosine Transform" },
@@ -100,7 +100,7 @@ The compression system processes raw video frames, identifies moving regions, an
           label: "Binary Encoding",
           sub: "Write .cmp file",
           detail:
-            "Quantized coefficients are written to a .cmp binary file in scanline order. Each macroblock entry begins with a block_type flag (0 = background, 1 = foreground) followed by 64 quantized DCT coefficients per channel (R, G, B), giving 192 values per 8×8 block. The file header stores n1 and n2.",
+            "Quantized coefficients are written to a .cmp binary file in scanline order. Each macroblock entry begins with a block_type flag (0 = background, 1 = foreground) followed by 64 quantized DCT coefficients per channel (R, G, B). The file header stores n1 and n2.",
           details: [
             { label: "Format", value: ".cmp binary" },
             { label: "Header", value: "n1, n2" },
@@ -112,7 +112,7 @@ The compression system processes raw video frames, identifies moving regions, an
           label: "Reconstruction",
           sub: "IDCT + synchronized playback",
           detail:
-            "The decoder reads the .cmp file, dequantizes each block using the appropriate n1 or n2 value, and applies the inverse DCT to reconstruct pixel values. Frames are displayed at 30 FPS synchronized with the .wav audio stream via PyAudio. The player supports play, pause, and frame-by-frame stepping.",
+            "The decoder reads the .cmp file, dequantizes each block using n1 or n2, and applies the inverse DCT to reconstruct pixel values. Frames are displayed at 30 FPS synchronized with the .wav audio stream via PyAudio.",
           details: [
             { label: "Dequantize", value: "Multiply coefficients by 2^n1 or 2^n2" },
             { label: "Transform", value: "2D Inverse DCT" },
@@ -131,23 +131,21 @@ The compression system processes raw video frames, identifies moving regions, an
       html: `
         <div class="space-y-8 text-sm leading-relaxed">
 
-          <!-- DCT -->
           <div>
             <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">01 — Forward Transform</h3>
             <p class="opacity-85 mb-4">
-              The <strong>2D Discrete Cosine Transform</strong> converts an 8×8 block of spatial pixel values
-              into the frequency domain. Each output coefficient represents how strongly a particular
-              horizontal and vertical frequency pattern is present in the block. The DC coefficient
-              at <span class="font-mono">(u,v) = (0,0)</span> captures the block's average intensity;
-              higher-index AC coefficients encode increasingly fine spatial detail.
+              The <strong>2D Discrete Cosine Transform</strong> converts an 8×8 block of spatial pixel
+              values into the frequency domain. The DC coefficient at
+              <span class="font-mono">(u,v) = (0,0)</span> captures average intensity; higher-index
+              AC coefficients encode increasingly fine spatial detail.
             </p>
-            <div class="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800/50 px-6 py-5">
+            <div class="eq-box">
               $$F(u,v) = \\frac{1}{4}\\, C(u)\\, C(v) \\sum_{x=0}^{7} \\sum_{y=0}^{7} f(x,y) \\cos\\!\\left[\\frac{(2x+1)\\,u\\,\\pi}{16}\\right] \\cos\\!\\left[\\frac{(2y+1)\\,v\\,\\pi}{16}\\right]$$
             </div>
-            <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div class="eq-legend">
               <div class="rounded-md border border-slate-200 dark:border-zinc-700 px-3 py-2">
                 <span class="font-mono text-xs text-blue-500 dark:text-blue-400 block mb-1">f(x, y)</span>
-                <span class="opacity-70">Pixel intensity at spatial position (x, y) in the 8×8 block</span>
+                <span class="opacity-70">Pixel intensity at position (x, y) in the 8×8 block</span>
               </div>
               <div class="rounded-md border border-slate-200 dark:border-zinc-700 px-3 py-2">
                 <span class="font-mono text-xs text-blue-500 dark:text-blue-400 block mb-1">F(u, v)</span>
@@ -155,68 +153,59 @@ The compression system processes raw video frames, identifies moving regions, an
               </div>
               <div class="rounded-md border border-slate-200 dark:border-zinc-700 px-3 py-2">
                 <span class="font-mono text-xs text-blue-500 dark:text-blue-400 block mb-1">C(k)</span>
-                <span class="opacity-70">Normalization factor — $\\frac{1}{\\sqrt{2}}$ when $k = 0$, else $1$</span>
+                <span class="opacity-70">Normalization: $\\frac{1}{\\sqrt{2}}$ when $k=0$, else $1$</span>
               </div>
               <div class="rounded-md border border-slate-200 dark:border-zinc-700 px-3 py-2">
                 <span class="font-mono text-xs text-blue-500 dark:text-blue-400 block mb-1">u, v ∈ [0, 7]</span>
-                <span class="opacity-70">Frequency indices — low values = coarse structure, high = fine detail</span>
+                <span class="opacity-70">Frequency indices — low = coarse structure, high = fine detail</span>
               </div>
             </div>
           </div>
 
-          <!-- Quantization -->
           <div>
             <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">02 — Quantization</h3>
             <p class="opacity-85 mb-4">
-              Each DCT coefficient is divided by a uniform quantization step size and rounded to the
-              nearest integer. This is where compression loss actually occurs — small high-frequency
-              coefficients round to zero and are effectively discarded. The step size is controlled
-              by the exponent <em>n</em>, which is set independently for foreground and background
-              macroblocks via the encoder parameters <strong>n1</strong> and <strong>n2</strong>.
+              Each coefficient is divided by a uniform step size and rounded. Small high-frequency
+              coefficients round to zero and are discarded — this is where compression loss occurs.
+              The step size is controlled by exponent <em>n</em>, set independently per region via
+              <strong>n1</strong> (foreground) and <strong>n2</strong> (background).
             </p>
-            <div class="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800/50 px-6 py-5">
-              $$\\hat{F}(u,v) = \\text{round}\\!\\left(\\frac{F(u,v)}{2^{n}}\\right)$$
+            <div class="eq-box">
+              $$\\hat{F}(u,v) = \\operatorname{round}\\!\\left(\\frac{F(u,v)}{2^{n}}\\right)$$
             </div>
             <p class="mt-3 opacity-75">
-              A smaller <em>n</em> preserves more coefficients (higher quality, larger file).
-              A larger <em>n</em> zeroes out more coefficients (lower quality, smaller file).
-              Foreground blocks use <span class="font-mono text-blue-500 dark:text-blue-400">n = n1</span> and
-              background blocks use <span class="font-mono text-blue-500 dark:text-blue-400">n = n2</span>,
-              where typically $n_1 < n_2$ so that moving subjects retain more detail.
+              Smaller <em>n</em> preserves more detail; larger <em>n</em> zeroes out more coefficients.
+              Typically $n_1 &lt; n_2$ so moving subjects retain crispness while the background is compressed more aggressively.
             </p>
           </div>
 
-          <!-- IDCT -->
           <div>
             <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">03 — Inverse Transform</h3>
             <p class="opacity-85 mb-4">
-              The decoder dequantizes each coefficient by multiplying by $2^n$, then applies the
-              <strong>2D Inverse DCT</strong> to reconstruct approximate pixel values. Because
-              quantization is lossy, the reconstructed block $\hat{f}(x,y)$ differs from the
-              original — the degree of error depends directly on how aggressively the block was quantized.
+              The decoder multiplies each coefficient by $2^n$ to dequantize, then applies the
+              <strong>2D Inverse DCT</strong> to reconstruct approximate pixel values. The degree
+              of error depends directly on how aggressively the block was quantized.
             </p>
-            <div class="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800/50 px-6 py-5 space-y-4">
+            <div class="eq-box space-y-4">
               <div>
                 <p class="text-xs font-mono uppercase opacity-40 mb-2">Dequantization</p>
                 $$\\tilde{F}(u,v) = \\hat{F}(u,v) \\cdot 2^{n}$$
               </div>
-              <div class="border-t border-slate-200 dark:border-zinc-700 pt-4">
+              <div style="border-top: 1px solid rgb(226 232 240); padding-top: 1rem;">
                 <p class="text-xs font-mono uppercase opacity-40 mb-2">Reconstruction</p>
                 $$\\hat{f}(x,y) = \\frac{1}{4} \\sum_{u=0}^{7} \\sum_{v=0}^{7} C(u)\\, C(v)\\, \\tilde{F}(u,v) \\cos\\!\\left[\\frac{(2x+1)\\,u\\,\\pi}{16}\\right] \\cos\\!\\left[\\frac{(2y+1)\\,v\\,\\pi}{16}\\right]$$
               </div>
             </div>
           </div>
 
-          <!-- Why it works -->
           <div>
             <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">04 — Why This Works Perceptually</h3>
             <p class="opacity-85">
               The human visual system is more sensitive to low-frequency luminance changes than to
-              high-frequency detail. By concentrating energy in the lower DCT coefficients, the
-              transform makes it easy to identify which information can be discarded with minimal
-              perceptual impact. Background regions — which the viewer's attention drifts away from —
-              can tolerate a larger $n_2$, while foreground subjects under $n_1$ retain crispness
-              where the eye is actually focused.
+              fine high-frequency detail. By concentrating energy in the lower DCT coefficients,
+              the transform makes it straightforward to identify what can be discarded with minimal
+              perceptual impact. Background regions tolerate a larger $n_2$, while foreground
+              subjects under $n_1$ stay crisp where the eye is actually focused.
             </p>
           </div>
 
@@ -231,72 +220,66 @@ The compression system processes raw video frames, identifies moving regions, an
       html: `
         <div class="space-y-8 text-sm leading-relaxed">
 
-          <!-- Motion vectors -->
           <div>
             <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">01 — Motion Vector Estimation</h3>
             <p class="opacity-85 mb-4">
-              For each 16×16 macroblock in frame $t$, the encoder searches the previous frame $t-1$
-              for the best matching block using <strong>Three-Step Search (TSS)</strong> — a fast
-              motion estimation algorithm that reduces the search from an exhaustive scan to
-              three logarithmically-spaced steps. The quality of the match is measured by
+              For each 16×16 macroblock in frame $t$, the encoder searches frame $t-1$ for the
+              best matching block using <strong>Three-Step Search (TSS)</strong>, measured by
               <strong>Mean Absolute Difference (MAD)</strong>.
             </p>
-            <div class="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800/50 px-6 py-5">
+            <div class="eq-box">
               $$\\text{MAD}(d_x, d_y) = \\frac{1}{N^2} \\sum_{i=0}^{N-1} \\sum_{j=0}^{N-1} \\left| f_t(x+i,\\, y+j) - f_{t-1}(x+i+d_x,\\, y+j+d_y) \\right|$$
             </div>
             <p class="mt-3 opacity-75">
-              where $(d_x, d_y)$ is the displacement vector candidate and $N = 16$.
-              The displacement that minimizes MAD becomes the macroblock's motion vector $\\mathbf{v} = (d_x^*, d_y^*)$.
+              $(d_x, d_y)$ is the displacement candidate, $N = 16$.
+              The displacement minimizing MAD becomes the block's motion vector $\\mathbf{v} = (d_x^*, d_y^*)$.
             </p>
           </div>
 
-          <!-- Classification -->
           <div>
             <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">02 — Foreground / Background Classification</h3>
             <p class="opacity-85 mb-3">
-              Once every macroblock has a motion vector, blocks are classified using two criteria:
+              Blocks are classified using magnitude and directional consistency of motion vectors
+              relative to the global scene motion.
             </p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+            <div class="grid grid-cols-1 gap-3 mb-4">
               <div class="rounded-md border border-slate-200 dark:border-zinc-700 px-4 py-3">
                 <div class="font-semibold mb-1">Background</div>
-                <p class="opacity-70">Motion vector magnitude is near zero (static camera) or matches a global dominant vector (moving camera). These blocks move uniformly with the scene.</p>
+                <p class="opacity-70">Near-zero magnitude (static camera) or matches the global dominant vector (moving camera).</p>
               </div>
               <div class="rounded-md border border-slate-200 dark:border-zinc-700 px-4 py-3">
                 <div class="font-semibold mb-1">Foreground</div>
-                <p class="opacity-70">Motion vector direction and magnitude are consistent within a contiguous region but differ from the global background motion. Contiguity is key — isolated outlier blocks are not treated as foreground.</p>
+                <p class="opacity-70">Consistent magnitude and direction within a contiguous region that differs from global background motion. Isolated outlier blocks are not treated as foreground.</p>
               </div>
             </div>
             <p class="opacity-75">
-              The magnitude of a motion vector is computed as $\\|\\mathbf{v}\\| = \\sqrt{d_x^2 + d_y^2}$.
-              Blocks whose magnitude exceeds a threshold $\\tau$ and share directional consistency
-              with their neighbors are flagged as foreground.
+              Vector magnitude is $\\|\\mathbf{v}\\| = \\sqrt{d_x^2 + d_y^2}$.
+              Blocks exceeding threshold $\\tau$ with directional consistency among neighbors are flagged as foreground.
             </p>
           </div>
 
-          <!-- Detectron2 extension -->
           <div>
             <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">03 — Extended: Detectron2 + Optical Flow</h3>
             <p class="opacity-85 mb-3">
-              As an extension, <strong>Detectron2</strong> instance segmentation was combined with
-              <strong>dense optical flow</strong> (Farneback method) to produce semantically-aware
-              foreground masks. For each frame, per-pixel flow vectors are computed and compared
-              against the global motion vector. Objects whose local flow deviates significantly
-              from the global trend — in either magnitude or direction — are retained as foreground.
+              <strong>Detectron2</strong> instance segmentation was combined with
+              <strong>dense optical flow</strong> (Farneback) to produce semantically-aware masks.
+              Per-pixel flow is compared against the global motion vector — objects whose local flow
+              deviates significantly in magnitude or direction are retained as foreground.
             </p>
-            <div class="rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800/50 px-6 py-5 space-y-3">
+            <div class="eq-box space-y-4">
               <div>
                 <p class="text-xs font-mono uppercase opacity-40 mb-1">Per-pixel flow magnitude</p>
                 $$m(x,y) = \\sqrt{u(x,y)^2 + v(x,y)^2}$$
               </div>
-              <div class="border-t border-slate-200 dark:border-zinc-700 pt-3">
+              <div style="border-top: 1px solid rgb(226 232 240); padding-top: 1rem;">
                 <p class="text-xs font-mono uppercase opacity-40 mb-1">Foreground condition (moving camera)</p>
-                $$\\left|\\, \\bar{m}_{\\text{object}} - \\|\\mathbf{v}_{\\text{global}}\\|\\, \\right| > \\tau_{m} \\quad \\text{or} \\quad \\left|\\, \\bar{\\theta}_{\\text{object}} - \\theta_{\\text{global}} \\right| > \\tau_{\\theta}$$
+                $$\\left|\\, \\bar{m}_{\\text{obj}} - \\|\\mathbf{v}_{\\text{global}}\\|\\, \\right| > \\tau_{m} \\quad \\text{or} \\quad \\left|\\, \\bar{\\theta}_{\\text{obj}} - \\theta_{\\text{global}} \\right| > \\tau_{\\theta}$$
               </div>
             </div>
             <p class="mt-3 opacity-75">
-              where $\\bar{m}$ and $\\bar{\\theta}$ are the mean magnitude and angle of flow within a
-              detected object's mask, and $\\tau_m$, $\\tau_\\theta$ are tunable thresholds.
-              This approach reduces false positives from camera-induced motion that TSS alone can misclassify.
+              $\\bar{m}$ and $\\bar{\\theta}$ are the mean magnitude and angle within a detected
+              object's mask. $\\tau_m$ and $\\tau_\\theta$ are tunable thresholds. This reduces
+              false positives from camera-induced motion that TSS alone can misclassify.
             </p>
           </div>
 
