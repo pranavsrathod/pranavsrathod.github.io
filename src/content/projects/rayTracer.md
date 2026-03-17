@@ -503,7 +503,7 @@ Full source code on [GitHub](https://github.com/pranavsrathod/Ray-Tracing), with
 <div class="spp-compare-wrap">
   <div class="spp-header">
     <p>sample count comparison</p>
-    <h3>256 spp vs 512 spp</h3>
+    <h3>64 spp vs 512 spp</h3>
   </div>
   <div class="rt-controls-row">
     <div class="spp-scene-tabs" id="sppSceneTabs">
@@ -516,13 +516,13 @@ Full source code on [GitHub](https://github.com/pranavsrathod/Ray-Tracing), with
   </div>
   <div class="spp-slider-container" id="sppSlider">
     <img class="spp-img-base" id="sppImg512" src="/CS420/rayTracing/PathTracing/512/spheres.jpg" alt="512 spp"/>
-    <img class="spp-img-overlay" id="sppImg256" src="/CS420/rayTracing/PathTracing/256/spheres.jpg" alt="256 spp"/>
+    <img class="spp-img-overlay" id="sppImg64" src="/CS420/rayTracing/PathTracing/64/spheres.jpg" alt="64 spp"/>
     <div class="spp-divider" id="sppDivider"></div>
     <div class="spp-handle" id="sppHandle">⇔</div>
-    <span class="spp-label-left">256 spp</span>
+    <span class="spp-label-left">64 spp</span>
     <span class="spp-label-right">512 spp</span>
   </div>
-  <p class="spp-hint">Drag to compare · 256 spp left · 512 spp right</p>
+  <p class="spp-hint">Drag to compare · 64 spp left · 512 spp right</p>
 </div>
 
 </div><!-- end pt panel -->
@@ -645,9 +645,9 @@ Full source code on [GitHub](https://github.com/pranavsrathod/Ray-Tracing), with
       caption: 'Test2 · 512 spp',
       tag: 'anti-aliasing',
       title: 'Jittered Per-Pixel Sampling',
-      desc: 'Rather than firing one ray through the exact pixel center, jittered sampling adds a random sub-pixel offset to each of the 256 or 512 samples. This distributes samples across the pixel area, simultaneously anti-aliasing edges and reducing noise compared to uniform sampling.',
+      desc: 'Rather than firing one ray through the exact pixel center, jittered sampling adds a random sub-pixel offset to each of the 64 or 512 samples. This distributes samples across the pixel area, simultaneously anti-aliasing edges and reducing noise compared to uniform sampling.',
       formula: 'color = (1/N) · Σ traceRay(x + ξ<sub>x</sub>, y + ξ<sub>y</sub>)',
-      note: 'ξ_x and ξ_y are uniform random offsets in [0,1) per sample. N = 256 or 512.'
+      note: 'ξ_x and ξ_y are uniform random offsets in [0,1) per sample. N = 64 or 512.'
     }
   }
 
@@ -694,7 +694,7 @@ Full source code on [GitHub](https://github.com/pranavsrathod/Ray-Tracing), with
 
   // ── SPP COMPARISON SLIDER ──────────────────────────────────────────
   const slider = document.getElementById('sppSlider')
-  const img256 = document.getElementById('sppImg256')
+  const img64 = document.getElementById('sppImg64')
   const divider = document.getElementById('sppDivider')
   const handle = document.getElementById('sppHandle')
   let dragging = false
@@ -702,7 +702,7 @@ Full source code on [GitHub](https://github.com/pranavsrathod/Ray-Tracing), with
 
   function setSPPPosition(pct) {
     pct = Math.max(2, Math.min(98, pct))
-    img256.style.clipPath = `inset(0 ${100 - pct}% 0 0)`
+    img64.style.clipPath = `inset(0 ${100 - pct}% 0 0)`
     divider.style.left = pct + '%'
     handle.style.left = pct + '%'
   }
@@ -727,7 +727,7 @@ Full source code on [GitHub](https://github.com/pranavsrathod/Ray-Tracing), with
       document.querySelectorAll('#sppSceneTabs .spp-scene-tab').forEach(t => t.classList.remove('active'))
       tab.classList.add('active')
       sppScene = tab.dataset.scene
-      img256.src = `/CS420/rayTracing/PathTracing/256/${sppScene}.jpg`
+      img64.src = `/CS420/rayTracing/PathTracing/64/${sppScene}.jpg`
       document.getElementById('sppImg512').src = `/CS420/rayTracing/PathTracing/512/${sppScene}.jpg`
       setSPPPosition(50)
     })
@@ -824,7 +824,7 @@ A path tracer extends a ray tracer by simulating the full physical behavior of l
 
 The result is physically accurate global illumination: color bleeding between surfaces, soft shadows from area lights, and realistic inter-reflections - all emerging naturally from the simulation rather than being approximated.
 
-The key tradeoff is noise. Each pixel is estimated by averaging many independent random paths. Fewer samples means faster renders but grainier images. The 256 vs 512 spp comparison above shows this directly.
+The key tradeoff is noise. Each pixel is estimated by averaging many independent random paths. Fewer samples means faster renders but grainier images. The 64 vs 512 spp comparison above shows this directly.
 
 ---
 
@@ -837,7 +837,7 @@ The key tradeoff is noise. Each pixel is estimated by averaging many independent
     </div>
     <div class="rt-feature-body">
       <h4>Monte Carlo Global Illumination</h4>
-      <p>Each pixel samples 256 or 512 random light paths. Every path bounces up to 5 times, accumulating color from each surface it hits. The average of all samples approximates the rendering equation integral, producing physically accurate indirect lighting without precomputed light maps.</p>
+      <p>Each pixel samples 64 or 512 random light paths. Every path bounces up to 5 times, accumulating color from each surface it hits. The average of all samples approximates the rendering equation integral, producing physically accurate indirect lighting without precomputed light maps.</p>
     </div>
   </div>
   <div class="rt-feature">
@@ -1101,7 +1101,7 @@ Building this renderer made those tradeoffs tangible. Every feature added - shad
       <span class="rt-repo-name">Path-Tracing</span>
       <span class="rt-repo-badge rt-repo-badge--branch">path-tracer</span>
     </div>
-    <p class="rt-repo-desc">Full Monte Carlo path tracer with cosine-weighted sampling, Russian Roulette termination, Next Event Estimation, and 256/512 spp jittered sampling.</p>
+    <p class="rt-repo-desc">Full Monte Carlo path tracer with cosine-weighted sampling, Russian Roulette termination, Next Event Estimation, and 64/512 spp jittered sampling.</p>
     <div class="rt-repo-tags">
       <span>C++</span><span>Global Illumination</span><span>Monte Carlo</span>
     </div>
