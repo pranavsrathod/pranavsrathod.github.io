@@ -1,0 +1,378 @@
+---
+title: "Segmented Video Compression"
+description: "A multimedia systems project exploring motion-aware video compression. Moving regions are segmented and compressed differently from the background to preserve visual quality where it matters most."
+publishDate: "2024-12-13"
+poster: "/CS576/VideoCompression/SVC.png"
+isFeatured: false
+seo:
+  title: "Segmented Video Compression"
+  description: "A multimedia systems project exploring motion-aware video compression using segmentation, transform coding, and synchronized playback."
+---
+
+## Overview
+
+This project explores a simple idea: not all parts of a video frame are equally important. In many scenes, the viewer’s attention is drawn to moving subjects while the background remains relatively static.
+
+In this system, video frames are analyzed to detect motion and separate foreground regions from the background. These segmented regions can then be treated differently during compression, preserving more detail in moving areas while applying stronger compression to static regions.
+
+The project demonstrates the full pipeline from raw frame processing to synchronized video playback, along with visualizations that show how motion segmentation influences the compression process.
+
+## Demo
+
+The demo video below shows the final reconstructed video along with visualizations of the segmentation process used to identify moving regions in each frame.
+
+<iframe 
+  width="100%" 
+  height="500"
+  src="https://www.youtube.com/embed/llPhds0_qjQ"
+  title="Segmented Video Compression Demo"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
+
+The first portion of the video shows the reconstructed playback with synchronized audio.  
+Later in the video, segmentation visualizations illustrate how the system identifies moving regions and foreground blocks during processing.
+
+## Source Code
+
+The implementation for this project, including the compression pipeline and visualization scripts, is available on GitHub.
+
+<a href="https://github.com/pranavsrathod/SegmentedVideoCompression" target="_blank">
+View the repository →
+</a>
+
+## System Pipeline
+
+The compression system processes raw video frames, identifies moving regions, and applies transform-based compression before reconstructing the final video.
+
+<InteractiveDashboard
+  id="svc-pipeline"
+  sections={[
+    {
+      id: "pipeline",
+      label: "Pipeline",
+      type: "steps",
+      steps: [
+        {
+          label: "Input Video",
+          sub: "Raw RGB frames + audio",
+          detail:
+            "The system begins with raw RGB frame data at 960×540 resolution and a synchronized .wav audio track. Frames are read sequentially and processed one at a time to analyze motion and identify compression opportunities."
+        },
+        {
+          label: "Motion Estimation",
+          sub: "Three-Step Search (TSS)",
+          detail:
+            "Each frame is divided into 16×16 macroblocks. For every macroblock, a Three-Step Search finds the best matching block in the previous frame by minimizing Mean Absolute Difference (MAD). The result is a motion vector per block describing how much and in which direction that region moved.",
+          details: [
+            { label: "Block size", value: "16 × 16 px" },
+            { label: "Algorithm", value: "Three-Step Search (TSS)" },
+            { label: "Metric", value: "Mean Absolute Difference (MAD)" },
+            { label: "Component", value: "R channel only (for efficiency)" }
+          ]
+        },
+        {
+          label: "Foreground Segmentation",
+          sub: "Classify blocks by motion consistency",
+          detail:
+            "Macroblocks are classified as foreground or background based on the magnitude and directional consistency of their motion vectors. Foreground regions have distinct, contiguous motion; background blocks share a near-zero or globally uniform motion vector. Detectron2 + dense optical flow were also explored as an enhanced segmentation path.",
+          details: [
+            { label: "Foreground", value: "Distinct, consistent motion vectors" },
+            { label: "Background", value: "Near-zero or globally uniform vectors" },
+            { label: "Extended", value: "Detectron2 + Farneback optical flow" }
+          ]
+        },
+        {
+          label: "Transform Compression",
+          sub: "DCT + uniform quantization",
+          detail:
+            "Each 16×16 macroblock is subdivided into 8×8 blocks. A 2D DCT is applied to each block across all three color channels (R, G, B). Coefficients are then uniformly quantized using a step size of 2^n, where n = n1 for foreground blocks and n = n2 for background blocks.",
+          details: [
+            { label: "Block size", value: "8 × 8 px" },
+            { label: "Transform", value: "2D Discrete Cosine Transform" },
+            { label: "Foreground Q", value: "Step size 2^n1 (lower = more detail)" },
+            { label: "Background Q", value: "Step size 2^n2 (higher = more loss)" },
+            { label: "Channels", value: "R, G, B independently" }
+          ]
+        },
+        {
+          label: "Binary Encoding",
+          sub: "Write .cmp file",
+          detail:
+            "Quantized coefficients are written to a .cmp binary file in scanline order. Each macroblock entry begins with a block_type flag (0 = background, 1 = foreground) followed by 64 quantized DCT coefficients per channel (R, G, B). The file header stores n1 and n2.",
+          details: [
+            { label: "Format", value: ".cmp binary" },
+            { label: "Header", value: "n1, n2" },
+            { label: "Per block", value: "block_type + 64×3 coefficients" },
+            { label: "Order", value: "Scanline (no zigzag / entropy coding)" }
+          ]
+        },
+        {
+          label: "Reconstruction",
+          sub: "IDCT + synchronized playback",
+          detail:
+            "The decoder reads the .cmp file, dequantizes each block using n1 or n2, and applies the inverse DCT to reconstruct pixel values. Frames are displayed at 30 FPS synchronized with the .wav audio stream via PyAudio.",
+          details: [
+            { label: "Dequantize", value: "Multiply coefficients by 2^n1 or 2^n2" },
+            { label: "Transform", value: "2D Inverse DCT" },
+            { label: "Frame rate", value: "30 FPS" },
+            { label: "Audio sync", value: "PyAudio stream" },
+            { label: "Controls", value: "Play / Pause (p) / Step (s) / Quit (q)" }
+          ]
+        }
+      ]
+    },
+
+    {
+      id: "dct",
+      label: "DCT / IDCT",
+      type: "html",
+      html: `
+        <div class="space-y-8 text-sm leading-relaxed">
+
+          <div>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">01 — Forward Transform</h3>
+            <p class="opacity-85 mb-4">
+              The <strong>2D Discrete Cosine Transform</strong> converts an 8×8 block of spatial pixel
+              values into the frequency domain. The DC coefficient at
+              <span class="font-mono">(u,v) = (0,0)</span> captures average intensity; higher-index
+              AC coefficients encode increasingly fine spatial detail.
+            </p>
+            <div class="eq-box">
+              $$F(u,v) = \\frac{1}{4}\\, C(u)\\, C(v) \\sum_{x=0}^{7} \\sum_{y=0}^{7} f(x,y) \\cos\\!\\left[\\frac{(2x+1)\\,u\\,\\pi}{16}\\right] \\cos\\!\\left[\\frac{(2y+1)\\,v\\,\\pi}{16}\\right]$$
+            </div>
+            <div class="eq-legend">
+              <div class="rounded-md border border-slate-200 dark:border-zinc-700 px-3 py-2">
+                <span class="font-mono text-xs text-blue-500 dark:text-blue-400 block mb-1">f(x, y)</span>
+                <span class="opacity-70">Pixel intensity at position (x, y) in the 8×8 block</span>
+              </div>
+              <div class="rounded-md border border-slate-200 dark:border-zinc-700 px-3 py-2">
+                <span class="font-mono text-xs text-blue-500 dark:text-blue-400 block mb-1">F(u, v)</span>
+                <span class="opacity-70">DCT coefficient at frequency index (u, v)</span>
+              </div>
+              <div class="rounded-md border border-slate-200 dark:border-zinc-700 px-3 py-2">
+                <span class="font-mono text-xs text-blue-500 dark:text-blue-400 block mb-1">C(k)</span>
+                <span class="opacity-70">Normalization: $\\frac{1}{\\sqrt{2}}$ when $k=0$, else $1$</span>
+              </div>
+              <div class="rounded-md border border-slate-200 dark:border-zinc-700 px-3 py-2">
+                <span class="font-mono text-xs text-blue-500 dark:text-blue-400 block mb-1">u, v ∈ [0, 7]</span>
+                <span class="opacity-70">Frequency indices — low = coarse structure, high = fine detail</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">02 — Quantization</h3>
+            <p class="opacity-85 mb-4">
+              Each coefficient is divided by a uniform step size and rounded. Small high-frequency
+              coefficients round to zero and are discarded — this is where compression loss occurs.
+              The step size is controlled by exponent <em>n</em>, set independently per region via
+              <strong>n1</strong> (foreground) and <strong>n2</strong> (background).
+            </p>
+            <div class="eq-box">
+              $$\\hat{F}(u,v) = \\operatorname{round}\\!\\left(\\frac{F(u,v)}{2^{n}}\\right)$$
+            </div>
+            <p class="mt-3 opacity-75">
+              Smaller <em>n</em> preserves more detail; larger <em>n</em> zeroes out more coefficients.
+              Typically $n_1 &lt; n_2$ so moving subjects retain crispness while the background is compressed more aggressively.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">03 — Inverse Transform</h3>
+            <p class="opacity-85 mb-4">
+              The decoder multiplies each coefficient by $2^n$ to dequantize, then applies the
+              <strong>2D Inverse DCT</strong> to reconstruct approximate pixel values. The degree
+              of error depends directly on how aggressively the block was quantized.
+            </p>
+            <div class="eq-box space-y-4">
+              <div>
+                <p class="text-xs font-mono uppercase opacity-40 mb-2">Dequantization</p>
+                $$\\tilde{F}(u,v) = \\hat{F}(u,v) \\cdot 2^{n}$$
+              </div>
+              <div style="border-top: 1px solid rgb(226 232 240); padding-top: 1rem;">
+                <p class="text-xs font-mono uppercase opacity-40 mb-2">Reconstruction</p>
+                $$\\hat{f}(x,y) = \\frac{1}{4} \\sum_{u=0}^{7} \\sum_{v=0}^{7} C(u)\\, C(v)\\, \\tilde{F}(u,v) \\cos\\!\\left[\\frac{(2x+1)\\,u\\,\\pi}{16}\\right] \\cos\\!\\left[\\frac{(2y+1)\\,v\\,\\pi}{16}\\right]$$
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">04 — Why This Works Perceptually</h3>
+            <p class="opacity-85">
+              The human visual system is more sensitive to low-frequency luminance changes than to
+              fine high-frequency detail. By concentrating energy in the lower DCT coefficients,
+              the transform makes it straightforward to identify what can be discarded with minimal
+              perceptual impact. Background regions tolerate a larger $n_2$, while foreground
+              subjects under $n_1$ stay crisp where the eye is actually focused.
+            </p>
+          </div>
+
+        </div>
+      `
+    },
+
+    {
+      id: "segmentation",
+      label: "Segmentation",
+      type: "html",
+      html: `
+        <div class="space-y-8 text-sm leading-relaxed">
+
+          <div>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">01 — Motion Vector Estimation</h3>
+            <p class="opacity-85 mb-4">
+              For each 16×16 macroblock in frame $t$, the encoder searches frame $t-1$ for the
+              best matching block using <strong>Three-Step Search (TSS)</strong>, measured by
+              <strong>Mean Absolute Difference (MAD)</strong>.
+            </p>
+            <div class="eq-box">
+              $$\\text{MAD}(d_x, d_y) = \\frac{1}{N^2} \\sum_{i=0}^{N-1} \\sum_{j=0}^{N-1} \\left| f_t(x+i,\\, y+j) - f_{t-1}(x+i+d_x,\\, y+j+d_y) \\right|$$
+            </div>
+            <p class="mt-3 opacity-75">
+              $(d_x, d_y)$ is the displacement candidate, $N = 16$.
+              The displacement minimizing MAD becomes the block's motion vector $\\mathbf{v} = (d_x^*, d_y^*)$.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">02 — Foreground / Background Classification</h3>
+            <p class="opacity-85 mb-3">
+              Blocks are classified using magnitude and directional consistency of motion vectors
+              relative to the global scene motion.
+            </p>
+            <div class="grid grid-cols-1 gap-3 mb-4">
+              <div class="rounded-md border border-slate-200 dark:border-zinc-700 px-4 py-3">
+                <div class="font-semibold mb-1">Background</div>
+                <p class="opacity-70">Near-zero magnitude (static camera) or matches the global dominant vector (moving camera).</p>
+              </div>
+              <div class="rounded-md border border-slate-200 dark:border-zinc-700 px-4 py-3">
+                <div class="font-semibold mb-1">Foreground</div>
+                <p class="opacity-70">Consistent magnitude and direction within a contiguous region that differs from global background motion. Isolated outlier blocks are not treated as foreground.</p>
+              </div>
+            </div>
+            <p class="opacity-75">
+              Vector magnitude is $\\|\\mathbf{v}\\| = \\sqrt{d_x^2 + d_y^2}$.
+              Blocks exceeding threshold $\\tau$ with directional consistency among neighbors are flagged as foreground.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">03 — Extended: Detectron2 + Optical Flow</h3>
+            <p class="opacity-85 mb-3">
+              <strong>Detectron2</strong> instance segmentation was combined with
+              <strong>dense optical flow</strong> (Farneback) to produce semantically-aware masks.
+              Per-pixel flow is compared against the global motion vector — objects whose local flow
+              deviates significantly in magnitude or direction are retained as foreground.
+            </p>
+            <div class="eq-box space-y-4">
+              <div>
+                <p class="text-xs font-mono uppercase opacity-40 mb-1">Per-pixel flow magnitude</p>
+                $$m(x,y) = \\sqrt{u(x,y)^2 + v(x,y)^2}$$
+              </div>
+              <div style="border-top: 1px solid rgb(226 232 240); padding-top: 1rem;">
+                <p class="text-xs font-mono uppercase opacity-40 mb-1">Foreground condition (moving camera)</p>
+                $$\\left|\\, \\bar{m}_{\\text{obj}} - \\|\\mathbf{v}_{\\text{global}}\\|\\, \\right| > \\tau_{m} \\quad \\text{or} \\quad \\left|\\, \\bar{\\theta}_{\\text{obj}} - \\theta_{\\text{global}} \\right| > \\tau_{\\theta}$$
+              </div>
+            </div>
+            <p class="mt-3 opacity-75">
+              $\\bar{m}$ and $\\bar{\\theta}$ are the mean magnitude and angle within a detected
+              object's mask. $\\tau_m$ and $\\tau_\\theta$ are tunable thresholds. This reduces
+              false positives from camera-induced motion that TSS alone can misclassify.
+            </p>
+          </div>
+
+        </div>
+      `
+    }
+  ]}
+/>
+
+## Foreground Segmentation with Detectron2
+
+The segmentation step was extended using **Detectron2**, Facebook AI Research's framework for object detection and instance segmentation. Rather than relying solely on motion differencing, Detectron2 identifies semantic objects in the scene, making it possible to isolate foreground subjects like the tennis player more reliably.
+
+Classical motion analysis and deep learning segmentation are combined so the pipeline can better determine which regions deserve higher visual quality during compression.
+
+## Segmentation Visualization
+
+The video below shows the segmentation stage in action. Detected foreground regions are highlighted to illustrate how object-level masks guide compression decisions across the frame.
+
+<iframe
+  width="100%"
+  height="500"
+  src="https://www.youtube.com/embed/llPhds0_qjQ?start=37"
+  title="Segmentation Visualization"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
+
+## Technical Highlights
+
+- Built a full video compression pipeline over raw RGB frames with synchronized audio playback.
+- Used Three-Step Search motion estimation to classify macroblocks as foreground or background per frame.
+- Applied 2D DCT with separate quantization parameters for foreground and background regions, then reconstructed frames via IDCT.
+- Extended segmentation with **Detectron2** and dense optical flow to produce semantically-aware foreground masks.
+- Built a four-panel visualization showing original frames, Detectron2 segmentation, optical flow, and final foreground block classification side by side.
+
+export const teamSections = [
+  {
+    id: "people",
+    label: "Contributors",
+    type: "team",
+    cards: [
+      {
+        title: "Pranav Rathod",
+        desc: "Video compression pipeline, playback system, and visualizations",
+        actions: [
+          { icon: "github", href: "https://github.com/pranavsrathod", label: "GitHub" },
+          { icon: "linkedin", href: "https://www.linkedin.com/in/pranavsrathod/", label: "LinkedIn" }
+        ]
+      },
+      {
+        title: "James Kasaba",
+        desc: "Segmentation pipeline and integration",
+        actions: [
+          { icon: "github", href: "https://github.com/JKasaba", label: "GitHub" },
+          { icon: "linkedin", href: "https://www.linkedin.com/in/james-kasaba/", label: "LinkedIn" }
+        ]
+      },
+      {
+        title: "Ruiqi Zhang",
+        desc: "Detectron2 integration and segmentation experimentation",
+        actions: [
+          { icon: "linkedin", href: "https://www.linkedin.com/in/ruiqi-zhang-0b667b280/", label: "LinkedIn" }
+        ]
+      }
+    ]
+  },
+  {
+    id: "tech",
+    label: "Technical Scope",
+    type: "cards",
+    cards: [
+      {
+        title: "Languages",
+        desc: "Python, NumPy"
+      },
+      {
+        title: "Computer Vision",
+        desc: "OpenCV, Detectron2"
+      },
+      {
+        title: "Compression",
+        desc: "Block processing, DCT/IDCT transforms"
+      },
+      {
+        title: "Multimedia",
+        desc: "RGB frame pipelines, audio-video synchronization"
+      }
+    ]
+  }
+];
+
+## Team & Technical Scope
+
+<InteractiveDashboard id="svc-team" sections={teamSections} />

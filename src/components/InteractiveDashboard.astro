@@ -4,25 +4,15 @@ type SectionType = 'cards' | 'team' | 'steps' | 'chart' | 'list' | 'html';
 
 interface Section {
     id: string;
-    label: string; // Text on the tab button
+    label: string;
     type: SectionType;
-    // Dynamic content based on type
     cards?: {
-        // Optional leading visual. Use ONE of: emoji OR image.
-        emoji?: string;
+        icon?: string; // SVG icon name from ICON_SVGS (e.g. "code", "cpu", "layers")
         image?: { src: string; alt?: string; className?: string };
-
         title: string;
-
-        // Simple text description (optional)
         desc?: string;
-
-        // Optional rich content (rendered as HTML). Use when you need labels, links, lists, etc.
         html?: string;
-
-        // Optional structured key-value details (compact, readable)
         details?: { label: string; value: string }[];
-
         actions?: { type?: 'link' | 'button'; icon: 'github' | 'linkedin' | 'link' | string; href?: string; label?: string; onClickId?: string }[];
     }[];
     steps?: {
@@ -38,10 +28,10 @@ interface Section {
         tag?: string;
         title: string;
         summary: string;
-        href?: string; // optional external link
-        linkLabel?: string; // optional label (defaults to "Source")
+        href?: string;
+        linkLabel?: string;
     }[];
-    html?: string; // For completely custom content
+    html?: string; // Supports KaTeX math via $...$ (inline) and $$...$$ (block)
 }
 
 interface Props {
@@ -51,25 +41,52 @@ interface Props {
 
 const { id, sections } = Astro.props;
 
+// ─── SVG ICON LIBRARY ────────────────────────────────────────────────────────
+// Usage: set icon: "code" | "cpu" | "layers" | "eye" | "git" | "settings" etc.
+// on cards. Falls back to a neutral dot if name not found.
 const ICON_SVGS: Record<string, string> = {
+    // Social / actions
     github: `<svg viewBox="0 0 24 24" aria-hidden="true" class="w-4 h-4 fill-current"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.69c-2.77.6-3.35-1.17-3.35-1.17-.45-1.14-1.1-1.44-1.1-1.44-.9-.62.07-.6.07-.6 1 .07 1.52 1.03 1.52 1.03.89 1.52 2.34 1.08 2.91.83.09-.64.35-1.08.63-1.32-2.21-.25-4.54-1.1-4.54-4.9 0-1.08.39-1.97 1.03-2.66-.1-.26-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.6 9.6 0 0 1 12 6.8c.85 0 1.7.12 2.5.34 1.9-1.29 2.74-1.02 2.74-1.02.56 1.38.21 2.39.1 2.65.64.69 1.03 1.58 1.03 2.66 0 3.81-2.34 4.65-4.57 4.89.36.31.68.92.68 1.86v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2z"/></svg>`,
     linkedin: `<svg viewBox="0 0 24 24" aria-hidden="true" class="w-4 h-4 fill-current"><path d="M20.45 20.45h-3.55v-5.53c0-1.32-.03-3.02-1.84-3.02-1.85 0-2.13 1.44-2.13 2.92v5.63H9.38V9h3.4v1.56h.05c.47-.9 1.63-1.84 3.35-1.84 3.58 0 4.24 2.36 4.24 5.43v6.3zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM3.56 20.45h3.55V9H3.56v11.45z"/></svg>`,
-    link: `<img src="/icons/link.svg" alt="External link" class="w-4 h-4" />`
+    link: `<svg viewBox="0 0 24 24" aria-hidden="true" class="w-4 h-4 fill-current"><path d="M13.828 10.172a4 4 0 0 0-5.656 0l-4 4a4 4 0 1 0 5.656 5.656l1.102-1.101m-.758-4.899a4 4 0 0 0 5.656 0l4-4a4 4 0 0 0-5.656-5.656l-1.1 1.1"/></svg>`,
+
+    // Tech / content icons for cards
+    code: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/></svg>`,
+    cpu: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="w-5 h-5"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path stroke-linecap="round" d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>`,
+    layers: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="m12 2 10 6.5-10 6.5L2 8.5 12 2ZM2 15.5l10 6.5 10-6.5M2 11.5l10 6.5 10-6.5"/></svg>`,
+    eye: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>`,
+    git: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="w-5 h-5"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path stroke-linecap="round" d="M6 21V9a9 9 0 0 0 9 9"/></svg>`,
+    settings: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>`,
+    chart: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>`,
+    database: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="w-5 h-5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path stroke-linecap="round" d="M3 5v14c0 1.657 4.03 3 9 3s9-1.343 9-3V5"/><path stroke-linecap="round" d="M3 12c0 1.657 4.03 3 9 3s9-1.343 9-3"/></svg>`,
+    terminal: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>`,
+    wand: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"/></svg>`,
+    music: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="m9 9 10.5-3m0 6.553v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 1 1-.99-3.467l2.31-.66a2.25 2.25 0 0 0 1.632-2.163Zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 0 1-.99-3.467l2.31-.66A2.25 2.25 0 0 0 9 15.553Z"/></svg>`,
+    film: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"/></svg>`,
+    gamepad: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 0 1-.657.643 48.39 48.39 0 0 1-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 0 1-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 0 0-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 0 1-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 0 0 .657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 0 1-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 0 0 5.427-.63 48.05 48.05 0 0 0 .582-4.717.532.532 0 0 0-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.959.401v0a.656.656 0 0 0 .658-.663 48.422 48.422 0 0 0-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 0 1-.61-.58v0Z"/></svg>`,
+    robot: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z"/></svg>`,
+    math: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.745 3A23.933 23.933 0 0 0 3 12c0 3.183.62 6.22 1.745 9M19.255 3A23.933 23.933 0 0 1 21 12c0 3.183-.62 6.22-1.745 9M8.25 8.885l1.444-.89a.75.75 0 0 1 1.105.402l2.402 7.206a.75.75 0 0 0 1.104.401l1.445-.889m-8.25.75.213.09a1.687 1.687 0 0 0 2.062-.617l4.45-6.676a1.688 1.688 0 0 1 2.062-.618l.213.09"/></svg>`,
+    // Generic fallback
+    dot: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="w-3 h-3"><circle cx="12" cy="12" r="4"/></svg>`
 };
 
 function getIconSvg(name?: string) {
     if (!name) return ICON_SVGS.link;
-    return ICON_SVGS[name.toLowerCase()] || ICON_SVGS.link;
+    return ICON_SVGS[name.toLowerCase()] ?? ICON_SVGS.dot;
 }
 ---
 
+<!-- KaTeX for math rendering in html sections -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" />
+<script is:inline src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"></script>
 <script is:inline src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <div
     class="not-prose my-8 border border-slate-200 dark:border-zinc-700 rounded-xl overflow-hidden shadow-sm bg-white dark:bg-zinc-900 interactive-dashboard"
     id={`dash-${id}`}
 >
-    <!-- 1. DYNAMIC NAVIGATION -->
+    <!-- NAV TABS -->
     <div class="bg-slate-100 dark:bg-zinc-800 p-4 border-b border-slate-200 dark:border-zinc-700 flex flex-wrap gap-2 justify-center nav-container">
         {
             sections.map((section, index) => (
@@ -83,18 +100,19 @@ function getIconSvg(name?: string) {
         }
     </div>
 
-    <!-- 2. DYNAMIC CONTENT RENDERING -->
+    <!-- CONTENT -->
     <div class="p-6 min-h-[400px]">
         {
             sections.map((section, index) => (
                 <div id={`${id}-${section.id}`} class={`tab-section ${index !== 0 ? 'hidden' : ''} space-y-6`}>
-                    {/* TYPE: CARDS */}
+                    {/* ── CARDS ── */}
                     {section.type === 'cards' && section.cards && (
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[420px] overflow-y-auto pr-2 custom-scroll">
                             {section.cards.map((c) => (
                                 <div class="p-4 rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800/50">
                                     <div class="flex items-start justify-between gap-3">
                                         <div class="flex items-start gap-3 min-w-0">
+                                            {/* Image takes priority, then SVG icon, then nothing */}
                                             {c.image?.src ? (
                                                 <img
                                                     src={c.image.src}
@@ -106,14 +124,17 @@ function getIconSvg(name?: string) {
                                                     loading="lazy"
                                                     decoding="async"
                                                 />
-                                            ) : c.emoji ? (
-                                                <div class="text-2xl shrink-0">{c.emoji}</div>
+                                            ) : c.icon ? (
+                                                <div class="shrink-0 w-8 h-8 flex items-center justify-center rounded-md border border-slate-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-slate-600 dark:text-slate-300">
+                                                    <span set:html={getIconSvg(c.icon)} />
+                                                </div>
                                             ) : null}
 
-                                            <div class="text-2xl truncate">{c.title}</div>
+                                            <div class="font-medium text-base leading-snug">{c.title}</div>
                                         </div>
+
                                         {c.actions && c.actions.length > 0 && (
-                                            <div class="flex items-center gap-2 pt-1">
+                                            <div class="flex items-center gap-2 pt-1 shrink-0">
                                                 {c.actions.map((a) =>
                                                     a.href ? (
                                                         <a
@@ -141,8 +162,8 @@ function getIconSvg(name?: string) {
                                             </div>
                                         )}
                                     </div>
-                                    {c.desc && <p class="mt-2 text-sm opacity-80">{c.desc}</p>}
 
+                                    {c.desc && <p class="mt-2 text-sm opacity-80">{c.desc}</p>}
                                     {c.html && <div class="mt-2 text-sm opacity-80" set:html={c.html} />}
 
                                     {c.details && c.details.length > 0 && (
@@ -160,7 +181,7 @@ function getIconSvg(name?: string) {
                         </div>
                     )}
 
-                    {/* TYPE: TEAM (Chic profile list) */}
+                    {/* ── TEAM ── */}
                     {section.type === 'team' && section.cards && (
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {section.cards.map((m) => (
@@ -170,7 +191,6 @@ function getIconSvg(name?: string) {
                                             <div class="font-serif text-base leading-tight truncate">{m.title}</div>
                                             {m.desc && m.desc.trim().length > 0 && <div class="mt-1 text-xs opacity-70 leading-snug">{m.desc}</div>}
                                         </div>
-
                                         {m.actions && m.actions.length > 0 && (
                                             <div class="flex items-center gap-2 pt-0.5 shrink-0">
                                                 {m.actions.map((a) =>
@@ -205,40 +225,73 @@ function getIconSvg(name?: string) {
                         </div>
                     )}
 
-                    {/* TYPE: STEPS (Interactable List) */}
+                    {/* ── STEPS — vertical timeline with inline accordion ── */}
                     {section.type === 'steps' && section.steps && (
-                        <>
-                            <div class="flex flex-col gap-3 max-h-[300px] overflow-y-auto pr-2 custom-scroll">
-                                {section.steps.map((s) => (
-                                    <button
-                                        class="step-btn p-3 border rounded-lg text-left hover:bg-blue-50 dark:hover:bg-blue-900/20 border-blue-200 dark:border-blue-800 transition-colors flex gap-3"
-                                        data-detail={s.detail}
-                                        data-details={s.details ? JSON.stringify(s.details) : ''}
-                                    >
-                                        {s.image?.src && (
+                        <div class="relative overflow-y-auto max-h-[600px] pr-2 custom-scroll">
+                            {/* Vertical spine */}
+                            <div class="absolute left-[19px] top-0 bottom-0 w-px bg-slate-200 dark:bg-zinc-700 pointer-events-none" aria-hidden="true" />
+
+                            <ol class="relative space-y-0">
+                                {section.steps.map((s, i) => (
+                                    <li class="step-item">
+                                        {/* Clickable header row */}
+                                        <button
+                                            class="step-btn group w-full text-left flex items-start gap-4 py-4 pr-2 transition-colors"
+                                            data-detail={s.detail}
+                                            data-details={s.details ? JSON.stringify(s.details) : ''}
+                                            data-image-src={s.image?.src || ''}
+                                            data-image-alt={s.image?.alt || ''}
+                                            data-index={i}
+                                            aria-expanded="false"
+                                        >
+                                            {/* Node on the spine */}
+                                            <div class="step-node relative z-10 mt-0.5 flex-shrink-0 w-10 h-10 rounded-full border-2 border-slate-300 dark:border-zinc-600 bg-white dark:bg-zinc-900 flex items-center justify-center text-xs font-mono font-bold text-slate-400 dark:text-zinc-500 group-hover:border-blue-400 group-hover:text-blue-500 dark:group-hover:border-blue-500 dark:group-hover:text-blue-400 transition-colors">
+                                                {String(i + 1).padStart(2, '0')}
+                                            </div>
+
+                                            <div class="flex-1 min-w-0 pt-1.5">
+                                                <div class="font-semibold text-sm text-slate-800 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-tight">
+                                                    {s.label}
+                                                </div>
+                                                <div class="text-xs opacity-60 mt-0.5 font-mono">{s.sub}</div>
+                                            </div>
+
+                                            {/* Chevron — rotates when open */}
+                                            <div class="step-chevron mt-2.5 flex-shrink-0 opacity-40 group-hover:opacity-80 transition-all text-slate-500 dark:text-zinc-400">
+                                                <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 transition-transform duration-200">
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                                                        clip-rule="evenodd"
+                                                    />
+                                                </svg>
+                                            </div>
+                                        </button>
+
+                                        {/* Inline expandable content — hidden by default */}
+                                        <div class="step-expand hidden pl-14 pb-5 pr-2 space-y-3">
+                                            {/* Description */}
+                                            <p class="step-expand-text text-sm text-slate-700 dark:text-zinc-300 leading-relaxed" />
+
+                                            {/* Full image if present */}
                                             <img
-                                                src={s.image.src}
-                                                alt={s.image.alt || ''}
-                                                class="w-20 h-20 rounded-lg object-cover shrink-0 border border-slate-200 dark:border-zinc-700"
+                                                class="step-expand-img hidden w-full rounded-lg border border-slate-200 dark:border-zinc-700 object-contain max-h-80"
+                                                src=""
+                                                alt=""
                                                 loading="lazy"
                                                 decoding="async"
                                             />
-                                        )}
-                                        <div class="min-w-0 flex flex-col justify-center">
-                                            <span class="text-blue-600 dark:text-blue-400 font-bold block">{s.label}</span>
-                                            <span class="text-xs opacity-70">{s.sub}</span>
+
+                                            {/* Key-value details */}
+                                            <dl class="step-expand-dl hidden text-sm grid grid-cols-1 gap-1.5" />
                                         </div>
-                                    </button>
+                                    </li>
                                 ))}
-                            </div>
-                            <div class="mt-4 p-4 rounded bg-slate-50 dark:bg-black border-l-4 border-slate-300 loop-detail-box">
-                                <p class="text-sm opacity-90">Click an item above to see details.</p>
-                                <dl class="mt-3 text-sm grid grid-cols-1 gap-1 hidden" />
-                            </div>
-                        </>
+                            </ol>
+                        </div>
                     )}
 
-                    {/* TYPE: CHART */}
+                    {/* ── CHART ── */}
                     {section.type === 'chart' && (
                         <>
                             <div class="relative w-full h-[250px]">
@@ -248,7 +301,7 @@ function getIconSvg(name?: string) {
                         </>
                     )}
 
-                    {/* TYPE: LIST (Bibliography/Resources) */}
+                    {/* ── LIST ── */}
                     {section.type === 'list' && section.list && (
                         <div class="space-y-3 max-h-[300px] overflow-y-auto custom-scroll pr-2">
                             {section.list.map((item) => (
@@ -276,26 +329,149 @@ function getIconSvg(name?: string) {
                         </div>
                     )}
 
-                    {/* TYPE: HTML (Custom) */}
-                    {section.type === 'html' && <div class="custom-html-content" set:html={section.html} />}
+                    {/* ── HTML (with KaTeX math support) ── */}
+                    {/*
+                        Math syntax (inside html strings):
+                          Inline:  $F(u,v) = \sum ...$
+                          Block:   $$F(u,v) = \sum ...$$
+                        KaTeX auto-render will process after mount.
+                    */}
+                    {section.type === 'html' && (
+                        <div
+                            class="custom-html-content katex-content prose-sm dark:prose-invert max-w-none text-sm leading-relaxed min-w-0 w-full"
+                            set:html={section.html}
+                        />
+                    )}
                 </div>
             ))
         }
     </div>
 </div>
 
+<style>
+    /* ── Timeline active state ── */
+    .step-btn.is-active .step-node {
+        border-color: rgb(59 130 246);
+        color: rgb(59 130 246);
+        background-color: rgb(239 246 255);
+    }
+    .dark .step-btn.is-active .step-node {
+        border-color: rgb(96 165 250);
+        color: rgb(96 165 250);
+        background-color: rgb(30 41 59);
+    }
+    .step-btn.is-active .step-chevron {
+        opacity: 1;
+        color: rgb(59 130 246);
+    }
+
+    /* ── KaTeX mobile-safe rendering ── */
+
+    /* Content container must not clip */
+    .katex-content {
+        overflow: visible;
+    }
+
+    /* Display equations outside eq-box: fallback self-scroll */
+    .katex-content .katex-display {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.25rem;
+        margin: 1rem 0;
+    }
+
+    /* ── eq-box: self-contained horizontal scroll, never escapes parent ── */
+    .eq-box {
+        /* Critical: constrain width to parent so overflow scrolls inside */
+        display: block;
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+
+        border-radius: 0.5rem;
+        border: 1px solid rgb(226 232 240);
+        background: rgb(248 250 252);
+        padding: 1.25rem;
+    }
+    .dark .eq-box {
+        border-color: rgb(63 63 70);
+        background: rgba(39 39 42 / 0.5);
+    }
+
+    /* KaTeX inside eq-box must NOT scroll itself — render at natural width */
+    .eq-box .katex-display {
+        overflow: visible;
+        margin: 0;
+        padding: 0;
+    }
+    .eq-box .katex-display > .katex,
+    .eq-box .katex-display > .katex > .katex-html {
+        display: inline-block;
+        white-space: nowrap;
+        max-width: none;
+        min-width: 0;
+    }
+
+    /* Thin scrollbar on the eq-box itself */
+    .eq-box::-webkit-scrollbar {
+        height: 3px;
+    }
+    .eq-box::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .eq-box::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.18);
+        border-radius: 2px;
+    }
+    .dark .eq-box::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Legend grids: single col mobile, two col sm+ */
+    .eq-legend {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+    }
+    @media (min-width: 640px) {
+        .eq-legend {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    /* ── Subtle scrollbar ── */
+    .custom-scroll::-webkit-scrollbar {
+        width: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.15);
+        border-radius: 2px;
+    }
+    .dark .custom-scroll::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+    }
+</style>
+
 <script define:vars={{ id }}>
     document.addEventListener('astro:page-load', () => {
         const root = document.getElementById(`dash-${id}`);
         if (!root) return;
 
-        // --- TAB LOGIC ---
+        // ── TAB LOGIC ──────────────────────────────────────────────────────────
         const btns = root.querySelectorAll('.nav-container button');
-        const sections = root.querySelectorAll('.tab-section');
+        const tabSecs = root.querySelectorAll('.tab-section');
 
         btns.forEach((btn) => {
             btn.addEventListener('click', () => {
-                // 1. Update Buttons
                 btns.forEach((b) => {
                     b.classList.remove('active-tab', 'bg-slate-800', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-sm');
                     b.classList.add('opacity-50', 'hover:opacity-100');
@@ -303,25 +479,22 @@ function getIconSvg(name?: string) {
                 btn.classList.remove('opacity-50', 'hover:opacity-100');
                 btn.classList.add('active-tab', 'bg-slate-800', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-sm');
 
-                // 2. Show Section
                 const targetId = btn.dataset.target;
-                sections.forEach((s) => s.classList.add('hidden'));
-                const activeSec = document.getElementById(`${id}-${targetId}`);
-                if (activeSec) {
-                    activeSec.classList.remove('hidden');
-                    // Trigger chart render if needed
-                    initChartsIn(activeSec);
+                tabSecs.forEach((s) => s.classList.add('hidden'));
+                const active = document.getElementById(`${id}-${targetId}`);
+                if (active) {
+                    active.classList.remove('hidden');
+                    initChartsIn(active);
+                    renderMathIn(active);
                 }
             });
         });
 
-        // --- CHART LOGIC ---
+        // ── CHART LOGIC ────────────────────────────────────────────────────────
         function initChartsIn(container) {
             const canvas = container.querySelector('canvas');
             if (!canvas || canvas.dataset.initialized === 'true' || typeof Chart === 'undefined') return;
-
             const rawData = JSON.parse(canvas.dataset.chart);
-
             new Chart(canvas, {
                 type: 'line',
                 data: {
@@ -331,7 +504,8 @@ function getIconSvg(name?: string) {
                         data: ds.data,
                         borderColor: ds.color,
                         borderDash: ds.dashed ? [5, 5] : [],
-                        tension: 0.4
+                        tension: 0.4,
+                        fill: false
                     }))
                 },
                 options: { responsive: true, maintainAspectRatio: false }
@@ -339,55 +513,103 @@ function getIconSvg(name?: string) {
             canvas.dataset.initialized = 'true';
         }
 
-        // --- STEPS LOGIC ---
+        // ── KATEX MATH RENDERING ───────────────────────────────────────────────
+        function renderMathIn(container) {
+            if (typeof renderMathInElement === 'undefined') return;
+            const nodes = container.querySelectorAll('.katex-content');
+            nodes.forEach((el) => {
+                if (el.dataset.mathRendered === 'true') return;
+                renderMathInElement(el, {
+                    delimiters: [
+                        { left: '$$', right: '$$', display: true },
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false
+                });
+                el.dataset.mathRendered = 'true';
+            });
+        }
+
+        // ── STEPS TIMELINE LOGIC ───────────────────────────────────────────────
         root.querySelectorAll('.step-btn').forEach((btn) => {
             btn.addEventListener('click', (e) => {
                 const el = e.currentTarget;
-                const detailText = el.dataset.detail;
-                const rawDetails = el.dataset.details;
-                const detailBox = el.parentElement.nextElementSibling; // The loop-detail-box
-                if (!detailBox) return;
+                const item = el.closest('.step-item');
+                const expand = item?.querySelector('.step-expand');
+                const chevron = el.querySelector('.step-chevron svg');
+                const isOpen = el.getAttribute('aria-expanded') === 'true';
 
-                // Update main text
-                const p = detailBox.querySelector('p');
-                if (p) p.textContent = detailText;
+                // Close all other open steps in this dashboard
+                root.querySelectorAll('.step-btn[aria-expanded="true"]').forEach((other) => {
+                    if (other === el) return;
+                    other.setAttribute('aria-expanded', 'false');
+                    other.classList.remove('is-active');
+                    other.querySelector('.step-chevron svg')?.style.setProperty('transform', '');
+                    other.closest('.step-item')?.querySelector('.step-expand')?.classList.add('hidden');
+                });
 
-                // Update structured details
-                const dl = detailBox.querySelector('dl');
-                if (dl) {
-                    dl.innerHTML = '';
-                    if (rawDetails) {
-                        try {
-                            const details = JSON.parse(rawDetails);
-                            details.forEach((d) => {
-                                const row = document.createElement('div');
-                                row.className = 'flex gap-2';
+                if (isOpen) {
+                    // Collapse
+                    el.setAttribute('aria-expanded', 'false');
+                    el.classList.remove('is-active');
+                    chevron?.style.setProperty('transform', '');
+                    expand?.classList.add('hidden');
+                } else {
+                    // Expand
+                    el.setAttribute('aria-expanded', 'true');
+                    el.classList.add('is-active');
+                    chevron?.style.setProperty('transform', 'rotate(180deg)');
+                    expand?.classList.remove('hidden');
 
-                                const dt = document.createElement('dt');
-                                dt.className = 'font-mono text-xs uppercase opacity-70 w-28 shrink-0';
-                                dt.textContent = d.label;
+                    // Populate content (only needed once — check flag)
+                    if (expand && !expand.dataset.populated) {
+                        const textEl = expand.querySelector('.step-expand-text');
+                        const imgEl = expand.querySelector('.step-expand-img');
+                        const dl = expand.querySelector('.step-expand-dl');
 
-                                const dd = document.createElement('dd');
-                                dd.className = 'opacity-85';
-                                dd.textContent = d.value;
+                        if (textEl) textEl.textContent = el.dataset.detail || '';
 
-                                row.appendChild(dt);
-                                row.appendChild(dd);
-                                dl.appendChild(row);
-                            });
-                            dl.classList.remove('hidden');
-                        } catch (err) {
-                            dl.classList.add('hidden');
+                        const src = el.dataset.imageSrc || '';
+                        if (imgEl && src) {
+                            imgEl.src = src;
+                            imgEl.alt = el.dataset.imageAlt || '';
+                            imgEl.classList.remove('hidden');
                         }
-                    } else {
-                        dl.classList.add('hidden');
+
+                        if (dl) {
+                            const rawDetails = el.dataset.details;
+                            if (rawDetails) {
+                                try {
+                                    JSON.parse(rawDetails).forEach((d) => {
+                                        const row = document.createElement('div');
+                                        row.className = 'flex gap-2';
+                                        const dt = document.createElement('dt');
+                                        dt.className = 'font-mono text-xs uppercase opacity-60 w-28 shrink-0';
+                                        dt.textContent = d.label;
+                                        const dd = document.createElement('dd');
+                                        dd.className = 'opacity-85';
+                                        dd.textContent = d.value;
+                                        row.append(dt, dd);
+                                        dl.appendChild(row);
+                                    });
+                                    dl.classList.remove('hidden');
+                                } catch {
+                                    /* ignore */
+                                }
+                            }
+                        }
+
+                        expand.dataset.populated = 'true';
                     }
                 }
             });
         });
 
-        // Init visible charts on load
+        // Init on first visible section
         const firstSection = root.querySelector('.tab-section:not(.hidden)');
-        if (firstSection) initChartsIn(firstSection);
+        if (firstSection) {
+            initChartsIn(firstSection);
+            renderMathIn(firstSection);
+        }
     });
 </script>
