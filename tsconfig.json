@@ -8,6 +8,8 @@
     "dist"
   ],
   "compilerOptions": {
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   }
 }

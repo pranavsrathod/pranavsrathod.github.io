@@ -1,0 +1,512 @@
+---
+// Wada Pav pixel art — built at compile time as static SVG
+const PAL: Record<string, string> = {
+  K: "#111111", B: "#D4A830", Y: "#F5D050", P: "#E8D090",
+  E: "#F5EDD0", L: "#E0D8B8", S: "#3A3020",
+};
+const GRID = [
+  "___KKKKKKKKK___",
+  "__KBBBBBBBBBBK_",
+  "_KBBBBBBBBBBBK_",
+  "_KYYBBBBBBBYYK_",
+  "__KBBBBBBBBBK__",
+  "___KKKKKKKKK___",
+  "___KPPPPPPK____",
+  "__KPPPPPPPPPK__",
+  "_KPPPPPPPPPPPPK",
+  "_KEPPLPPPPLPPEK",
+  "_KPPPPPPPPPPPEK",
+  "KKPPPPPPPPPPPKK",
+  "KSSSSSSSSSSSSSK",
+  "KSSSSSSSSSSSSSK",
+];
+const PX = 9;
+const rects: { x: number; y: number; fill: string }[] = [];
+GRID.forEach((row, ry) =>
+  [...row].forEach((ch, rx) => {
+    if (ch !== "_" && PAL[ch]) rects.push({ x: rx * PX, y: ry * PX, fill: PAL[ch] });
+  })
+);
+const svgW = GRID[0].length * PX;
+const svgH = GRID.length * PX;
+---
+
+<div class="city" id="city">
+
+  <!-- ── PROPS ── -->
+  <div class="props-layer">
+
+    <div class="prop" data-id="chaiwala" data-dest="/blog">
+      <img class="prop-img"
+        src="/pixel-city/chaiwala-day.png"
+        data-day="/pixel-city/chaiwala-day.png"
+        data-night="/pixel-city/chaiwala-night.png"
+        alt="" draggable="false" />
+      <div class="tooltip">☕ Blog</div>
+    </div>
+
+    <div class="prop" data-id="garage" data-dest="/projects">
+      <img class="prop-img"
+        src="/pixel-city/garage-day.png"
+        data-day="/pixel-city/garage-day.png"
+        data-night="/pixel-city/garage-night.png"
+        alt="" draggable="false" />
+      <div class="tooltip">🔧 Projects</div>
+    </div>
+
+    <div class="prop" data-id="photographer" data-dest="https://photos.pranavrathod.com" data-external="true">
+      <img class="prop-img"
+        src="/pixel-city/photographer-day.png"
+        data-day="/pixel-city/photographer-day.png"
+        data-night="/pixel-city/photographer-night.png"
+        alt="" draggable="false" />
+      <div class="tooltip">📷 Photos</div>
+    </div>
+
+    <div class="prop" data-id="wadapav" data-dest="contact">
+      <img class="prop-img"
+        src="/pixel-city/wadapav-day.png"
+        data-day="/pixel-city/wadapav-day.png"
+        data-night="/pixel-city/wadapav-night.png"
+        alt="" draggable="false" />
+      <div class="tooltip">🌶️ Contact</div>
+    </div>
+
+  </div>
+
+  <!-- ── HUD ── -->
+  <div class="pr-logo" aria-hidden="true">PR</div>
+
+  <button class="theme-btn" id="city-theme-btn" aria-label="Toggle day / night">
+    <span id="theme-icon">🌙</span>
+    <span id="theme-label">NIGHT</span>
+  </button>
+
+  <p class="hint" aria-hidden="true">HOVER TO EXPLORE · CLICK TO NAVIGATE</p>
+
+  <!-- ── CONTACT OVERLAY ── -->
+  <div class="overlay" id="contact-overlay" hidden>
+    <div class="overlay-bg" id="overlay-bg"></div>
+    <article class="newspaper" id="newspaper">
+      <div class="np-left">
+        <svg width={svgW} height={svgH} viewBox={`0 0 ${svgW} ${svgH}`}
+          style="image-rendering:pixelated" shape-rendering="crispEdges">
+          {rects.map(({ x, y, fill }) => (
+            <rect x={x} y={y} width={PX} height={PX} fill={fill} />
+          ))}
+        </svg>
+        <p class="np-caption">wada pav · ₹15</p>
+      </div>
+      <div class="np-right">
+        <p class="np-masthead">THE MUMBAI HERALD · CLASSIFIEDS</p>
+        <h2 class="np-title">CONTACT ME</h2>
+        <p class="np-body">SEEKING CONNECTIONS IN DESIGN,<br />ENGINEERING &amp; CREATIVE WORK.</p>
+        <div class="contact-rows">
+          <a class="contact-row" href="mailto:pranavrathodev@gmail.com">
+            <span class="c-icon">✉</span>
+            <span class="c-info">
+              <span class="c-label">EMAIL</span>
+              <span class="c-val">pranavrathodev@gmail.com</span>
+            </span>
+          </a>
+          <a class="contact-row" href="https://www.linkedin.com/in/pranavsrathod/" target="_blank" rel="noreferrer">
+            <span class="c-icon">in</span>
+            <span class="c-info">
+              <span class="c-label">LINKEDIN</span>
+              <span class="c-val">linkedin.com/in/pranavsrathod</span>
+            </span>
+          </a>
+          <a class="contact-row" href="https://github.com/pranavsrathod" target="_blank" rel="noreferrer">
+            <span class="c-icon">⌥</span>
+            <span class="c-info">
+              <span class="c-label">GITHUB</span>
+              <span class="c-val">github.com/pranavsrathod</span>
+            </span>
+          </a>
+        </div>
+        <p class="np-footer">© PRANAV RATHOD · EST. MUMBAI<br />ESC OR CLICK OUTSIDE TO CLOSE</p>
+      </div>
+      <div class="np-fold" aria-hidden="true"></div>
+    </article>
+  </div>
+
+</div>
+
+<style>
+  .city {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    user-select: none;
+    font-family: 'Press Start 2P', monospace;
+
+    /* City background — swapped in JS */
+    background-image: url('/pixel-city/city-day.png');
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+
+    /* Sky fallback before image loads */
+    background-color: #7bbdd8;
+
+    --neon: #FF3B3B;
+    --ground: 19%;
+    --prop-h: 29vh;
+    --person-h: 20vh;
+  }
+
+  .city.night {
+    background-image: url('/pixel-city/city-night.png');
+    background-color: #050c1a;
+  }
+
+  /* ── PROPS ── */
+  .props-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .prop {
+    position: absolute;
+    bottom: var(--ground);
+    transform: translateX(-50%);
+    pointer-events: all;
+    cursor: pointer;
+    /* transition on wrapper, NOT on img — keeps img out of GPU compositing layer */
+    transition: transform 0.2s ease;
+  }
+
+  .prop:hover { transform: translateX(-50%) translateY(-5px); }
+
+  .prop[data-id="chaiwala"]     { left: 13%; }
+  .prop[data-id="garage"]       { left: 34%; }
+  .prop[data-id="photographer"] { left: 58%; }
+  .prop[data-id="wadapav"]      { left: 78%; }
+
+  .prop-img {
+    display: block;
+    height: var(--prop-h);
+    width: auto;
+    max-width: 30vw;
+    object-fit: contain;
+    object-position: bottom center;
+
+    /*
+      Gradient mask: fade left/right edges so the prop image's baked
+      background dissolves into the city scene instead of showing as
+      a hard rectangle. Bottom stays solid (sits on pavement), top
+      fades so props blend into the buildings behind them.
+    */
+    mask-image:
+      linear-gradient(to right,  transparent 0%, black 14%, black 86%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, black 16%, black 100%);
+    mask-composite: intersect;
+    -webkit-mask-image:
+      linear-gradient(to right,  transparent 0%, black 14%, black 86%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, black 16%, black 100%);
+    -webkit-mask-composite: source-in;
+
+    transition: filter 0.18s ease;
+  }
+
+  /* Photographer has more surroundings — use a tighter elliptical mask */
+  .prop[data-id="photographer"] .prop-img {
+    height: var(--person-h);
+    mask-image: radial-gradient(ellipse 70% 82% at 44% 88%, black 45%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 82% at 44% 88%, black 45%, transparent 100%);
+  }
+
+  .prop:hover .prop-img {
+    filter:
+      drop-shadow(0 0 7px var(--neon))
+      drop-shadow(0 0 20px color-mix(in srgb, var(--neon) 45%, transparent));
+  }
+
+  /* Night: darken the background-only areas further so they read as shadows */
+  .city.night .prop-img {
+    filter: brightness(0.92) saturate(1.1);
+  }
+  .city.night .prop:hover .prop-img {
+    filter:
+      brightness(1.05)
+      drop-shadow(0 0 7px var(--neon))
+      drop-shadow(0 0 20px color-mix(in srgb, var(--neon) 45%, transparent));
+  }
+
+  /* ── TOOLTIP ── */
+  .tooltip {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    background: #080808ee;
+    color: var(--neon);
+    border: 1.5px solid var(--neon);
+    padding: 5px 10px;
+    font-size: 8px;
+    letter-spacing: 0.06em;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    box-shadow: 0 0 12px color-mix(in srgb, var(--neon) 30%, transparent);
+  }
+  .tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: var(--neon);
+  }
+  .prop:hover .tooltip { opacity: 1; }
+
+  /* ── HUD ── */
+  .pr-logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 20;
+    font-size: 15px;
+    color: var(--neon);
+    text-shadow: 0 0 10px var(--neon), 0 0 24px color-mix(in srgb, var(--neon) 40%, transparent);
+    pointer-events: none;
+  }
+
+  .theme-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    background: #1a2a3acc;
+    color: #88bbff;
+    border: 2px solid #88bbff;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(136,187,255,0.3);
+    transition: box-shadow 0.2s;
+    letter-spacing: 0.04em;
+    backdrop-filter: blur(4px);
+  }
+  .theme-btn:hover { box-shadow: 0 0 22px rgba(136,187,255,0.6); }
+
+  .city.night .theme-btn {
+    background: #0e1530cc;
+    color: #ffaa30;
+    border-color: #ffaa30;
+    box-shadow: 0 0 10px rgba(255,170,48,0.4);
+  }
+  .city.night .theme-btn:hover { box-shadow: 0 0 24px rgba(255,170,48,0.7); }
+
+  .hint {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    font-size: 6px;
+    letter-spacing: 0.14em;
+    pointer-events: none;
+    white-space: nowrap;
+    color: rgba(60, 40, 20, 0.6);
+  }
+  .city.night .hint { color: rgba(220, 210, 180, 0.35); }
+
+  /* ── OVERLAY ── */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .overlay[hidden] { display: none; }
+
+  .overlay-bg {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.87);
+  }
+
+  /* ── NEWSPAPER ── */
+  .newspaper {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    max-width: 820px;
+    width: 92vw;
+    background: #f0e8c8;
+    border: 3px solid #8a7a50;
+    box-shadow: 0 8px 60px rgba(0,0,0,0.85);
+    font-family: 'Press Start 2P', monospace;
+  }
+  .city.night .newspaper { background: #1a1a0e; border-color: #3a3830; }
+
+  .np-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 28px 22px;
+    background: #e8e0b0;
+    border-right: 3px solid #8a7a50;
+    min-width: 165px;
+  }
+  .city.night .np-left { background: #14140e; border-right-color: #3a3830; }
+
+  .np-caption {
+    font-size: 7px;
+    color: #8a7a50;
+    text-align: center;
+    line-height: 1.8;
+    letter-spacing: 0.06em;
+  }
+  .city.night .np-caption { color: #5a5030; }
+
+  .np-right {
+    flex: 1;
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .np-masthead {
+    font-size: 7px;
+    color: #5a4a20;
+    letter-spacing: 0.14em;
+    border-bottom: 2px solid #3a2a10;
+    padding-bottom: 10px;
+  }
+  .city.night .np-masthead { color: #6a6040; border-bottom-color: #5a5030; }
+
+  .np-title {
+    font-size: 13px;
+    font-weight: normal;
+    color: #1a1000;
+    letter-spacing: 0.07em;
+  }
+  .city.night .np-title { color: #f0d860; text-shadow: 0 0 14px rgba(255,220,80,0.45); }
+
+  .np-body { font-size: 6px; color: #4a3a18; line-height: 2.4; }
+  .city.night .np-body { color: #8a8060; }
+
+  .contact-rows { display: flex; flex-direction: column; gap: 8px; }
+
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    border: 2px solid transparent;
+    padding: 4px 6px;
+    transition: border-color 0.1s, box-shadow 0.1s;
+  }
+  .contact-row:hover {
+    border-color: var(--neon);
+    box-shadow: 0 0 12px color-mix(in srgb, var(--neon) 30%, transparent);
+  }
+
+  .c-icon {
+    width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    background: #d8c888;
+    border: 2px solid #8a7a50;
+    color: #3a2a10;
+    flex-shrink: 0;
+    transition: border-color 0.1s, box-shadow 0.1s;
+  }
+  .city.night .c-icon { background: #2a2820; border-color: #4a4030; color: #c0b060; }
+  .contact-row:hover .c-icon { border-color: var(--neon); box-shadow: 0 0 8px var(--neon); }
+
+  .c-info { display: flex; flex-direction: column; gap: 3px; }
+  .c-label { font-size: 6px; color: #8a7a50; }
+  .c-val   { font-size: 7px; color: #2a1a08; }
+  .city.night .c-label { color: #5a5030; }
+  .city.night .c-val   { color: #d0c070; }
+
+  .np-footer {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid #8a7a50;
+    font-size: 6px;
+    color: #8a7a50;
+    line-height: 2;
+  }
+  .city.night .np-footer { border-top-color: #3a3020; color: #504830; }
+
+  .np-fold {
+    position: absolute; top: 0; right: 0;
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 0 26px 26px 0;
+    border-color: transparent #c8b880 transparent transparent;
+  }
+  .city.night .np-fold { border-color: transparent #2a2820 transparent transparent; }
+</style>
+
+<script>
+  // No astro:page-load wrapper — Astro bundles this as a deferred ES module,
+  // which runs after DOM is parsed without needing an event wrapper.
+  const city      = document.getElementById('city')!      as HTMLElement;
+  const themeBtn  = document.getElementById('city-theme-btn')! as HTMLButtonElement;
+  const themeIcon = document.getElementById('theme-icon')! as HTMLElement;
+  const themeLabel= document.getElementById('theme-label')! as HTMLElement;
+  const overlay   = document.getElementById('contact-overlay')! as HTMLElement;
+  const overlayBg = document.getElementById('overlay-bg')!  as HTMLElement;
+
+  // ── THEME ─────────────────────────────────────────────
+  function applyTheme(night: boolean) {
+    city.classList.toggle('night', night);
+
+    // swap prop images
+    document.querySelectorAll<HTMLImageElement>('.prop-img').forEach(img => {
+      img.src = night ? img.dataset.night! : img.dataset.day!;
+    });
+
+    themeIcon.textContent  = night ? '☀' : '🌙';
+    themeLabel.textContent = night ? 'DAY' : 'NIGHT';
+
+    // keep site-wide dark class in sync
+    document.documentElement.classList.toggle('dark', night);
+    localStorage.setItem('theme', night ? 'dark' : 'light');
+  }
+
+  applyTheme(document.documentElement.classList.contains('dark'));
+
+  themeBtn.addEventListener('click', () => applyTheme(!city.classList.contains('night')));
+
+  // sync if an external toggle changes the theme
+  new MutationObserver(() => {
+    const want = document.documentElement.classList.contains('dark');
+    if (city.classList.contains('night') !== want) applyTheme(want);
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+  // ── NAVIGATION ────────────────────────────────────────
+  document.querySelectorAll<HTMLElement>('.prop').forEach(prop => {
+    prop.addEventListener('click', () => {
+      const dest = prop.dataset.dest!;
+      if (dest === 'contact') { overlay.removeAttribute('hidden'); return; }
+      if (dest.startsWith('http') || prop.dataset.external) {
+        window.open(dest, '_blank', 'noreferrer');
+      } else {
+        window.location.href = dest;
+      }
+    });
+  });
+
+  // ── OVERLAY ───────────────────────────────────────────
+  const closeOverlay = () => overlay.setAttribute('hidden', '');
+  overlayBg.addEventListener('click', closeOverlay);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay(); });
+</script>

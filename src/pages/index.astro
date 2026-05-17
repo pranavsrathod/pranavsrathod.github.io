@@ -1,46 +1,26 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Button from '../components/Button.astro';
-import Hero from '../components/Hero.astro';
-import PostPreview from '../components/PostPreview.astro';
-import ProjectPreview from '../components/ProjectPreview.astro';
-import siteConfig from '../data/site-config';
-import { sortItemsByDateDesc } from '../utils/data-utils';
-
-const posts = (await getCollection('blog')).sort(sortItemsByDateDesc);
-const featuredPosts = posts.filter(({ data }) => data.isFeatured);
-
-const projects = (await getCollection('projects')).sort(sortItemsByDateDesc);
-const featuredProjects = projects.filter(({ data }) => data.isFeatured);
+import BaseHead from '../components/BaseHead.astro';
+import { PixelCity } from '../components/PixelCity';
 ---
-
-<BaseLayout description={siteConfig.description} image={siteConfig.image}>
-    <Hero />
-    {
-        featuredProjects?.length > 0 && (
-            <div class="mb-16 sm:mb-24">
-                <h2 class="mb-12 text-xl font-serif italic sm:mb-16 sm:text-2xl">Projects</h2>
-                {featuredProjects.map((project) => (
-                    <ProjectPreview project={project} class="mb-10 sm:mb-12" headingLevel="h3" />
-                ))}
-                <div class="mt-12 sm:mt-16">
-                    <Button href="/projects">View All Projects</Button>
-                </div>
-            </div>
-        )
-    }
-    {
-        featuredPosts?.length > 0 && (
-            <div class="mb-16 sm:mb-24">
-                <h2 class="mb-12 text-xl font-serif italic sm:mb-16 sm:text-2xl">Writing</h2>
-                {featuredPosts.map((post) => (
-                    <PostPreview post={post} class="mb-10 sm:mb-12" headingLevel="h3" />
-                ))}
-                <div class="mt-12 sm:mt-16">
-                    <Button href="/blog">View All Posts</Button>
-                </div>
-            </div>
-        )
-    }
-</BaseLayout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title="Pranav Rathod"
+      description="Creative technologist, engineer, and sometimes a quiet observer of the world."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+    <style>
+      html, body { margin: 0; padding: 0; overflow: hidden; height: 100%; background: #7bbdd8; }
+      html.dark body { background: #030812; }
+    </style>
+    <script is:inline>
+      if (localStorage.theme === 'dark') document.documentElement.classList.add('dark');
+    </script>
+  </head>
+  <body>
+    <PixelCity client:only="react" />
+  </body>
+</html>
