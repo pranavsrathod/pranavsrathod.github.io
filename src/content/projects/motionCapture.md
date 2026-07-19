@@ -14,7 +14,7 @@ _Pranav Rathod_
 
 **Date:** March 12, 2025
 
-In this project for my CSCI 520 course, I set out to improve the smoothness and naturalness of motion capture animations by implementing various interpolation techniques. Working with ASF/AMC motion capture data—where the ASF file defines the skeleton structure and the AMC file records joint rotations and root translations at 120 frames per second—I explored four distinct methods:
+In this project for my CSCI 520 course, I set out to improve the smoothness and naturalness of motion capture animations by implementing various interpolation techniques. Working with ASF/AMC motion capture data, where the ASF file defines the skeleton structure and the AMC file records joint rotations and root translations at 120 frames per second, I explored four distinct methods:
 
 - **Linear Euler Interpolation**
 - **Bezier Euler Interpolation**

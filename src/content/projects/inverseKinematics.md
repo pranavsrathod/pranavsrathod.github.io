@@ -15,7 +15,7 @@ _Pranav Rathod_
 
 **Date:** April 20, 2025
 
-Inverse Kinematics (IK) plays a fundamental role in animation and character control—whether it's getting a game character's hand to reach a doorknob or a robot's foot to plant properly on uneven terrain. Unlike forward kinematics (FK), where transformations are applied down the joint chain from parent to child, IK solves for joint angles *given a desired end-effector position*. This reverse direction of computation enables more intuitive control and dynamic responsiveness in both games and films.
+Inverse Kinematics (IK) plays a fundamental role in animation and character control, whether it's getting a game character's hand to reach a doorknob or a robot's foot to plant properly on uneven terrain. Unlike forward kinematics (FK), where transformations are applied down the joint chain from parent to child, IK solves for joint angles *given a desired end-effector position*. This reverse direction of computation enables more intuitive control and dynamic responsiveness in both games and films.
 
 ## Demo Video
 

@@ -1,6 +1,6 @@
 ---
 title: "Urban Renderer"
-description: "I developed an interactive WebGL application to render a dynamic 3D urban environment from JSON data. The project features two interactive demos—one for standard urban rendering and another with advanced shadow mapping for realistic lighting."
+description: "I developed an interactive WebGL application to render a dynamic 3D urban environment from JSON data. The project features two interactive demos: one for standard urban rendering and another with advanced shadow mapping for realistic lighting."
 publishDate: "March 4, 2022"
 isFeatured: false
 poster: "/UICProjects/Graphics1/UR.png"
@@ -13,7 +13,7 @@ seo:
 **Fall 2022**  
 **Pranav Rathod**
 
-I developed **Urban Renderer**—an interactive WebGL application that brings a 3D urban environment to life using data loaded from external JSON files and a custom configuration panel. The project is split into two main parts: the core urban rendering demo and an enhanced shadow mapping demo that delivers realistic lighting and shadows.
+I developed **Urban Renderer**, an interactive WebGL application that brings a 3D urban environment to life using data loaded from external JSON files and a custom configuration panel. The project is split into two main parts: the core urban rendering demo and an enhanced shadow mapping demo that delivers realistic lighting and shadows.
 
 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
   <img src="/UICProjects/Graphics1/assignment-1.gif" alt="Urban Renderer Demo" />
@@ -41,7 +41,7 @@ I built a configuration panel with:
 - A **dropdown menu** to toggle between perspective and orthographic projections.
 - A **file input element** for loading a JSON file that defines the urban environment.
   
-User interactions are handled via mouse events that update a view transformation matrix—allowing the camera to rotate around the scene’s center—and enable zoom functionality to adjust the view seamlessly.
+User interactions are handled via mouse events that update a view transformation matrix, allowing the camera to rotate around the scene’s center, and enable zoom functionality to adjust the view seamlessly.
 
 For rendering:
 - The **Building Layer** is shaded using normals and a constant color. This gives the buildings a responsive appearance without needing a full illumination model.

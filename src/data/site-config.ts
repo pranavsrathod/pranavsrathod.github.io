@@ -97,7 +97,7 @@ const siteConfig: SiteConfig = {
     ],
     hero: {
         title: 'Code, Art, and a Bit of Chaos',
-        text: `I’m a creative technologist, engineer, and sometimes a quiet observer of the world — currently pursuing my Master’s in Computer Science at the University of Southern California, specializing in Multimedia and Creative Technologies.`,
+        text: `I’m a creative technologist, engineer, and sometimes a quiet observer of the world. I recently completed my Master’s in Computer Science at the University of Southern California, specializing in Multimedia and Creative Technologies.`,
         actions: [
             {
                 text: 'View Resume',

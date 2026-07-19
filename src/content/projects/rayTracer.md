@@ -885,7 +885,7 @@ Think about how you see the world. Light travels from a source, bounces off obje
 
 <figure>
   <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Ray_trace_diagram.svg" alt="Backwards ray tracing diagram showing rays fired from camera through pixels into the scene" />
-  <figcaption>Backwards ray tracing — rays originate at the camera and travel through each pixel into the scene. Source: Wikipedia, CC BY-SA 3.0</figcaption>
+  <figcaption>Backwards ray tracing: rays originate at the camera and travel through each pixel into the scene. Source: Wikipedia, CC BY-SA 3.0</figcaption>
 </figure>
 
 Most real-time graphics use a faster technique called rasterization instead. While rasterization is great for speed, it struggles to simulate how light actually behaves. Shadows, reflections, and the way light bounces between surfaces all have to be faked using clever tricks. Ray tracing does not need those tricks - shadows fall naturally because a blocked ray means no light, and reflections work because a ray can bounce and pick up color from whatever it hits next.

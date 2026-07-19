@@ -132,7 +132,7 @@ The compression system processes raw video frames, identifies moving regions, an
         <div class="space-y-8 text-sm leading-relaxed">
 
           <div>
-            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">01 — Forward Transform</h3>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">01: Forward Transform</h3>
             <p class="opacity-85 mb-4">
               The <strong>2D Discrete Cosine Transform</strong> converts an 8×8 block of spatial pixel
               values into the frequency domain. The DC coefficient at
@@ -157,16 +157,16 @@ The compression system processes raw video frames, identifies moving regions, an
               </div>
               <div class="rounded-md border border-slate-200 dark:border-zinc-700 px-3 py-2">
                 <span class="font-mono text-xs text-blue-500 dark:text-blue-400 block mb-1">u, v ∈ [0, 7]</span>
-                <span class="opacity-70">Frequency indices — low = coarse structure, high = fine detail</span>
+                <span class="opacity-70">Frequency indices: low = coarse structure, high = fine detail</span>
               </div>
             </div>
           </div>
 
           <div>
-            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">02 — Quantization</h3>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">02: Quantization</h3>
             <p class="opacity-85 mb-4">
               Each coefficient is divided by a uniform step size and rounded. Small high-frequency
-              coefficients round to zero and are discarded — this is where compression loss occurs.
+              coefficients round to zero and are discarded. This is where compression loss occurs.
               The step size is controlled by exponent <em>n</em>, set independently per region via
               <strong>n1</strong> (foreground) and <strong>n2</strong> (background).
             </p>
@@ -180,7 +180,7 @@ The compression system processes raw video frames, identifies moving regions, an
           </div>
 
           <div>
-            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">03 — Inverse Transform</h3>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">03: Inverse Transform</h3>
             <p class="opacity-85 mb-4">
               The decoder multiplies each coefficient by $2^n$ to dequantize, then applies the
               <strong>2D Inverse DCT</strong> to reconstruct approximate pixel values. The degree
@@ -199,7 +199,7 @@ The compression system processes raw video frames, identifies moving regions, an
           </div>
 
           <div>
-            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">04 — Why This Works Perceptually</h3>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">04: Why This Works Perceptually</h3>
             <p class="opacity-85">
               The human visual system is more sensitive to low-frequency luminance changes than to
               fine high-frequency detail. By concentrating energy in the lower DCT coefficients,
@@ -221,7 +221,7 @@ The compression system processes raw video frames, identifies moving regions, an
         <div class="space-y-8 text-sm leading-relaxed">
 
           <div>
-            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">01 — Motion Vector Estimation</h3>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">01: Motion Vector Estimation</h3>
             <p class="opacity-85 mb-4">
               For each 16×16 macroblock in frame $t$, the encoder searches frame $t-1$ for the
               best matching block using <strong>Three-Step Search (TSS)</strong>, measured by
@@ -237,7 +237,7 @@ The compression system processes raw video frames, identifies moving regions, an
           </div>
 
           <div>
-            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">02 — Foreground / Background Classification</h3>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">02: Foreground / Background Classification</h3>
             <p class="opacity-85 mb-3">
               Blocks are classified using magnitude and directional consistency of motion vectors
               relative to the global scene motion.
@@ -259,11 +259,11 @@ The compression system processes raw video frames, identifies moving regions, an
           </div>
 
           <div>
-            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">03 — Extended: Detectron2 + Optical Flow</h3>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">03: Detectron2 + Optical Flow (Extended)</h3>
             <p class="opacity-85 mb-3">
               <strong>Detectron2</strong> instance segmentation was combined with
               <strong>dense optical flow</strong> (Farneback) to produce semantically-aware masks.
-              Per-pixel flow is compared against the global motion vector — objects whose local flow
+              Per-pixel flow is compared against the global motion vector, and objects whose local flow
               deviates significantly in magnitude or direction are retained as foreground.
             </p>
             <div class="eq-box space-y-4">

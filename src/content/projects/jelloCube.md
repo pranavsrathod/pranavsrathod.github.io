@@ -65,8 +65,8 @@ For this assignment, I successfully implemented a physically based simulation of
 - **External Force Field**:
   Trilinear interpolation was used to calculate external force values from a 3D grid defined in the `.w` file.
 
-  1. **Grid Indexing** – mapping position to force grid
-  2. **Interpolation** – blending 8 surrounding vectors
+  1. **Grid Indexing**: mapping position to force grid
+  2. **Interpolation**: blending 8 surrounding vectors
 
 - **OpenGL Visualization**:
   - Wireframe and shaded surface rendering modes

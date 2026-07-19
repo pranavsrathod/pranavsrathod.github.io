@@ -10,7 +10,7 @@ const navLinks = siteConfig.headerNavLinks || [];
     {
         navLinks.length > 0 && (
             <div class="w-full max-w-3xl mx-auto relative flex items-center gap-5 md:gap-8">
-                <a class="font-display text-lg leading-none text-accent relative z-30" href="/" aria-label="Pranav Rathod — Home">
+                <a class="font-display text-lg leading-none text-accent relative z-30" href="/" aria-label="Pranav Rathod, Home">
                     PR.
                 </a>
                 <button
@@ -39,10 +39,19 @@ const navLinks = siteConfig.headerNavLinks || [];
     <div class="absolute right-0 top-4 z-10 md:top-8 flex items-center">
         <button
             id="companion-toggle"
-            class="w-8 h-8 ml-3 hidden lg:flex items-center justify-center rounded-full border border-main hover:bg-muted cursor-pointer"
+            class="w-8 h-8 ml-3 flex items-center justify-center rounded-full border border-main hover:bg-muted cursor-pointer"
             aria-label="Summon Cat"
         >
-            🐾
+            <svg class="w-4 h-4" viewBox="0 0 12 12" fill="currentColor" shape-rendering="crispEdges" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="3" width="2" height="2" />
+                <rect x="2" y="1" width="2" height="2" />
+                <rect x="5" y="0" width="2" height="2" />
+                <rect x="8" y="1" width="2" height="2" />
+                <rect x="10" y="3" width="2" height="2" />
+                <rect x="4" y="4" width="4" height="1" />
+                <rect x="3" y="5" width="6" height="3" />
+                <rect x="4" y="8" width="4" height="1" />
+            </svg>
         </button>
         <ThemeToggle />
     </div>

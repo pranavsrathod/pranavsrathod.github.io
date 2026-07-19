@@ -23,7 +23,7 @@ This project is designed to showcase two places/attractions that have been signi
 
 AR has gained immense popularity in recent years, and I believe it will continue to flourish in the future. The familiarity of AR among the generation that grew up with social media platforms like Instagram and Snapchat has played a significant role in its widespread adoption. For example, Snapchat’s face filters have evolved from playful animations into powerful tools for self-expression.
 
-Beyond face filters, the phenomenal success of Pokémon Go in 2016 provided a glimpse into AR's potential by seamlessly blending the real and virtual worlds. AR has evolved from a novelty into a practical tool, with applications like using LiDAR for precise spatial mapping—allowing users to visualize how furniture might fit in a room before making a purchase.
+Beyond face filters, the phenomenal success of Pokémon Go in 2016 provided a glimpse into AR's potential by seamlessly blending the real and virtual worlds. AR has evolved from a novelty into a practical tool, with applications like using LiDAR for precise spatial mapping, which lets users visualize how furniture might fit in a room before making a purchase.
 
 The recent announcements from companies like Meta further emphasize AR's promising future. While there are valid concerns about the increasing role of digital experiences, I believe that, when used responsibly, AR can enhance our interaction with the world by merging physical and virtual realities.
 
@@ -33,7 +33,7 @@ The recent announcements from companies like Meta further emphasize AR's promisi
 
 ### Merge Cube
 
-Italy holds a special place in my heart—it marks the first international journey my family and I embarked on during my middle school years. In this AR project, the Merge Cube displays meticulously crafted models representing iconic symbols of Pisa:
+Italy holds a special place in my heart. It marks the first international journey my family and I embarked on during my middle school years. In this AR project, the Merge Cube displays meticulously crafted models representing iconic symbols of Pisa:
 
 - **Leaning Tower of Pisa**
 - **Vespa**
@@ -122,8 +122,8 @@ To create the physical cubes for the AR experience:
 
 ![Cubes Template](/UICProjects/AR/cubes.jpg)
 
-_Left – Merge Cube_  
-_Right – Class Cube_
+_Left: Merge Cube_  
+_Right: Class Cube_
 
 ---
 
