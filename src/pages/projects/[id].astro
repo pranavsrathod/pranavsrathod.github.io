@@ -32,7 +32,7 @@ const { Content } = await render(project);
 <BaseLayout title={seo?.title ?? title} description={seo?.description ?? description} image={seo?.image} pageType="article" showHeader={false}>
     <article class="mb-16 sm:mb-24">
         <header class="mb-8">
-            <h1 class="text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">{title}</h1>
+            <h1 class="text-2xl leading-tight font-display heading-accent sm:text-4xl sm:leading-tight">{title}</h1>
         </header>
         <div class="max-w-none prose sm:prose-lg">
             <Content components={{ InteractiveDashboard }} />
@@ -41,7 +41,7 @@ const { Content } = await render(project);
     {
         (prevProject || nextProject) && (
             <div class="my-16 sm:my-24">
-                <h2 class="mb-12 text-xl font-serif italic sm:mb-16 sm:text-2xl">View Next</h2>
+                <h2 class="mb-12 text-lg font-display heading-accent sm:mb-16 sm:text-xl">View Next</h2>
                 {nextProject && <ProjectPreview project={nextProject} class="mb-10 sm:mb-12" headingLevel="h3" />}
                 {prevProject && <ProjectPreview project={prevProject} class="mb-10 sm:mb-12" headingLevel="h3" />}
             </div>

@@ -10,7 +10,7 @@ const navLinks = siteConfig.footerNavLinks || [];
         navLinks.length > 0 && (
             <div class="mb-4 flex flex-wrap gap-x-6 gap-y-1">
                 {navLinks.map((link) => (
-                    <a class="font-serif hover:underline hover:underline-offset-2" href={link.href}>
+                    <a class="text-sm font-medium hover:underline hover:underline-offset-2" href={link.href}>
                         {link.text}
                     </a>
                 ))}

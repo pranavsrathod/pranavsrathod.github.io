@@ -27,13 +27,13 @@ const TitleTag = headingLevel;
     </figure>
   )}
   <div class={`sm:w-1/2 ${poster ? (poster ? 'sm:pl-4' : '') : ''} text-center`}>
-    <TitleTag class="text-xl leading-tight font-serif font-medium group-hover:underline group-hover:decoration-dashed group-hover:underline-offset-4 group-hover:decoration-1 sm:text-2xl">
+    <TitleTag class="text-xl leading-tight font-medium group-hover:underline group-hover:decoration-dashed group-hover:underline-offset-4 group-hover:decoration-1 sm:text-2xl">
       {title}
     </TitleTag>
     {description && (
       <div class="mt-1 text-sm leading-normal">{description}</div>
     )}
-    <div class="mt-4 font-serif italic opacity-0 transition group-hover:opacity-100 sm:block">
+    <div class="mt-4 text-sm font-medium opacity-0 transition group-hover:opacity-100 sm:block">
       View Project <ArrowRight class="fill-current w-4 h-4 inline-block" />
     </div>
   </div>

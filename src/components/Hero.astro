@@ -1,29 +1,66 @@
 ---
 import { marked } from 'marked';
 import siteConfig from '../data/site-config';
+import ArrowRight from '../icons/ArrowRight.astro';
 import Button from './Button.astro';
+import PixelAvatar from './PixelAvatar.astro';
 
 const hero = siteConfig.hero;
 ---
 
 {
-    (hero?.title || hero?.image?.src || hero?.text || (hero?.actions && hero.actions.length > 0)) && (
-        <section class="w-full flex flex-col gap-8 mb-16 sm:mb-24">
-            {hero.title && <h1 class="text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">{hero.title}</h1>}
-            {hero.image?.src && (
-                <figure>
-                    <img class="w-full" src={hero.image.src} loading="lazy" decoding="async" alt={hero.image.alt || ''} />
-                    {hero.image.caption && <figcaption class="mt-1.5 text-xs sm:text-sm">{hero.image.caption}</figcaption>}
-                </figure>
-            )}
-            {hero.text && <div class="max-w-none prose sm:prose-lg" set:html={marked.parse(hero.text)} />}
-            {hero.actions && hero.actions.length > 0 && (
-                <div class="flex flex-wrap gap-4">
-                    {hero.actions.map((action) => (
-                        <Button href={action.href}>{action.text}</Button>
-                    ))}
+    (hero?.title || hero?.text || (hero?.actions && hero.actions.length > 0)) && (
+        <section class="w-full mb-12 sm:mb-20 flex flex-col-reverse items-center gap-8 text-center sm:flex-row sm:items-center sm:justify-between sm:gap-12 sm:text-left">
+            <div class="w-full min-w-0 flex flex-col items-center gap-5 sm:items-start">
+                <div class="flex flex-col gap-0.5">
+                    <span class="text-[0.8rem] font-medium uppercase tracking-widest">{siteConfig.title}</span>
+                    {siteConfig.subtitle && <span class="text-[0.8rem] tracking-wide text-muted">{siteConfig.subtitle.replaceAll('|', '/')}</span>}
                 </div>
-            )}
+                {hero.title && (
+                    <h1 class="text-2xl leading-tight font-display heading-accent max-sm:[&::after]:mx-auto sm:text-4xl sm:leading-tight">{hero.title}</h1>
+                )}
+                {hero.text && <div class="max-w-[52ch] prose prose-sm sm:prose-base" set:html={marked.parse(hero.text)} />}
+                <a class="group inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline hover:underline-offset-4" href="/about">
+                    more about me <ArrowRight class="w-4 h-4 fill-current transition-transform group-hover:translate-x-0.5" />
+                </a>
+                {hero.actions && hero.actions.length > 0 && (
+                    <div class="flex flex-wrap justify-center gap-4 sm:justify-start">
+                        {hero.actions.map((action) => (
+                            <Button href={action.href}>{action.text}</Button>
+                        ))}
+                    </div>
+                )}
+            </div>
+            <div class="avatar-card shrink-0">
+                <PixelAvatar />
+            </div>
         </section>
     )
 }
+
+<style>
+    /* Sticker-on-notebook card. The rotated card is a ::before layer BEHIND the
+       sprite — the pixel art itself must stay axis-aligned to keep pixels crisp.
+       The extra bottom/side inset keeps the rotated edge from rising above the
+       sprite's flat bottom edge (2deg over this width shifts corners ~5px). */
+    .avatar-card {
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 1.5rem 1.75rem 0;
+    }
+
+    .avatar-card::before {
+        content: '';
+        position: absolute;
+        inset: 0 -4px -9px;
+        z-index: -1;
+        border-radius: 1.25rem;
+        background-color: var(--bg-muted);
+        background-image: radial-gradient(var(--dot-grid) 1px, transparent 1px);
+        background-size: 24px 24px;
+        box-shadow: 0 10px 24px -8px var(--card-shadow);
+        transform: rotate(2deg);
+    }
+</style>

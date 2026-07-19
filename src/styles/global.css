@@ -1,23 +1,41 @@
 @import '@fontsource-variable/inter' layer(base);
 @import '@fontsource-variable/newsreader' layer(base);
 @import '@fontsource-variable/newsreader/wght-italic.css' layer(base);
+@import '@fontsource/climate-crisis' layer(base);
 
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Day: warm paper with a planning-notebook dot grid */
 :root {
-    --text-main: #171717;
-    --bg-main: #f2f1ec;
-    --bg-muted: #eae9e1;
-    --border-main: #171717;
+    --text-main: #1c1917;
+    --text-muted: #57534e;
+    --bg-main: #faf6ee;
+    --bg-muted: #f1ebdf;
+    --border-main: #1c1917;
+    --dot-grid: rgba(28, 25, 23, 0.1);
+    --accent: #c73e1d;
+    --card-shadow: rgba(28, 25, 23, 0.15);
 }
+/* Night: whiteboard-at-night navy, same grid barely visible */
 html.dark {
-    --text-main: #f2f1ec;
-    --bg-main: #152039;
-    --bg-muted: #242424;
-    --border-main: #f2f1ec;
+    --text-main: #ede9e0;
+    --text-muted: #a8a29a;
+    --bg-main: #131b2e;
+    --bg-muted: #1c2740;
+    --border-main: #ede9e0;
+    --dot-grid: rgba(255, 255, 255, 0.07);
+    --accent: #ff7a50;
+    --card-shadow: rgba(6, 10, 20, 0.6);
+}
+
+@layer base {
+    body {
+        background-image: radial-gradient(var(--dot-grid) 1px, transparent 1px);
+        background-size: 24px 24px;
+    }
 }
 
 /* Cyan */
@@ -55,10 +73,13 @@ html.dark {
 @theme inline {
     --font-sans: 'Inter Variable', sans-serif;
     --font-serif: 'Newsreader Variable', serif;
+    --font-display: 'Climate Crisis', 'Archivo Black', 'Inter Variable', sans-serif;
     --text-color-main: var(--text-main);
+    --text-color-muted: var(--text-muted);
     --background-color-main: var(--bg-main);
     --background-color-muted: var(--bg-muted);
     --border-color-main: var(--border-main);
+    --color-accent: var(--accent);
 }
 
 @layer utilities {
@@ -81,7 +102,19 @@ html.dark {
     }
 
     .prose a {
-        @apply underline font-normal decoration-1 underline-offset-2 decoration-dashed hover:decoration-solid;
+        @apply underline font-normal decoration-1 underline-offset-2 decoration-dashed hover:decoration-solid hover:text-accent;
+    }
+
+    /* Short accent bar under display headings — slightly askew, like a marker stroke */
+    .heading-accent::after {
+        content: '';
+        display: block;
+        width: 2.5rem;
+        height: 0.25rem;
+        margin-top: 0.625rem;
+        background-color: var(--accent);
+        border-radius: 2px 6px 3px 5px;
+        transform: rotate(-0.5deg);
     }
 
     .prose :where(h1, h2, h3, h4, h5, h6) {
