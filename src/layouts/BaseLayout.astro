@@ -30,6 +30,7 @@ const { showHeader = true, ...head } = Astro.props;
         <BaseHead {...head} />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
         <script>
+            document.documentElement.classList.add('js');
             if (localStorage.theme === 'dark') {
                 document.documentElement.classList.add('dark');
             }
@@ -82,6 +83,28 @@ const { showHeader = true, ...head } = Astro.props;
                 });
 
                 updateCompanionState();
+            });
+        </script>
+        <script>
+            document.addEventListener('astro:page-load', () => {
+                const els = document.querySelectorAll('.reveal');
+                if (els.length === 0) return;
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    els.forEach((el) => el.classList.add('is-visible'));
+                    return;
+                }
+                const io = new IntersectionObserver(
+                    (entries, observer) => {
+                        for (const entry of entries) {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('is-visible');
+                                observer.unobserve(entry.target);
+                            }
+                        }
+                    },
+                    { rootMargin: '0px 0px -10% 0px' }
+                );
+                els.forEach((el) => io.observe(el));
             });
         </script>
     </body>

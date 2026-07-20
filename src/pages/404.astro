@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PixelAvatar from '../components/PixelAvatar.astro';
+---
+
+<BaseLayout title="404" description="Page not found" showHeader={false}>
+    <section class="flex flex-col items-center gap-6 py-12 text-center sm:py-20">
+        <PixelAvatar />
+        <h1 class="text-3xl leading-tight font-display heading-accent [&::after]:mx-auto sm:text-5xl">Lost?</h1>
+        <p class="max-w-[36ch] text-muted">This page isn't on the board. Maybe it never was.</p>
+        <a class="text-sm font-medium text-accent hover:underline hover:underline-offset-4" href="/">take me home</a>
+    </section>
+</BaseLayout>

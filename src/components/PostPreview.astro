@@ -1,38 +1,25 @@
 ---
 import { type CollectionEntry } from 'astro:content';
-import ArrowRight from '../icons/ArrowRight.astro';
-import FormattedDate from './FormattedDate.astro';
 
 type Props = { post: CollectionEntry<'blog'>; class?: string; headingLevel?: 'h2' | 'h3' };
 
 const { post, class: className, headingLevel = 'h2' } = Astro.props;
-const { title, publishDate, updatedDate, excerpt } = post.data;
+const { title, publishDate, excerpt } = post.data;
 const TitleTag = headingLevel;
+
+const dateLabel = publishDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+const words = (post.body ?? '').split(/\s+/).filter(Boolean).length;
+const readingMinutes = Math.max(1, Math.round(words / 220));
 ---
 
-<a class:list={['flex justify-between items-start gap-8 group', className]} href={`/blog/${post.id}/`}>
-    <div class="grow">
-        <TitleTag
-            class="text-xl leading-tight font-medium group-hover:underline group-hover:decoration-dashed group-hover:underline-offset-4 group-hover:decoration-1 sm:text-2xl"
-        >
-            {title}
-        </TitleTag>
-        <div class="mt-1 text-sm leading-normal">
-            <FormattedDate date={publishDate} />
-            {
-                updatedDate && (
-                    <>
-                        {' '}
-                        <span>
-                            (Updated on <FormattedDate date={updatedDate} />)
-                        </span>
-                    </>
-                )
-            }
-        </div>
-        {excerpt && <div class="mt-3 text-sm leading-normal">{excerpt}</div>}
+<a class:list={['planner-row grid grid-cols-[5.5rem_1fr] items-baseline gap-4 py-5', className]} href={`/blog/${post.id}/`}>
+    <div class="relative text-xs uppercase tracking-wide text-muted [font-variant-numeric:tabular-nums]">
+        <span class="planner-tick" aria-hidden="true"></span>
+        {dateLabel}
     </div>
-    <div class="hidden text-sm font-medium opacity-0 transition group-hover:opacity-100 sm:inline-flex sm:gap-1 sm:items-center sm:shrink-0">
-        Read Post <ArrowRight class="fill-current w-4 h-4" />
+    <div class="min-w-0">
+        <TitleTag class="planner-title text-lg leading-snug font-medium">{title}</TitleTag>
+        {excerpt && <div class="mt-1 truncate text-sm text-muted">{excerpt}</div>}
+        <div class="mt-1 text-xs text-muted">{readingMinutes} min read</div>
     </div>
 </a>

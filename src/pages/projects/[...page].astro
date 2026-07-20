@@ -1,21 +1,17 @@
 ---
-import type { GetStaticPathsOptions, Page } from 'astro';
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Pagination from '../../components/Pagination.astro';
 import ProjectPreview from '../../components/ProjectPreview.astro';
-import siteConfig from '../../data/site-config';
 import { sortItemsByDateDesc } from '../../utils/data-utils';
 
-export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+export async function getStaticPaths() {
     const projects = (await getCollection('projects')).sort(sortItemsByDateDesc);
-    return paginate(projects, { pageSize: siteConfig.projectsPerPage || 6 });
+    return [{ params: { page: undefined }, props: { projects } }];
 }
 
-type Props = { page: Page<CollectionEntry<'projects'>> };
+type Props = { projects: CollectionEntry<'projects'>[] };
 
-const { page } = Astro.props;
-const portfolio = page.data;
+const { projects } = Astro.props;
 ---
 
 <BaseLayout
@@ -25,6 +21,7 @@ const portfolio = page.data;
     showHeader={false}
 >
     <h1 class="mb-12 text-xl leading-tight font-display heading-accent sm:mb-16 sm:text-3xl">Projects</h1>
-    {portfolio.map((project) => <ProjectPreview project={project} class="mb-10 sm:mb-12" />)}
-    <Pagination page={page} class="my-16 sm:my-24" />
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        {projects.map((project) => <ProjectPreview project={project} class="reveal" />)}
+    </div>
 </BaseLayout>

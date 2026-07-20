@@ -26,7 +26,9 @@ const blog = page.data;
     showHeader={false}
 >
     <h1 class="mb-12 text-xl leading-tight font-display heading-accent sm:mb-16 sm:text-3xl">Blog Archive</h1>
-    {blog.map((post) => <PostPreview post={post} class="mb-10 sm:mb-12" />)}
+    <div class="planner-list">
+        {blog.map((post) => <PostPreview post={post} class="reveal" />)}
+    </div>
     <Pagination page={page} class="my-16 sm:my-24" />
     <Subscribe class="my-16 sm:my-24" />
 </BaseLayout>

@@ -10,12 +10,14 @@ const { class: className } = Astro.props;
     class:list={['pixel-avatar', className]}
     role="img"
     aria-label="Pixel art avatar of Pranav that puts on headphones when hovered"
-    title="Hover me"
 >
 </div>
 
 <style>
-    /* 5-frame sprite sheet (P1–P5 appended horizontally): idle → grab → lift → place → worn */
+    /* 5-frame sprite sheet (P1–P5 appended horizontally): idle → grab → lift → place → worn.
+       A steps() TRANSITION (not a keyframe animation) so un-hovering walks the
+       frames backward to idle instead of snapping. `.worn` is toggled by tap on
+       touch devices, where hover doesn't exist. */
     .pixel-avatar {
         width: 10rem;
         height: 10rem;
@@ -25,6 +27,7 @@ const { class: className } = Astro.props;
         background-position: 0% 0;
         background-repeat: no-repeat;
         image-rendering: pixelated;
+        transition: background-position 0.7s steps(4);
     }
 
     @media (min-width: 640px) {
@@ -34,26 +37,25 @@ const { class: className } = Astro.props;
         }
     }
 
-    /* steps(4) walks the 4 frame boundaries; forwards holds "worn".
-       Un-hovering removes the animation, snapping back to idle. */
-    .pixel-avatar:hover {
-        animation: avatar-headphones 0.7s steps(4) forwards;
-    }
-
-    @keyframes avatar-headphones {
-        from {
-            background-position: 0% 0;
-        }
-        to {
-            background-position: 100% 0;
-        }
+    .pixel-avatar:hover,
+    .pixel-avatar.worn {
+        background-position: 100% 0;
     }
 
     @media (prefers-reduced-motion: reduce) {
         .pixel-avatar,
         .pixel-avatar:hover {
-            animation: none;
+            transition: none;
             background-position: 100% 0; /* headphones on, no motion */
         }
     }
 </style>
+
+<script>
+    document.addEventListener('astro:page-load', () => {
+        if (!window.matchMedia('(hover: none)').matches) return;
+        document.querySelectorAll('.pixel-avatar').forEach((el) => {
+            el.addEventListener('click', () => el.classList.toggle('worn'));
+        });
+    });
+</script>

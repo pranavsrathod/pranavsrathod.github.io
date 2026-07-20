@@ -36,6 +36,11 @@ html.dark {
         background-image: radial-gradient(var(--dot-grid) 1px, transparent 1px);
         background-size: 24px 24px;
     }
+
+    ::selection {
+        background-color: var(--accent);
+        color: var(--bg-main);
+    }
 }
 
 /* Cyan */
@@ -103,6 +108,131 @@ html.dark {
 
     .prose a {
         @apply underline font-normal decoration-1 underline-offset-2 decoration-dashed hover:decoration-solid hover:text-accent;
+    }
+
+    /* Scroll reveal. Hidden state only applies once JS has stamped .js on <html>
+       (inline script in BaseLayout head), so content stays visible without JS.
+       Reveal uses `transform`; cards use the separate rotate/translate properties,
+       so the two compose instead of fighting. */
+    @media (prefers-reduced-motion: no-preference) {
+        .js .reveal {
+            opacity: 0;
+            transform: translateY(12px);
+            transition:
+                opacity 0.5s ease,
+                transform 0.5s ease;
+        }
+        .js .reveal:nth-child(even) {
+            transition-delay: 90ms;
+        }
+        .js .reveal.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    /* Index cards on the board: alternating tilt, tape strip, lift on hover */
+    .project-card {
+        rotate: 0.7deg;
+        transition:
+            rotate 0.2s ease,
+            translate 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+    .project-card:nth-child(even) {
+        rotate: -0.7deg;
+    }
+    .project-card:hover {
+        rotate: 0deg;
+        translate: 0 -3px;
+        box-shadow: 0 14px 28px -12px var(--card-shadow);
+    }
+    .project-card::after {
+        content: '';
+        position: absolute;
+        top: -0.55rem;
+        left: 50%;
+        width: 3rem;
+        height: 1.1rem;
+        translate: -50% 0;
+        rotate: 1deg;
+        border-radius: 2px;
+        background-color: color-mix(in oklab, var(--accent) 28%, transparent);
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .project-card,
+        .project-card:nth-child(even),
+        .project-card:hover {
+            rotate: 0deg;
+            translate: 0 0;
+            transition: box-shadow 0.2s ease;
+        }
+    }
+
+    /* The one empty slot on the board: dashed outline, flat (only pinned cards
+       tilt and get tape), quiet until hovered */
+    .view-all-card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 8rem;
+        border-radius: 0.5rem;
+        border: 1.5px dashed color-mix(in oklab, var(--border-main) 35%, transparent);
+        color: var(--text-muted);
+        transition:
+            border-color 0.2s ease,
+            color 0.2s ease;
+    }
+    .view-all-card:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+    /* Planner list: dashed ruled lines between entries */
+    .planner-list > :not(:last-child) {
+        border-bottom: 1px dashed color-mix(in oklab, var(--border-main) 30%, transparent);
+    }
+
+    /* Planner rows: accent tick in the date gutter + nav-style title underline */
+    .planner-tick {
+        position: absolute;
+        left: -0.875rem;
+        top: 50%;
+        width: 8px;
+        height: 2px;
+        border-radius: 9999px;
+        background-color: var(--accent);
+        rotate: -20deg;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+    .planner-row:hover .planner-tick {
+        opacity: 1;
+    }
+    .planner-title {
+        position: relative;
+        display: inline-block;
+    }
+    .planner-title::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -3px;
+        height: 2px;
+        background-color: var(--accent);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.2s ease;
+    }
+    .planner-row:hover .planner-title::after {
+        transform: scaleX(1);
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .planner-title::after,
+        .planner-tick {
+            transition: none;
+        }
     }
 
     /* Short accent bar under display headings — slightly askew, like a marker stroke */
