@@ -3,10 +3,13 @@ import { type CollectionEntry, render } from 'astro:content';
 import Button from '../components/Button.astro';
 import Callout from '../components/Callout.astro';
 import Compare from '../components/Compare.astro';
+import ContactSheet from '../components/ContactSheet.astro';
+import FilmstripViewer from '../components/FilmstripViewer.astro';
 import Gallery from '../components/Gallery.astro';
 import InteractiveDashboard from '../components/InteractiveDashboard.astro';
 import MediaEmbed from '../components/MediaEmbed.astro';
 import ProjectPreview from '../components/ProjectPreview.astro';
+import TogglePanels from '../components/TogglePanels.astro';
 import BaseLayout from './BaseLayout.astro';
 
 type Props = {
@@ -90,7 +93,7 @@ const specCols = [primaryCategory, true, role, tools.length > 0, links].filter(B
         </dl>
 
         <div class="max-w-none prose sm:prose-lg">
-            <Content components={{ InteractiveDashboard, Compare, Gallery, MediaEmbed, Callout, Button }} />
+            <Content components={{ InteractiveDashboard, Compare, Gallery, MediaEmbed, Callout, Button, FilmstripViewer, ContactSheet, TogglePanels }} />
         </div>
     </article>
     {(prevProject || nextProject) && (
