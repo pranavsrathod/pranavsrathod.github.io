@@ -12,7 +12,7 @@ const { title, description, poster, tags = [] } = project.data;
 const TitleTag = headingLevel;
 ---
 
-<a class:list={['project-card relative flex flex-col rounded-lg border border-main/20 bg-muted', className]} href={`/projects/${project.id}/`}>
+<a class:list={['project-card flex flex-col rounded-xl bg-muted', className]} href={`/projects/${project.id}/`}>
     {poster && (
         <div class="overflow-hidden rounded-t-lg">
             <img class="w-full aspect-video object-cover" src={poster} alt="" loading="lazy" decoding="async" />
@@ -20,7 +20,7 @@ const TitleTag = headingLevel;
     )}
     <div class="flex flex-col gap-2 p-4 sm:p-5">
         <TitleTag class="text-lg leading-snug font-semibold">{title}</TitleTag>
-        {description && <div class="text-sm leading-normal line-clamp-2">{description}</div>}
+        {description && <div class="text-sm leading-normal">{description}</div>}
         {tags.length > 0 && (
             <div class="mt-1 flex flex-wrap gap-2">
                 {tags.map((tag) => (
