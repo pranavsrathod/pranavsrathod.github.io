@@ -18,6 +18,9 @@
     --dot-grid: rgba(28, 25, 23, 0.1);
     --accent: #c73e1d;
     --card-shadow: rgba(28, 25, 23, 0.15);
+    --film-accent: #e8a33d;
+    --film-chrome: #1c1a17;
+    --film-paper-on-chrome: rgba(245, 242, 234, 0.92);
 }
 /* Night: whiteboard-at-night navy, same grid barely visible */
 html.dark {
@@ -29,6 +32,9 @@ html.dark {
     --dot-grid: rgba(255, 255, 255, 0.07);
     --accent: #ff7a50;
     --card-shadow: rgba(6, 10, 20, 0.6);
+    --film-accent: #e8a33d;
+    --film-chrome: #1c1a17;
+    --film-paper-on-chrome: rgba(245, 242, 234, 0.92);
 }
 
 @layer base {
@@ -303,6 +309,29 @@ html.dark {
         background-color: var(--bg-muted);
         background-image: radial-gradient(var(--dot-grid) 1px, transparent 1px);
         background-size: 16px 16px;
+    }
+
+    /* ── Film system (rayTracer page): sprockets, edge codes, negatives ── */
+    .film-sprockets {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.3rem 0.6rem;
+    }
+    .film-sprockets i {
+        width: 0.85rem;
+        height: 0.55rem;
+        background-color: var(--film-paper-on-chrome);
+        border-radius: 0.125rem;
+    }
+    .film-edgecode {
+        font-family: var(--font-mono, ui-monospace, monospace);
+        font-size: 0.625rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--film-accent);
+    }
+    .film-negative {
+        filter: invert(1) hue-rotate(180deg) contrast(0.85) brightness(0.5);
     }
 
     /* Short accent bar under display headings — slightly askew, like a marker stroke */
