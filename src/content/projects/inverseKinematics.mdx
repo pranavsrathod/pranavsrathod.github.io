@@ -2,18 +2,17 @@
 title: "Inverse Kinematics and Skeleton Skinning"
 description: "Built an inverse kinematics solver with support for two-bone chains, animation blending, and skinning for deformable characters in real-time using a simple joint system."
 publishDate: "April 20, 2025"
-poster: "/CS520/3/inverseKinematics.png"  # To be added later
+poster: "/CS520/3/inverseKinematics.png"
 isFeatured: false
+category: "Character Animation"
+role: "Solo project"
+links:
+  github: "https://github.com/pranavsrathod/InverseKinematics"
 seo:
   image:
     src: "/CS520/3/inverseKinematics.png"
     alt: "Inverse Kinematics Demo"
 ---
-
-**Real-time skeletal control using Inverse Kinematics**  
-_Pranav Rathod_
-
-**Date:** April 20, 2025
 
 Inverse Kinematics (IK) plays a fundamental role in animation and character control, whether it's getting a game character's hand to reach a doorknob or a robot's foot to plant properly on uneven terrain. Unlike forward kinematics (FK), where transformations are applied down the joint chain from parent to child, IK solves for joint angles *given a desired end-effector position*. This reverse direction of computation enables more intuitive control and dynamic responsiveness in both games and films.
 
@@ -21,7 +20,7 @@ Inverse Kinematics (IK) plays a fundamental role in animation and character cont
 
 Here's a video demonstration of the IK solver in action:
 
-<iframe width=100% height="500" src="https://www.youtube.com/embed/NvYSi-8Ig9E?si=oTxRuuYoLECCvOul" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<MediaEmbed src="https://www.youtube.com/embed/NvYSi-8Ig9E?si=oTxRuuYoLECCvOul" title="Inverse kinematics solver demo" />
 
 ## Source Code
 
@@ -63,7 +62,7 @@ Other common strategies include Jacobian pseudo-inverse and damped least squares
 
 ## What I Built
 
--This project involved designing and implementing:
+This project involved designing and implementing:
 - A two-joint IK solver that positions the end effector to a given target using iterative Jacobian-based updates.
 - Blending between FK and IK to allow smooth transitions and user control.
 - A skinning system where mesh vertices deform in response to the joint transformations, simulating character movement more realistically.

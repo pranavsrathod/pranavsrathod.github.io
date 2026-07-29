@@ -235,6 +235,76 @@ html.dark {
         }
     }
 
+    /* Full-bleed hero media, pinned to the page like a photo taped to a case file */
+    .hero-bleed {
+        position: relative;
+        left: 50%;
+        width: 100vw;
+        transform: translateX(-50%);
+        overflow-x: clip;
+    }
+    .hero-tape::after {
+        content: '';
+        position: absolute;
+        top: -0.75rem;
+        left: 50%;
+        width: 5.5rem;
+        height: 1.75rem;
+        translate: -50% 0;
+        rotate: -1.25deg;
+        border-radius: 2px;
+        background-color: color-mix(in oklab, var(--accent) 28%, transparent);
+    }
+
+    /* Spec strip: index-card metadata band under the hero, dashed dividers like the planner list */
+    .spec-strip {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        gap: 0.75rem 1.5rem;
+    }
+    @media (min-width: 640px) {
+        .spec-strip {
+            grid-template-columns: repeat(var(--spec-strip-cols, 4), minmax(0, 1fr));
+        }
+    }
+    .spec-strip > div {
+        padding-bottom: 0.75rem;
+        border-bottom: 1px dashed color-mix(in oklab, var(--border-main) 30%, transparent);
+    }
+    @media (min-width: 640px) {
+        .spec-strip > div {
+            padding-bottom: 0;
+            padding-left: 1rem;
+            border-bottom: none;
+            border-left: 1px dashed color-mix(in oklab, var(--border-main) 30%, transparent);
+        }
+        .spec-strip > div:first-child {
+            padding-left: 0;
+            border-left: none;
+        }
+    }
+    .spec-strip dt {
+        font-family: var(--font-sans);
+        font-size: 0.6875rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+    }
+    .spec-strip dd {
+        margin-top: 0.25rem;
+    }
+
+    /* Margin-note callout: paper-card texture at a smaller scale */
+    .callout {
+        position: relative;
+        border-radius: 0.5rem;
+        border-left: 4px solid var(--accent);
+        background-color: var(--bg-muted);
+        background-image: radial-gradient(var(--dot-grid) 1px, transparent 1px);
+        background-size: 16px 16px;
+    }
+
     /* Short accent bar under display headings — slightly askew, like a marker stroke */
     .heading-accent::after {
         content: '';
