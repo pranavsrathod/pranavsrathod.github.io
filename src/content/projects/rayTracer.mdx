@@ -25,61 +25,55 @@ The ray tracer foundation implements Phong shading, shadow rays, and sphere/tria
 
 Full source code on [GitHub](https://github.com/pranavsrathod/Ray-Tracing), with branches for [antialiasing](https://github.com/pranavsrathod/Ray-Tracing/tree/antialiasing), [recursive reflections](https://github.com/pranavsrathod/Ray-Tracing/tree/reflections), and [path tracing](https://github.com/pranavsrathod/Ray-Tracing/tree/path-tracer).
 
-export const ptTechniqueSections = [
+export const ptRolls = [
   {
-    id: "techniques",
-    label: "Techniques",
-    type: "cards",
-    cards: [
+    id: "pt",
+    label: "Path Tracer",
+    frames: [
       {
         image: { src: "/CS420/rayTracing/PathTracing/512/SIGGRAPH.jpg", alt: "SIGGRAPH path trace" },
+        caption: "SIGGRAPH · 512 spp",
+        edgecode: "PT-512 ▸ FRAME 01 ▸ global illumination",
         title: "Monte Carlo Path Tracing",
         desc: "The rendering equation describes how light accumulates at a point by integrating incoming radiance over the hemisphere. Monte Carlo integration approximates this integral by averaging many random ray samples, each sample traces a full light path through the scene, bouncing off surfaces and accumulating color.",
-        details: [
-          { label: "Focus", value: "global illumination" },
-          { label: "Formula", value: "L_o = L_e + ∫ f_r · L_i · cosθ dω" },
-          { label: "Note", value: "f_r is the BRDF, L_i is incoming radiance, cosθ is the angle to the surface normal." }
-        ]
+        formula: "L_o = L_e + ∫ f_r · L_i · cosθ dω",
+        note: "f_r is the BRDF, L_i is incoming radiance, cosθ is the angle to the surface normal."
       },
       {
         image: { src: "/CS420/rayTracing/PathTracing/512/snow.jpg", alt: "Snow path trace" },
+        caption: "Snow · 512 spp",
+        edgecode: "PT-512 ▸ FRAME 02 ▸ importance sampling",
         title: "Cosine-Weighted Hemisphere Sampling",
         desc: "Uniform hemisphere sampling wastes samples on directions that contribute little energy. Cosine-weighted sampling concentrates samples near the surface normal where the cosine term is largest, reducing variance without bias. The PDF cancels cleanly against the cosine term in the rendering equation.",
-        details: [
-          { label: "Focus", value: "importance sampling" },
-          { label: "Formula", value: "pdf(ω) = cosθ / π" },
-          { label: "Note", value: "Sampling proportional to cosθ means the pdf cancels the cosine term, leaving just the BRDF contribution." }
-        ]
+        formula: "pdf(ω) = cosθ / π",
+        note: "Sampling proportional to cosθ means the pdf cancels the cosine term, leaving just the BRDF contribution."
       },
       {
         image: { src: "/CS420/rayTracing/PathTracing/512/spheres.jpg", alt: "Spheres path trace" },
+        caption: "Spheres · 512 spp",
+        edgecode: "PT-512 ▸ FRAME 03 ▸ russian roulette",
         title: "Russian Roulette Termination",
         desc: "Truncating paths at a fixed depth introduces bias. Russian Roulette instead terminates paths probabilistically based on albedo brightness, high-albedo surfaces survive more often, low-albedo paths terminate early. Surviving paths are divided by their survival probability to keep the estimator unbiased.",
-        details: [
-          { label: "Focus", value: "russian roulette" },
-          { label: "Formula", value: "L = L_direct + (albedo · L_indirect) / p_survive" },
-          { label: "Note", value: "p_survive is clamped between 0.1 and 0.95 based on the max albedo channel." }
-        ]
+        formula: "L = L_direct + (albedo · L_indirect) / p_survive",
+        note: "p_survive is clamped between 0.1 and 0.95 based on the max albedo channel."
       },
       {
         image: { src: "/CS420/rayTracing/PathTracing/512/table.jpg", alt: "Table path trace" },
+        caption: "Table · 512 spp",
+        edgecode: "PT-512 ▸ FRAME 04 ▸ next event estimation",
         title: "Next Event Estimation",
         desc: "Pure path tracing rarely hits light sources by random sampling, causing high variance. Next Event Estimation (NEE) explicitly samples each light at every bounce, combining direct lighting with the indirect bounce. This dramatically reduces noise, especially in scenes with small or distant lights.",
-        details: [
-          { label: "Focus", value: "next event estimation" },
-          { label: "Formula", value: "L = L_direct(NEE) + albedo · L_indirect" },
-          { label: "Note", value: "Direct light is computed by shadow ray to each point light. Indirect comes from the random bounce." }
-        ]
+        formula: "L = L_direct(NEE) + albedo · L_indirect",
+        note: "Direct light is computed by shadow ray to each point light. Indirect comes from the random bounce."
       },
       {
         image: { src: "/CS420/rayTracing/PathTracing/512/test2.jpg", alt: "Test2 path trace" },
+        caption: "Test2 · 512 spp",
+        edgecode: "PT-512 ▸ FRAME 05 ▸ anti-aliasing",
         title: "Jittered Per-Pixel Sampling",
         desc: "Rather than firing one ray through the exact pixel center, jittered sampling adds a random sub-pixel offset to each of the 64 or 512 samples. This distributes samples across the pixel area, simultaneously anti-aliasing edges and reducing noise compared to uniform sampling.",
-        details: [
-          { label: "Focus", value: "anti-aliasing" },
-          { label: "Formula", value: "color = (1/N) · Σ traceRay(x + ξx, y + ξy)" },
-          { label: "Note", value: "ξx and ξy are uniform random offsets in [0,1) per sample. N = 64 or 512." }
-        ]
+        formula: "color = (1/N) · Σ traceRay(x + ξx, y + ξy)",
+        note: "ξx and ξy are uniform random offsets in [0,1) per sample. N = 64 or 512."
       }
     ]
   }
@@ -179,40 +173,102 @@ export const reflectionRtStepDefs = [
   }
 ];
 
-export function toRtSteps(scene, defs) {
-  return defs.map((d) => ({
-    label: d.label,
-    sub: d.sub,
-    detail: d.detail,
-    details: d.details,
-    image: { src: `/CS420/rayTracing/${scene}/${d.file}`, alt: `${scene} - ${d.label}` }
+export function toRtFrames(scene, defs, startIndex = 0) {
+  return defs.map((d, i) => ({
+    image: { src: `/CS420/rayTracing/${scene}/${d.file}`, alt: `${scene} - ${d.label}` },
+    caption: `${scene} · stage ${startIndex + i + 1}`,
+    edgecode: `RT ▸ STAGE ${String(startIndex + i + 1).padStart(2, '0')} ▸ ${d.sub}`,
+    title: d.label,
+    desc: d.detail,
+    formula: d.details[0].value,
+    note: d.details[1].value
   }));
 }
 
-export const rtProgressionSections = [
-  { id: "snow", label: "Snow", type: "steps", steps: toRtSteps("Snow", baseRtStepDefs) },
-  { id: "spheres", label: "Spheres", type: "steps", steps: toRtSteps("Spheres", baseRtStepDefs) },
-  { id: "test2", label: "Test2", type: "steps", steps: [...toRtSteps("Test2", baseRtStepDefs), ...toRtSteps("Test2", reflectionRtStepDefs)] }
+export const rtRolls = [
+  { id: "snow", label: "Snow", frames: toRtFrames("Snow", baseRtStepDefs) },
+  { id: "spheres", label: "Spheres", frames: toRtFrames("Spheres", baseRtStepDefs) },
+  { id: "test2", label: "Test2", frames: [...toRtFrames("Test2", baseRtStepDefs), ...toRtFrames("Test2", reflectionRtStepDefs, 5)] }
 ];
 
-## Path Tracer
+export const ptFeatureCells = [
+  { title: "Monte Carlo Global Illumination", desc: "Each pixel samples 64 or 512 random light paths. Every path bounces up to 5 times, accumulating color from each surface it hits. The average of all samples approximates the rendering equation integral, producing physically accurate indirect lighting without precomputed light maps." },
+  { title: "Cosine-Weighted Hemisphere Sampling", desc: "Bounce directions are sampled proportionally to the cosine of the angle from the surface normal. This concentrates samples where they contribute most energy, reducing variance compared to uniform hemisphere sampling. The cosine term in the rendering equation cancels against the PDF, simplifying the estimator." },
+  { title: "Russian Roulette Termination", desc: "Paths are terminated probabilistically based on surface albedo rather than a fixed depth limit. High-albedo surfaces have a higher survival probability; low-albedo paths terminate early. Surviving paths divide their contribution by the survival probability to maintain an unbiased estimate." },
+  { title: "Next Event Estimation", desc: "At every bounce, a shadow ray is fired directly to each point light and its contribution is added to the path. This explicit direct lighting sampling dramatically reduces variance in the indirect lighting estimate, especially in scenes where random rays rarely hit light sources." },
+  { title: "Ray Tracer Foundation", desc: "The path tracer extends a from-scratch ray tracer implementing sphere and triangle intersection, Phong shading with barycentric normal interpolation, shadow rays, 2×2 supersampling anti-aliasing, and configurable-depth recursive reflections - all built without reliance on existing rendering engines." }
+];
 
-<InteractiveDashboard id="pt-techniques" sections={ptTechniqueSections} />
+export const rtFeatureCells = [
+  { title: "Ray Generation", desc: "For every pixel in a 640x480 image, a ray is fired from the camera into the scene. The direction of each ray is computed from the field of view and aspect ratio, mapping screen coordinates into 3D camera space." },
+  { title: "Geometry Intersection", desc: "Two primitive types are supported. Spheres use a quadratic intersection formula, solving for where the ray meets the sphere surface. Triangles use a plane intersection followed by a barycentric coordinate test to confirm the hit lands inside the triangle boundary. The same barycentric weights are reused later for smooth shading." },
+  { title: "Phong Illumination", desc: "Lighting is computed per hit point using the Phong model, combining an ambient base, a diffuse term that responds to the angle between the surface and light, and a specular highlight that sharpens on glossy materials. Triangle surfaces interpolate normals and material properties across the surface using barycentric coordinates, giving smooth gradients instead of flat facets." },
+  { title: "Shadow Rays", desc: "After every surface hit, a secondary ray is fired toward each light source. If any geometry blocks the path, that light is excluded from the final color. Scenes with multiple lights produce partial shadows correctly." },
+  { title: "Extensions", desc: "Two extra features were implemented in separate branches. Antialiasing fires a 2x2 grid of rays per pixel and averages the result, smoothing jagged silhouette edges. Recursive reflections bounce rays off surfaces up to a configurable depth, blending reflected scene color with local Phong shading weighted by the surface's specular value." }
+];
 
-<Compare
-  id="spp"
-  eyebrow="sample count comparison"
-  title="64 spp vs 512 spp"
-  beforeLabel="64 spp"
-  afterLabel="512 spp"
-  scenes={sppCompareScenes}
-/>
+export const repoCells = [
+  {
+    title: "Path-Tracing",
+    desc: "Full Monte Carlo path tracer with cosine-weighted sampling, Russian Roulette termination, Next Event Estimation, and 64/512 spp jittered sampling.",
+    href: "https://github.com/pranavsrathod/Ray-Tracing/tree/path-tracer",
+    details: [
+      { label: "Branch", value: "path-tracer" },
+      { label: "Tags", value: "C++, Global Illumination, Monte Carlo" }
+    ]
+  },
+  {
+    title: "Ray-Tracing (main)",
+    desc: "Core ray tracer - ray generation, sphere and triangle intersection, Phong shading, and shadow rays. Built in C++ from scratch.",
+    href: "https://github.com/pranavsrathod/Ray-Tracing",
+    details: [
+      { label: "Branch", value: "main" },
+      { label: "Tags", value: "C++, OpenGL, GLUT" }
+    ]
+  },
+  {
+    title: "Ray-Tracing (antialiasing)",
+    desc: "2×2 grid supersampling - fires four rays per pixel and averages the result, smoothing jagged edges on curved surfaces.",
+    href: "https://github.com/pranavsrathod/Ray-Tracing/tree/antialiasing",
+    details: [
+      { label: "Branch", value: "antialiasing" },
+      { label: "Tags", value: "Supersampling" }
+    ]
+  },
+  {
+    title: "Ray-Tracing (reflections)",
+    desc: "Recursive reflection rays with configurable bounce depth. Final color blends local Phong shading with reflected scene color weighted by the surface's specular value.",
+    href: "https://github.com/pranavsrathod/Ray-Tracing/tree/reflections",
+    details: [
+      { label: "Branch", value: "reflections" },
+      { label: "Tags", value: "Recursion" }
+    ]
+  }
+];
 
-## Ray Tracer
+## Renderer Viewer
 
-<InteractiveDashboard id="rt-progression" sections={rtProgressionSections} />
+<TogglePanels id="renderer" labels={["Path Tracer", "Ray Tracer"]}>
+  <div slot="a">
+    <FilmstripViewer id="pt" eyebrow="REEL A ▸ PATH TRACER" rolls={ptRolls} />
+    <Compare
+      id="spp"
+      variant="film"
+      eyebrow="REEL A ▸ SAMPLE COUNT"
+      title="64 spp vs 512 spp"
+      beforeLabel="64 spp"
+      afterLabel="512 spp"
+      scenes={sppCompareScenes}
+    />
+  </div>
+  <div slot="b">
+    <FilmstripViewer id="rt" eyebrow="REEL B ▸ RAY TRACER" rolls={rtRolls} />
+  </div>
+</TogglePanels>
 
 ---
+
+<div class="film-edgecode not-prose">REEL A ▸ WHAT IS A PATH TRACER?</div>
 
 ## What Is a Path Tracer?
 
@@ -224,26 +280,15 @@ The key tradeoff is noise. Each pixel is estimated by averaging many independent
 
 ---
 
+<div class="film-edgecode not-prose">REEL A ▸ CORE FEATURES</div>
+
 ## Core Features
 
-export const ptFeatureSections = [
-  {
-    id: "pt-features",
-    label: "Path Tracer",
-    type: "cards",
-    cards: [
-      { icon: "layers", title: "Monte Carlo Global Illumination", desc: "Each pixel samples 64 or 512 random light paths. Every path bounces up to 5 times, accumulating color from each surface it hits. The average of all samples approximates the rendering equation integral, producing physically accurate indirect lighting without precomputed light maps." },
-      { icon: "math", title: "Cosine-Weighted Hemisphere Sampling", desc: "Bounce directions are sampled proportionally to the cosine of the angle from the surface normal. This concentrates samples where they contribute most energy, reducing variance compared to uniform hemisphere sampling. The cosine term in the rendering equation cancels against the PDF, simplifying the estimator." },
-      { icon: "settings", title: "Russian Roulette Termination", desc: "Paths are terminated probabilistically based on surface albedo rather than a fixed depth limit. High-albedo surfaces have a higher survival probability; low-albedo paths terminate early. Surviving paths divide their contribution by the survival probability to maintain an unbiased estimate." },
-      { icon: "cpu", title: "Next Event Estimation", desc: "At every bounce, a shadow ray is fired directly to each point light and its contribution is added to the path. This explicit direct lighting sampling dramatically reduces variance in the indirect lighting estimate, especially in scenes where random rays rarely hit light sources." },
-      { icon: "code", title: "Ray Tracer Foundation", desc: "The path tracer extends a from-scratch ray tracer implementing sphere and triangle intersection, Phong shading with barycentric normal interpolation, shadow rays, 2×2 supersampling anti-aliasing, and configurable-depth recursive reflections - all built without reliance on existing rendering engines." }
-    ]
-  }
-];
-
-<InteractiveDashboard id="pt-core-features" sections={ptFeatureSections} />
+<ContactSheet id="pt-features" eyebrow="CONTACT SHEET ▸ PATH TRACER" cells={ptFeatureCells} />
 
 ---
+
+<div class="film-edgecode not-prose">REEL B ▸ WHAT IS A RAY TRACER?</div>
 
 ## What Is a Ray Tracer?
 
@@ -258,26 +303,15 @@ Most real-time graphics use a faster technique called rasterization instead. Whi
 
 *Sources: [NVIDIA Blog](https://blogs.nvidia.com/blog/whats-difference-between-ray-tracing-rasterization/), [Wikipedia](https://en.wikipedia.org/wiki/Ray_tracing_(graphics)), [Scratchapixel](https://www.scratchapixel.com/lessons/3d-basic-rendering/ray-tracing-generating-camera-rays/generating-camera-rays.html)*
 
+<div class="film-edgecode not-prose">REEL B ▸ CORE FEATURES</div>
+
 ## Core Features
 
-export const rtFeatureSections = [
-  {
-    id: "rt-features",
-    label: "Ray Tracer",
-    type: "cards",
-    cards: [
-      { icon: "code", title: "Ray Generation", desc: "For every pixel in a 640x480 image, a ray is fired from the camera into the scene. The direction of each ray is computed from the field of view and aspect ratio, mapping screen coordinates into 3D camera space." },
-      { icon: "layers", title: "Geometry Intersection", desc: "Two primitive types are supported. Spheres use a quadratic intersection formula, solving for where the ray meets the sphere surface. Triangles use a plane intersection followed by a barycentric coordinate test to confirm the hit lands inside the triangle boundary. The same barycentric weights are reused later for smooth shading." },
-      { icon: "eye", title: "Phong Illumination", desc: "Lighting is computed per hit point using the Phong model, combining an ambient base, a diffuse term that responds to the angle between the surface and light, and a specular highlight that sharpens on glossy materials. Triangle surfaces interpolate normals and material properties across the surface using barycentric coordinates, giving smooth gradients instead of flat facets." },
-      { icon: "terminal", title: "Shadow Rays", desc: "After every surface hit, a secondary ray is fired toward each light source. If any geometry blocks the path, that light is excluded from the final color. Scenes with multiple lights produce partial shadows correctly." },
-      { icon: "git", title: "Extensions", desc: "Two extra features were implemented in separate branches. Antialiasing fires a 2x2 grid of rays per pixel and averages the result, smoothing jagged silhouette edges. Recursive reflections bounce rays off surfaces up to a configurable depth, blending reflected scene color with local Phong shading weighted by the surface's specular value." }
-    ]
-  }
-];
-
-<InteractiveDashboard id="rt-core-features" sections={rtFeatureSections} />
+<ContactSheet id="rt-features" eyebrow="CONTACT SHEET ▸ RAY TRACER" cells={rtFeatureCells} />
 
 ---
+
+<div class="film-edgecode not-prose">INDEX ▸ APPLICATIONS AND TRADEOFFS</div>
 
 ## Applications and Tradeoffs
 
@@ -299,56 +333,8 @@ Building this renderer made those tradeoffs tangible. Every feature added - shad
 
 ---
 
+<div class="film-edgecode not-prose">INDEX ▸ SOURCE CODE</div>
+
 ## Source Code
 
-export const repoSections = [
-  {
-    id: "repos",
-    label: "Repositories",
-    type: "cards",
-    cards: [
-      {
-        icon: "github",
-        title: "Path-Tracing",
-        desc: "Full Monte Carlo path tracer with cosine-weighted sampling, Russian Roulette termination, Next Event Estimation, and 64/512 spp jittered sampling.",
-        details: [
-          { label: "Branch", value: "path-tracer" },
-          { label: "Tags", value: "C++, Global Illumination, Monte Carlo" }
-        ],
-        actions: [{ icon: "github", href: "https://github.com/pranavsrathod/Ray-Tracing/tree/path-tracer", label: "View" }]
-      },
-      {
-        icon: "github",
-        title: "Ray-Tracing (main)",
-        desc: "Core ray tracer - ray generation, sphere and triangle intersection, Phong shading, and shadow rays. Built in C++ from scratch.",
-        details: [
-          { label: "Branch", value: "main" },
-          { label: "Tags", value: "C++, OpenGL, GLUT" }
-        ],
-        actions: [{ icon: "github", href: "https://github.com/pranavsrathod/Ray-Tracing", label: "View" }]
-      },
-      {
-        icon: "github",
-        title: "Ray-Tracing (antialiasing)",
-        desc: "2×2 grid supersampling - fires four rays per pixel and averages the result, smoothing jagged edges on curved surfaces.",
-        details: [
-          { label: "Branch", value: "antialiasing" },
-          { label: "Tags", value: "Supersampling" }
-        ],
-        actions: [{ icon: "github", href: "https://github.com/pranavsrathod/Ray-Tracing/tree/antialiasing", label: "View" }]
-      },
-      {
-        icon: "github",
-        title: "Ray-Tracing (reflections)",
-        desc: "Recursive reflection rays with configurable bounce depth. Final color blends local Phong shading with reflected scene color weighted by specularity.",
-        details: [
-          { label: "Branch", value: "reflections" },
-          { label: "Tags", value: "Recursion" }
-        ],
-        actions: [{ icon: "github", href: "https://github.com/pranavsrathod/Ray-Tracing/tree/reflections", label: "View" }]
-      }
-    ]
-  }
-];
-
-<InteractiveDashboard id="source-repos" sections={repoSections} />
+<ContactSheet id="repos" eyebrow="CONTACT SHEET ▸ REPOSITORIES" cells={repoCells} />
