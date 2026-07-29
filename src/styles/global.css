@@ -243,6 +243,30 @@ html.dark {
         transform: translateX(-50%);
         overflow-x: clip;
     }
+
+    /* Bottom-of-hero scroll hint: bobs gently, hides once the reader moves */
+    .hero-scroll-cue {
+        animation: hero-cue-bob 2.2s ease-in-out infinite;
+        transition: opacity 0.4s ease;
+    }
+    .hero-scroll-cue.is-hidden {
+        opacity: 0;
+    }
+    @keyframes hero-cue-bob {
+        0%,
+        100% {
+            translate: 0 0;
+        }
+        50% {
+            translate: 0 6px;
+        }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .hero-scroll-cue {
+            animation: none;
+        }
+    }
+
     .hero-tape::after {
         content: '';
         position: absolute;

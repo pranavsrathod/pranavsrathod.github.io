@@ -37,6 +37,13 @@ const { class: className } = Astro.props;
         }
     }
 
+    @media (min-width: 1024px) {
+        .pixel-avatar {
+            width: 17rem;
+            height: 17rem;
+        }
+    }
+
     .pixel-avatar:hover,
     .pixel-avatar.worn {
         background-position: 100% 0;

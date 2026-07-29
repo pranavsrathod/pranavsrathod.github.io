@@ -10,35 +10,43 @@ const hero = siteConfig.hero;
 
 {
     (hero?.title || hero?.text || (hero?.actions && hero.actions.length > 0)) && (
-        <section class="w-full mb-12 sm:mb-20 flex flex-col-reverse items-center gap-8 text-center sm:flex-row sm:items-center sm:justify-between sm:gap-12 sm:text-left">
-            <div class="w-full min-w-0 flex flex-col items-center gap-5 sm:items-start">
-                <div class="flex flex-col gap-0.5">
-                    <span class="text-[0.8rem] font-medium uppercase tracking-widest">{siteConfig.title}</span>
-                    {siteConfig.subtitle && <span class="text-[0.8rem] tracking-wide text-muted">{siteConfig.subtitle.replaceAll('|', '/')}</span>}
-                </div>
-                {hero.title && (
-                    <h1 class="text-2xl leading-tight font-display heading-accent max-sm:[&::after]:mx-auto sm:text-4xl sm:leading-tight">{hero.title}</h1>
-                )}
-                {hero.text && <div class="max-w-[52ch] prose prose-sm sm:prose-base" set:html={marked.parse(hero.text)} />}
-                <a class="group inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline hover:underline-offset-4" href="/about">
-                    more about me <ArrowRight class="w-4 h-4 fill-current transition-transform group-hover:translate-x-0.5" />
-                </a>
-                {hero.actions && hero.actions.length > 0 && (
-                    <div class="flex flex-wrap justify-center gap-4 sm:justify-start">
-                        {hero.actions.map((action) => (
-                            <Button href={action.href}>{action.text}</Button>
-                        ))}
+        <section class="hero-bleed relative mb-12 sm:mb-20 flex flex-col justify-center px-4 md:px-8 min-h-[calc(100svh-5.5rem)] sm:min-h-[calc(100svh-7.5rem)] md:min-h-[calc(100svh-8.5rem)]">
+            <div class="mx-auto w-full max-w-5xl flex flex-col-reverse items-center gap-8 text-center sm:flex-row sm:items-center sm:justify-between sm:gap-12 sm:text-left">
+                <div class="w-full min-w-0 flex flex-col items-center gap-5 sm:items-start">
+                    <div class="flex flex-col gap-0.5">
+                        <span class="text-[0.8rem] font-medium uppercase tracking-widest">{siteConfig.title}</span>
+                        {siteConfig.subtitle && <span class="text-[0.8rem] tracking-wide text-muted">{siteConfig.subtitle.replaceAll('|', '/')}</span>}
                     </div>
-                )}
-            </div>
-            <div class="shrink-0 flex flex-col items-center">
-                <div class="avatar-card">
-                    <PixelAvatar />
+                    {hero.title && (
+                        <h1 class="text-3xl leading-tight font-display heading-accent max-sm:[&::after]:mx-auto sm:text-5xl sm:leading-tight lg:text-6xl lg:leading-tight">{hero.title}</h1>
+                    )}
+                    {hero.text && <div class="max-w-[52ch] prose prose-base sm:prose-lg" set:html={marked.parse(hero.text)} />}
+                    <a class="group inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline hover:underline-offset-4" href="/about">
+                        more about me <ArrowRight class="w-4 h-4 fill-current transition-transform group-hover:translate-x-0.5" />
+                    </a>
+                    {hero.actions && hero.actions.length > 0 && (
+                        <div class="flex flex-wrap justify-center gap-4 sm:justify-start">
+                            {hero.actions.map((action) => (
+                                <Button href={action.href}>{action.text}</Button>
+                            ))}
+                        </div>
+                    )}
                 </div>
-                <div class="avatar-baseline" aria-hidden="true"></div>
-                <p class="avatar-caption text-xs text-muted" aria-hidden="true">
-                    <span class="if-hover">hover me</span><span class="if-touch">tap me</span>
-                </p>
+                <div class="shrink-0 flex flex-col items-center">
+                    <div class="avatar-card">
+                        <PixelAvatar />
+                    </div>
+                    <div class="avatar-baseline" aria-hidden="true"></div>
+                    <p class="avatar-caption text-xs text-muted" aria-hidden="true">
+                        <span class="if-hover">hover me</span><span class="if-touch">tap me</span>
+                    </p>
+                </div>
+            </div>
+            <div class="hero-scroll-cue absolute inset-x-0 bottom-5 flex flex-col items-center gap-1" id="hero-scroll-cue" aria-hidden="true">
+                <span class="font-mono text-[0.625rem] uppercase tracking-[0.18em] text-muted">scroll</span>
+                <svg viewBox="0 0 24 24" class="h-4 w-4 text-accent" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+                </svg>
             </div>
         </section>
     )
@@ -98,3 +106,17 @@ const hero = siteConfig.hero;
         }
     }
 </style>
+
+<script>
+    document.addEventListener('astro:page-load', () => {
+        const cue = document.getElementById('hero-scroll-cue');
+        if (!cue || cue.dataset.initialized === 'true') return;
+        cue.dataset.initialized = 'true';
+
+        const onScroll = () => {
+            cue.classList.toggle('is-hidden', window.scrollY > 40);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+    });
+</script>
