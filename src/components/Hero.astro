@@ -110,13 +110,17 @@ const hero = siteConfig.hero;
 <script>
     document.addEventListener('astro:page-load', () => {
         const cue = document.getElementById('hero-scroll-cue');
-        if (!cue || cue.dataset.initialized === 'true') return;
-        cue.dataset.initialized = 'true';
-
-        const onScroll = () => {
-            cue.classList.toggle('is-hidden', window.scrollY > 40);
-        };
-        window.addEventListener('scroll', onScroll, { passive: true });
-        onScroll();
+        if (!cue) return;
+        cue.classList.toggle('is-hidden', window.scrollY > 40);
+        if ((window as any).heroCueBound) return;
+        (window as any).heroCueBound = true;
+        window.addEventListener(
+            'scroll',
+            () => {
+                const el = document.getElementById('hero-scroll-cue');
+                if (el) el.classList.toggle('is-hidden', window.scrollY > 40);
+            },
+            { passive: true }
+        );
     });
 </script>
