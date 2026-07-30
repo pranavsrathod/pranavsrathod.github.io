@@ -1,38 +1,32 @@
 ---
 import { type CollectionEntry } from 'astro:content';
-import ArrowRight from '../icons/ArrowRight.astro';
-import FormattedDate from './FormattedDate.astro';
 
 type Props = { post: CollectionEntry<'blog'>; class?: string; headingLevel?: 'h2' | 'h3' };
 
 const { post, class: className, headingLevel = 'h2' } = Astro.props;
-const { title, publishDate, updatedDate, excerpt } = post.data;
+const { title, publishDate, excerpt } = post.data;
 const TitleTag = headingLevel;
+
+const dateLabel = publishDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+const words = (post.body ?? '').split(/\s+/).filter(Boolean).length;
+const readingMinutes = Math.max(1, Math.round(words / 220));
 ---
 
-<a class:list={['flex justify-between items-start gap-8 group', className]} href={`/blog/${post.id}/`}>
-    <div class="grow">
-        <TitleTag
-            class="text-xl leading-tight font-serif font-medium group-hover:underline group-hover:decoration-dashed group-hover:underline-offset-4 group-hover:decoration-1 sm:text-2xl"
-        >
-            {title}
-        </TitleTag>
-        <div class="mt-1 text-sm leading-normal">
-            <FormattedDate date={publishDate} />
-            {
-                updatedDate && (
-                    <>
-                        {' '}
-                        <span>
-                            (Updated on <FormattedDate date={updatedDate} />)
-                        </span>
-                    </>
-                )
-            }
-        </div>
-        {excerpt && <div class="mt-3 text-sm leading-normal">{excerpt}</div>}
+<a class:list={['planner-row grid grid-cols-[5.5rem_1fr] items-baseline gap-4 py-5', className]} href={`/blog/${post.id}/`}>
+    <div class="relative text-xs uppercase tracking-wide text-muted [font-variant-numeric:tabular-nums]">
+        <svg class="pencil-circle" viewBox="0 0 120 34" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M8,17 C10,6 48,2 76,4 C104,6 116,10 113,19 C110,29 74,32 44,30 C18,28 5,25 8,17 C9,12 20,8 34,6" />
+        </svg>
+        {dateLabel}
     </div>
-    <div class="hidden font-serif italic opacity-0 transition group-hover:opacity-100 sm:inline-flex sm:gap-1 sm:items-center sm:shrink-0">
-        Read Post <ArrowRight class="fill-current w-4 h-4" />
+    <div class="min-w-0">
+        <TitleTag class="planner-title text-lg leading-snug font-medium">
+            {title}
+            <svg class="pencil-under" viewBox="0 0 240 10" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M2,6 C40,3 80,8 120,5 C160,2 200,7 238,4" />
+            </svg>
+        </TitleTag>
+        {excerpt && <div class="mt-1 text-sm text-muted">{excerpt}</div>}
+        <div class="mt-1 text-xs text-muted">{readingMinutes} min read</div>
     </div>
 </a>

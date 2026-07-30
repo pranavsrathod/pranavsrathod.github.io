@@ -4,14 +4,16 @@ description: "This project showcases two significant places from my life, presen
 publishDate: "September 19, 2022"
 isFeatured: false
 poster: "/UICProjects/AR/AR.png"
+category: "Augmented Reality"
+role: "Solo project"
+tools: ["Unity", "Vuforia"]
+links:
+  github: "https://github.com/pranavsrathod/pratho2CS428Project1"
 seo:
   image:
     src: "/UICProjects/AR/AR.png"
     alt: "Around The World Project Cover"
 ---
-
-**Pranav Rathod**  
-**Date:** September 19, 2022
 
 This project is designed to showcase two places/attractions that have been significant in my life. They are rendered on physical cubes through the magic of Augmented Reality (AR).
 
@@ -23,7 +25,7 @@ This project is designed to showcase two places/attractions that have been signi
 
 AR has gained immense popularity in recent years, and I believe it will continue to flourish in the future. The familiarity of AR among the generation that grew up with social media platforms like Instagram and Snapchat has played a significant role in its widespread adoption. For example, Snapchat’s face filters have evolved from playful animations into powerful tools for self-expression.
 
-Beyond face filters, the phenomenal success of Pokémon Go in 2016 provided a glimpse into AR's potential by seamlessly blending the real and virtual worlds. AR has evolved from a novelty into a practical tool, with applications like using LiDAR for precise spatial mapping—allowing users to visualize how furniture might fit in a room before making a purchase.
+Beyond face filters, the phenomenal success of Pokémon Go in 2016 provided a glimpse into AR's potential by seamlessly blending the real and virtual worlds. AR has evolved from a novelty into a practical tool, with applications like using LiDAR for precise spatial mapping, which lets users visualize how furniture might fit in a room before making a purchase.
 
 The recent announcements from companies like Meta further emphasize AR's promising future. While there are valid concerns about the increasing role of digital experiences, I believe that, when used responsibly, AR can enhance our interaction with the world by merging physical and virtual realities.
 
@@ -33,7 +35,7 @@ The recent announcements from companies like Meta further emphasize AR's promisi
 
 ### Merge Cube
 
-Italy holds a special place in my heart—it marks the first international journey my family and I embarked on during my middle school years. In this AR project, the Merge Cube displays meticulously crafted models representing iconic symbols of Pisa:
+Italy holds a special place in my heart. It marks the first international journey my family and I embarked on during my middle school years. In this AR project, the Merge Cube displays meticulously crafted models representing iconic symbols of Pisa:
 
 - **Leaning Tower of Pisa**
 - **Vespa**
@@ -41,12 +43,15 @@ Italy holds a special place in my heart—it marks the first international journ
 
 Additionally, custom models (a charming table and the Italian flag) have been designed using the Unity Game Engine. When you flip the cube, the directional light changes from red to blue and reverts when flipped back.
 
-<div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
-  <img src="/UICProjects/AR/IT1.jpg" width="200" height="400" alt="Merge Cube Model 1" />
-  <img src="/UICProjects/AR/IT2.jpg" width="200" height="400" alt="Merge Cube Model 2" />
-  <img src="/UICProjects/AR/IT3.jpg" width="200" height="400" alt="Merge Cube Model 3" />
-  <img src="/UICProjects/AR/IT4.jpg" width="200" height="400" alt="Merge Cube Model 4" />
-</div>
+<Gallery
+  columns={3}
+  images={[
+    { src: "/UICProjects/AR/IT1.jpg", alt: "Merge Cube Model 1" },
+    { src: "/UICProjects/AR/IT2.jpg", alt: "Merge Cube Model 2" },
+    { src: "/UICProjects/AR/IT3.jpg", alt: "Merge Cube Model 3" },
+    { src: "/UICProjects/AR/IT4.jpg", alt: "Merge Cube Model 4" }
+  ]}
+/>
 
 ---
 
@@ -60,12 +65,15 @@ The Class Cube is designed to represent London, England. It includes models that
 
 These models capture a nostalgic view of London. For instance, when you flip the cube upside down, a blue spotlight illuminates one of the stumps and then turns off when flipped back.
 
-<div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
-  <img src="/UICProjects/AR/UK1.jpg" width="200" height="400" alt="Class Cube Model 1" />
-  <img src="/UICProjects/AR/UK2.jpg" width="200" height="400" alt="Class Cube Model 2" />
-  <img src="/UICProjects/AR/UK3.jpg" width="200" height="400" alt="Class Cube Model 3" />
-  <img src="/UICProjects/AR/UK4.jpg" width="200" height="400" alt="Class Cube Model 4" />
-</div>
+<Gallery
+  columns={3}
+  images={[
+    { src: "/UICProjects/AR/UK1.jpg", alt: "Class Cube Model 1" },
+    { src: "/UICProjects/AR/UK2.jpg", alt: "Class Cube Model 2" },
+    { src: "/UICProjects/AR/UK3.jpg", alt: "Class Cube Model 3" },
+    { src: "/UICProjects/AR/UK4.jpg", alt: "Class Cube Model 4" }
+  ]}
+/>
 
 ---
 
@@ -73,7 +81,7 @@ These models capture a nostalgic view of London. For instance, when you flip the
 
 To see the project in action, watch the video demonstration below:
 
-<iframe src="https://www.youtube.com/embed/y2Hd0X9s-_s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:500px;"></iframe>
+<MediaEmbed src="https://www.youtube.com/embed/y2Hd0X9s-_s" title="Around The World AR demonstration" />
 
 ---
 
@@ -122,8 +130,8 @@ To create the physical cubes for the AR experience:
 
 ![Cubes Template](/UICProjects/AR/cubes.jpg)
 
-_Left – Merge Cube_  
-_Right – Class Cube_
+_Left: Merge Cube_  
+_Right: Class Cube_
 
 ---
 

@@ -4,17 +4,18 @@ description: "Applied advanced interpolation techniques to reconstruct missing m
 publishDate: "March 12, 2025"
 poster: "/CS520/2/motionCapture.png"
 isFeatured: false
+category: "Computer Animation"
+role: "Solo project"
+tools: ["C++"]
+links:
+  github: "https://github.com/pranavsrathod/MotionCaptureInterpolation"
 seo:
   image:
     src: "/CS520/2/motionCapture.png"
     alt: "Motion Capture Interpolation"
 ---
-**Reconstructing missing motion capture frames using different interpolation techniques**  
-_Pranav Rathod_
 
-**Date:** March 12, 2025
-
-In this project for my CSCI 520 course, I set out to improve the smoothness and naturalness of motion capture animations by implementing various interpolation techniques. Working with ASF/AMC motion capture data—where the ASF file defines the skeleton structure and the AMC file records joint rotations and root translations at 120 frames per second—I explored four distinct methods:
+In this project for my CSCI 520 course, I set out to improve the smoothness and naturalness of motion capture animations by implementing various interpolation techniques. Working with ASF/AMC motion capture data, where the ASF file defines the skeleton structure and the AMC file records joint rotations and root translations at 120 frames per second, I explored four distinct methods:
 
 - **Linear Euler Interpolation**
 - **Bezier Euler Interpolation**
@@ -29,7 +30,8 @@ The goal was to generate keyframes by periodically dropping every N-th frame fro
 ## Video Demonstration and Source Code
 
 To further validate the results, I created three videos using the martial arts dataset (`135_06-martialArts.amc`) with N=40:
-<iframe width=100% height="500" src="https://www.youtube.com/embed/qGeqzX3NPvI?si=zRkqSS1tIEWmvS6j" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<MediaEmbed src="https://www.youtube.com/embed/qGeqzX3NPvI?si=zRkqSS1tIEWmvS6j" title="Motion capture interpolation comparison" />
 
 Each video uses the default camera settings and distinguishes the input motion (in red) from the interpolated output (in green). You can find all the source code, graphs, and videos in the GitHub repository: [GitHub Repository](https://github.com/pranavsrathod/MotionCaptureInterpolation).
 
@@ -69,24 +71,20 @@ The `mocapPlayer` (source files `mocapPlayer.cpp` and `mocapPlayer.h`) is used t
 
 Additionally, I plotted four graphs comparing the different techniques:
 - **Graph #1:** Linear Euler vs. Bezier Euler for the lfemur X-axis (frames 600–800, N=20)
-<div style="text-align: center; margin: 2rem 0;">
-  <img src="/CS520/2/graph1.png" alt="Pranav with friends and their families" style="max-width: 100%; height: auto;" />
-</div>
+
+  ![Linear Euler vs. Bezier Euler for the lfemur X-axis](/CS520/2/graph1.png)
 
 - **Graph #2:** SLERP Quaternion vs. Bezier SLERP Quaternion for the lfemur X-axis (frames 600–800, N=20)
-<div style="text-align: center; margin: 2rem 0;">
-  <img src="/CS520/2/graph2.png" alt="Pranav with friends and their families" style="max-width: 100%; height: auto;" />
-</div>
+
+  ![SLERP Quaternion vs. Bezier SLERP Quaternion for the lfemur X-axis](/CS520/2/graph2.png)
 
 - **Graph #3:** Linear Euler vs. SLERP Quaternion for root rotation around the Z-axis (frames 200–500, N=20)
-<div style="text-align: center; margin: 2rem 0;">
-  <img src="/CS520/2/graph3.png" alt="Pranav with friends and their families" style="max-width: 100%; height: auto;" />
-</div>
+
+  ![Linear Euler vs. SLERP Quaternion for root rotation around the Z-axis](/CS520/2/graph3.png)
 
 - **Graph #4:** Bezier Euler vs. Bezier SLERP Quaternion for root rotation around the Z-axis (frames 200–500, N=20)
-<div style="text-align: center; margin: 2rem 0;">
-  <img src="/CS520/2/graph4.png" alt="Pranav with friends and their families" style="max-width: 100%; height: auto;" />
-</div>
+
+  ![Bezier Euler vs. Bezier SLERP Quaternion for root rotation around the Z-axis](/CS520/2/graph4.png)
 
 The graphs demonstrate that while both Bezier curves smooth the data better than their linear counterparts, the quaternion methods (especially Bezier SLERP) more faithfully preserve the original motion characteristics without the risk of gimbal lock.
 
@@ -98,5 +96,3 @@ This project was both challenging and rewarding. Through the implementation, I g
 - The importance of proper conversion routines between Euler angles, rotation matrices, and quaternions.
 
 Overall, the exercise not only honed my programming and mathematical skills but also reinforced the importance of leveraging advanced interpolation techniques for realistic computer animations. I look forward to further applying these techniques in future projects.
-
----

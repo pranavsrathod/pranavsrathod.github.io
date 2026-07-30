@@ -22,3 +22,4 @@ pnpm-debug.log*
 
 # ignore unfinished project
 src/content/projects/mobileGames.md
+.superpowers/

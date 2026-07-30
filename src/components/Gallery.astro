@@ -1,0 +1,97 @@
+---
+interface Image {
+    src: string;
+    alt: string;
+    caption?: string;
+}
+
+interface Props {
+    id?: string;
+    images: Image[];
+    columns?: 2 | 3;
+}
+
+const { id = crypto.randomUUID().slice(0, 8), images, columns = 2 } = Astro.props;
+const galleryId = `gallery-${id}`;
+---
+
+<div class="not-prose my-8" id={galleryId}>
+    <div class:list={['grid gap-3', columns === 3 ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-2']}>
+        {
+            images.map((img, i) => (
+                <button
+                    type="button"
+                    class="group overflow-hidden rounded-lg border border-main/20 bg-muted"
+                    style="aspect-ratio: 4 / 3;"
+                    data-gallery-open={i}
+                    aria-label={`Open ${img.alt || 'image'} full size`}
+                >
+                    <img
+                        src={img.src}
+                        alt={img.alt}
+                        class="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
+                        loading="lazy"
+                        decoding="async"
+                    />
+                </button>
+            ))
+        }
+    </div>
+
+    <dialog class="gallery-dialog m-auto max-h-[90vh] max-w-[95vw] rounded-lg border border-main/20 bg-main p-0 text-main backdrop:bg-black/70">
+        <figure class="relative flex max-h-[90vh] flex-col items-center">
+            <button type="button" class="gallery-close absolute top-2 right-2 z-10 rounded-full border border-main/30 bg-main/90 p-2" aria-label="Close">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18" /></svg>
+            </button>
+            <img class="gallery-dialog-img max-h-[80vh] max-w-full object-contain" src="" alt="" />
+            <figcaption class="gallery-caption w-full px-4 py-3 text-center text-sm text-muted"></figcaption>
+            <div class="mb-3 flex items-center gap-4">
+                <button type="button" class="gallery-prev rounded-full border border-main/30 p-2" aria-label="Previous image">
+                    <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M15.5 4.5 8 12l7.5 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button type="button" class="gallery-next rounded-full border border-main/30 p-2" aria-label="Next image">
+                    <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="m8.5 4.5 7.5 7.5-7.5 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+            </div>
+        </figure>
+    </dialog>
+</div>
+
+<script define:vars={{ galleryId, images }}>
+    document.addEventListener('astro:page-load', () => {
+        const root = document.getElementById(galleryId);
+        if (!root || root.dataset.initialized === 'true') return;
+        root.dataset.initialized = 'true';
+
+        const dialog = root.querySelector('.gallery-dialog');
+        const img = root.querySelector('.gallery-dialog-img');
+        const caption = root.querySelector('.gallery-caption');
+        let current = 0;
+
+        function show(index) {
+            current = (index + images.length) % images.length;
+            const item = images[current];
+            img.src = item.src;
+            img.alt = item.alt || '';
+            caption.textContent = item.caption || '';
+        }
+
+        root.querySelectorAll('[data-gallery-open]').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                show(Number(btn.dataset.galleryOpen));
+                dialog.showModal();
+            });
+        });
+
+        root.querySelector('.gallery-close')?.addEventListener('click', () => dialog.close());
+        root.querySelector('.gallery-prev')?.addEventListener('click', () => show(current - 1));
+        root.querySelector('.gallery-next')?.addEventListener('click', () => show(current + 1));
+        dialog.addEventListener('click', (e) => {
+            if (e.target === dialog) dialog.close();
+        });
+        dialog.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') show(current - 1);
+            if (e.key === 'ArrowRight') show(current + 1);
+        });
+    });
+</script>

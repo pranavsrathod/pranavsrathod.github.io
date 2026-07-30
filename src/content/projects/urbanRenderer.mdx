@@ -1,27 +1,25 @@
 ---
 title: "Urban Renderer"
-description: "I developed an interactive WebGL application to render a dynamic 3D urban environment from JSON data. The project features two interactive demos—one for standard urban rendering and another with advanced shadow mapping for realistic lighting."
+description: "I developed an interactive WebGL application to render a dynamic 3D urban environment from JSON data. The project features two interactive demos: one for standard urban rendering and another with advanced shadow mapping for realistic lighting."
 publishDate: "March 4, 2022"
 isFeatured: false
 poster: "/UICProjects/Graphics1/UR.png"
+category: "Computer Graphics"
+role: "Solo project"
+tools: ["WebGL", "JavaScript"]
+links:
+  github: "https://github.com/uic-cs425/spring-2022-assignment-2-pranavsrathod"
 seo:
   image:
     src: "/UICProjects/Graphics1/UR.png"
     alt: "Urban Renderer - A WebGL Project"
 ---
 
-**Fall 2022**  
-**Pranav Rathod**
+I developed **Urban Renderer**, an interactive WebGL application that brings a 3D urban environment to life using data loaded from external JSON files and a custom configuration panel. The project is split into two main parts: the core urban rendering demo and an enhanced shadow mapping demo that delivers realistic lighting and shadows.
 
-I developed **Urban Renderer**—an interactive WebGL application that brings a 3D urban environment to life using data loaded from external JSON files and a custom configuration panel. The project is split into two main parts: the core urban rendering demo and an enhanced shadow mapping demo that delivers realistic lighting and shadows.
+![Urban Renderer Demo](/UICProjects/Graphics1/assignment-1.gif)
 
-<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
-  <img src="/UICProjects/Graphics1/assignment-1.gif" alt="Urban Renderer Demo" />
-</div>
-
-<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
-  <img src="/UICProjects/Graphics2/manhattan.gif" alt="Shadow Maps Demo" />
-</div>
+![Shadow Maps Demo](/UICProjects/Graphics2/manhattan.gif)
 
 ## Overview
 
@@ -41,7 +39,7 @@ I built a configuration panel with:
 - A **dropdown menu** to toggle between perspective and orthographic projections.
 - A **file input element** for loading a JSON file that defines the urban environment.
   
-User interactions are handled via mouse events that update a view transformation matrix—allowing the camera to rotate around the scene’s center—and enable zoom functionality to adjust the view seamlessly.
+User interactions are handled via mouse events that update a view transformation matrix, allowing the camera to rotate around the scene’s center, and enable zoom functionality to adjust the view seamlessly.
 
 For rendering:
 - The **Building Layer** is shaded using normals and a constant color. This gives the buildings a responsive appearance without needing a full illumination model.
@@ -78,9 +76,7 @@ To experience the core urban rendering:
 - **Download Sample File:** <a href="/UICProjects/Graphics1/city.json" download="city.json"> city.json</a>.
 - **View Demo:** Click the button to launch the demo.
 
-<div style="text-align: center; margin-top: 20px;">
-  <a href="/UICProjects/Graphics1/index.html" class="btn btn-lg btn-primary" style="font-size: 1.5em; padding: 10px 20px;">View Urban Rendering Demo</a>
-</div>
+<Button href="/UICProjects/Graphics1/index.html">View Urban Rendering Demo</Button>
 
 In this demo, you can:
 - **Rotate:** Click and drag to rotate the view.
@@ -89,12 +85,10 @@ In this demo, you can:
 
 ### 2. Shadow Mapping Demo
 To see the advanced shadow mapping in action:
-- **Download Sample File:** <a href="/UICProjects/Graphics2/manhattan.json" download="city.json"> manhattan.json</a>..
+- **Download Sample File:** <a href="/UICProjects/Graphics2/manhattan.json" download="city.json"> manhattan.json</a>.
 - **View Demo:** Click the button to launch the shadow mapping demo.
 
-<div style="text-align: center; margin-top: 20px;">
-  <a href="/UICProjects/Graphics2/index.html" class="btn btn-lg btn-primary" style="font-size: 1.5em; padding: 10px 20px;">View Shadow Mapping Demo</a>
-</div>
+<Button href="/UICProjects/Graphics2/index.html">View Shadow Mapping Demo</Button>
 
 In this demo, besides the usual interactive controls (rotate, zoom, pan), you can:
 - **Adjust Light Direction:** Use the slider in the control panel to rotate the light around the scene.
@@ -105,5 +99,3 @@ In this demo, besides the usual interactive controls (rotate, zoom, pan), you ca
 Working on Urban Renderer and extending it with shadow mapping allowed me to dive deep into WebGL, shader programming, and interactive graphics. I learned how to manage complex rendering pipelines with multiple layers and how to implement advanced techniques like shadow mapping to achieve realistic lighting effects. The addition of interactive controls makes the application engaging, and the dual demo setup showcases both the core rendering and the added depth provided by dynamic shadows.
 
 For more technical details and to view the source code, please visit my [GitHub repository](https://github.com/uic-cs425/spring-2022-assignment-2-pranavsrathod).
-
----

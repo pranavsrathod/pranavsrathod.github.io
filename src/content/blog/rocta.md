@@ -18,7 +18,7 @@ seo:
 
 In 2021, during my undergraduate studies at UIC, I worked on a hardware systems project shaped heavily by the realities of the COVID-19 pandemic. Public indoor spaces were operating under strict occupancy and safety constraints, raising an important question: how can we reliably monitor room capacity and environmental conditions in real time?
 
-This question led to **ROCTA — the Room Occupancy Counter and Temperature Alarm**, an embedded system designed to track the number of people in a room, monitor ambient temperature, and trigger alerts when safety thresholds were exceeded. The project went on to win the **UIC Engineering Expo 2021**, but more importantly, it taught me early lessons about systems thinking, adaptability, and designing under real-world constraints.
+This question led to **ROCTA: the Room Occupancy Counter and Temperature Alarm**, an embedded system designed to track the number of people in a room, monitor ambient temperature, and trigger alerts when safety thresholds were exceeded. The project went on to win the **UIC Engineering Expo 2021**, but more importantly, it taught me early lessons about systems thinking, adaptability, and designing under real-world constraints.
 
 <!--
 <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTiMmg_ucYt4irZ9XC94stsjtGRCbFhdZhkcwga-AAofva0cpJtMwN5fbcuxY2-5qYEMpq1FpUBN8t1/pubembed?start=false&loop=false&delayms=30000" frameborder="0" width="1440" height="839" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
@@ -55,7 +55,7 @@ In my case, this meant abandoning the originally planned PIR sensor and switchin
 
 These constraints slowed development, but they also pushed us toward clearer abstractions, better documentation, and more deliberate design decisions. In hindsight, the limitations imposed by lockdown ended up being one of the most valuable parts of the learning experience.
 
-## How we made it work — and why it succeeded
+## How we made it work, and why it succeeded
 
 Despite the circumstances, this project came together because of clear communication, trust, and a deliberate division of responsibilities. My teammate, **Manasvi Narayanan**, was instrumental throughout the process. While she was based in Chicago and I was working remotely from Mumbai, we treated the time difference not as a blocker, but as a constraint to design around.
 
@@ -63,6 +63,6 @@ We split the system into well-defined components early on. This allowed us to wo
 
 More importantly, we shared a common understanding of what “success” looked like. Given the uncertainty around hardware access, shipping delays, and shifting personal schedules, our goal was to build something that worked reliably under imperfect conditions. We prioritized robustness, clarity, and demonstrability over complexity.
 
-The fact that ROCTA went on to win the **UIC Engineering Expo 2021** felt especially meaningful in this context. The recognition was not just for the final system, but for the process behind it — adapting to severe constraints, making pragmatic design decisions, and still delivering a cohesive, functional solution.
+The fact that ROCTA went on to win the **UIC Engineering Expo 2021** felt especially meaningful in this context. The recognition was not just for the final system, but for the process behind it: adapting to severe constraints, making pragmatic design decisions, and still delivering a cohesive, functional solution.
 
 Looking back, this experience reinforced a lesson that has stayed with me since: strong collaboration and clear system boundaries matter even more when circumstances are far from ideal. Winning under these conditions was less about any single technical choice, and more about how we worked together when everything around us was uncertain.

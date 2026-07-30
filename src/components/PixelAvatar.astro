@@ -1,0 +1,68 @@
+---
+interface Props {
+    class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div
+    class:list={['pixel-avatar', className]}
+    role="img"
+    aria-label="Pixel art avatar of Pranav that puts on headphones when hovered"
+>
+</div>
+
+<style>
+    /* 5-frame sprite sheet (P1–P5 appended horizontally): idle → grab → lift → place → worn.
+       A steps() TRANSITION (not a keyframe animation) so un-hovering walks the
+       frames backward to idle instead of snapping. `.worn` is toggled by tap on
+       touch devices, where hover doesn't exist. */
+    .pixel-avatar {
+        width: 10rem;
+        height: 10rem;
+        flex-shrink: 0;
+        background-image: url('/GIFS/avatar-sheet.png');
+        background-size: 500% 100%;
+        background-position: 0% 0;
+        background-repeat: no-repeat;
+        image-rendering: pixelated;
+        transition: background-position 0.7s steps(4);
+    }
+
+    @media (min-width: 640px) {
+        .pixel-avatar {
+            width: 13rem;
+            height: 13rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .pixel-avatar {
+            width: 17rem;
+            height: 17rem;
+        }
+    }
+
+    .pixel-avatar:hover,
+    .pixel-avatar.worn {
+        background-position: 100% 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .pixel-avatar,
+        .pixel-avatar:hover {
+            transition: none;
+            background-position: 100% 0; /* headphones on, no motion */
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('astro:page-load', () => {
+        if (!window.matchMedia('(hover: none)').matches) return;
+        document.querySelectorAll('.pixel-avatar').forEach((el) => {
+            el.addEventListener('click', () => el.classList.toggle('worn'));
+        });
+    });
+</script>

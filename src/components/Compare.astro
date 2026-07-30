@@ -1,0 +1,171 @@
+---
+interface Scene {
+    id: string;
+    label: string;
+    before: { src: string; alt: string };
+    after: { src: string; alt: string };
+}
+
+interface Props {
+    id: string;
+    eyebrow?: string;
+    title?: string;
+    beforeLabel?: string;
+    afterLabel?: string;
+    aspectRatio?: string;
+    scenes: Scene[];
+    variant?: 'default' | 'film';
+}
+
+const { id, eyebrow, title, beforeLabel = 'Before', afterLabel = 'After', aspectRatio = '3 / 2', scenes, variant = 'default' } = Astro.props;
+const isFilm = variant === 'film';
+const rootId = `compare-${id}`;
+const first = scenes[0];
+---
+
+<div class="not-prose my-8" id={rootId}>
+    {(eyebrow || title) && (
+        <div class="mb-3">
+            {eyebrow && <div class="font-sans text-[0.6875rem] font-semibold tracking-widest text-accent uppercase">{eyebrow}</div>}
+            {title && <div class="mt-0.5 font-serif text-lg font-medium">{title}</div>}
+        </div>
+    )}
+
+    {!isFilm && scenes.length > 1 && (
+        <div class="compare-scene-tabs mb-3 flex flex-wrap gap-2">
+            {scenes.map((scene, i) => (
+                <button
+                    type="button"
+                    class:list={['rounded-full border border-main/30 px-3 py-1 text-xs font-medium transition-colors', i === 0 ? 'bg-accent text-white' : 'hover:bg-muted']}
+                    data-scene-index={i}
+                >
+                    {scene.label}
+                </button>
+            ))}
+        </div>
+    )}
+
+    <div class:list={[isFilm && 'overflow-hidden rounded-lg']} style={isFilm ? 'background-color: var(--film-chrome);' : undefined}>
+        {isFilm && (
+            <div class="film-sprockets" aria-hidden="true">
+                {Array.from({ length: 8 }).map(() => <i></i>)}
+            </div>
+        )}
+        <div
+            class:list={[
+                'compare-frame relative w-full touch-none overflow-hidden select-none',
+                isFilm ? 'mx-2.5 !w-auto rounded-sm' : 'rounded-lg border border-main/20'
+            ]}
+            style={`aspect-ratio: ${aspectRatio}; --compare-pos: 50%;`}
+            data-scenes={JSON.stringify(scenes)}
+        >
+            <img class="compare-after pointer-events-none absolute inset-0 h-full w-full object-cover" src={first.after.src} alt={first.after.alt} />
+            <img
+                class="compare-before pointer-events-none absolute inset-0 h-full w-full object-cover"
+                style="clip-path: inset(0 calc(100% - var(--compare-pos)) 0 0);"
+                src={first.before.src}
+                alt={first.before.alt}
+            />
+            <div class="compare-divider pointer-events-none absolute inset-y-0 w-0.5 bg-white/90 shadow-[0_0_0_1px_rgba(0,0,0,0.2)]" style="left: var(--compare-pos);">
+            </div>
+            <button
+                type="button"
+                class="compare-handle absolute top-1/2 flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 touch-none items-center justify-center rounded-full border-2 border-white bg-accent text-white shadow-md"
+                style="left: var(--compare-pos);"
+                aria-label="Drag to compare"
+            >
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 8 4 12l4 4M16 8l4 4-4 4" /></svg>
+            </button>
+            <span class:list={['pointer-events-none absolute bottom-2 left-2 rounded px-2 py-0.5', isFilm ? 'film-edgecode bg-black/70' : 'bg-black/60 text-xs text-white']}>{beforeLabel}</span>
+            <span class:list={['pointer-events-none absolute right-2 bottom-2 rounded px-2 py-0.5', isFilm ? 'film-edgecode bg-black/70' : 'bg-black/60 text-xs text-white']}>{afterLabel}</span>
+        </div>
+        {isFilm && (
+            <div class="film-sprockets" aria-hidden="true">
+                {Array.from({ length: 8 }).map(() => <i></i>)}
+            </div>
+        )}
+    </div>
+
+    {isFilm && scenes.length > 1 && (
+        <div class="mt-3 overflow-hidden rounded-md" style="background-color: var(--film-chrome);">
+            <div class="compare-scene-tabs flex gap-1.5 overflow-x-auto px-1.5 py-1.5">
+                {scenes.map((scene, i) => (
+                    <button type="button" class="flex-none" data-scene-index={i} aria-label={`Show scene: ${scene.label}`}>
+                        <img
+                            class:list={['compare-thumb block h-12 w-20 rounded-sm border-2 object-cover', i === 0 ? '' : 'film-negative opacity-80']}
+                            style={i === 0 ? 'border-color: var(--film-accent);' : 'border-color: transparent;'}
+                            src={scene.after.src}
+                            alt=""
+                        />
+                        <span class:list={['film-edgecode block py-0.5 text-center', i !== 0 && 'opacity-50']} style="font-size: 0.5rem;">{scene.label}</span>
+                    </button>
+                ))}
+            </div>
+        </div>
+    )}
+</div>
+
+<script define:vars={{ rootId, isFilm }}>
+    document.addEventListener('astro:page-load', () => {
+        const root = document.getElementById(rootId);
+        if (!root || root.dataset.initialized === 'true') return;
+        root.dataset.initialized = 'true';
+
+        const frame = root.querySelector('.compare-frame');
+        const handle = root.querySelector('.compare-handle');
+        const beforeImg = root.querySelector('.compare-before');
+        const afterImg = root.querySelector('.compare-after');
+        const scenes = JSON.parse(frame.dataset.scenes);
+
+        function setPosition(clientX) {
+            const rect = frame.getBoundingClientRect();
+            const pct = Math.min(100, Math.max(0, ((clientX - rect.left) / rect.width) * 100));
+            frame.style.setProperty('--compare-pos', `${pct}%`);
+        }
+
+        let dragging = false;
+        handle.addEventListener('pointerdown', (e) => {
+            dragging = true;
+            handle.setPointerCapture(e.pointerId);
+        });
+        handle.addEventListener('pointermove', (e) => {
+            if (dragging) setPosition(e.clientX);
+        });
+        handle.addEventListener('pointerup', () => {
+            dragging = false;
+        });
+        frame.addEventListener('pointerdown', (e) => {
+            if (e.target === handle) return;
+            setPosition(e.clientX);
+        });
+
+        root.querySelectorAll('[data-scene-index]').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const scene = scenes[Number(btn.dataset.sceneIndex)];
+                beforeImg.src = scene.before.src;
+                beforeImg.alt = scene.before.alt;
+                afterImg.src = scene.after.src;
+                afterImg.alt = scene.after.alt;
+
+                if (isFilm) {
+                    root.querySelectorAll('[data-scene-index]').forEach((b) => {
+                        const t = b.querySelector('.compare-thumb');
+                        const lbl = b.querySelector('span');
+                        const active = b === btn;
+                        t.classList.toggle('film-negative', !active);
+                        t.classList.toggle('opacity-80', !active);
+                        t.style.borderColor = active ? 'var(--film-accent)' : 'transparent';
+                        lbl.classList.toggle('opacity-50', !active);
+                    });
+                } else {
+                    root.querySelectorAll('[data-scene-index]').forEach((b) => {
+                        b.classList.remove('bg-accent', 'text-white');
+                        b.classList.add('hover:bg-muted');
+                    });
+                    btn.classList.add('bg-accent', 'text-white');
+                    btn.classList.remove('hover:bg-muted');
+                }
+            });
+        });
+    });
+</script>

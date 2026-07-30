@@ -10,7 +10,7 @@ const navLinks = siteConfig.footerNavLinks || [];
         navLinks.length > 0 && (
             <div class="mb-4 flex flex-wrap gap-x-6 gap-y-1">
                 {navLinks.map((link) => (
-                    <a class="font-serif hover:underline hover:underline-offset-2" href={link.href}>
+                    <a class="text-sm font-medium hover:underline hover:underline-offset-2" href={link.href}>
                         {link.text}
                     </a>
                 ))}
@@ -43,4 +43,5 @@ const navLinks = siteConfig.footerNavLinks || [];
             &copy; {new Date().getFullYear()}&nbsp;<a class="hover:underline hover:underline-offset-2" href="/">{siteConfig.title}</a>. All rights reserved.
         </p>
     </div>
+    <p class="mt-6 text-xs text-muted">Built with Astro on dot paper.</p>
 </footer>

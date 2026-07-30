@@ -1,0 +1,49 @@
+---
+interface Props {
+    src: string;
+    type?: 'youtube' | 'video';
+    title: string;
+    aspectRatio?: string;
+    poster?: string;
+}
+
+const { src, type, title, aspectRatio = '16 / 9', poster } = Astro.props;
+
+const isLocalVideo = /\.(mp4|webm|mov)(\?.*)?$/i.test(src);
+const resolvedType = type ?? (isLocalVideo ? 'video' : 'youtube');
+
+function toYouTubeEmbed(url: string): string {
+    const watchMatch = url.match(/[?&]v=([^&]+)/);
+    if (watchMatch) return `https://www.youtube.com/embed/${watchMatch[1]}`;
+    const shortMatch = url.match(/youtu\.be\/([^?&]+)/);
+    if (shortMatch) return `https://www.youtube.com/embed/${shortMatch[1]}`;
+    return url;
+}
+
+const embedSrc = resolvedType === 'youtube' ? toYouTubeEmbed(src) : src;
+---
+
+<div class="not-prose my-8 overflow-hidden rounded-lg border border-main/20 bg-muted" style={`position: relative; width: 100%; aspect-ratio: ${aspectRatio};`}>
+    {
+        resolvedType === 'video' ? (
+            <video
+                class="absolute inset-0 h-full w-full object-cover"
+                src={embedSrc}
+                poster={poster}
+                controls
+                playsinline
+                preload="metadata"
+                title={title}
+            />
+        ) : (
+            <iframe
+                class="absolute inset-0 h-full w-full"
+                src={embedSrc}
+                title={title}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+            />
+        )
+    }
+</div>

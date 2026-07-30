@@ -4,6 +4,11 @@ description: "A multimedia systems project exploring motion-aware video compress
 publishDate: "2024-12-13"
 poster: "/CS576/VideoCompression/SVC.png"
 isFeatured: false
+category: "Multimedia Systems"
+role: "Team of 3"
+tools: ["Python", "OpenCV", "Detectron2"]
+links:
+  github: "https://github.com/pranavsrathod/SegmentedVideoCompression"
 seo:
   title: "Segmented Video Compression"
   description: "A multimedia systems project exploring motion-aware video compression using segmentation, transform coding, and synchronized playback."
@@ -21,15 +26,7 @@ The project demonstrates the full pipeline from raw frame processing to synchron
 
 The demo video below shows the final reconstructed video along with visualizations of the segmentation process used to identify moving regions in each frame.
 
-<iframe 
-  width="100%" 
-  height="500"
-  src="https://www.youtube.com/embed/llPhds0_qjQ"
-  title="Segmented Video Compression Demo"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen>
-</iframe>
+<MediaEmbed src="https://www.youtube.com/embed/llPhds0_qjQ" title="Segmented Video Compression demo" />
 
 The first portion of the video shows the reconstructed playback with synchronized audio.  
 Later in the video, segmentation visualizations illustrate how the system identifies moving regions and foreground blocks during processing.
@@ -38,9 +35,9 @@ Later in the video, segmentation visualizations illustrate how the system identi
 
 The implementation for this project, including the compression pipeline and visualization scripts, is available on GitHub.
 
-<a href="https://github.com/pranavsrathod/SegmentedVideoCompression" target="_blank">
-View the repository →
-</a>
+<Button href="https://github.com/pranavsrathod/SegmentedVideoCompression" target="_blank" rel="noopener noreferrer">
+  View the repository
+</Button>
 
 ## System Pipeline
 
@@ -132,7 +129,7 @@ The compression system processes raw video frames, identifies moving regions, an
         <div class="space-y-8 text-sm leading-relaxed">
 
           <div>
-            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">01 — Forward Transform</h3>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">01: Forward Transform</h3>
             <p class="opacity-85 mb-4">
               The <strong>2D Discrete Cosine Transform</strong> converts an 8×8 block of spatial pixel
               values into the frequency domain. The DC coefficient at
@@ -143,30 +140,30 @@ The compression system processes raw video frames, identifies moving regions, an
               $$F(u,v) = \\frac{1}{4}\\, C(u)\\, C(v) \\sum_{x=0}^{7} \\sum_{y=0}^{7} f(x,y) \\cos\\!\\left[\\frac{(2x+1)\\,u\\,\\pi}{16}\\right] \\cos\\!\\left[\\frac{(2y+1)\\,v\\,\\pi}{16}\\right]$$
             </div>
             <div class="eq-legend">
-              <div class="rounded-md border border-slate-200 dark:border-zinc-700 px-3 py-2">
-                <span class="font-mono text-xs text-blue-500 dark:text-blue-400 block mb-1">f(x, y)</span>
+              <div class="rounded-md border border-main/20 px-3 py-2">
+                <span class="font-mono text-xs text-accent block mb-1">f(x, y)</span>
                 <span class="opacity-70">Pixel intensity at position (x, y) in the 8×8 block</span>
               </div>
-              <div class="rounded-md border border-slate-200 dark:border-zinc-700 px-3 py-2">
-                <span class="font-mono text-xs text-blue-500 dark:text-blue-400 block mb-1">F(u, v)</span>
+              <div class="rounded-md border border-main/20 px-3 py-2">
+                <span class="font-mono text-xs text-accent block mb-1">F(u, v)</span>
                 <span class="opacity-70">DCT coefficient at frequency index (u, v)</span>
               </div>
-              <div class="rounded-md border border-slate-200 dark:border-zinc-700 px-3 py-2">
-                <span class="font-mono text-xs text-blue-500 dark:text-blue-400 block mb-1">C(k)</span>
+              <div class="rounded-md border border-main/20 px-3 py-2">
+                <span class="font-mono text-xs text-accent block mb-1">C(k)</span>
                 <span class="opacity-70">Normalization: $\\frac{1}{\\sqrt{2}}$ when $k=0$, else $1$</span>
               </div>
-              <div class="rounded-md border border-slate-200 dark:border-zinc-700 px-3 py-2">
-                <span class="font-mono text-xs text-blue-500 dark:text-blue-400 block mb-1">u, v ∈ [0, 7]</span>
-                <span class="opacity-70">Frequency indices — low = coarse structure, high = fine detail</span>
+              <div class="rounded-md border border-main/20 px-3 py-2">
+                <span class="font-mono text-xs text-accent block mb-1">u, v ∈ [0, 7]</span>
+                <span class="opacity-70">Frequency indices: low = coarse structure, high = fine detail</span>
               </div>
             </div>
           </div>
 
           <div>
-            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">02 — Quantization</h3>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">02: Quantization</h3>
             <p class="opacity-85 mb-4">
               Each coefficient is divided by a uniform step size and rounded. Small high-frequency
-              coefficients round to zero and are discarded — this is where compression loss occurs.
+              coefficients round to zero and are discarded. This is where compression loss occurs.
               The step size is controlled by exponent <em>n</em>, set independently per region via
               <strong>n1</strong> (foreground) and <strong>n2</strong> (background).
             </p>
@@ -180,7 +177,7 @@ The compression system processes raw video frames, identifies moving regions, an
           </div>
 
           <div>
-            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">03 — Inverse Transform</h3>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">03: Inverse Transform</h3>
             <p class="opacity-85 mb-4">
               The decoder multiplies each coefficient by $2^n$ to dequantize, then applies the
               <strong>2D Inverse DCT</strong> to reconstruct approximate pixel values. The degree
@@ -191,7 +188,7 @@ The compression system processes raw video frames, identifies moving regions, an
                 <p class="text-xs font-mono uppercase opacity-40 mb-2">Dequantization</p>
                 $$\\tilde{F}(u,v) = \\hat{F}(u,v) \\cdot 2^{n}$$
               </div>
-              <div style="border-top: 1px solid rgb(226 232 240); padding-top: 1rem;">
+              <div style="border-top: 1px solid color-mix(in oklab, var(--border-main) 20%, transparent); padding-top: 1rem;">
                 <p class="text-xs font-mono uppercase opacity-40 mb-2">Reconstruction</p>
                 $$\\hat{f}(x,y) = \\frac{1}{4} \\sum_{u=0}^{7} \\sum_{v=0}^{7} C(u)\\, C(v)\\, \\tilde{F}(u,v) \\cos\\!\\left[\\frac{(2x+1)\\,u\\,\\pi}{16}\\right] \\cos\\!\\left[\\frac{(2y+1)\\,v\\,\\pi}{16}\\right]$$
               </div>
@@ -199,7 +196,7 @@ The compression system processes raw video frames, identifies moving regions, an
           </div>
 
           <div>
-            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">04 — Why This Works Perceptually</h3>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">04: Why This Works Perceptually</h3>
             <p class="opacity-85">
               The human visual system is more sensitive to low-frequency luminance changes than to
               fine high-frequency detail. By concentrating energy in the lower DCT coefficients,
@@ -221,7 +218,7 @@ The compression system processes raw video frames, identifies moving regions, an
         <div class="space-y-8 text-sm leading-relaxed">
 
           <div>
-            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">01 — Motion Vector Estimation</h3>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">01: Motion Vector Estimation</h3>
             <p class="opacity-85 mb-4">
               For each 16×16 macroblock in frame $t$, the encoder searches frame $t-1$ for the
               best matching block using <strong>Three-Step Search (TSS)</strong>, measured by
@@ -237,17 +234,17 @@ The compression system processes raw video frames, identifies moving regions, an
           </div>
 
           <div>
-            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">02 — Foreground / Background Classification</h3>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">02: Foreground / Background Classification</h3>
             <p class="opacity-85 mb-3">
               Blocks are classified using magnitude and directional consistency of motion vectors
               relative to the global scene motion.
             </p>
             <div class="grid grid-cols-1 gap-3 mb-4">
-              <div class="rounded-md border border-slate-200 dark:border-zinc-700 px-4 py-3">
+              <div class="rounded-md border border-main/20 px-4 py-3">
                 <div class="font-semibold mb-1">Background</div>
                 <p class="opacity-70">Near-zero magnitude (static camera) or matches the global dominant vector (moving camera).</p>
               </div>
-              <div class="rounded-md border border-slate-200 dark:border-zinc-700 px-4 py-3">
+              <div class="rounded-md border border-main/20 px-4 py-3">
                 <div class="font-semibold mb-1">Foreground</div>
                 <p class="opacity-70">Consistent magnitude and direction within a contiguous region that differs from global background motion. Isolated outlier blocks are not treated as foreground.</p>
               </div>
@@ -259,11 +256,11 @@ The compression system processes raw video frames, identifies moving regions, an
           </div>
 
           <div>
-            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">03 — Extended: Detectron2 + Optical Flow</h3>
+            <h3 class="text-xs font-mono uppercase tracking-widest opacity-50 mb-3">03: Detectron2 + Optical Flow (Extended)</h3>
             <p class="opacity-85 mb-3">
               <strong>Detectron2</strong> instance segmentation was combined with
               <strong>dense optical flow</strong> (Farneback) to produce semantically-aware masks.
-              Per-pixel flow is compared against the global motion vector — objects whose local flow
+              Per-pixel flow is compared against the global motion vector, and objects whose local flow
               deviates significantly in magnitude or direction are retained as foreground.
             </p>
             <div class="eq-box space-y-4">
@@ -271,7 +268,7 @@ The compression system processes raw video frames, identifies moving regions, an
                 <p class="text-xs font-mono uppercase opacity-40 mb-1">Per-pixel flow magnitude</p>
                 $$m(x,y) = \\sqrt{u(x,y)^2 + v(x,y)^2}$$
               </div>
-              <div style="border-top: 1px solid rgb(226 232 240); padding-top: 1rem;">
+              <div style="border-top: 1px solid color-mix(in oklab, var(--border-main) 20%, transparent); padding-top: 1rem;">
                 <p class="text-xs font-mono uppercase opacity-40 mb-1">Foreground condition (moving camera)</p>
                 $$\\left|\\, \\bar{m}_{\\text{obj}} - \\|\\mathbf{v}_{\\text{global}}\\|\\, \\right| > \\tau_{m} \\quad \\text{or} \\quad \\left|\\, \\bar{\\theta}_{\\text{obj}} - \\theta_{\\text{global}} \\right| > \\tau_{\\theta}$$
               </div>
@@ -299,15 +296,7 @@ Classical motion analysis and deep learning segmentation are combined so the pip
 
 The video below shows the segmentation stage in action. Detected foreground regions are highlighted to illustrate how object-level masks guide compression decisions across the frame.
 
-<iframe
-  width="100%"
-  height="500"
-  src="https://www.youtube.com/embed/llPhds0_qjQ?start=37"
-  title="Segmentation Visualization"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen>
-</iframe>
+<MediaEmbed src="https://www.youtube.com/embed/llPhds0_qjQ?start=37" title="Segmentation visualization" />
 
 ## Technical Highlights
 

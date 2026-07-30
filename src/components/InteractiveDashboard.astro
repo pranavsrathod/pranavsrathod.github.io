@@ -40,6 +40,8 @@ interface Props {
 }
 
 const { id, sections } = Astro.props;
+const needsMath = sections.some((s) => s.type === 'html');
+const needsChart = sections.some((s) => s.type === 'chart');
 
 // ─── SVG ICON LIBRARY ────────────────────────────────────────────────────────
 // Usage: set icon: "code" | "cpu" | "layers" | "eye" | "git" | "settings" etc.
@@ -76,23 +78,23 @@ function getIconSvg(name?: string) {
 }
 ---
 
-<!-- KaTeX for math rendering in html sections -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" />
-<script is:inline src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
-<script is:inline src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"></script>
-<script is:inline src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{needsMath && (
+    <>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" />
+        <script is:inline src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+        <script is:inline src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"></script>
+    </>
+)}
+{needsChart && <script is:inline src="https://cdn.jsdelivr.net/npm/chart.js"></script>}
 
-<div
-    class="not-prose my-8 border border-slate-200 dark:border-zinc-700 rounded-xl overflow-hidden shadow-sm bg-white dark:bg-zinc-900 interactive-dashboard"
-    id={`dash-${id}`}
->
+<div class="not-prose my-8 border border-main/20 rounded-xl overflow-hidden shadow-sm bg-muted interactive-dashboard" id={`dash-${id}`}>
     <!-- NAV TABS -->
-    <div class="bg-slate-100 dark:bg-zinc-800 p-4 border-b border-slate-200 dark:border-zinc-700 flex flex-wrap gap-2 justify-center nav-container">
+    <div class="bg-main/40 p-4 border-b border-main/20 flex flex-wrap gap-2 justify-center nav-container">
         {
             sections.map((section, index) => (
                 <button
                     data-target={section.id}
-                    class={`px-3 py-1 text-xs uppercase font-bold tracking-wider rounded transition-colors ${index === 0 ? 'active-tab bg-slate-800 text-white dark:bg-white dark:text-black shadow-sm' : 'opacity-50 hover:opacity-100'}`}
+                    class={`px-3 py-1 text-xs uppercase font-bold tracking-wider rounded transition-colors ${index === 0 ? 'active-tab bg-accent text-white shadow-sm' : 'opacity-50 hover:opacity-100'}`}
                 >
                     {section.label}
                 </button>
@@ -109,7 +111,7 @@ function getIconSvg(name?: string) {
                     {section.type === 'cards' && section.cards && (
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[420px] overflow-y-auto pr-2 custom-scroll">
                             {section.cards.map((c) => (
-                                <div class="p-4 rounded-lg border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800/50">
+                                <div class="p-4 rounded-lg border border-main/20 bg-main/40">
                                     <div class="flex items-start justify-between gap-3">
                                         <div class="flex items-start gap-3 min-w-0">
                                             {/* Image takes priority, then SVG icon, then nothing */}
@@ -117,15 +119,12 @@ function getIconSvg(name?: string) {
                                                 <img
                                                     src={c.image.src}
                                                     alt={c.image.alt || ''}
-                                                    class:list={[
-                                                        'w-16 h-16 rounded-lg object-cover shrink-0 border border-slate-200 dark:border-zinc-700',
-                                                        c.image.className
-                                                    ]}
+                                                    class:list={['w-16 h-16 rounded-lg object-cover shrink-0 border border-main/20', c.image.className]}
                                                     loading="lazy"
                                                     decoding="async"
                                                 />
                                             ) : c.icon ? (
-                                                <div class="shrink-0 w-8 h-8 flex items-center justify-center rounded-md border border-slate-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-slate-600 dark:text-slate-300">
+                                                <div class="shrink-0 w-8 h-8 flex items-center justify-center rounded-md border border-main/20 bg-main text-muted">
                                                     <span set:html={getIconSvg(c.icon)} />
                                                 </div>
                                             ) : null}
@@ -141,7 +140,7 @@ function getIconSvg(name?: string) {
                                                             href={a.href}
                                                             target="_blank"
                                                             rel="noreferrer"
-                                                            class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-slate-200 dark:border-zinc-700 bg-slate-100 dark:bg-zinc-700 hover:bg-slate-200 dark:hover:bg-zinc-600 transition-colors"
+                                                            class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-main/20 bg-main/60 hover:bg-muted transition-colors"
                                                             aria-label={a.label || a.icon}
                                                             title={a.label || a.icon}
                                                         >
@@ -150,7 +149,7 @@ function getIconSvg(name?: string) {
                                                     ) : (
                                                         <button
                                                             type="button"
-                                                            class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-slate-200 dark:border-zinc-700 bg-slate-100 dark:bg-zinc-700 hover:bg-slate-200 dark:hover:bg-zinc-600 transition-colors"
+                                                            class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-main/20 bg-main/60 hover:bg-muted transition-colors"
                                                             aria-label={a.label || a.icon}
                                                             title={a.label || a.icon}
                                                             data-action={a.onClickId || ''}
@@ -185,7 +184,7 @@ function getIconSvg(name?: string) {
                     {section.type === 'team' && section.cards && (
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {section.cards.map((m) => (
-                                <div class="group p-4 rounded-xl border border-slate-200 dark:border-zinc-700 bg-white dark:bg-zinc-900/40 shadow-sm hover:shadow-md transition-shadow">
+                                <div class="group p-4 rounded-xl border border-main/20 bg-main/40 shadow-sm hover:shadow-md transition-shadow">
                                     <div class="flex items-start justify-between gap-3">
                                         <div class="min-w-0">
                                             <div class="font-serif text-base leading-tight truncate">{m.title}</div>
@@ -199,7 +198,7 @@ function getIconSvg(name?: string) {
                                                             href={a.href}
                                                             target="_blank"
                                                             rel="noreferrer"
-                                                            class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-slate-200 dark:border-zinc-700 bg-transparent hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors"
+                                                            class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-main/20 bg-transparent hover:bg-muted transition-colors"
                                                             aria-label={a.label || a.icon}
                                                             title={a.label || a.icon}
                                                         >
@@ -208,7 +207,7 @@ function getIconSvg(name?: string) {
                                                     ) : (
                                                         <button
                                                             type="button"
-                                                            class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-slate-200 dark:border-zinc-700 bg-transparent hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors"
+                                                            class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-main/20 bg-transparent hover:bg-muted transition-colors"
                                                             aria-label={a.label || a.icon}
                                                             title={a.label || a.icon}
                                                             data-action={a.onClickId || ''}
@@ -229,7 +228,7 @@ function getIconSvg(name?: string) {
                     {section.type === 'steps' && section.steps && (
                         <div class="relative overflow-y-auto max-h-[600px] pr-2 custom-scroll">
                             {/* Vertical spine */}
-                            <div class="absolute left-[19px] top-0 bottom-0 w-px bg-slate-200 dark:bg-zinc-700 pointer-events-none" aria-hidden="true" />
+                            <div class="absolute left-[19px] top-0 bottom-0 w-px bg-main/20 pointer-events-none" aria-hidden="true" />
 
                             <ol class="relative space-y-0">
                                 {section.steps.map((s, i) => (
@@ -245,12 +244,12 @@ function getIconSvg(name?: string) {
                                             aria-expanded="false"
                                         >
                                             {/* Node on the spine */}
-                                            <div class="step-node relative z-10 mt-0.5 flex-shrink-0 w-10 h-10 rounded-full border-2 border-slate-300 dark:border-zinc-600 bg-white dark:bg-zinc-900 flex items-center justify-center text-xs font-mono font-bold text-slate-400 dark:text-zinc-500 group-hover:border-blue-400 group-hover:text-blue-500 dark:group-hover:border-blue-500 dark:group-hover:text-blue-400 transition-colors">
+                                            <div class="step-node relative z-10 mt-0.5 flex-shrink-0 w-10 h-10 rounded-full border-2 border-main/30 bg-main flex items-center justify-center text-xs font-mono font-bold text-muted group-hover:border-accent group-hover:text-accent transition-colors">
                                                 {String(i + 1).padStart(2, '0')}
                                             </div>
 
                                             <div class="flex-1 min-w-0 pt-1.5">
-                                                <div class="font-semibold text-sm text-slate-800 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-tight">
+                                                <div class="font-semibold text-sm text-main group-hover:text-accent transition-colors leading-tight">
                                                     {s.label}
                                                 </div>
                                                 <div class="text-xs opacity-60 mt-0.5 font-mono">{s.sub}</div>
@@ -271,11 +270,11 @@ function getIconSvg(name?: string) {
                                         {/* Inline expandable content — hidden by default */}
                                         <div class="step-expand hidden pl-14 pb-5 pr-2 space-y-3">
                                             {/* Description */}
-                                            <p class="step-expand-text text-sm text-slate-700 dark:text-zinc-300 leading-relaxed" />
+                                            <p class="step-expand-text text-sm text-main/80 leading-relaxed" />
 
                                             {/* Full image if present */}
                                             <img
-                                                class="step-expand-img hidden w-full rounded-lg border border-slate-200 dark:border-zinc-700 object-contain max-h-80"
+                                                class="step-expand-img hidden w-full rounded-lg border border-main/20 object-contain max-h-80"
                                                 src=""
                                                 alt=""
                                                 loading="lazy"
@@ -305,8 +304,8 @@ function getIconSvg(name?: string) {
                     {section.type === 'list' && section.list && (
                         <div class="space-y-3 max-h-[300px] overflow-y-auto custom-scroll pr-2">
                             {section.list.map((item) => (
-                                <div class="p-3 text-sm border rounded dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800/30">
-                                    {item.tag && <span class="text-xs font-mono uppercase text-blue-500 mb-1 block">[{item.tag}]</span>}
+                                <div class="p-3 text-sm border rounded border-main/20 bg-main/40">
+                                    {item.tag && <span class="text-xs font-mono uppercase text-accent mb-1 block">[{item.tag}]</span>}
                                     <div class="flex items-center justify-between gap-2">
                                         <div class="font-bold">{item.title}</div>
                                         {item.href && (
@@ -314,7 +313,7 @@ function getIconSvg(name?: string) {
                                                 href={item.href}
                                                 target="_blank"
                                                 rel="noreferrer"
-                                                class="inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:underline text-xs bg-slate-100 dark:bg-zinc-700 hover:bg-slate-200 dark:hover:bg-zinc-600 rounded px-2 py-1 transition-colors"
+                                                class="inline-flex items-center gap-1 text-accent hover:underline text-xs bg-main/60 hover:bg-muted rounded px-2 py-1 transition-colors"
                                                 aria-label={item.linkLabel || 'Source'}
                                                 title={item.linkLabel || 'Source'}
                                             >
@@ -351,18 +350,13 @@ function getIconSvg(name?: string) {
 <style>
     /* ── Timeline active state ── */
     .step-btn.is-active .step-node {
-        border-color: rgb(59 130 246);
-        color: rgb(59 130 246);
-        background-color: rgb(239 246 255);
-    }
-    .dark .step-btn.is-active .step-node {
-        border-color: rgb(96 165 250);
-        color: rgb(96 165 250);
-        background-color: rgb(30 41 59);
+        border-color: var(--accent);
+        color: var(--accent);
+        background-color: color-mix(in oklab, var(--accent) 15%, var(--bg-main));
     }
     .step-btn.is-active .step-chevron {
         opacity: 1;
-        color: rgb(59 130 246);
+        color: var(--accent);
     }
 
     /* ── KaTeX mobile-safe rendering ── */
@@ -394,13 +388,10 @@ function getIconSvg(name?: string) {
         -webkit-overflow-scrolling: touch;
 
         border-radius: 0.5rem;
-        border: 1px solid rgb(226 232 240);
-        background: rgb(248 250 252);
+        border: 1px solid var(--border-main);
+        border-color: color-mix(in oklab, var(--border-main) 20%, transparent);
+        background: var(--bg-muted);
         padding: 1.25rem;
-    }
-    .dark .eq-box {
-        border-color: rgb(63 63 70);
-        background: rgba(39 39 42 / 0.5);
     }
 
     /* KaTeX inside eq-box must NOT scroll itself — render at natural width */
@@ -473,11 +464,11 @@ function getIconSvg(name?: string) {
         btns.forEach((btn) => {
             btn.addEventListener('click', () => {
                 btns.forEach((b) => {
-                    b.classList.remove('active-tab', 'bg-slate-800', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-sm');
+                    b.classList.remove('active-tab', 'bg-accent', 'text-white', 'shadow-sm');
                     b.classList.add('opacity-50', 'hover:opacity-100');
                 });
                 btn.classList.remove('opacity-50', 'hover:opacity-100');
-                btn.classList.add('active-tab', 'bg-slate-800', 'text-white', 'dark:bg-white', 'dark:text-black', 'shadow-sm');
+                btn.classList.add('active-tab', 'bg-accent', 'text-white', 'shadow-sm');
 
                 const targetId = btn.dataset.target;
                 tabSecs.forEach((s) => s.classList.add('hidden'));

@@ -33,7 +33,7 @@ const { Content } = await render(post);
 <BaseLayout title={seo?.title ?? title} description={seo?.description ?? excerpt} image={seo?.image} pageType="article" showHeader={false}>
     <article class="mb-16 sm:mb-24">
         <header class="mb-8">
-            <h1 class="text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">{title}</h1>
+            <h1 class="text-2xl leading-tight font-display heading-accent sm:text-4xl sm:leading-tight">{title}</h1>
             <div class="mt-4 text-sm">
                 <FormattedDate date={publishDate} />
                 {
@@ -54,9 +54,12 @@ const { Content } = await render(post);
         <div class="mt-8 flex flex-wrap items-center gap-6 text-sm justify-between sm:mt-12 sm:text-base">
             {
                 tags.length > 0 && (
-                    <div class="flex flex-wrap gap-x-5 gap-y-1 text-sm">
+                    <div class="flex flex-wrap gap-2 text-sm">
                         {tags.map((tag) => (
-                            <a class="text-main hover:underline" href={`/tags/${slugify(tag)}`}>
+                            <a
+                                class="inline-flex items-center rounded-full border border-accent/40 px-3 py-1 leading-tight text-main transition hover:border-accent hover:text-accent"
+                                href={`/tags/${slugify(tag)}`}
+                            >
                                 #{tag}
                             </a>
                         ))}
@@ -69,7 +72,7 @@ const { Content } = await render(post);
     {
         (prevPost || nextPost) && (
             <div class="my-16 sm:my-24">
-                <h2 class="mb-12 text-xl font-serif italic sm:mb-16 sm:text-2xl">Read Next</h2>
+                <h2 class="mb-12 text-lg font-display heading-accent sm:mb-16 sm:text-xl">Read Next</h2>
                 {nextPost && <PostPreview post={nextPost} class="mb-10 sm:mb-12" headingLevel="h3" />}
                 {prevPost && <PostPreview post={prevPost} class="mb-10 sm:mb-12" headingLevel="h3" />}
             </div>

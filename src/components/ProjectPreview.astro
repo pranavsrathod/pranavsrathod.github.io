@@ -1,40 +1,32 @@
 ---
 import { type CollectionEntry } from 'astro:content';
-import ArrowRight from '../icons/ArrowRight.astro';
 
-type Props = { 
-  project: CollectionEntry<'projects'>; 
-  index?: number; // not used in this version
-  class?: string; 
-  headingLevel?: 'h2' | 'h3'
+type Props = {
+    project: CollectionEntry<'projects'>;
+    class?: string;
+    headingLevel?: 'h2' | 'h3';
 };
 
 const { project, class: className, headingLevel = 'h2' } = Astro.props;
-const { title, description, poster } = project.data;
+const { title, description, poster, tags = [] } = project.data;
 const TitleTag = headingLevel;
 ---
 
-<a class:list={['flex flex-col sm:flex-row items-center gap-8 group', className]} href={`/projects/${project.id}/`}>
-  {poster && (
-    <figure class="sm:w-1/2">
-      <img 
-        class="w-full object-cover mx-auto" 
-        src={poster} 
-        alt="Project Poster" 
-        loading="lazy" 
-        decoding="async" 
-      />
-    </figure>
-  )}
-  <div class={`sm:w-1/2 ${poster ? (poster ? 'sm:pl-4' : '') : ''} text-center`}>
-    <TitleTag class="text-xl leading-tight font-serif font-medium group-hover:underline group-hover:decoration-dashed group-hover:underline-offset-4 group-hover:decoration-1 sm:text-2xl">
-      {title}
-    </TitleTag>
-    {description && (
-      <div class="mt-1 text-sm leading-normal">{description}</div>
+<a class:list={['project-card flex flex-col rounded-xl bg-muted', className]} href={`/projects/${project.id}/`}>
+    {poster && (
+        <div class="overflow-hidden rounded-t-lg">
+            <img class="w-full aspect-video object-cover" src={poster} alt="" loading="lazy" decoding="async" />
+        </div>
     )}
-    <div class="mt-4 font-serif italic opacity-0 transition group-hover:opacity-100 sm:block">
-      View Project <ArrowRight class="fill-current w-4 h-4 inline-block" />
+    <div class="flex flex-col gap-2 p-4 sm:p-5">
+        <TitleTag class="text-lg leading-snug font-semibold">{title}</TitleTag>
+        {description && <div class="text-sm leading-normal">{description}</div>}
+        {tags.length > 0 && (
+            <div class="mt-1 flex flex-wrap gap-2">
+                {tags.map((tag) => (
+                    <span class="inline-flex items-center rounded-full border border-accent/40 px-2.5 py-0.5 text-xs leading-tight">{tag}</span>
+                ))}
+            </div>
+        )}
     </div>
-  </div>
 </a>

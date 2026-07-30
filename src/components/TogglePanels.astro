@@ -1,0 +1,55 @@
+---
+interface Props {
+    id: string;
+    labels: [string, string];
+}
+
+const { id, labels } = Astro.props;
+const rootId = `toggle-${id}`;
+---
+
+<div class="not-prose my-8" id={rootId}>
+    <div class="mb-4 inline-flex rounded-lg border border-main/30 p-1" role="tablist">
+        {labels.map((label, i) => (
+            <button
+                type="button"
+                role="tab"
+                aria-selected={i === 0 ? 'true' : 'false'}
+                class:list={[
+                    'tp-tab rounded-md px-4 py-1.5 text-sm font-medium transition-colors',
+                    i === 0 ? 'bg-accent text-white' : 'hover:bg-muted'
+                ]}
+                data-panel-index={i}
+            >
+                {label}
+            </button>
+        ))}
+    </div>
+    <div class="tp-panel" data-panel="0"><slot name="a" /></div>
+    <div class="tp-panel hidden" data-panel="1"><slot name="b" /></div>
+</div>
+
+<script define:vars={{ rootId }}>
+    document.addEventListener('astro:page-load', () => {
+        const root = document.getElementById(rootId);
+        if (!root || root.dataset.initialized === 'true') return;
+        root.dataset.initialized = 'true';
+
+        const tabs = root.querySelectorAll('.tp-tab');
+        const panels = root.querySelectorAll('.tp-panel');
+
+        tabs.forEach((tab) => {
+            tab.addEventListener('click', () => {
+                const index = tab.dataset.panelIndex;
+                tabs.forEach((t) => {
+                    const active = t === tab;
+                    t.setAttribute('aria-selected', String(active));
+                    t.classList.toggle('bg-accent', active);
+                    t.classList.toggle('text-white', active);
+                    t.classList.toggle('hover:bg-muted', !active);
+                });
+                panels.forEach((p) => p.classList.toggle('hidden', p.dataset.panel !== index));
+            });
+        });
+    });
+</script>

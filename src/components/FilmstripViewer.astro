@@ -1,0 +1,235 @@
+---
+interface Frame {
+    image: { src: string; alt: string };
+    caption: string;
+    edgecode: string;
+    title: string;
+    desc: string;
+    formula?: string;
+    note?: string;
+}
+
+interface Roll {
+    id: string;
+    label: string;
+    frames: Frame[];
+}
+
+interface Props {
+    id: string;
+    eyebrow?: string;
+    title?: string;
+    rolls: Roll[];
+}
+
+const { id, eyebrow, title, rolls } = Astro.props;
+const rootId = `filmstrip-${id}`;
+const firstFrame = rolls[0].frames[0];
+---
+
+<div class="not-prose my-8" id={rootId}>
+    {(eyebrow || title) && (
+        <div class="mb-3">
+            {eyebrow && <div class="film-edgecode">{eyebrow}</div>}
+            {title && <div class="mt-0.5 font-serif text-lg font-medium">{title}</div>}
+        </div>
+    )}
+
+    {rolls.length > 1 && (
+        <div class="mb-3 flex flex-wrap gap-2">
+            {rolls.map((roll, i) => (
+                <button
+                    type="button"
+                    class:list={[
+                        'fsv-roll rounded-full border border-main/30 px-3 py-1 text-xs font-medium transition-colors',
+                        i === 0 ? 'bg-accent text-white' : 'hover:bg-muted'
+                    ]}
+                    data-roll-index={i}
+                >
+                    {roll.label}
+                </button>
+            ))}
+        </div>
+    )}
+
+    <button
+        type="button"
+        class="fsv-frame block w-full cursor-pointer overflow-hidden rounded-lg text-left"
+        style="background-color: var(--film-chrome);"
+        aria-pressed="false"
+        aria-label="Toggle between render and technique details"
+        data-rolls={JSON.stringify(rolls)}
+    >
+        <div class="film-sprockets" aria-hidden="true">
+            {Array.from({ length: 8 }).map(() => <i></i>)}
+        </div>
+        <div class="fsv-gate relative mx-2.5">
+            <img
+                class="fsv-image block w-full transition-[filter] duration-[450ms]"
+                src={firstFrame.image.src}
+                alt={firstFrame.image.alt}
+            />
+            <div class="fsv-negside pointer-events-none absolute inset-0 flex flex-col justify-end p-4 opacity-0 transition-opacity duration-[450ms]">
+                <div class="film-edgecode fsv-edgecode mb-1.5">{firstFrame.edgecode}</div>
+                <div class="fsv-title text-lg font-bold" style="color: var(--film-paper-on-chrome);">{firstFrame.title}</div>
+                <div class="fsv-desc mt-1 text-sm leading-relaxed" style="color: var(--film-paper-on-chrome); opacity: 0.85;">{firstFrame.desc}</div>
+                <div
+                    class="fsv-formula mt-2 border-t border-dashed pt-2 font-mono text-sm"
+                    style={`color: var(--film-accent); border-color: color-mix(in oklab, var(--film-accent) 40%, transparent); ${firstFrame.formula ? '' : 'display: none;'}`}
+                >
+                    {firstFrame.formula}
+                </div>
+                <div class="fsv-note mt-1 text-xs" style={`color: var(--film-paper-on-chrome); opacity: 0.7; ${firstFrame.note ? '' : 'display: none;'}`}>
+                    {firstFrame.note}
+                </div>
+            </div>
+        </div>
+        <div class="flex items-center justify-between px-2.5">
+            <div class="fsv-caption film-edgecode py-1.5" style="letter-spacing: 0.08em;">{firstFrame.caption}</div>
+            <div class="film-edgecode py-1.5 opacity-60">tap to develop</div>
+        </div>
+        <div class="film-sprockets" aria-hidden="true">
+            {Array.from({ length: 8 }).map(() => <i></i>)}
+        </div>
+    </button>
+
+    <div class="mt-3 overflow-hidden rounded-md" style="background-color: var(--film-chrome);">
+        <div class="film-sprockets" aria-hidden="true">
+            {Array.from({ length: 10 }).map(() => <i></i>)}
+        </div>
+        <div class="fsv-strip flex gap-1.5 overflow-x-auto px-1.5">
+            {rolls[0].frames.map((frame, i) => (
+                <button
+                    type="button"
+                    class="fsv-thumb flex-none"
+                    data-frame-index={i}
+                    aria-label={`Show frame: ${frame.caption}`}
+                >
+                    <img
+                        class:list={['block h-14 w-24 rounded-sm border-2 object-cover', i === 0 ? 'fsv-thumb-on' : 'film-negative opacity-80 border-transparent']}
+                        style={i === 0 ? 'border-color: var(--film-accent);' : ''}
+                        src={frame.image.src}
+                        alt=""
+                    />
+                    <span class:list={['film-edgecode block py-1 text-center', i !== 0 && 'opacity-50']} style="font-size: 0.5rem; letter-spacing: 0.1em;">
+                        {String(i + 1).padStart(2, '0')}
+                    </span>
+                </button>
+            ))}
+        </div>
+        <div class="film-sprockets" aria-hidden="true">
+            {Array.from({ length: 10 }).map(() => <i></i>)}
+        </div>
+    </div>
+</div>
+
+<script define:vars={{ rootId }}>
+    document.addEventListener('astro:page-load', () => {
+        const root = document.getElementById(rootId);
+        if (!root || root.dataset.initialized === 'true') return;
+        root.dataset.initialized = 'true';
+
+        const frameBtn = root.querySelector('.fsv-frame');
+        const rolls = JSON.parse(frameBtn.dataset.rolls);
+        const img = root.querySelector('.fsv-image');
+        const negSide = root.querySelector('.fsv-negside');
+        const strip = root.querySelector('.fsv-strip');
+
+        let rollIndex = 0;
+        let frameIndex = 0;
+        let developed = false;
+
+        function currentFrame() {
+            return rolls[rollIndex].frames[frameIndex];
+        }
+
+        function setDeveloped(on) {
+            developed = on;
+            frameBtn.setAttribute('aria-pressed', String(on));
+            img.classList.toggle('film-negative', on);
+            negSide.classList.toggle('opacity-0', !on);
+        }
+
+        function renderFrame() {
+            const f = currentFrame();
+            img.src = f.image.src;
+            img.alt = f.image.alt;
+            root.querySelector('.fsv-caption').textContent = f.caption;
+            root.querySelector('.fsv-edgecode').textContent = f.edgecode;
+            root.querySelector('.fsv-title').textContent = f.title;
+            root.querySelector('.fsv-desc').textContent = f.desc;
+            const formula = root.querySelector('.fsv-formula');
+            formula.textContent = f.formula ?? '';
+            formula.style.display = f.formula ? '' : 'none';
+            const note = root.querySelector('.fsv-note');
+            note.textContent = f.note ?? '';
+            note.style.display = f.note ? '' : 'none';
+
+            strip.querySelectorAll('.fsv-thumb').forEach((thumb, i) => {
+                const tImg = thumb.querySelector('img');
+                const tLbl = thumb.querySelector('span');
+                const active = i === frameIndex;
+                tImg.classList.toggle('film-negative', !active);
+                tImg.classList.toggle('opacity-80', !active);
+                tImg.classList.toggle('fsv-thumb-on', active);
+                tImg.style.borderColor = active ? 'var(--film-accent)' : 'transparent';
+                tLbl.classList.toggle('opacity-50', !active);
+            });
+        }
+
+        function renderStrip() {
+            const frames = rolls[rollIndex].frames;
+            strip.innerHTML = '';
+            frames.forEach((f, i) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'fsv-thumb flex-none';
+                btn.dataset.frameIndex = String(i);
+                btn.setAttribute('aria-label', `Show frame: ${f.caption}`);
+                const tImg = document.createElement('img');
+                tImg.className = 'block h-14 w-24 rounded-sm border-2 object-cover';
+                tImg.src = f.image.src;
+                tImg.alt = '';
+                const tLbl = document.createElement('span');
+                tLbl.className = 'film-edgecode block py-1 text-center';
+                tLbl.style.fontSize = '0.5rem';
+                tLbl.style.letterSpacing = '0.1em';
+                tLbl.textContent = String(i + 1).padStart(2, '0');
+                btn.appendChild(tImg);
+                btn.appendChild(tLbl);
+                btn.addEventListener('click', () => {
+                    frameIndex = i;
+                    setDeveloped(false);
+                    renderFrame();
+                });
+                strip.appendChild(btn);
+            });
+            renderFrame();
+        }
+
+        frameBtn.addEventListener('click', () => setDeveloped(!developed));
+
+        strip.querySelectorAll('.fsv-thumb').forEach((thumb) => {
+            thumb.addEventListener('click', () => {
+                frameIndex = Number(thumb.dataset.frameIndex);
+                setDeveloped(false);
+                renderFrame();
+            });
+        });
+
+        root.querySelectorAll('.fsv-roll').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                rollIndex = Number(btn.dataset.rollIndex);
+                frameIndex = Math.min(frameIndex, rolls[rollIndex].frames.length - 1);
+                setDeveloped(false);
+                root.querySelectorAll('.fsv-roll').forEach((b) => {
+                    b.classList.remove('bg-accent', 'text-white');
+                    b.classList.add('hover:bg-muted');
+                });
+                btn.classList.add('bg-accent', 'text-white');
+                btn.classList.remove('hover:bg-muted');
+                renderStrip();
+            });
+        });
+    });
+</script>
