@@ -197,44 +197,56 @@ html.dark {
         border-bottom: 1px dashed color-mix(in oklab, var(--border-main) 30%, transparent);
     }
 
-    /* Planner rows: accent tick in the date gutter + nav-style title underline */
-    .planner-tick {
+    /* Pencil-on-hover: a rough circle sketches around the date and a wavy
+       line draws under the title, like marking the entry you're about to read */
+    .pencil-circle,
+    .pencil-under {
         position: absolute;
-        left: -0.875rem;
-        top: 50%;
-        width: 8px;
-        height: 2px;
-        border-radius: 9999px;
-        background-color: var(--accent);
-        rotate: -20deg;
-        opacity: 0;
-        transition: opacity 0.2s ease;
+        overflow: visible;
+        pointer-events: none;
     }
-    .planner-row:hover .planner-tick {
-        opacity: 1;
+    .pencil-circle {
+        inset: -0.375rem -0.625rem;
+        width: calc(100% + 1.25rem);
+        height: calc(100% + 0.75rem);
+    }
+    .pencil-under {
+        left: -2px;
+        bottom: -7px;
+        width: calc(100% + 8px);
+        height: 10px;
+    }
+    .pencil-circle path,
+    .pencil-under path {
+        fill: none;
+        stroke: var(--accent);
+        stroke-linecap: round;
+    }
+    .pencil-circle path {
+        stroke-width: 1.6;
+        stroke-dasharray: 340;
+        stroke-dashoffset: 340;
+        opacity: 0.85;
+        transition: stroke-dashoffset 0.5s ease-out;
+    }
+    .pencil-under path {
+        stroke-width: 1.8;
+        stroke-dasharray: 260;
+        stroke-dashoffset: 260;
+        opacity: 0.9;
+        transition: stroke-dashoffset 0.45s ease-out 0.08s;
+    }
+    .planner-row:hover .pencil-circle path,
+    .planner-row:hover .pencil-under path {
+        stroke-dashoffset: 0;
     }
     .planner-title {
         position: relative;
         display: inline-block;
     }
-    .planner-title::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -3px;
-        height: 2px;
-        background-color: var(--accent);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.2s ease;
-    }
-    .planner-row:hover .planner-title::after {
-        transform: scaleX(1);
-    }
     @media (prefers-reduced-motion: reduce) {
-        .planner-title::after,
-        .planner-tick {
+        .pencil-circle path,
+        .pencil-under path {
             transition: none;
         }
     }

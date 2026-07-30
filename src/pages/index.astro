@@ -43,13 +43,13 @@ const featuredProjects = projects.filter(({ data }) => data.isFeatured);
                         <PostPreview post={post} class="reveal" headingLevel="h3" />
                     ))}
                     <a class="planner-row reveal grid grid-cols-[5.5rem_1fr] items-baseline gap-4 py-5" href="/blog">
-                        <div class="relative text-xs uppercase tracking-wide text-muted">
-                            <span class="planner-tick" aria-hidden="true" />
-                            Archive
-                        </div>
+                        <div class="relative text-xs uppercase tracking-wide text-muted">Archive</div>
                         <div class="min-w-0">
                             <span class="planner-title inline-flex items-center gap-1 text-lg leading-snug font-medium whitespace-nowrap">
                                 All {posts.length} posts <ArrowRight class="w-4 h-4 fill-current shrink-0" />
+                                <svg class="pencil-under" viewBox="0 0 240 10" preserveAspectRatio="none" aria-hidden="true">
+                                    <path d="M2,6 C40,3 80,8 120,5 C160,2 200,7 238,4" />
+                                </svg>
                             </span>
                         </div>
                     </a>

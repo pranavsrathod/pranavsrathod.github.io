@@ -14,12 +14,19 @@ const readingMinutes = Math.max(1, Math.round(words / 220));
 
 <a class:list={['planner-row grid grid-cols-[5.5rem_1fr] items-baseline gap-4 py-5', className]} href={`/blog/${post.id}/`}>
     <div class="relative text-xs uppercase tracking-wide text-muted [font-variant-numeric:tabular-nums]">
-        <span class="planner-tick" aria-hidden="true"></span>
+        <svg class="pencil-circle" viewBox="0 0 120 34" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M8,17 C10,6 48,2 76,4 C104,6 116,10 113,19 C110,29 74,32 44,30 C18,28 5,25 8,17 C9,12 20,8 34,6" />
+        </svg>
         {dateLabel}
     </div>
     <div class="min-w-0">
-        <TitleTag class="planner-title text-lg leading-snug font-medium">{title}</TitleTag>
-        {excerpt && <div class="mt-1 truncate text-sm text-muted">{excerpt}</div>}
+        <TitleTag class="planner-title text-lg leading-snug font-medium">
+            {title}
+            <svg class="pencil-under" viewBox="0 0 240 10" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M2,6 C40,3 80,8 120,5 C160,2 200,7 238,4" />
+            </svg>
+        </TitleTag>
+        {excerpt && <div class="mt-1 text-sm text-muted">{excerpt}</div>}
         <div class="mt-1 text-xs text-muted">{readingMinutes} min read</div>
     </div>
 </a>
