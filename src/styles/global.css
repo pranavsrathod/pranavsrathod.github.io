@@ -237,7 +237,9 @@ html.dark {
         transition: stroke-dashoffset 0.45s ease-out 0.08s;
     }
     .planner-row:hover .pencil-circle path,
-    .planner-row:hover .pencil-under path {
+    .planner-row:hover .pencil-under path,
+    .planner-row:focus-visible .pencil-circle path,
+    .planner-row:focus-visible .pencil-under path {
         stroke-dashoffset: 0;
     }
     .planner-title {
