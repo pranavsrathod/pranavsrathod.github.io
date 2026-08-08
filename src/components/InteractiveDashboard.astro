@@ -103,7 +103,7 @@ function getIconSvg(name?: string) {
     </div>
 
     <!-- CONTENT -->
-    <div class="p-6 min-h-[400px]">
+    <div class="min-h-[320px] p-4 sm:min-h-[400px] sm:p-6">
         {
             sections.map((section, index) => (
                 <div id={`${id}-${section.id}`} class={`tab-section ${index !== 0 ? 'hidden' : ''} space-y-6`}>
@@ -111,15 +111,15 @@ function getIconSvg(name?: string) {
                     {section.type === 'cards' && section.cards && (
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[420px] overflow-y-auto pr-2 custom-scroll">
                             {section.cards.map((c) => (
-                                <div class="p-4 rounded-lg border border-main/20 bg-main/40">
-                                    <div class="flex items-start justify-between gap-3">
+                                <div class="rounded-lg border border-main/20 bg-main/40 p-3 sm:p-4">
+                                    <div class="flex flex-col items-start justify-between gap-3 sm:flex-row">
                                         <div class="flex items-start gap-3 min-w-0">
                                             {/* Image takes priority, then SVG icon, then nothing */}
                                             {c.image?.src ? (
                                                 <img
                                                     src={c.image.src}
                                                     alt={c.image.alt || ''}
-                                                    class:list={['w-16 h-16 rounded-lg object-cover shrink-0 border border-main/20', c.image.className]}
+                                                    class:list={['h-12 w-12 shrink-0 rounded-lg border border-main/20 object-cover sm:h-16 sm:w-16', c.image.className]}
                                                     loading="lazy"
                                                     decoding="async"
                                                 />
@@ -133,7 +133,7 @@ function getIconSvg(name?: string) {
                                         </div>
 
                                         {c.actions && c.actions.length > 0 && (
-                                            <div class="flex items-center gap-2 pt-1 shrink-0">
+                                            <div class="flex shrink-0 flex-wrap items-center gap-2 pt-1">
                                                 {c.actions.map((a) =>
                                                     a.href ? (
                                                         <a
@@ -168,9 +168,9 @@ function getIconSvg(name?: string) {
                                     {c.details && c.details.length > 0 && (
                                         <dl class="mt-3 text-sm grid grid-cols-1 gap-1">
                                             {c.details.map((d) => (
-                                                <div class="flex gap-2">
-                                                    <dt class="font-mono text-xs uppercase opacity-70 w-28 shrink-0">{d.label}</dt>
-                                                    <dd class="opacity-85">{d.value}</dd>
+                                                <div class="grid min-w-0 grid-cols-1 gap-0.5 sm:grid-cols-[7rem_1fr] sm:gap-2">
+                                                    <dt class="font-mono text-xs uppercase opacity-70">{d.label}</dt>
+                                                    <dd class="min-w-0 break-words opacity-85">{d.value}</dd>
                                                 </div>
                                             ))}
                                         </dl>
@@ -235,7 +235,7 @@ function getIconSvg(name?: string) {
                                     <li class="step-item">
                                         {/* Clickable header row */}
                                         <button
-                                            class="step-btn group w-full text-left flex items-start gap-4 py-4 pr-2 transition-colors"
+                                            class="step-btn group flex w-full items-start gap-3 py-4 pr-1 text-left transition-colors sm:gap-4 sm:pr-2"
                                             data-detail={s.detail}
                                             data-details={s.details ? JSON.stringify(s.details) : ''}
                                             data-image-src={s.image?.src || ''}
@@ -244,7 +244,7 @@ function getIconSvg(name?: string) {
                                             aria-expanded="false"
                                         >
                                             {/* Node on the spine */}
-                                            <div class="step-node relative z-10 mt-0.5 flex-shrink-0 w-10 h-10 rounded-full border-2 border-main/30 bg-main flex items-center justify-center text-xs font-mono font-bold text-muted group-hover:border-accent group-hover:text-accent transition-colors">
+                                            <div class="step-node relative z-10 mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border-2 border-main/30 bg-main font-mono text-[0.6875rem] font-bold text-muted transition-colors group-hover:border-accent group-hover:text-accent sm:h-10 sm:w-10 sm:text-xs">
                                                 {String(i + 1).padStart(2, '0')}
                                             </div>
 
@@ -268,7 +268,7 @@ function getIconSvg(name?: string) {
                                         </button>
 
                                         {/* Inline expandable content — hidden by default */}
-                                        <div class="step-expand hidden pl-14 pb-5 pr-2 space-y-3">
+                                        <div class="step-expand hidden space-y-3 pb-5 pl-12 pr-1 sm:pl-14 sm:pr-2">
                                             {/* Description */}
                                             <p class="step-expand-text text-sm text-main/80 leading-relaxed" />
 
@@ -293,7 +293,7 @@ function getIconSvg(name?: string) {
                     {/* ── CHART ── */}
                     {section.type === 'chart' && (
                         <>
-                            <div class="relative w-full h-[250px]">
+                            <div class="relative h-[220px] w-full min-w-0 sm:h-[250px]">
                                 <canvas id={`chart-${id}-${section.id}`} data-chart={JSON.stringify(section.chart)} />
                             </div>
                             {section.chart?.insight && <p class="text-xs text-center opacity-60 mt-2">{section.chart.insight}</p>}
@@ -357,6 +357,14 @@ function getIconSvg(name?: string) {
     .step-btn.is-active .step-chevron {
         opacity: 1;
         color: var(--accent);
+    }
+
+    /* Canvas has a 300px intrinsic width before Chart.js initializes. Keep that
+       fallback inside narrow dashboard cards as well. */
+    .interactive-dashboard canvas {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100% !important;
     }
 
     /* ── KaTeX mobile-safe rendering ── */

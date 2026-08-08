@@ -12,7 +12,10 @@ const words = (post.body ?? '').split(/\s+/).filter(Boolean).length;
 const readingMinutes = Math.max(1, Math.round(words / 220));
 ---
 
-<a class:list={['planner-row grid grid-cols-[5.5rem_1fr] items-baseline gap-4 py-5', className]} href={`/blog/${post.id}/`}>
+<a
+    class:list={['planner-row grid grid-cols-1 items-start gap-2 py-5 sm:grid-cols-[5.5rem_1fr] sm:items-baseline sm:gap-4', className]}
+    href={`/blog/${post.id}/`}
+>
     <div class="relative text-xs uppercase tracking-wide text-muted [font-variant-numeric:tabular-nums]">
         <svg class="pencil-circle" viewBox="0 0 120 34" preserveAspectRatio="none" aria-hidden="true">
             <path d="M8,17 C10,6 48,2 76,4 C104,6 116,10 113,19 C110,29 74,32 44,30 C18,28 5,25 8,17 C9,12 20,8 34,6" />

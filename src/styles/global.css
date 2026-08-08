@@ -45,6 +45,7 @@ html.dark {
     }
 
     body {
+        min-width: 0;
         background-image: radial-gradient(var(--dot-grid) 1px, transparent 1px);
         background-size: 24px 24px;
     }
@@ -120,6 +121,27 @@ html.dark {
 
     .prose a {
         @apply underline font-normal decoration-1 underline-offset-2 decoration-dashed hover:decoration-solid hover:text-accent;
+    }
+
+    /* Long technical content should adapt without making the whole page scroll.
+       Code and tables keep their natural width inside their own scroll area. */
+    .prose :where(img, video, iframe, canvas, svg) {
+        max-width: 100%;
+    }
+    .prose :where(pre, .katex-display) {
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .prose table {
+        display: block;
+        width: max-content;
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .prose :where(p, li, dd, figcaption) {
+        overflow-wrap: anywhere;
     }
 
     /* Scroll reveal. Hidden state only applies once JS has stamped .js on <html>
@@ -304,7 +326,12 @@ html.dark {
         grid-template-columns: repeat(1, minmax(0, 1fr));
         gap: 0.75rem 1.5rem;
     }
-    @media (min-width: 640px) {
+    @media (min-width: 640px) and (max-width: 767px) {
+        .spec-strip {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+    @media (min-width: 768px) {
         .spec-strip {
             grid-template-columns: repeat(var(--spec-strip-cols, 4), minmax(0, 1fr));
         }
@@ -313,7 +340,7 @@ html.dark {
         padding-bottom: 0.75rem;
         border-bottom: 1px dashed color-mix(in oklab, var(--border-main) 30%, transparent);
     }
-    @media (min-width: 640px) {
+    @media (min-width: 768px) {
         .spec-strip > div {
             padding-bottom: 0;
             padding-left: 1rem;

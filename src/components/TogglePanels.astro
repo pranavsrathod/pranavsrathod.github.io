@@ -9,14 +9,14 @@ const rootId = `toggle-${id}`;
 ---
 
 <div class="not-prose my-8" id={rootId}>
-    <div class="mb-4 inline-flex rounded-lg border border-main/30 p-1" role="tablist">
+    <div class="mb-4 flex w-full gap-1 overflow-x-auto rounded-lg border border-main/30 p-1 sm:inline-flex sm:w-auto" role="tablist">
         {labels.map((label, i) => (
             <button
                 type="button"
                 role="tab"
                 aria-selected={i === 0 ? 'true' : 'false'}
                 class:list={[
-                    'tp-tab rounded-md px-4 py-1.5 text-sm font-medium transition-colors',
+                    'tp-tab shrink-0 rounded-md px-4 py-1.5 text-sm font-medium transition-colors',
                     i === 0 ? 'bg-accent text-white' : 'hover:bg-muted'
                 ]}
                 data-panel-index={i}

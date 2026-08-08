@@ -42,7 +42,10 @@ const featuredProjects = projects.filter(({ data }) => data.isFeatured);
                     {featuredPosts.map((post) => (
                         <PostPreview post={post} class="reveal" headingLevel="h3" />
                     ))}
-                    <a class="planner-row reveal grid grid-cols-[5.5rem_1fr] items-baseline gap-4 py-5" href="/blog">
+                    <a
+                        class="planner-row reveal grid grid-cols-1 items-start gap-2 py-5 sm:grid-cols-[5.5rem_1fr] sm:items-baseline sm:gap-4"
+                        href="/blog"
+                    >
                         <div class="text-xs uppercase tracking-wide text-muted">Archive</div>
                         <div class="min-w-0">
                             <span class="planner-title inline-flex items-center gap-1 text-lg leading-snug font-medium whitespace-nowrap">

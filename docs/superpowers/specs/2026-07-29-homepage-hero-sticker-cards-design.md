@@ -9,7 +9,7 @@
 The homepage reads as a standard template: the hero occupies a fraction of the first screen inside the site's 768px column, the project cards are generic image-top tiles whose two-line clamped descriptions cut off mid-sentence, and nothing carries the eye down the page.
 
 ## Goal
-
+1 
 Make the first screen a full-viewport hero on every device, restyle the project cards as die-cut stickers on the dot-paper board, and fix the description truncation structurally. The Writing section is explicitly out of scope (pinned for a later pass).
 
 ## 1. Full-screen hero
