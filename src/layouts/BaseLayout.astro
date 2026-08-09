@@ -2,11 +2,12 @@
 import { ClientRouter } from 'astro:transitions';
 import BaseHead, { type Props as HeadProps } from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
+import IntroLogo from '../components/IntroLogo.astro';
 import Nav from '../components/Nav.astro';
 
-export type Props = HeadProps & { showHeader?: boolean };
+export type Props = HeadProps & { showHeader?: boolean; showIntro?: boolean };
 
-const { showHeader = true, ...head } = Astro.props;
+const { showHeader = true, showIntro = false, ...head } = Astro.props;
 ---
 
 <!doctype html>
@@ -35,6 +36,19 @@ const { showHeader = true, ...head } = Astro.props;
                 document.documentElement.classList.add('dark');
             }
         </script>
+        <script is:inline define:vars={{ showIntro }}>
+            try {
+                const isFirstPage = sessionStorage.getItem('pr-site-loaded') !== 'true';
+                const forceIntro = new URLSearchParams(window.location.search).get('intro') === '1';
+                const canAnimate = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                if (showIntro && (isFirstPage || forceIntro) && canAnimate) {
+                    document.documentElement.classList.add('pr-intro-pending');
+                }
+                sessionStorage.setItem('pr-site-loaded', 'true');
+            } catch {
+                // If storage is unavailable, prefer loading the site normally.
+            }
+        </script>
         <ClientRouter />
     </head>
     <body class="bg-main text-main">
@@ -45,13 +59,14 @@ const { showHeader = true, ...head } = Astro.props;
         >
         <!-- End Google Tag Manager (noscript) -->
         <!-- Actual page content -->
-        <div class="flex flex-col min-h-screen px-4 md:px-8 relative z-10">
+        <div class="flex flex-col min-h-screen px-4 md:px-8 relative z-10" id="site-shell">
             <Nav />
             <main class="grow w-full max-w-3xl mx-auto">
                 <slot />
             </main>
             <Footer />
         </div>
+        {showIntro && <IntroLogo />}
         <script is:inline>
             document.addEventListener('astro:page-load', () => {
                 const toggleBtn = document.getElementById('companion-toggle');

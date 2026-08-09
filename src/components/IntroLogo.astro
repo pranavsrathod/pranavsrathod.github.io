@@ -1,0 +1,295 @@
+<button class="pr-intro" id="pr-intro" type="button" aria-label="Enter Pranav Rathod's portfolio" hidden>
+    <span class="pr-intro-backdrop" aria-hidden="true"></span>
+    <span class="pr-intro-mark font-display" id="pr-intro-mark" aria-hidden="true">PR<span class="pr-intro-dot">.</span><span class="pr-intro-stroke"></span></span>
+    <span class="pr-intro-hint" aria-hidden="true">
+        <span class="if-pointer">scroll to enter</span>
+        <span class="if-touch">swipe to enter</span>
+    </span>
+</button>
+
+<style>
+    .pr-intro {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: none;
+        width: 100%;
+        height: 100dvh;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        border: 0;
+        color: var(--text-main);
+        background: transparent;
+        cursor: s-resize;
+        isolation: isolate;
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    :global(html.pr-intro-pending) .pr-intro {
+        display: grid;
+        place-items: center;
+    }
+
+    :global(html.pr-intro-pending),
+    :global(html.pr-intro-pending body) {
+        overflow: hidden;
+        overscroll-behavior: none;
+    }
+
+    .pr-intro-backdrop {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background-color: var(--bg-main);
+        background-image: radial-gradient(var(--dot-grid) 1px, transparent 1px);
+        background-size: 24px 24px;
+    }
+
+    .pr-intro-mark {
+        position: relative;
+        display: block;
+        flex: none;
+        font-size: min(54vw, 48rem);
+        line-height: 0.76;
+        letter-spacing: -0.065em;
+        white-space: nowrap;
+        transform-origin: top left;
+        animation: pr-ink-settle 0.78s cubic-bezier(0.22, 1, 0.36, 1) both;
+        will-change: opacity, transform;
+    }
+
+    .pr-intro-dot {
+        color: var(--accent);
+    }
+
+    .pr-intro-stroke {
+        position: absolute;
+        bottom: -0.065em;
+        left: 0.035em;
+        width: 0.42em;
+        height: 0.012em;
+        min-height: 3px;
+        border-radius: 2px 7px 3px 6px;
+        background: var(--accent);
+        transform: rotate(-0.65deg);
+        transform-origin: left center;
+        transition:
+            opacity 0.24s ease,
+            transform 0.24s ease;
+    }
+
+    .pr-intro-hint {
+        position: absolute;
+        right: auto;
+        bottom: max(1.5rem, env(safe-area-inset-bottom));
+        left: 50%;
+        padding: 0.35rem 0.55rem;
+        border-radius: 0.25rem;
+        border: 1px dashed color-mix(in oklab, var(--border-main) 22%, transparent);
+        color: var(--text-muted);
+        background: color-mix(in oklab, var(--bg-main) 88%, transparent);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.625rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        opacity: 0;
+        transform: translateX(-50%);
+        translate: 0 0.5rem;
+        transition:
+            opacity 0.45s ease,
+            translate 0.45s ease;
+    }
+
+    .pr-intro.is-ready .pr-intro-hint {
+        opacity: 1;
+        translate: 0 0;
+    }
+
+    .pr-intro.is-exiting {
+        pointer-events: none;
+    }
+
+    .pr-intro.is-exiting .pr-intro-hint {
+        opacity: 0;
+        translate: 0 0.5rem;
+    }
+
+    .pr-intro.is-exiting .pr-intro-stroke {
+        opacity: 0;
+        transform: rotate(-0.65deg) scaleX(0.72);
+    }
+
+    .if-touch {
+        display: none;
+    }
+
+    @media (hover: none) {
+        .if-pointer {
+            display: none;
+        }
+        .if-touch {
+            display: inline;
+        }
+    }
+
+    @keyframes pr-ink-settle {
+        from {
+            opacity: 0;
+            filter: blur(7px);
+            transform: scale(0.985);
+        }
+        to {
+            opacity: 1;
+            filter: blur(0);
+            transform: scale(1);
+        }
+    }
+
+    :global(html.pr-intro-pending:not(.pr-intro-revealing) #home-hero) {
+        opacity: 0;
+    }
+
+    :global(html.pr-intro-revealing #home-hero) {
+        animation: pr-hero-reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+    }
+
+    :global(html.pr-intro-pending #site-logo) {
+        visibility: hidden;
+    }
+
+    @keyframes pr-hero-reveal {
+        from {
+            opacity: 0;
+            filter: blur(6px);
+        }
+        to {
+            opacity: 1;
+            filter: blur(0);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .pr-intro {
+            display: none !important;
+        }
+    }
+</style>
+
+<script is:inline>
+    (() => {
+        const html = document.documentElement;
+        const intro = document.getElementById('pr-intro');
+        const mark = document.getElementById('pr-intro-mark');
+        const target = document.getElementById('site-logo');
+        const shell = document.getElementById('site-shell');
+
+        if (!html.classList.contains('pr-intro-pending') || !intro || !mark || !target || !shell) return;
+
+        intro.hidden = false;
+        shell.inert = true;
+        intro.focus({ preventScroll: true });
+
+        let ready = false;
+        let exitQueued = false;
+        let exiting = false;
+        let touchStartY = 0;
+
+        const waitForFont = document.fonts?.ready ?? Promise.resolve();
+        Promise.all([waitForFont, new Promise((resolve) => setTimeout(resolve, 850))]).then(() => {
+            ready = true;
+            intro.classList.add('is-ready');
+            if (exitQueued) exitIntro();
+        });
+
+        function requestExit(event) {
+            event?.preventDefault?.();
+            if (exiting) return;
+            if (!ready) {
+                exitQueued = true;
+                return;
+            }
+            exitIntro();
+        }
+
+        function handleWheel(event) {
+            if (Math.abs(event.deltaY) > 2) requestExit(event);
+        }
+
+        function handleTouchStart(event) {
+            touchStartY = event.touches[0]?.clientY ?? 0;
+        }
+
+        function handleTouchMove(event) {
+            const currentY = event.touches[0]?.clientY ?? touchStartY;
+            if (Math.abs(currentY - touchStartY) > 8) requestExit(event);
+        }
+
+        function handleKeydown(event) {
+            if (['Enter', ' ', 'ArrowDown', 'PageDown'].includes(event.key)) requestExit(event);
+        }
+
+        function removeInputListeners() {
+            window.removeEventListener('wheel', handleWheel);
+            window.removeEventListener('touchstart', handleTouchStart);
+            window.removeEventListener('touchmove', handleTouchMove);
+            intro.removeEventListener('click', requestExit);
+            intro.removeEventListener('keydown', handleKeydown);
+        }
+
+        function exitIntro() {
+            if (exiting) return;
+            exiting = true;
+            removeInputListeners();
+            intro.classList.add('is-exiting');
+            html.classList.add('pr-intro-revealing');
+
+            const start = mark.getBoundingClientRect();
+            const end = target.getBoundingClientRect();
+            const scale = end.width / start.width;
+            const currentColor = getComputedStyle(mark).color;
+            const targetColor = getComputedStyle(target).color;
+
+            mark.style.color = currentColor;
+
+            const markAnimation = mark.animate(
+                [
+                    { transform: 'translate3d(0, 0, 0) scale(1)', color: currentColor, offset: 0 },
+                    { transform: 'translate3d(0, 0, 0) scale(1.015)', color: currentColor, offset: 0.12 },
+                    {
+                        transform: `translate3d(${end.left - start.left}px, ${end.top - start.top}px, 0) scale(${scale})`,
+                        color: targetColor,
+                        offset: 1
+                    }
+                ],
+                { duration: 1000, easing: 'cubic-bezier(0.76, 0, 0.24, 1)', fill: 'forwards' }
+            );
+
+            intro.querySelector('.pr-intro-backdrop')?.animate(
+                [
+                    { opacity: 1, offset: 0 },
+                    { opacity: 1, offset: 0.46 },
+                    { opacity: 0, offset: 1 }
+                ],
+                { duration: 1000, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'forwards' }
+            );
+
+            markAnimation.finished.finally(() => {
+                html.classList.remove('pr-intro-pending');
+                intro.hidden = true;
+                shell.inert = false;
+                window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+                setTimeout(() => html.classList.remove('pr-intro-revealing'), 400);
+            });
+        }
+
+        window.addEventListener('wheel', handleWheel, { passive: false });
+        window.addEventListener('touchstart', handleTouchStart, { passive: true });
+        window.addEventListener('touchmove', handleTouchMove, { passive: false });
+        intro.addEventListener('click', requestExit);
+        intro.addEventListener('keydown', handleKeydown);
+    })();
+</script>

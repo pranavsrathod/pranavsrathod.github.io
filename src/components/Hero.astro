@@ -10,7 +10,10 @@ const hero = siteConfig.hero;
 
 {
     (hero?.title || hero?.text || (hero?.actions && hero.actions.length > 0)) && (
-        <section class="hero-bleed relative mb-12 sm:mb-20 flex flex-col justify-center px-4 md:px-8 min-h-[calc(100svh-5.5rem)] sm:min-h-[calc(100svh-7.5rem)] md:min-h-[calc(100svh-8.5rem)]">
+        <section
+            class="hero-bleed relative mb-12 sm:mb-20 flex flex-col justify-center px-4 md:px-8 min-h-[calc(100svh-5.5rem)] sm:min-h-[calc(100svh-7.5rem)] md:min-h-[calc(100svh-8.5rem)]"
+            id="home-hero"
+        >
             <div class="mx-auto w-full max-w-5xl flex flex-col-reverse items-center gap-8 text-center sm:flex-row sm:items-center sm:justify-between sm:gap-12 sm:text-left">
                 <div class="w-full min-w-0 flex flex-col items-center gap-5 sm:items-start">
                     <div class="flex flex-col gap-0.5">

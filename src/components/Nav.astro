@@ -6,120 +6,440 @@ import siteConfig from '../data/site-config';
 const navLinks = siteConfig.headerNavLinks || [];
 ---
 
-<nav class="relative min-h-11 pt-4 pb-8 sm:min-h-14 sm:pb-12 md:pt-8">
+<nav class="site-nav relative pt-4 pb-9 md:pt-6 md:pb-12" aria-label="Primary navigation">
     {
         navLinks.length > 0 && (
-            <div class="relative mx-auto flex w-full max-w-3xl items-center gap-3 md:gap-8">
-                <a class="font-display text-lg leading-none text-accent relative z-30" href="/" aria-label="Pranav Rathod, Home">
+            <div class="masthead relative mx-auto grid w-full max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-3">
+                <a class="brand-mark relative z-30 font-display text-lg leading-none text-accent" href="/" aria-label="Pranav Rathod, Home" id="site-logo">
                     PR.
                 </a>
-                <button
-                    class="menu-toggle relative z-30 -ml-1 flex h-11 w-11 cursor-pointer items-center justify-center md:hidden"
-                    aria-label="Open Menu"
-                    aria-expanded="false"
-                    aria-controls="menu-items"
-                >
-                    <span class="menu-toggle-icon w-6 h-px relative bg-current" />
+
+                <div id="menu-items" class="menu" aria-hidden="true">
+                    <div class="menu-meta" aria-hidden="true">
+                        <span>Index</span>
+                        <span>01—{String(navLinks.length).padStart(2, '0')}</span>
+                    </div>
+                    <ul class="menu-list">
+                        {navLinks.map((link, index) => (
+                            <li class="menu-item">
+                                <span class="menu-number" aria-hidden="true">
+                                    {String(index + 1).padStart(2, '0')}
+                                </span>
+                                <NavLink class="masthead-link" href={link.href}>
+                                    {link.text}
+                                </NavLink>
+                            </li>
+                        ))}
+                    </ul>
+                    <p class="menu-edition" aria-hidden="true">Pranav Rathod · Portfolio / 2026</p>
+                </div>
+
+                <div class="nav-tools relative z-30 ml-auto flex items-center">
+                    <span class="tools-label" aria-hidden="true">Utilities</span>
+                    <button id="companion-toggle" class="tool-button" aria-label="Summon Cat">
+                        <svg
+                            class="h-4 w-4"
+                            viewBox="0 0 12 12"
+                            fill="currentColor"
+                            shape-rendering="crispEdges"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <rect x="0" y="3" width="2" height="2" />
+                            <rect x="2" y="1" width="2" height="2" />
+                            <rect x="5" y="0" width="2" height="2" />
+                            <rect x="8" y="1" width="2" height="2" />
+                            <rect x="10" y="3" width="2" height="2" />
+                            <rect x="4" y="4" width="4" height="1" />
+                            <rect x="3" y="5" width="6" height="3" />
+                            <rect x="4" y="8" width="4" height="1" />
+                        </svg>
+                    </button>
+                    <ThemeToggle />
+                </div>
+
+                <button class="menu-toggle relative z-30" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items">
+                    <span class="menu-toggle-open" aria-hidden="true">Menu</span>
+                    <span class="menu-toggle-close" aria-hidden="true">Close</span>
+                    <span class="menu-toggle-icon" aria-hidden="true" />
                 </button>
-                <ul
-                    id="menu-items"
-                    class="menu flex gap-6 max-md:fixed max-md:inset-0 max-md:z-20 max-md:h-[100dvh] max-md:flex-col max-md:items-start max-md:gap-2 max-md:overflow-y-auto max-md:bg-main max-md:px-4 max-md:pt-24 max-md:pb-8"
-                >
-                    {navLinks.map((link) => (
-                        <li class="w-full py-1 md:w-auto">
-                            <NavLink class="inline-flex min-h-11 items-center text-2xl font-medium text-main md:min-h-0 md:text-sm" href={link.href}>
-                                {link.text}
-                            </NavLink>
-                        </li>
-                    ))}
-                </ul>
             </div>
         )
     }
-    <div class="absolute right-0 top-4 z-30 flex items-center md:top-8">
-        <button
-            id="companion-toggle"
-            class="ml-1 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-main hover:bg-muted md:ml-3 md:h-8 md:w-8"
-            aria-label="Summon Cat"
-        >
-            <svg class="w-4 h-4" viewBox="0 0 12 12" fill="currentColor" shape-rendering="crispEdges" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-                <rect x="0" y="3" width="2" height="2" />
-                <rect x="2" y="1" width="2" height="2" />
-                <rect x="5" y="0" width="2" height="2" />
-                <rect x="8" y="1" width="2" height="2" />
-                <rect x="10" y="3" width="2" height="2" />
-                <rect x="4" y="4" width="4" height="1" />
-                <rect x="3" y="5" width="6" height="3" />
-                <rect x="4" y="8" width="4" height="1" />
-            </svg>
-        </button>
-        <ThemeToggle />
-    </div>
 </nav>
 
 <style>
     @reference "tailwindcss";
 
-    @media (max-width: 767px) {
+    .masthead {
+        min-height: 2.75rem;
+    }
+
+    .masthead::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        bottom: -0.875rem;
+        left: 0;
+        border-bottom: 1px dashed color-mix(in oklab, var(--border-main) 25%, transparent);
+    }
+
+    .brand-mark {
+        transition: color 0.2s ease;
+    }
+
+    .brand-mark:hover {
+        color: var(--text-main);
+    }
+
+    :global(.masthead-link:focus-visible),
+    .menu-toggle:focus-visible,
+    .tool-button:focus-visible,
+    :global(#theme-toggle:focus-visible) {
+        border-radius: 0.125rem;
+        outline: 1.5px dashed var(--accent);
+        outline-offset: 0.2rem;
+    }
+
+    .menu-toggle {
+        display: inline-flex;
+        min-height: 2.75rem;
+        cursor: pointer;
+        align-items: center;
+        gap: 0.625rem;
+        border: 0;
+        background: transparent;
+        padding: 0 0.125rem 0 0.75rem;
+        color: var(--text-main);
+        font-family: var(--font-serif);
+        font-size: 0.9375rem;
+    }
+
+    .menu-toggle-close {
+        display: none;
+    }
+
+    .menu-toggle.is-active .menu-toggle-open {
+        display: none;
+    }
+
+    .menu-toggle.is-active .menu-toggle-close {
+        display: inline;
+    }
+
+    .menu-toggle-icon {
+        position: relative;
+        width: 1.25rem;
+        height: 1px;
+        background-color: currentColor;
+        transition: background-color 0.15s ease;
+    }
+
+    .menu-toggle-icon::before,
+    .menu-toggle-icon::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 1.25rem;
+        height: 1px;
+        transform-origin: center;
+        background-color: currentColor;
+        transition: transform 0.2s ease;
+    }
+
+    .menu-toggle-icon::before {
+        transform: translate(-50%, -50%) translateY(-0.3rem);
+    }
+
+    .menu-toggle-icon::after {
+        transform: translate(-50%, -50%) translateY(0.3rem);
+    }
+
+    .menu-toggle.is-active .menu-toggle-icon {
+        background-color: transparent;
+    }
+
+    .menu-toggle.is-active .menu-toggle-icon::before {
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .menu-toggle.is-active .menu-toggle-icon::after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    .tool-button {
+        display: inline-flex;
+        width: 2rem;
+        height: 2rem;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-main);
+        transition: color 0.2s ease;
+    }
+
+    .tool-button:hover {
+        color: var(--accent);
+    }
+
+    .tools-label {
+        display: none;
+    }
+
+    @media (max-width: 899px) {
+        .brand-mark {
+            grid-column: 1;
+            grid-row: 1;
+            justify-self: start;
+        }
+
+        .menu-toggle {
+            grid-column: 3;
+            grid-row: 1;
+            justify-self: end;
+        }
+
         .menu {
-            @apply invisible pointer-events-none opacity-0;
+            position: fixed;
+            z-index: 20;
+            inset: 0;
+            display: flex;
+            visibility: hidden;
+            height: 100dvh;
+            min-height: 32rem;
+            pointer-events: none;
+            flex-direction: column;
+            overflow-y: auto;
+            background-color: var(--bg-main);
             background-image: radial-gradient(var(--dot-grid) 1px, transparent 1px);
             background-size: 24px 24px;
-            transform: translateY(-0.75rem);
+            padding: 5.75rem max(1.25rem, env(safe-area-inset-right)) calc(5.75rem + env(safe-area-inset-bottom)) max(1.25rem, env(safe-area-inset-left));
+            opacity: 0;
+            transform: translateY(-0.5rem);
             transition:
-                visibility 0s linear 0.2s,
-                opacity 0.2s ease,
-                transform 0.2s ease;
+                visibility 0s linear 0.25s,
+                opacity 0.25s ease,
+                transform 0.25s ease;
         }
+
         .menu.is-visible {
-            @apply visible pointer-events-auto opacity-100;
+            visibility: visible;
+            pointer-events: auto;
+            opacity: 1;
             transform: translateY(0);
             transition:
-                opacity 0.2s ease,
-                transform 0.2s ease;
+                opacity 0.25s ease,
+                transform 0.25s ease;
         }
-        .menu-toggle-icon {
-            transition: background-color 0.15s ease;
+
+        .menu-meta,
+        .menu-edition,
+        .menu-list {
+            width: min(100%, 32rem);
+            margin-inline: auto;
         }
-        .menu-toggle.is-active .menu-toggle-icon {
-            background-color: transparent;
+
+        .menu-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid color-mix(in oklab, var(--border-main) 45%, transparent);
+            color: var(--text-muted);
+            font-family: var(--font-sans);
+            font-size: 0.625rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
         }
-        .menu-toggle-icon:before,
-        .menu-toggle-icon:after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 1.5rem;
-            height: 1px;
-            transform-origin: center;
-            background-color: currentColor;
-            transition: transform 0.2s ease;
+
+        .menu-list {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            justify-content: center;
+            padding-block: clamp(1rem, 4vh, 2.5rem);
         }
-        .menu-toggle-icon:before {
-            transform: translate(-50%, -50%) translateY(-0.375rem);
+
+        .menu-item {
+            display: grid;
+            grid-template-columns: 2.25rem minmax(0, 1fr);
+            align-items: baseline;
         }
-        .menu-toggle-icon:after {
-            transform: translate(-50%, -50%) translateY(0.375rem);
+
+        .menu-number {
+            color: var(--accent);
+            font-family: var(--font-sans);
+            font-size: 0.625rem;
+            font-weight: 650;
+            letter-spacing: 0.12em;
         }
-        .menu-toggle.is-active .menu-toggle-icon:before {
-            transform: translate(-50%, -50%) rotate(45deg);
+
+        :global(.masthead-link) {
+            display: inline-flex;
+            width: fit-content;
+            min-height: 2.75rem;
+            align-items: center;
+            color: var(--text-main);
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, min(10vw, 6.4vh), 4rem);
+            font-weight: 450;
+            line-height: 0.95;
+            letter-spacing: -0.035em;
         }
-        .menu-toggle.is-active .menu-toggle-icon:after {
-            transform: translate(-50%, -50%) rotate(-45deg);
+
+        :global(.masthead-link.is-active) {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        .menu-edition {
+            padding-top: 0.75rem;
+            border-top: 1px solid color-mix(in oklab, var(--border-main) 45%, transparent);
+            color: var(--text-muted);
+            font-family: var(--font-sans);
+            font-size: 0.625rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .nav-tools {
+            position: fixed;
+            z-index: 30;
+            right: max(1.25rem, env(safe-area-inset-right));
+            bottom: calc(1.15rem + env(safe-area-inset-bottom));
+            left: max(1.25rem, env(safe-area-inset-left));
+            display: flex;
+            visibility: hidden;
+            pointer-events: none;
+            justify-content: flex-end;
+            gap: 0.125rem;
+            opacity: 0;
+            transition:
+                visibility 0s linear 0.2s,
+                opacity 0.2s ease;
+        }
+
+        .tools-label {
+            display: inline-flex;
+            flex: 1;
+            align-items: center;
+            color: var(--text-muted);
+            font-family: var(--font-sans);
+            font-size: 0.625rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        :global(body.menu-open) .nav-tools {
+            visibility: visible;
+            pointer-events: auto;
+            opacity: 1;
+            transition: opacity 0.2s ease 0.08s;
         }
 
         :global(body.menu-open) {
             overflow: hidden;
         }
+
+        :global(body.menu-open) .brand-mark {
+            position: fixed;
+            z-index: 30;
+            top: calc(1rem + env(safe-area-inset-top));
+            left: max(1.25rem, env(safe-area-inset-left));
+        }
+    }
+
+    @media (min-width: 900px) {
+        .masthead {
+            grid-template-columns: minmax(5rem, 1fr) auto minmax(5rem, 1fr);
+        }
+
+        .menu {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .menu-list {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(0.75rem, 1.7vw, 1.5rem);
+        }
+
+        .menu-item {
+            display: block;
+        }
+
+        .menu-number,
+        .menu-meta,
+        .menu-edition {
+            display: none;
+        }
+
+        :global(.masthead-link) {
+            display: inline-flex;
+            min-height: 2rem;
+            align-items: center;
+            color: var(--text-main);
+            font-family: var(--font-serif);
+            font-size: clamp(0.8rem, 1.15vw, 0.9375rem);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        :global(.masthead-link.is-active) {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        .nav-tools {
+            grid-column: 3;
+            grid-row: 1;
+        }
+
+        .menu-toggle {
+            display: none;
+        }
+    }
+
+    @media (min-width: 900px) and (max-width: 1040px) {
+        .menu-list {
+            gap: 0.625rem;
+        }
+
+        :global(.masthead-link) {
+            font-size: 0.75rem;
+        }
+    }
+
+    @media (max-width: 360px), (max-height: 620px) {
+        .menu {
+            padding-top: 4.75rem;
+            padding-bottom: calc(4.75rem + env(safe-area-inset-bottom));
+        }
+
+        .menu-list {
+            padding-block: 0.75rem;
+        }
+
+        :global(.masthead-link) {
+            min-height: 2.25rem;
+            font-size: clamp(1.75rem, min(9vw, 5.8vh), 2.75rem);
+        }
     }
 
     @media (prefers-reduced-motion: reduce) {
+        .brand-mark,
         .menu,
         .menu.is-visible,
+        .nav-tools,
         .menu-toggle-icon,
         .menu-toggle-icon::before,
-        .menu-toggle-icon::after {
+        .menu-toggle-icon::after,
+        .tool-button {
             transition: none;
         }
     }
@@ -134,7 +454,7 @@ const navLinks = siteConfig.headerNavLinks || [];
         const menuWindow = window as Window & { cleanupMobileMenu?: () => void };
         menuWindow.cleanupMobileMenu?.();
         menuToggleBtn.dataset.initialized = 'true';
-        const mobileQuery = window.matchMedia('(max-width: 767px)');
+        const mobileQuery = window.matchMedia('(max-width: 899px)');
 
         function setMenuOpen(open: boolean, returnFocus = false) {
             const shouldOpen = open && mobileQuery.matches;
@@ -150,13 +470,14 @@ const navLinks = siteConfig.headerNavLinks || [];
         setMenuOpen(false);
 
         menuToggleBtn.addEventListener('click', () => {
-            setMenuOpen(menuToggleBtn.getAttribute('aria-expanded') !== 'true');
+            const willOpen = menuToggleBtn.getAttribute('aria-expanded') !== 'true';
+            setMenuOpen(willOpen);
+            if (willOpen) {
+                window.setTimeout(() => menu?.querySelector<HTMLAnchorElement>('a')?.focus(), 260);
+            }
         });
 
         menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenuOpen(false)));
-        menu.addEventListener('click', (event) => {
-            if (event.target === menu) setMenuOpen(false, true);
-        });
         function handleKeydown(event: KeyboardEvent) {
             if (event.key === 'Escape' && menuToggleBtn.getAttribute('aria-expanded') === 'true') {
                 setMenuOpen(false, true);

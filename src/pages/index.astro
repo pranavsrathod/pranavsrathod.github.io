@@ -15,7 +15,7 @@ const projects = (await getCollection('projects')).sort(sortItemsByDateDesc);
 const featuredProjects = projects.filter(({ data }) => data.isFeatured);
 ---
 
-<BaseLayout description={siteConfig.description} image={siteConfig.image}>
+<BaseLayout description={siteConfig.description} image={siteConfig.image} showIntro>
     <Hero />
     {
         featuredProjects?.length > 0 && (
