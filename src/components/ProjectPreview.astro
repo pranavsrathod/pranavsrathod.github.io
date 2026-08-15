@@ -5,7 +5,7 @@ type Props = {
     project: CollectionEntry<'projects'>;
     class?: string;
     headingLevel?: 'h2' | 'h3';
-    variant?: 'archive' | 'featured' | 'featured-lead';
+    variant?: 'archive' | 'featured' | 'featured-lead' | 'rolodex';
 };
 
 const { project, class: className, headingLevel = 'h2', variant = 'archive' } = Astro.props;
@@ -56,30 +56,11 @@ const TitleTag = headingLevel;
             translate 0.25s ease;
     }
 
-    .blueprint-card::after {
-        content: '';
-        position: absolute;
-        z-index: 3;
-        right: -18%;
-        bottom: -2px;
-        left: -18%;
-        height: 2px;
-        background: var(--accent);
-        transform: scaleX(0) rotate(-0.4deg);
-        transform-origin: left;
-        transition: transform 0.45s ease;
-    }
-
     .blueprint-card:hover,
     .blueprint-card:focus-visible {
         border-color: var(--blueprint-ink);
         box-shadow: 8px 12px 24px -18px var(--card-shadow);
         translate: 0 -2px;
-    }
-
-    .blueprint-card:hover::after,
-    .blueprint-card:focus-visible::after {
-        transform: scaleX(1) rotate(-0.4deg);
     }
 
     .blueprint-card:focus-visible {
@@ -94,6 +75,10 @@ const TitleTag = headingLevel;
         height: 0.65rem;
         pointer-events: none;
         border-color: var(--blueprint-ink);
+        transition:
+            width 0.3s ease,
+            height 0.3s ease,
+            border-color 0.3s ease;
     }
 
     .corner-mark--tl {
@@ -129,6 +114,32 @@ const TitleTag = headingLevel;
         overflow: hidden;
         border-bottom: 1px solid color-mix(in oklab, var(--blueprint-ink) 58%, transparent);
         background: color-mix(in oklab, var(--blueprint-ink) 9%, var(--bg-muted));
+    }
+
+    .blueprint-thumbnail::after {
+        content: '';
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        bottom: 0;
+        left: -28%;
+        width: 18%;
+        pointer-events: none;
+        background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--accent) 48%, transparent), transparent);
+        opacity: 0;
+        transform: skewX(-10deg);
+    }
+
+    .blueprint-card:hover .blueprint-thumbnail::after,
+    .blueprint-card:focus-visible .blueprint-thumbnail::after {
+        animation: blueprint-inspection-scan 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .blueprint-card:hover .corner-mark,
+    .blueprint-card:focus-visible .corner-mark {
+        width: 1rem;
+        height: 1rem;
+        border-color: var(--accent);
     }
 
     .blueprint-thumbnail img {
@@ -184,54 +195,96 @@ const TitleTag = headingLevel;
     }
 
     .blueprint-copy p {
-        display: -webkit-box;
-        overflow: hidden;
         color: var(--text-muted);
         font-size: 0.8125rem;
         line-height: 1.5;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
+    }
+
+    .blueprint-card--rolodex .blueprint-copy {
+        justify-content: center;
+    }
+
+    .blueprint-card--rolodex .blueprint-copy p {
+        font-size: clamp(0.875rem, 1.2vw, 1rem);
+    }
+
+    .blueprint-card--featured .blueprint-copy,
+    .blueprint-card--featured-lead .blueprint-copy {
+        min-height: 11rem;
+        justify-content: center;
     }
 
     @media (min-width: 640px) {
-        .blueprint-card--featured-lead {
+        .blueprint-card--featured-lead,
+        .blueprint-card--rolodex {
             display: grid;
             grid-template-columns: minmax(0, 1.35fr) minmax(16rem, 0.65fr);
         }
 
-        .blueprint-card--featured-lead .blueprint-thumbnail {
+        .blueprint-card--rolodex {
+            grid-template-columns: minmax(0, 3fr) minmax(18rem, 2fr);
+        }
+
+        .blueprint-card--featured-lead .blueprint-thumbnail,
+        .blueprint-card--rolodex .blueprint-thumbnail {
             min-height: 100%;
             border-right: 1px solid color-mix(in oklab, var(--blueprint-ink) 58%, transparent);
             border-bottom: 0;
         }
 
-        .blueprint-card--featured-lead .blueprint-thumbnail img {
+        .blueprint-card--featured-lead .blueprint-thumbnail img,
+        .blueprint-card--rolodex .blueprint-thumbnail img {
             height: 100%;
             min-height: 19rem;
             aspect-ratio: auto;
         }
 
-        .blueprint-card--featured-lead .blueprint-copy {
+        .blueprint-card--rolodex .blueprint-thumbnail img {
+            min-height: clamp(22rem, 36vw, 29rem);
+        }
+
+        .blueprint-card--featured-lead .blueprint-copy,
+        .blueprint-card--rolodex .blueprint-copy {
+            min-height: 0;
             justify-content: center;
             padding: 1.5rem;
         }
 
         .blueprint-card--featured-lead .blueprint-copy h2,
-        .blueprint-card--featured-lead .blueprint-copy h3 {
-            font-size: clamp(1.75rem, 3.5vw, 2.35rem);
+        .blueprint-card--featured-lead .blueprint-copy h3,
+        .blueprint-card--rolodex .blueprint-copy h2,
+        .blueprint-card--rolodex .blueprint-copy h3 {
+            overflow-wrap: normal;
+            font-size: clamp(1.65rem, 2.8vw, 2.4rem);
+            word-break: normal;
         }
+    }
 
-        .blueprint-card--featured-lead .blueprint-copy p {
-            -webkit-line-clamp: 6;
+    @keyframes blueprint-inspection-scan {
+        0% {
+            left: -28%;
+            opacity: 0;
+        }
+        20% {
+            opacity: 0.75;
+        }
+        100% {
+            left: 112%;
+            opacity: 0;
         }
     }
 
     @media (prefers-reduced-motion: reduce) {
         .blueprint-card,
-        .blueprint-card::after,
         .blueprint-thumbnail img,
-        .thumbnail-grid {
+        .thumbnail-grid,
+        .corner-mark {
             transition: none;
+        }
+
+        .blueprint-card:hover .blueprint-thumbnail::after,
+        .blueprint-card:focus-visible .blueprint-thumbnail::after {
+            animation: none;
         }
 
         .blueprint-card:hover,

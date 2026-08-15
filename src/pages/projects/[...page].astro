@@ -1,7 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ProjectPreview from '../../components/ProjectPreview.astro';
+import ProjectRolodex from '../../components/ProjectRolodex.astro';
 import { sortItemsByDateDesc } from '../../utils/data-utils';
 
 export async function getStaticPaths() {
@@ -37,13 +37,18 @@ const { projects } = Astro.props;
             <span>NEWEST → OLDEST</span>
         </div>
 
-        <div class="project-archive-grid">
-            {projects.map((project) => <ProjectPreview project={project} variant="archive" class="reveal" />)}
-        </div>
+        <ProjectRolodex projects={projects} />
     </section>
 </BaseLayout>
 
 <style>
+    .project-archive {
+        position: relative;
+        left: 50%;
+        width: min(76rem, calc(100vw - 2rem));
+        transform: translateX(-50%);
+    }
+
     .project-archive-heading {
         display: grid;
         gap: 1rem;
@@ -88,12 +93,6 @@ const { projects } = Astro.props;
         color: var(--text-muted);
     }
 
-    .project-archive-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr);
-        gap: 1.25rem;
-    }
-
     @media (min-width: 640px) {
         .project-archive-heading {
             grid-template-columns: minmax(0, 0.8fr) minmax(16rem, 1.2fr);
@@ -112,9 +111,11 @@ const { projects } = Astro.props;
             grid-column: auto;
         }
 
-        .project-archive-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 1.5rem;
+    }
+
+    @media (min-width: 900px) {
+        .project-archive {
+            width: min(76rem, calc(100vw - 4rem));
         }
     }
 </style>

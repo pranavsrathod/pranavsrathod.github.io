@@ -1,0 +1,509 @@
+---
+import { type CollectionEntry } from 'astro:content';
+import ProjectPreview from './ProjectPreview.astro';
+
+type Props = {
+    projects: CollectionEntry<'projects'>[];
+};
+
+const { projects } = Astro.props;
+---
+
+<div class="project-rolodex" data-project-rolodex data-total={projects.length}>
+    <div class="file-tabs" role="tablist" aria-label="Project files">
+        {
+            projects.map((project, index) => (
+                <button
+                    class:list={['file-tab', { 'is-active': index === 0 }]}
+                    id={`project-tab-${project.id}`}
+                    type="button"
+                    role="tab"
+                    aria-selected={index === 0 ? 'true' : 'false'}
+                    aria-controls={`project-panel-${project.id}`}
+                    tabindex={index === 0 ? 0 : -1}
+                    data-project-index={index}
+                >
+                    <span class="file-number">{String(index + 1).padStart(2, '0')}</span>
+                    <span class="file-title">{project.data.title}</span>
+                </button>
+            ))
+        }
+    </div>
+
+    <div class="drawer-shell">
+        <span class="paper-layer paper-layer--one" aria-hidden="true"></span>
+        <span class="paper-layer paper-layer--two" aria-hidden="true"></span>
+        <div class="rolodex-deck" data-rolodex-deck>
+            {
+                projects.map((project, index) => (
+                    <div
+                        class:list={['rolodex-panel', { 'is-active': index === 0 }]}
+                        id={`project-panel-${project.id}`}
+                        role="tabpanel"
+                        aria-labelledby={`project-tab-${project.id}`}
+                        aria-hidden={index === 0 ? 'false' : 'true'}
+                        inert={index !== 0}
+                        data-project-panel
+                    >
+                        <ProjectPreview project={project} variant="rolodex" />
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+
+    <div class="rolodex-controls">
+        <button class="drawer-button" type="button" data-rolodex-previous aria-label="Previous project">
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M12.75 4.5 7.25 10l5.5 5.5" />
+            </svg>
+            <span>Previous</span>
+        </button>
+
+        <p class="drawer-status" aria-live="polite" aria-atomic="true">
+            <span data-current-project>01</span>
+            <span aria-hidden="true"> / </span>
+            <span class="sr-only">of</span>
+            <span>{String(projects.length).padStart(2, '0')}</span>
+        </p>
+
+        <button class="drawer-button drawer-button--next" type="button" data-rolodex-next aria-label="Next project">
+            <span>Next</span>
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="m7.25 4.5 5.5 5.5-5.5 5.5" />
+            </svg>
+        </button>
+    </div>
+
+    <p class="rolodex-hint">Use the file tabs, arrow keys, or swipe to browse.</p>
+</div>
+
+<style>
+    .file-tabs,
+    .rolodex-controls,
+    .rolodex-hint {
+        display: none;
+    }
+
+    .rolodex-panel + .rolodex-panel {
+        margin-top: 1.25rem;
+    }
+
+    :global(.js) .project-rolodex {
+        --drawer-edge: color-mix(in oklab, var(--blueprint-ink) 48%, transparent);
+        position: relative;
+    }
+
+    :global(.js) .file-tabs {
+        display: flex;
+        align-items: end;
+        gap: 0.2rem;
+        overflow-x: auto;
+        overscroll-behavior-inline: contain;
+        padding: 0 0.25rem;
+        scrollbar-width: none;
+        scroll-snap-type: x proximity;
+    }
+
+    :global(.js) .file-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    :global(.js) .file-tab {
+        display: inline-flex;
+        flex: 0 0 auto;
+        min-height: 2.5rem;
+        cursor: pointer;
+        align-items: center;
+        gap: 0.45rem;
+        scroll-snap-align: center;
+        border: 1px solid var(--drawer-edge);
+        border-bottom: 0;
+        border-radius: 0.35rem 0.35rem 0 0;
+        background: color-mix(in oklab, var(--blueprint-paper) 90%, var(--bg-main));
+        padding: 0.5rem 0.65rem 0.45rem;
+        color: var(--blueprint-ink);
+        transition:
+            background-color 0.2s ease,
+            color 0.2s ease,
+            padding 0.25s ease;
+    }
+
+    :global(.js) .file-tab:hover {
+        background: color-mix(in oklab, var(--blueprint-ink) 10%, var(--bg-main));
+    }
+
+    :global(.js) .file-tab.is-active {
+        background: var(--blueprint-ink);
+        color: var(--bg-main);
+        padding-inline: 0.8rem;
+    }
+
+    :global(.js) .file-tab:focus-visible,
+    :global(.js) .drawer-button:focus-visible {
+        z-index: 5;
+        outline: 2px dashed var(--accent);
+        outline-offset: 2px;
+    }
+
+    .file-number {
+        font-family: var(--font-sans);
+        font-size: 0.625rem;
+        font-weight: 750;
+        letter-spacing: 0.1em;
+    }
+
+    .file-title {
+        max-width: 0;
+        overflow: hidden;
+        font-family: var(--font-serif);
+        font-size: 0.8rem;
+        line-height: 1;
+        opacity: 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        transition:
+            max-width 0.3s ease,
+            opacity 0.2s ease;
+    }
+
+    .file-tab.is-active .file-title {
+        max-width: min(12rem, 52vw);
+        opacity: 1;
+    }
+
+    :global(.js) .drawer-shell {
+        position: relative;
+        z-index: 1;
+        border-top: 1px solid var(--drawer-edge);
+        padding-top: 0.65rem;
+    }
+
+    .paper-layer {
+        position: absolute;
+        z-index: -1;
+        top: 0.8rem;
+        right: 0.5rem;
+        bottom: -0.45rem;
+        left: 0.5rem;
+        border: 1px solid color-mix(in oklab, var(--blueprint-ink) 28%, transparent);
+        background: color-mix(in oklab, var(--blueprint-paper) 82%, var(--bg-main));
+        box-shadow: 0 7px 18px -17px var(--card-shadow);
+    }
+
+    .paper-layer--two {
+        z-index: -2;
+        top: 0.95rem;
+        right: 0.9rem;
+        bottom: -0.8rem;
+        left: 0.9rem;
+        opacity: 0.65;
+    }
+
+    :global(.js) .rolodex-deck {
+        display: grid;
+        align-items: stretch;
+        perspective: 1200px;
+        touch-action: pan-y;
+    }
+
+    :global(.js) .rolodex-panel {
+        display: contents;
+    }
+
+    :global(.js) .rolodex-panel :global(.blueprint-card) {
+        grid-area: 1 / 1 / 2 / 2;
+        align-self: stretch;
+        width: 100%;
+        min-width: 0;
+        margin: 0;
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+        transform: none;
+        transform-style: preserve-3d;
+        will-change: transform, opacity, filter;
+    }
+
+    :global(.js) .rolodex-panel.is-active :global(.blueprint-card) {
+        z-index: 2;
+        opacity: 1;
+        pointer-events: auto;
+        visibility: visible;
+        transform: none;
+    }
+
+    :global(.js) .project-rolodex.is-switching[data-direction='next'] .rolodex-panel.is-active :global(.blueprint-card) {
+        animation: file-enter-next 0.52s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        transform-origin: 50% 100%;
+    }
+
+    :global(.js) .project-rolodex.is-switching[data-direction='previous'] .rolodex-panel.is-active :global(.blueprint-card) {
+        animation: file-enter-previous 0.52s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        transform-origin: 50% 0%;
+    }
+
+    :global(.js) .project-rolodex[data-direction='next'] .rolodex-panel.is-leaving :global(.blueprint-card) {
+        z-index: 3;
+        visibility: visible;
+        animation: file-leave-next 0.46s cubic-bezier(0.4, 0, 0.6, 1) both;
+        transform-origin: 50% 0%;
+    }
+
+    :global(.js) .project-rolodex[data-direction='previous'] .rolodex-panel.is-leaving :global(.blueprint-card) {
+        z-index: 3;
+        visibility: visible;
+        animation: file-leave-previous 0.46s cubic-bezier(0.4, 0, 0.6, 1) both;
+        transform-origin: 50% 100%;
+    }
+
+    :global(.js) .rolodex-controls {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 0.75rem;
+        margin-top: 1.65rem;
+        border-top: 1px dashed color-mix(in oklab, var(--blueprint-ink) 40%, transparent);
+        border-bottom: 1px dashed color-mix(in oklab, var(--blueprint-ink) 40%, transparent);
+        padding: 0.65rem 0;
+    }
+
+    :global(.js) .drawer-button {
+        display: inline-flex;
+        min-height: 2.75rem;
+        cursor: pointer;
+        align-items: center;
+        gap: 0.3rem;
+        justify-self: start;
+        color: var(--text-main);
+        font-family: var(--font-serif);
+        font-size: 0.95rem;
+        transition: color 0.2s ease;
+    }
+
+    :global(.js) .drawer-button--next {
+        justify-self: end;
+    }
+
+    :global(.js) .drawer-button:hover {
+        color: var(--accent);
+    }
+
+    .drawer-button svg {
+        width: 1rem;
+        height: 1rem;
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.4;
+    }
+
+    .drawer-status {
+        color: var(--blueprint-ink);
+        font-family: var(--font-sans);
+        font-size: 0.625rem;
+        font-weight: 750;
+        letter-spacing: 0.14em;
+    }
+
+    :global(.js) .rolodex-hint {
+        display: block;
+        margin-top: 0.65rem;
+        color: var(--text-muted);
+        font-family: var(--font-sans);
+        font-size: 0.5625rem;
+        letter-spacing: 0.08em;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    @media (max-width: 380px) {
+        :global(.js) .drawer-button span {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+        }
+
+        :global(.js) .drawer-button svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    }
+
+    @keyframes file-enter-next {
+        0% {
+            opacity: 0;
+            filter: blur(1.5px);
+            transform: translateY(2.25rem) rotateX(-17deg) scale(0.975);
+        }
+        100% {
+            opacity: 1;
+            filter: blur(0);
+            transform: none;
+        }
+    }
+
+    @keyframes file-leave-next {
+        0% {
+            opacity: 1;
+            filter: blur(0);
+            transform: none;
+        }
+        100% {
+            opacity: 0;
+            filter: blur(1px);
+            transform: translateY(-1.75rem) rotateX(14deg) scale(0.975);
+        }
+    }
+
+    @keyframes file-enter-previous {
+        0% {
+            opacity: 0;
+            filter: blur(1.5px);
+            transform: translateY(-2.25rem) rotateX(17deg) scale(0.975);
+        }
+        100% {
+            opacity: 1;
+            filter: blur(0);
+            transform: none;
+        }
+    }
+
+    @keyframes file-leave-previous {
+        0% {
+            opacity: 1;
+            filter: blur(0);
+            transform: none;
+        }
+        100% {
+            opacity: 0;
+            filter: blur(1px);
+            transform: translateY(1.75rem) rotateX(-14deg) scale(0.975);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        :global(.js) .file-tab,
+        .file-title,
+        :global(.js) .rolodex-panel :global(.blueprint-card),
+        :global(.js) .rolodex-panel.is-active :global(.blueprint-card),
+        :global(.js) .drawer-button {
+            transition: none;
+        }
+
+        :global(.js) .project-rolodex.is-switching .rolodex-panel :global(.blueprint-card),
+        :global(.js) .project-rolodex .rolodex-panel.is-leaving :global(.blueprint-card) {
+            animation: none;
+        }
+    }
+</style>
+
+<script>
+    function initializeProjectRolodexes() {
+        document.querySelectorAll<HTMLElement>('[data-project-rolodex]').forEach((rolodex) => {
+            if (rolodex.dataset.initialized === 'true') return;
+            rolodex.dataset.initialized = 'true';
+
+            const tabs = Array.from(rolodex.querySelectorAll<HTMLButtonElement>('[data-project-index]'));
+            const panels = Array.from(rolodex.querySelectorAll<HTMLElement>('[data-project-panel]'));
+            const previousButton = rolodex.querySelector<HTMLButtonElement>('[data-rolodex-previous]');
+            const nextButton = rolodex.querySelector<HTMLButtonElement>('[data-rolodex-next]');
+            const currentLabel = rolodex.querySelector<HTMLElement>('[data-current-project]');
+            const deck = rolodex.querySelector<HTMLElement>('[data-rolodex-deck]');
+            if (!tabs.length || tabs.length !== panels.length || !previousButton || !nextButton || !deck) return;
+
+            let activeIndex = 0;
+            let pointerStartX: number | null = null;
+            let animationTimer: number | undefined;
+
+            function showProject(requestedIndex: number, direction?: 'next' | 'previous', focusTab = false) {
+                const nextIndex = (requestedIndex + panels.length) % panels.length;
+                if (nextIndex === activeIndex) {
+                    if (focusTab) tabs[activeIndex]?.focus();
+                    return;
+                }
+
+                const movement = direction || (nextIndex >= activeIndex ? 'next' : 'previous');
+                const outgoingPanel = panels[activeIndex];
+                const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+                if (animationTimer) window.clearTimeout(animationTimer);
+                panels.forEach((panel) => panel.classList.remove('is-leaving'));
+                rolodex.dataset.direction = movement;
+                if (!reducedMotion) outgoingPanel?.classList.add('is-leaving');
+                activeIndex = nextIndex;
+
+                panels.forEach((panel, index) => {
+                    const isActive = index === activeIndex;
+                    panel.classList.toggle('is-active', isActive);
+                    panel.setAttribute('aria-hidden', String(!isActive));
+                    panel.toggleAttribute('inert', !isActive);
+                });
+
+                tabs.forEach((tab, index) => {
+                    const isActive = index === activeIndex;
+                    tab.classList.toggle('is-active', isActive);
+                    tab.setAttribute('aria-selected', String(isActive));
+                    tab.tabIndex = isActive ? 0 : -1;
+                });
+
+                if (currentLabel) currentLabel.textContent = String(activeIndex + 1).padStart(2, '0');
+                tabs[activeIndex]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                if (focusTab) tabs[activeIndex]?.focus();
+
+                if (!reducedMotion) {
+                    rolodex.classList.remove('is-switching');
+                    void rolodex.offsetWidth;
+                    rolodex.classList.add('is-switching');
+                    animationTimer = window.setTimeout(() => {
+                        panels.forEach((panel) => panel.classList.remove('is-leaving'));
+                        rolodex.classList.remove('is-switching');
+                    }, 560);
+                }
+            }
+
+            tabs.forEach((tab, index) => tab.addEventListener('click', () => showProject(index)));
+            previousButton.addEventListener('click', () => showProject(activeIndex - 1, 'previous'));
+            nextButton.addEventListener('click', () => showProject(activeIndex + 1, 'next'));
+
+            rolodex.addEventListener('keydown', (event) => {
+                if (event.key === 'ArrowLeft') {
+                    event.preventDefault();
+                    showProject(activeIndex - 1, 'previous', event.target?.closest('[role="tab"]') !== null);
+                } else if (event.key === 'ArrowRight') {
+                    event.preventDefault();
+                    showProject(activeIndex + 1, 'next', event.target?.closest('[role="tab"]') !== null);
+                } else if (event.key === 'Home' && event.target?.closest('[role="tab"]')) {
+                    event.preventDefault();
+                    showProject(0, 'previous', true);
+                } else if (event.key === 'End' && event.target?.closest('[role="tab"]')) {
+                    event.preventDefault();
+                    showProject(panels.length - 1, 'next', true);
+                }
+            });
+
+            deck.addEventListener('pointerdown', (event) => {
+                if (event.pointerType === 'mouse') return;
+                pointerStartX = event.clientX;
+            });
+            deck.addEventListener('pointerup', (event) => {
+                if (pointerStartX === null) return;
+                const distance = event.clientX - pointerStartX;
+                pointerStartX = null;
+                if (Math.abs(distance) < 45) return;
+                showProject(activeIndex + (distance < 0 ? 1 : -1), distance < 0 ? 'next' : 'previous');
+            });
+            deck.addEventListener('pointercancel', () => {
+                pointerStartX = null;
+            });
+        });
+    }
+
+    initializeProjectRolodexes();
+    document.addEventListener('astro:page-load', initializeProjectRolodexes);
+    document.addEventListener('astro:after-swap', initializeProjectRolodexes);
+</script>
