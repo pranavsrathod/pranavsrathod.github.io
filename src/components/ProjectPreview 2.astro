@@ -1,0 +1,32 @@
+---
+import { type CollectionEntry } from 'astro:content';
+
+type Props = {
+    project: CollectionEntry<'projects'>;
+    class?: string;
+    headingLevel?: 'h2' | 'h3';
+};
+
+const { project, class: className, headingLevel = 'h2' } = Astro.props;
+const { title, description, poster, tags = [] } = project.data;
+const TitleTag = headingLevel;
+---
+
+<a class:list={['project-card flex flex-col rounded-xl bg-muted', className]} href={`/projects/${project.id}/`}>
+    {poster && (
+        <div class="overflow-hidden rounded-t-lg">
+            <img class="w-full aspect-video object-cover" src={poster} alt="" loading="lazy" decoding="async" />
+        </div>
+    )}
+    <div class="flex flex-col gap-2 p-4 sm:p-5">
+        <TitleTag class="text-lg leading-snug font-semibold">{title}</TitleTag>
+        {description && <div class="text-sm leading-normal">{description}</div>}
+        {tags.length > 0 && (
+            <div class="mt-1 flex flex-wrap gap-2">
+                {tags.map((tag) => (
+                    <span class="inline-flex items-center rounded-full border border-accent/40 px-2.5 py-0.5 text-xs leading-tight">{tag}</span>
+                ))}
+            </div>
+        )}
+    </div>
+</a>
