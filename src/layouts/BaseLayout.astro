@@ -30,7 +30,7 @@ const { showHeader = true, showIntro = false, ...head } = Astro.props;
         <!-- End Google Tag Manager -->
         <BaseHead {...head} />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
-        <script>
+        <script is:inline data-astro-rerun>
             document.documentElement.classList.add('js');
             if (localStorage.theme === 'dark') {
                 document.documentElement.classList.add('dark');

@@ -19,19 +19,36 @@ const featuredProjects = projects.filter(({ data }) => data.isFeatured);
     <Hero />
     {
         featuredProjects?.length > 0 && (
-            <div class="mb-16 sm:mb-24">
-                <h2 class="mb-12 text-lg font-display heading-accent sm:mb-16 sm:text-xl">Projects</h2>
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                    {featuredProjects.map((project) => (
-                        <ProjectPreview project={project} class="reveal" headingLevel="h3" />
+            <section class="featured-blueprints mb-16 sm:mb-24" aria-labelledby="featured-projects-title">
+                <header class="blueprint-section-heading">
+                    <div>
+                        <span class="blueprint-kicker">Selected schematics</span>
+                        <h2 id="featured-projects-title" class="text-lg font-display heading-accent sm:text-xl">
+                            Projects
+                        </h2>
+                    </div>
+                    <span class="blueprint-sheet-count" aria-hidden="true">
+                        SHEETS 01—{String(featuredProjects.length).padStart(2, '0')}
+                    </span>
+                </header>
+                <div class="featured-project-grid">
+                    {featuredProjects.map((project, index) => (
+                        <ProjectPreview
+                            project={project}
+                            variant={index === 0 ? 'featured-lead' : 'featured'}
+                            class={index === 0 ? 'featured-blueprint-lead reveal' : 'reveal'}
+                            headingLevel="h3"
+                        />
                     ))}
-                    <a class="view-all-card reveal" href="/projects">
-                        <span class="inline-flex items-center gap-1 text-sm font-medium whitespace-nowrap">
-                            All {projects.length} projects <ArrowRight class="w-4 h-4 fill-current shrink-0" />
+                    <a class="blueprint-index-link reveal" href="/projects">
+                        <span class="blueprint-index-reference" aria-hidden="true">ARCH—{String(projects.length).padStart(2, '0')}</span>
+                        <span>Open the complete project archive</span>
+                        <span class="blueprint-index-action">
+                            All {projects.length} projects <ArrowRight class="h-4 w-4 shrink-0 fill-current" />
                         </span>
                     </a>
                 </div>
-            </div>
+            </section>
         )
     }
     {
@@ -61,3 +78,111 @@ const featuredProjects = projects.filter(({ data }) => data.isFeatured);
         )
     }
 </BaseLayout>
+
+<style>
+    .blueprint-section-heading {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid color-mix(in oklab, var(--blueprint-ink) 42%, transparent);
+    }
+
+    .blueprint-kicker,
+    .blueprint-sheet-count,
+    .blueprint-index-reference {
+        color: var(--blueprint-ink);
+        font-family: var(--font-sans);
+        font-size: 0.5625rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+    }
+
+    .blueprint-kicker {
+        display: block;
+        margin-bottom: 0.45rem;
+    }
+
+    .featured-project-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.25rem;
+    }
+
+    .blueprint-index-link {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 0.35rem 1rem;
+        min-height: 5.5rem;
+        border-top: 1px dashed color-mix(in oklab, var(--blueprint-ink) 48%, transparent);
+        border-bottom: 1px dashed color-mix(in oklab, var(--blueprint-ink) 48%, transparent);
+        padding: 1rem 0.75rem;
+        font-family: var(--font-serif);
+        font-size: 1.15rem;
+        transition:
+            color 0.2s ease,
+            padding-inline 0.2s ease;
+    }
+
+    .blueprint-index-reference {
+        grid-column: 1 / -1;
+    }
+
+    .blueprint-index-action {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        color: var(--accent);
+        font-family: var(--font-sans);
+        font-size: 0.6875rem;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .blueprint-index-link:hover,
+    .blueprint-index-link:focus-visible {
+        color: var(--blueprint-ink);
+        padding-inline: 1rem 0.5rem;
+    }
+
+    .blueprint-index-link:focus-visible {
+        outline: 2px dashed var(--accent);
+        outline-offset: 3px;
+    }
+
+    @media (min-width: 640px) {
+        .blueprint-section-heading {
+            margin-bottom: 2.5rem;
+        }
+
+        .featured-project-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+
+        .featured-project-grid :global(.featured-blueprint-lead),
+        .blueprint-index-link {
+            grid-column: 1 / -1;
+        }
+
+        .blueprint-index-link {
+            grid-template-columns: auto 1fr auto;
+            gap: 1.25rem;
+            padding-inline: 1rem;
+        }
+
+        .blueprint-index-reference {
+            grid-column: auto;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .blueprint-index-link {
+            transition: none;
+        }
+    }
+</style>

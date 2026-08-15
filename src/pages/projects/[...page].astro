@@ -1,7 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ProjectPreview from '../../components/ProjectPreview.astro';
+import ProjectRolodex from '../../components/ProjectRolodex.astro';
 import { sortItemsByDateDesc } from '../../utils/data-utils';
 
 export async function getStaticPaths() {
@@ -20,8 +20,102 @@ const { projects } = Astro.props;
     image={{ src: '/dante-preview.jpg', alt: 'The preview of the site' }}
     showHeader={false}
 >
-    <h1 class="mb-12 text-xl leading-tight font-display heading-accent sm:mb-16 sm:text-3xl">Projects</h1>
-    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        {projects.map((project) => <ProjectPreview project={project} class="reveal" />)}
-    </div>
+    <section class="project-archive" aria-labelledby="project-archive-title">
+        <header class="project-archive-heading">
+            <div>
+                <span class="archive-kicker">Technical archive · Vol. 01</span>
+                <h1 id="project-archive-title" class="text-xl leading-tight font-display heading-accent sm:text-3xl">Projects</h1>
+            </div>
+            <p>
+                A working index of graphics, simulation, games, robotics, and interactive systems—documented as project sheets rather than polished mystery boxes.
+            </p>
+        </header>
+
+        <div class="archive-register" aria-hidden="true">
+            <span>DOCUMENT REGISTER</span>
+            <span>{String(projects.length).padStart(2, '0')} TOTAL SHEETS</span>
+            <span>NEWEST → OLDEST</span>
+        </div>
+
+        <ProjectRolodex projects={projects} />
+    </section>
 </BaseLayout>
+
+<style>
+    .project-archive {
+        position: relative;
+        left: 50%;
+        width: min(76rem, calc(100vw - 2rem));
+        transform: translateX(-50%);
+    }
+
+    .project-archive-heading {
+        display: grid;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .archive-kicker,
+    .archive-register {
+        color: var(--blueprint-ink);
+        font-family: var(--font-sans);
+        font-size: 0.5625rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+    }
+
+    .archive-kicker {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .project-archive-heading p {
+        max-width: 46rem;
+        color: var(--text-muted);
+        font-family: var(--font-serif);
+        font-size: clamp(1rem, 2.2vw, 1.2rem);
+        line-height: 1.35;
+    }
+
+    .archive-register {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0.4rem 1rem;
+        margin-bottom: 1.25rem;
+        border-top: 1px solid color-mix(in oklab, var(--blueprint-ink) 48%, transparent);
+        border-bottom: 1px solid color-mix(in oklab, var(--blueprint-ink) 48%, transparent);
+        padding: 0.65rem 0;
+    }
+
+    .archive-register span:last-child {
+        grid-column: 1 / -1;
+        color: var(--text-muted);
+    }
+
+    @media (min-width: 640px) {
+        .project-archive-heading {
+            grid-template-columns: minmax(0, 0.8fr) minmax(16rem, 1.2fr);
+            align-items: end;
+            gap: 2rem;
+            margin-bottom: 2.75rem;
+        }
+
+        .archive-register {
+            grid-template-columns: 1fr auto auto;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .archive-register span:last-child {
+            grid-column: auto;
+        }
+
+    }
+
+    @media (min-width: 900px) {
+        .project-archive {
+            width: min(76rem, calc(100vw - 4rem));
+        }
+    }
+</style>
