@@ -23,3 +23,7 @@ pnpm-debug.log*
 # ignore unfinished project
 src/content/projects/mobileGames.md
 .superpowers/
+
+# private resume worklog artifacts
+WEBSITE_RESUME_WORKLOG.md
+Website_Resume_Worklog.docx

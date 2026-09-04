@@ -11,6 +11,7 @@ import MediaEmbed from '../components/MediaEmbed.astro';
 import ProjectPreview from '../components/ProjectPreview.astro';
 import TogglePanels from '../components/TogglePanels.astro';
 import BaseLayout from './BaseLayout.astro';
+import { slugify } from '../utils/common-utils';
 
 type Props = {
     project: CollectionEntry<'projects'>;
@@ -63,7 +64,12 @@ const specCols = [primaryCategory, true, role, tools.length > 0, links].filter(B
                     <dt>Tools</dt>
                     <dd class="flex flex-wrap gap-1.5">
                         {tools.map((tool) => (
-                            <span class="inline-flex items-center rounded-full border border-accent/40 px-2.5 py-0.5 text-xs leading-tight">{tool}</span>
+                            <a
+                                href={`/tags/${slugify(tool)}`}
+                                class="inline-flex items-center rounded-full border border-accent/40 px-2.5 py-0.5 text-xs leading-tight transition hover:border-accent hover:bg-accent hover:text-bg-main focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                            >
+                                {tool}
+                            </a>
                         ))}
                     </dd>
                 </div>

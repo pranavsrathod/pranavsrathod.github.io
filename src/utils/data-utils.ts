@@ -23,3 +23,14 @@ export function getPostsByTag(posts: CollectionEntry<'blog'>[], tagId: string) {
     const filteredPosts: CollectionEntry<'blog'>[] = posts.filter((post) => (post.data.tags || []).map((tag) => slugify(tag)).includes(tagId));
     return filteredPosts;
 }
+
+export function getAllToolTags(projects: CollectionEntry<'projects'>[]) {
+    const tools: string[] = [...new Set(projects.flatMap((project) => project.data.tools || []).filter(Boolean))];
+    return tools
+        .map((tool) => ({ name: tool, id: slugify(tool) }))
+        .filter((obj, pos, arr) => arr.map((mapObj) => mapObj.id).indexOf(obj.id) === pos);
+}
+
+export function getProjectsByTool(projects: CollectionEntry<'projects'>[], tagId: string) {
+    return projects.filter((project) => (project.data.tools || []).map((tool) => slugify(tool)).includes(tagId));
+}

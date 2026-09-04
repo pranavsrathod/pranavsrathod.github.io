@@ -1,46 +1,62 @@
 ---
-import type { GetStaticPathsOptions, Page } from 'astro';
+import type { GetStaticPathsOptions } from 'astro';
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import Pagination from '../../../components/Pagination.astro';
 import PostPreview from '../../../components/PostPreview.astro';
-import Subscribe from '../../../components/Subscribe.astro';
-import siteConfig from '../../../data/site-config';
-import { sortItemsByDateDesc, getAllTags, getPostsByTag } from '../../../utils/data-utils';
+import ProjectPreview from '../../../components/ProjectPreview.astro';
+import { sortItemsByDateDesc, getAllTags, getAllToolTags, getPostsByTag, getProjectsByTool } from '../../../utils/data-utils';
 
-export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+export async function getStaticPaths(_options: GetStaticPathsOptions) {
     const posts = (await getCollection('blog')).sort(sortItemsByDateDesc);
-    const tags = getAllTags(posts);
-
-    return tags.flatMap((tag) => {
-        const filteredPosts = getPostsByTag(posts, tag.id);
-        return paginate(filteredPosts, {
-            params: { id: tag.id },
-            pageSize: siteConfig.postsPerPage || 4
-        });
-    });
+    const projects = (await getCollection('projects')).sort(sortItemsByDateDesc);
+    const tags = [...getAllTags(posts), ...getAllToolTags(projects)].filter((tag, index, all) => all.findIndex((item) => item.id === tag.id) === index);
+    return tags.map((tag) => ({
+        params: { id: tag.id },
+        props: { tag, posts: getPostsByTag(posts, tag.id), projects: getProjectsByTool(projects, tag.id) }
+    }));
 }
 
-type Props = { page: Page<CollectionEntry<'blog'>> };
+type Props = { tag: { name: string; id: string }; posts: CollectionEntry<'blog'>[]; projects: CollectionEntry<'projects'>[] };
 
-const { page } = Astro.props;
-const blog = page.data;
-const params = Astro.params;
-const allPosts = await getCollection('blog');
-const allTags = getAllTags(allPosts);
-const currentTag = allTags.find((tag) => {
-    return tag.id === params.id;
-});
+const { tag, posts, projects } = Astro.props;
+const itemCount = posts.length + projects.length;
 ---
 
 <BaseLayout
-    title={`Posts Tagged ${currentTag?.name}`}
-    description={`Explore a curated collection of blog posts under ${currentTag?.name}`}
+    title={tag.name}
+    description={`Explore work connected to ${tag.name}.`}
     image={{ src: '/dante-preview.jpg', alt: 'The preview of the site' }}
     showHeader={false}
 >
-    <h1 class="mb-12 text-xl leading-tight font-display heading-accent sm:mb-16 sm:text-3xl">Posts Tagged "{currentTag?.name}"</h1>
-    {blog.map((post) => <PostPreview post={post} class="mb-10 sm:mb-12" />)}
-    <Pagination page={page} class="my-16 sm:my-24" />
-    <Subscribe class="my-16 sm:my-24" />
+    <section class="tag-archive">
+        <header class="tag-archive__heading">
+            <a href="/tags" class="tag-archive__back">← All topics &amp; tools</a>
+            <span class="tag-archive__eyebrow">{itemCount} {itemCount === 1 ? 'related item' : 'related items'}</span>
+            <h1 class="text-xl leading-tight font-display heading-accent sm:text-3xl">{tag.name}</h1>
+        </header>
+        {projects.length > 0 && (
+            <section class="tag-archive__group" aria-labelledby="projects-heading">
+                <h2 id="projects-heading">Projects built with {tag.name}</h2>
+                <div class="tag-archive__projects">{projects.map((project) => <ProjectPreview project={project} headingLevel="h3" />)}</div>
+            </section>
+        )}
+        {posts.length > 0 && (
+            <section class="tag-archive__group" aria-labelledby="writing-heading">
+                <h2 id="writing-heading">Writing on {tag.name}</h2>
+                <div>{posts.map((post) => <PostPreview post={post} class="mb-10 sm:mb-12" headingLevel="h3" />)}</div>
+            </section>
+        )}
+    </section>
 </BaseLayout>
+
+<style>
+    .tag-archive { margin-bottom: 6rem; }
+    .tag-archive__heading { margin-bottom: 3rem; padding-bottom: 1.15rem; border-bottom: 1px dashed color-mix(in oklab, var(--border-main) 36%, transparent); }
+    .tag-archive__back { display: inline-block; margin-bottom: 1.75rem; color: var(--text-muted); font-size: .8rem; }
+    .tag-archive__back:hover { color: var(--accent); }
+    .tag-archive__eyebrow { display: block; margin-bottom: .55rem; color: var(--blueprint-ink); font-size: .625rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+    .tag-archive__group + .tag-archive__group { margin-top: 4rem; }
+    .tag-archive__group h2 { margin-bottom: 1.25rem; font-family: var(--font-display); font-size: 1rem; }
+    .tag-archive__projects { display: grid; gap: 1rem; }
+    @media (min-width: 680px) { .tag-archive__projects { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>

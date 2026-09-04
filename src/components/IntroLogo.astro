@@ -154,7 +154,7 @@
     }
 
     :global(html.pr-intro-revealing #home-hero) {
-        animation: pr-hero-reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+        animation: pr-hero-reveal 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.95s both;
     }
 
     :global(html.pr-intro-pending #site-logo) {
@@ -249,32 +249,55 @@
 
             const start = mark.getBoundingClientRect();
             const end = target.getBoundingClientRect();
-            const scale = end.width / start.width;
-            const currentColor = getComputedStyle(mark).color;
-            const targetColor = getComputedStyle(target).color;
+            const markStyle = getComputedStyle(mark);
+            const targetStyle = getComputedStyle(target);
+            const currentColor = markStyle.color;
+            const targetColor = targetStyle.color;
+
+            // Animate the real text geometry rather than scaling a large layer.
+            // At very different sizes, transform scaling can visually arrive at
+            // the target position before the glyph has become target-sized.
+            mark.style.position = 'fixed';
+            mark.style.left = `${start.left}px`;
+            mark.style.top = `${start.top}px`;
+            mark.style.margin = '0';
+            mark.style.fontSize = markStyle.fontSize;
+            mark.style.lineHeight = markStyle.lineHeight;
+            mark.style.letterSpacing = markStyle.letterSpacing;
 
             mark.style.color = currentColor;
 
             const markAnimation = mark.animate(
                 [
-                    { transform: 'translate3d(0, 0, 0) scale(1)', color: currentColor, offset: 0 },
-                    { transform: 'translate3d(0, 0, 0) scale(1.015)', color: currentColor, offset: 0.12 },
                     {
-                        transform: `translate3d(${end.left - start.left}px, ${end.top - start.top}px, 0) scale(${scale})`,
+                        left: `${start.left}px`,
+                        top: `${start.top}px`,
+                        fontSize: markStyle.fontSize,
+                        lineHeight: markStyle.lineHeight,
+                        letterSpacing: markStyle.letterSpacing,
+                        color: currentColor,
+                        offset: 0
+                    },
+                    {
+                        left: `${end.left}px`,
+                        top: `${end.top}px`,
+                        fontSize: targetStyle.fontSize,
+                        lineHeight: targetStyle.lineHeight,
+                        letterSpacing: targetStyle.letterSpacing,
                         color: targetColor,
                         offset: 1
                     }
                 ],
-                { duration: 1000, easing: 'cubic-bezier(0.76, 0, 0.24, 1)', fill: 'forwards' }
+                { duration: 1150, easing: 'cubic-bezier(0.22, 0.8, 0.2, 1)', fill: 'forwards' }
             );
 
             intro.querySelector('.pr-intro-backdrop')?.animate(
                 [
                     { opacity: 1, offset: 0 },
-                    { opacity: 1, offset: 0.46 },
+                    { opacity: 1, offset: 0.76 },
                     { opacity: 0, offset: 1 }
                 ],
-                { duration: 1000, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'forwards' }
+                { duration: 1250, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'forwards' }
             );
 
             markAnimation.finished.finally(() => {
