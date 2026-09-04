@@ -30,19 +30,6 @@ const tools = getAllToolTags(projects).sort((toolA, toolB) => {
         </header>
 
         <div class="tag-directory__sections">
-            <section aria-labelledby="topics-title">
-                <div class="tag-directory__section-heading">
-                    <h2 id="topics-title">Writing topics</h2>
-                    <span>{topics.length} subjects</span>
-                </div>
-                <div class="tag-cloud">
-                    {topics.map((tag) => {
-                        const postCount = getPostsByTag(posts, tag.id).length;
-                        return <a class="topic-tag" href={`/tags/${tag.id}`}>{tag.name}<small>{postCount}</small></a>;
-                    })}
-                </div>
-            </section>
-
             <section aria-labelledby="tools-title">
                 <div class="tag-directory__section-heading">
                     <h2 id="tools-title">Project tools</h2>
@@ -52,6 +39,19 @@ const tools = getAllToolTags(projects).sort((toolA, toolB) => {
                     {tools.map((tool) => {
                         const projectCount = getProjectsByTool(projects, tool.id).length;
                         return <a class="tool-tag" href={`/tags/${tool.id}`}>{tool.name}<small>{projectCount}</small></a>;
+                    })}
+                </div>
+            </section>
+
+            <section aria-labelledby="topics-title">
+                <div class="tag-directory__section-heading">
+                    <h2 id="topics-title">Writing topics</h2>
+                    <span>{topics.length} subjects</span>
+                </div>
+                <div class="tag-cloud">
+                    {topics.map((tag) => {
+                        const postCount = getPostsByTag(posts, tag.id).length;
+                        return <a class="topic-tag" href={`/tags/${tag.id}`}>{tag.name}<small>{postCount}</small></a>;
                     })}
                 </div>
             </section>
