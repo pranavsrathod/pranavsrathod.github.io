@@ -189,6 +189,7 @@ const { projects } = Astro.props;
         border: 1px solid color-mix(in oklab, var(--blueprint-ink) 28%, transparent);
         background: color-mix(in oklab, var(--blueprint-paper) 82%, var(--bg-main));
         box-shadow: 0 7px 18px -17px var(--card-shadow);
+        transform: rotate(-1.25deg);
     }
 
     .paper-layer--two {
@@ -198,6 +199,7 @@ const { projects } = Astro.props;
         bottom: -0.8rem;
         left: 0.9rem;
         opacity: 0.65;
+        transform: rotate(2deg);
     }
 
     :global(.js) .rolodex-deck {
@@ -235,26 +237,22 @@ const { projects } = Astro.props;
 
     :global(.js) .project-rolodex.is-switching[data-direction='next'] .rolodex-panel.is-active :global(.blueprint-card) {
         animation: file-enter-next 0.52s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-        transform-origin: 50% 100%;
     }
 
     :global(.js) .project-rolodex.is-switching[data-direction='previous'] .rolodex-panel.is-active :global(.blueprint-card) {
         animation: file-enter-previous 0.52s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-        transform-origin: 50% 0%;
     }
 
     :global(.js) .project-rolodex[data-direction='next'] .rolodex-panel.is-leaving :global(.blueprint-card) {
         z-index: 3;
         visibility: visible;
-        animation: file-leave-next 0.46s cubic-bezier(0.4, 0, 0.6, 1) both;
-        transform-origin: 50% 0%;
+        animation: file-leave-next 0.4s cubic-bezier(0.4, 0, 0.6, 1) both;
     }
 
     :global(.js) .project-rolodex[data-direction='previous'] .rolodex-panel.is-leaving :global(.blueprint-card) {
         z-index: 3;
         visibility: visible;
-        animation: file-leave-previous 0.46s cubic-bezier(0.4, 0, 0.6, 1) both;
-        transform-origin: 50% 100%;
+        animation: file-leave-previous 0.4s cubic-bezier(0.4, 0, 0.6, 1) both;
     }
 
     :global(.js) .rolodex-controls {
@@ -335,10 +333,11 @@ const { projects } = Astro.props;
     }
 
     @keyframes file-enter-next {
-        0% {
+        0%,
+        45% {
             opacity: 0;
-            filter: blur(1.5px);
-            transform: translateY(2.25rem) rotateX(-17deg) scale(0.975);
+            filter: blur(3px);
+            transform: translateX(2.75rem) scale(0.95);
         }
         100% {
             opacity: 1;
@@ -353,18 +352,20 @@ const { projects } = Astro.props;
             filter: blur(0);
             transform: none;
         }
+        45%,
         100% {
             opacity: 0;
-            filter: blur(1px);
-            transform: translateY(-1.75rem) rotateX(14deg) scale(0.975);
+            filter: blur(3px);
+            transform: translateX(-2.5rem) scale(0.95);
         }
     }
 
     @keyframes file-enter-previous {
-        0% {
+        0%,
+        45% {
             opacity: 0;
-            filter: blur(1.5px);
-            transform: translateY(-2.25rem) rotateX(17deg) scale(0.975);
+            filter: blur(3px);
+            transform: translateX(-2.75rem) scale(0.95);
         }
         100% {
             opacity: 1;
@@ -379,10 +380,11 @@ const { projects } = Astro.props;
             filter: blur(0);
             transform: none;
         }
+        45%,
         100% {
             opacity: 0;
-            filter: blur(1px);
-            transform: translateY(1.75rem) rotateX(-14deg) scale(0.975);
+            filter: blur(3px);
+            transform: translateX(2.5rem) scale(0.95);
         }
     }
 
