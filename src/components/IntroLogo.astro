@@ -1,10 +1,6 @@
 <button class="pr-intro" id="pr-intro" type="button" aria-label="Enter Pranav Rathod's portfolio" hidden>
     <span class="pr-intro-backdrop" aria-hidden="true"></span>
     <span class="pr-intro-mark font-display" id="pr-intro-mark" aria-hidden="true">PR<span class="pr-intro-dot">.</span><span class="pr-intro-stroke"></span></span>
-    <span class="pr-intro-hint" aria-hidden="true">
-        <span class="if-pointer">scroll to enter</span>
-        <span class="if-touch">swipe to enter</span>
-    </span>
 </button>
 
 <style>
@@ -80,60 +76,13 @@
             transform 0.24s ease;
     }
 
-    .pr-intro-hint {
-        position: absolute;
-        right: auto;
-        bottom: max(1.5rem, env(safe-area-inset-bottom));
-        left: 50%;
-        padding: 0.35rem 0.55rem;
-        border-radius: 0.25rem;
-        border: 1px dashed color-mix(in oklab, var(--border-main) 22%, transparent);
-        color: var(--text-muted);
-        background: color-mix(in oklab, var(--bg-main) 88%, transparent);
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        font-size: 0.625rem;
-        font-weight: 600;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        white-space: nowrap;
-        opacity: 0;
-        transform: translateX(-50%);
-        translate: 0 0.5rem;
-        transition:
-            opacity 0.45s ease,
-            translate 0.45s ease;
-    }
-
-    .pr-intro.is-ready .pr-intro-hint {
-        opacity: 1;
-        translate: 0 0;
-    }
-
     .pr-intro.is-exiting {
         pointer-events: none;
-    }
-
-    .pr-intro.is-exiting .pr-intro-hint {
-        opacity: 0;
-        translate: 0 0.5rem;
     }
 
     .pr-intro.is-exiting .pr-intro-stroke {
         opacity: 0;
         transform: rotate(-0.65deg) scaleX(0.72);
-    }
-
-    .if-touch {
-        display: none;
-    }
-
-    @media (hover: none) {
-        .if-pointer {
-            display: none;
-        }
-        .if-touch {
-            display: inline;
-        }
     }
 
     @keyframes pr-ink-settle {
@@ -204,6 +153,7 @@
             intro.classList.add('is-ready');
             if (exitQueued) exitIntro();
         });
+        Promise.all([waitForFont, new Promise((resolve) => setTimeout(resolve, 1500))]).then(() => requestExit());
 
         function requestExit(event) {
             event?.preventDefault?.();
