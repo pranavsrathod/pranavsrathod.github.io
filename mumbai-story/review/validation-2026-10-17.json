@@ -1,0 +1,171 @@
+{
+  "date": "2026-10-17",
+  "timezone": "America/Los_Angeles",
+  "article": {
+    "acts": 3,
+    "wordsIncludingCaptionsExcludingCollapsedDetails": 1184,
+    "images": 5,
+    "videos": 2,
+    "allLocalReferencesExist": true,
+    "localReferences": [
+      "./public/BlogPhotos/mumbai-story/evolution-poster.webp",
+      "./public/BlogPhotos/mumbai-story/friend-card-mobile.webp",
+      "./public/BlogPhotos/mumbai-story/friend-card.webp",
+      "./public/BlogPhotos/mumbai-story/handoff.png",
+      "./public/BlogPhotos/mumbai-story/newspaper-test-poster.webp",
+      "./public/BlogPhotos/mumbai-story/newspaper-test.mp4",
+      "./public/BlogPhotos/mumbai-story/newspaper.webp",
+      "./public/BlogPhotos/mumbai-story/places.webp",
+      "./public/BlogPhotos/mumbai-story/street-evolution.gif",
+      "./public/BlogPhotos/mumbai-story/street-evolution.mp4",
+      "./public/BlogPhotos/mumbai-story/street-now.webp",
+      "./two-wada-pavs.md"
+    ],
+    "allImagesHaveAlt": true,
+    "videoControlsAndLabels": true,
+    "allJumpLinksResolve": true
+  },
+  "astro": {
+    "result": "success",
+    "method": "Real Markdown compiled in an isolated Astro static build using existing installation. Preview HTML generated from that output."
+  },
+  "browser": {
+    "desktop": "Reviewed at default desktop viewport; editorial layout and hero visible.",
+    "phone": {
+      "viewportWidth": 390,
+      "documentWidth": 375,
+      "horizontalOverflow": false,
+      "cardSource": "friend-card-mobile.webp",
+      "cardNaturalDimensions": [
+        464,
+        649
+      ]
+    },
+    "videoPlayback": {
+      "file": "street-evolution.mp4",
+      "durationSeconds": 14,
+      "paused": false,
+      "readyState": 4,
+      "observedCurrentTime": 0.020882
+    },
+    "screenshots": [
+      "desktop.jpg",
+      "phone.jpg",
+      "phone-card.jpg",
+      "phone-workflow.jpg"
+    ],
+    "consoleErrors": [],
+    "workflow": "Revised illustration checked at 390px with larger text; no clipping."
+  },
+  "media": [
+    {
+      "file": "evolution-poster.webp",
+      "bytes": 136192,
+      "sha256": "93f75ae534d9ca7f1fdbd0b943045c3e107a884cd9803b09bbc063160c05de2d"
+    },
+    {
+      "file": "friend-card-mobile.webp",
+      "bytes": 60814,
+      "sha256": "fa30eb282e75884d1f33f3a5686dd6c8bbdcce22263cdd31cb8b449abf40d42c"
+    },
+    {
+      "file": "friend-card.webp",
+      "bytes": 124630,
+      "sha256": "16c645db224b2c37fc8f123604a0f16c6c8e149f2540a2d2913a28ef32a60828"
+    },
+    {
+      "file": "handoff.png",
+      "bytes": 107907,
+      "sha256": "6bbc47da346d0fdf5bb6b33088b017a1961a85c6132be83bdd4ee62726296c7f"
+    },
+    {
+      "file": "newspaper-test-poster.webp",
+      "bytes": 60516,
+      "sha256": "8c58059472f11a7fa7a2f87a4a3d6eb088460fbe4a1295d3d61efcb7a3f80392"
+    },
+    {
+      "file": "newspaper-test.mp4",
+      "bytes": 1641171,
+      "sha256": "d83e5b4f3fbb35eee0077daeb4a79ff2f1dd16ffb686fec52114e34553b8dcc7",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 720,
+            "pix_fmt": "yuv420p",
+            "nb_frames": "50"
+          }
+        ],
+        "format": {
+          "duration": "2.083333"
+        }
+      }
+    },
+    {
+      "file": "newspaper.webp",
+      "bytes": 213294,
+      "sha256": "3d7ef9cd965949857965f21823869c49836fe730e8f6a5f15c0629819040b368"
+    },
+    {
+      "file": "places.webp",
+      "bytes": 108322,
+      "sha256": "5c01b26408a553bb9a3ba81f6f859046a64907b14a08b063c1a81056a7e28f7e"
+    },
+    {
+      "file": "street-early.webp",
+      "bytes": 97042,
+      "sha256": "8768a4d511897e7cd6dfebfde2de7040fbccad839c815c85f3236c999ba02004"
+    },
+    {
+      "file": "street-evolution.gif",
+      "bytes": 760626,
+      "sha256": "651625eb0c2fa53239c1183ace2ed43191e0845fa0da8cd7e19f8bb54d576007",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "gif",
+            "width": 960,
+            "height": 600,
+            "pix_fmt": "bgra",
+            "nb_frames": "28"
+          }
+        ],
+        "format": {
+          "duration": "14.000000"
+        }
+      }
+    },
+    {
+      "file": "street-evolution.mp4",
+      "bytes": 720331,
+      "sha256": "6fdd6bfc9d44447e7332cc01cae467f5c23bbda6e422168a88d37569804a0520",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 800,
+            "pix_fmt": "yuv420p",
+            "nb_frames": "168"
+          }
+        ],
+        "format": {
+          "duration": "14.000000"
+        }
+      }
+    },
+    {
+      "file": "street-now.webp",
+      "bytes": 123422,
+      "sha256": "61772fce3d5a3d03301dd7cf72231614a5f47c4e07da5699fab513621e34dc2e"
+    }
+  ],
+  "publication": "Unpublished separate draft; no site integration performed."
+}

@@ -1,0 +1,194 @@
+---
+title: Two Wada Pavs, a Newspaper, and a City Made of Pixels
+excerpt: Two wada pavs, an uncooperative newspaper, and a suspiciously well-documented chai stall. How I built a little Mumbai, one side quest at a time.
+publishDate: '2026-10-17'
+updatedDate: '2026-10-19'
+isFeatured: false
+tags:
+  - Creative Process
+  - Mumbai
+  - AI
+seo:
+  image:
+    src: /BlogPhotos/mumbai-story/street-now.webp
+    alt: A pixel-stylized Mumbai street with roadside stalls and walking characters.
+---
+
+
+<figure>
+  <img src="/BlogPhotos/mumbai-story/street-now.webp" alt="The Mumbai portfolio street, with its garage, newspaper kiosk, wada pav stall, and illustrated pedestrians." width="1440" height="900" fetchpriority="high" style="width:100%;height:auto;" />
+  <figcaption>A little Mumbai on the internet. Captured from the local build on October 17, 2026.</figcaption>
+</figure>
+
+## Act I: Naturally, I Bought Two
+
+Last year, while visiting India, I was on my way to my grandma's place when we stopped for wada pav.
+
+Naturally, I bought two.
+
+They came wrapped in newspaper. I ate the first one without giving the packaging a second thought. When there's a freshly made wada pav in front of you, your priorities are pretty clear.
+
+But when I reached for the second, an advertisement caught my eye. I don't remember what it said. I do remember that, for some reason, it stayed with me after the snack was gone.
+
+A few months later, in a Mobile Game Development class, I kept noticing the personality packed into games like *EarthBound*, *A Link to the Past*, and *Streets of Rage*. Tiny sprites. Expressive worlds. An unreasonable amount of affection for a collection of squares.
+
+I was studying Computer Science with a focus on Multimedia and Creative Technologies. I wanted to make something that put the *creative* in Creative Technologist.
+
+And if I was building a little world about myself, shouldn't it reflect where I came from?
+
+I grew up in the suburbs of Mumbai: roadside stalls, rickshaws, crowded signs, chai breaks, and a thousand things happening at once.
+
+Remember Ishaan in *Taare Zameen Par*, wandering around Mumbai, completely absorbed in everything happening around him? That's a pretty good description of how I've always liked experiencing the world. Finding something interesting in what everyone else might walk past.
+
+My existing portfolio already had an editorial, magazine-like feel. I liked it. I just started wondering what would happen if its pages also existed as places.
+
+Usually, Contact is a few links. Email, LinkedIn, GitHub. Maybe a form if you're feeling fancy.
+
+I wanted mine wrapped around a wada pav.
+
+Obviously, this required my own newspaper: **The Chai & Code Chronicle**. My projects. My interests. My work. Apparently, the most pressing news of the day consisted mostly of me.
+
+Not going to lie, I felt a little like Oprah.
+
+*You get a headline! Everybody gets a headline!*
+
+<figure>
+  <img src="/BlogPhotos/mumbai-story/newspaper.webp" alt="The Chai & Code Chronicle newspaper artwork, with personal stories and a contact advertisement." width="1000" height="1333" loading="lazy" style="width:100%;max-height:680px;object-fit:contain;" />
+  <figcaption>An entire newspaper about myself. A very modest first step.</figcaption>
+</figure>
+
+Then I realized I had a newspaper, a blog, and a fairly serious interest in chai. The blog could live at a tea stall. My projects could occupy a garage studio.
+
+This is roughly how a snack became a neighborhood.
+
+<figure>
+  <picture>
+    <source media="(max-width: 640px)" srcset="/BlogPhotos/mumbai-story/origin-map-mobile.webp" width="720" height="1120" />
+    <img src="/BlogPhotos/mumbai-story/origin-map.webp" alt="A route map of creative associations: a wada pav wrapper becomes the Chronicle, Contact and Blog; Mumbai and pixel games suggest a street; friends and cricket cards suggest collectibles." width="1440" height="760" loading="lazy" style="width:100%;height:auto;" />
+  </picture>
+  <figcaption>No master plan. Just one idea finding an excuse to become another.</figcaption>
+</figure>
+
+## Act II: The Five-Hour Waiting Room
+
+I started in Canva, using a newspaper template, then brought the exported image into Blender as a texture. All I needed was for it to fold, crumple, and unwrap around two wada pavs.
+
+The newspaper had other plans.
+
+I had beginner-level Blender experience. Natural-looking deformation was beyond what I could manage, even after experimenting and asking people for help. The project entered that familiar folder: *I'll come back to this.*
+
+In early September, I saw Astra working with Blender. I wasn't expecting “make me a beautiful Mumbai street” to produce a finished portfolio. Although, admittedly, that would have been nice.
+
+I gathered references, drew rough sketches, and worked through one building at a time. For the first time, the place in my head was beginning to exist outside it.
+
+Then I hit my usage limit.
+
+### A Budget Becomes a Brief
+
+I called these interruptions the **five-hour token blackout**. Ten minutes earlier, I'd been obsessing over a model. Now I was sitting in the waiting room.
+
+There was technically a solution: pay for more usage.
+
+But I was working with my existing ChatGPT Plus subscription, and I was absolutely not about to justify an upgrade because I couldn't get a virtual chai stall to look right.
+
+I'd already committed to building Mumbai on the internet. I needed to draw the line somewhere.
+
+So I started using the waiting time to review, sketch, and write things down.
+
+Increasingly extensive Markdown things.
+
+What should change? What should stay? Which references mattered? What would count as finished? I'd spent too many interactions explaining decisions halfway through making them. Writing a handoff forced me to notice decisions I hadn't made at all.
+
+I learned to write better documentation because I was too stubborn to pay for more tokens.
+
+### My Imaginary Chai Stall Gets a Production Department
+
+Those documents gave specialized AI reviewers something specific to examine: an architect for proportions and placement, a set designer for composition and props, and a Blender technician for geometry and exports. One implementer could work from a combined brief, instead of several agents editing the same scene.
+
+At one point, the biscuits were floating inside their jars.
+
+This was not the atmosphere I was going for.
+
+The next brief asked for grounded golden stacks, clearer glass, and room below the lids. Keep the stall. Keep the newspapers. Please put the biscuits down.
+
+The garage taught me a different lesson. A cleaner studio had started looking like a room behind a shutter. I wanted a converted Mumbai workshop. Supports, tools, conduit, and hanging headphones helped bring that character back.
+
+“Fixed” and “feels right” were becoming two different questions.
+
+<figure>
+  <img src="/BlogPhotos/mumbai-story/handoff.png" alt="The handoff loop: a bounded brief, specialist reviews, one implementer, and a visual and technical check." width="800" height="1200" loading="lazy" style="width:100%;max-height:760px;object-fit:contain;" />
+  <figcaption>Three review perspectives. One scene writer. The creative judgment comes back around.</figcaption>
+</figure>
+<details><summary>The newspaper had other plans</summary><p>Corner curls made a boat; separate panels made a box. The revised brief called for one continuous sheet that hides the pavs, spreads unevenly, and settles flat. Five browser inspection poses made the in-between motion visible. The result is art-directed, not simulated cloth.</p></details>
+<details><summary>The garage identity crisis</summary><p>The cleaner studio looked like a room behind a shutter. Keeping the facade, footprint, and monitor while restoring workshop supports, conduit, tools, and headphones brought its character back. The final check included the actual camera journey.</p></details>
+<details><summary>Biscuits versus gravity</summary><p>Ground golden biscuit stacks on the jar bases, leave headspace, clarify the glass, and preserve the stall. Review both views, export, validate, and stop when that named change is complete.</p></details>
+
+The notebook below the cheerful little world was full of these loops. Sometimes the brief needed to change. Sometimes the implementation did. Sometimes another agent agreed with the first one and they were both confidently missing the point.
+
+I still had to look.
+
+<details>
+  <summary>From the original newspaper experiments</summary>
+  <figure>
+    <video aria-label="Early Blender newspaper animation test" controls playsinline preload="none" poster="/BlogPhotos/mumbai-story/newspaper-test-poster.webp" width="1280" height="720" style="width:100%;height:auto;">
+      <source src="/BlogPhotos/mumbai-story/newspaper-test.mp4" type="video/mp4" />
+      <a href="/BlogPhotos/mumbai-story/newspaper-test.mp4">Watch the newspaper test.</a>
+    </video>
+    <figcaption>A saved Blender experiment from before the browser interaction. The paper and I had a long relationship.</figcaption>
+  </figure>
+</details>
+
+## Act III: A Street Needs People
+
+Individual Blender models still weren't a website. Exporting them as GLB files gave Three.js the geometry, materials, and textures it needed to assemble the street.
+
+I'd never worked with Three.js before. Graphics and game-development experience gave me somewhere to start; AI handled a substantial amount of the coding and asset integration. I supplied the direction, references, constraints, and corrections.
+
+The wrapper became Contact. The garage monitor opened my project archive. The chai stall's newspapers became entry points to actual articles. Returning needed to feel like stepping back onto the same street.
+
+<figure>
+  <video aria-label="Five checkpoints in the Mumbai street's development" controls playsinline preload="none" poster="/BlogPhotos/mumbai-story/evolution-poster.webp" width="1280" height="800" style="width:100%;height:auto;">
+    <source src="/BlogPhotos/mumbai-story/street-evolution.mp4" type="video/mp4" />
+    <a href="/BlogPhotos/mumbai-story/street-evolution.gif">View the street's evolution as a GIF.</a>
+  </video>
+  <figcaption>Five checkpoints: reconstructed September 11 source, saved October 13 and 15 review captures, and the October 17 local view. Framing varies. The first frame was rendered October 17 from commit 831726c. <a href="/BlogPhotos/mumbai-story/street-evolution.gif">GIF version</a>.</figcaption>
+</figure>
+
+Friends helped me think about how it felt to explore. Eventually, I noticed something fairly obvious.
+
+Where were the people?
+
+So I started asking my friends whether they'd like to become walking pixel characters.
+
+A perfectly normal question, obviously.
+
+Their photographs became references for illustrated sprites. But I wanted visitors to discover something about each person, too. That brought back the cricket trading cards I collected growing up: little packs for around fifty rupees, players, statistics, and a folder I still have.
+
+Clicking a friend could open a collectible card. I asked everyone to choose a movie they liked. Not necessarily their all-time favorite. Not their Letterboxd Top Four. Definitely not something selected to demonstrate impeccable taste in cinema.
+
+Just a movie they liked.
+
+Fortunately, people replied quickly, considering I'd essentially recruited them into my increasingly elaborate digital arts-and-crafts project.
+
+<figure>
+  <picture>
+    <source media="(max-width: 640px)" srcset="/BlogPhotos/mumbai-story/friend-card-mobile.webp" width="464" height="649" />
+    <img src="/BlogPhotos/mumbai-story/friend-card.webp" alt="Payal's walking sprite and collectible card, pairing her pixel portrait with personal favorites against Mumbai's seafront." width="1440" height="900" loading="lazy" style="width:100%;height:auto;" />
+  </picture>
+  <figcaption>Familiar faces, small personal details, and absolutely no requirement for impeccable taste in cinema.</figcaption>
+</figure>
+
+The characters acquired little routines, too. Nico stops for wada pav. Kartik drinks chai. Vrishabh photographs the mural. The street was becoming somewhere people had a reason to stop.
+
+None of this arrived as a complete plan. A wrapper suggested a newspaper. The newspaper needed a stall. The street needed my friends.
+
+AI helped me build far more of it than I could have managed alone in the same time. If I approved something and put my name on it, though, I was responsible for what visitors experienced.
+
+The tools could help construct the world. They couldn't decide which memories belonged in it.
+
+I started with two wada pavs. Somewhere along the way, I found a way to bring more of myself into the work.
+
+<details>
+  <summary>Visual credits</summary>
+  <p>Images show this project's saved artwork, model renders, and browser captures. The maps and revision notebook were prepared for this story. Small props visible in the street and garage use adapted <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> models: <a href="https://sketchfab.com/3d-models/tuk-tuk-rikshaw-0bdfdf97a0f248008806840f7188367c">Tuk Tuk Rikshaw</a> by alnmathew; <a href="https://sketchfab.com/3d-models/dog-3a5c0b06db3d4fbea9af691827081043">Dog</a> by sv.stats; <a href="https://sketchfab.com/3d-models/lego-scarlet-witch-65fd0da1a5f04b4289db423cd00c9383">LEGO Scarlet Witch</a> by Ramón Ruiz; <a href="https://sketchfab.com/3d-models/art-reference-utah-teapot-4c02605ea63541b6aa053df167befe36">Art Reference: Utah Teapot</a> by Smallpoly; and <a href="https://sketchfab.com/3d-models/chicago-cubs-8d592b64547a46e4b730b8620f389296">Chicago Cubs</a> by Laurance Animations.</p>
+</details>

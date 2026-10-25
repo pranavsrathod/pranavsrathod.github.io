@@ -1,0 +1,156 @@
+{
+  "preparedOn": "2026-10-20",
+  "revisedOn": "2026-10-25",
+  "state": "Separate unpublished project-page draft",
+  "media": [
+    {
+      "output": "street.webp",
+      "source": "project-draft/mumbai-street/sources/captures/street-live-2026-10-24.jpg",
+      "kind": "Actual live-city browser screenshot",
+      "date": "2026-10-24",
+      "transformation": "WebP encode; no scene retouching.",
+      "note": "Current street appearance only; not a complete deployment audit."
+    },
+    {
+      "outputs": [
+        "rendering.webp",
+        "rendering-mobile.webp"
+      ],
+      "sources": [
+        "blog-draft/mumbai-story/sources/captures/street-now-original.jpg",
+        "blog-draft/mumbai-story/sources/captures/street-now-pixel.jpg"
+      ],
+      "kind": "Labeled comparison of saved rendering modes",
+      "date": "2026-10-17",
+      "note": "Same scene camera, different moments and pedestrians; comparison of appearance, not timings."
+    },
+    {
+      "outputs": [
+        "original.webp",
+        "pixel.webp"
+      ],
+      "sources": [
+        "blog-draft/mumbai-story/sources/captures/street-now-original.jpg",
+        "blog-draft/mumbai-story/sources/captures/street-now-pixel.jpg"
+      ],
+      "kind": "Separate saved development screenshots for native Compare",
+      "capturedOn": "2026-10-17",
+      "width": 1440,
+      "height": 900,
+      "transformation": "Lossless WebP encode without resizing or cropping; preserves decoded source-JPEG pixels, not pre-JPEG originals.",
+      "note": "Same scene camera, different moments and pedestrians. An appearance comparison, not a synchronized frame or timing benchmark."
+    },
+    {
+      "kind": "Five saved production-geometry inspection poses for native FilmstripViewer",
+      "capturedOn": "2026-10-19",
+      "width": 800,
+      "height": 425,
+      "frames": [
+        {
+          "output": "paper-closed.webp",
+          "source": "blog-draft/mumbai-story/sources/captures/workflow-paper-00.jpg",
+          "label": "Wrapped",
+          "captureProgress": 0
+        },
+        {
+          "output": "paper-quarter.webp",
+          "source": "blog-draft/mumbai-story/sources/captures/workflow-paper-01.jpg",
+          "label": "Loosen",
+          "captureProgress": 0.22
+        },
+        {
+          "output": "paper-half.webp",
+          "source": "blog-draft/mumbai-story/sources/captures/workflow-paper-02.jpg",
+          "label": "Spread",
+          "captureProgress": 0.45
+        },
+        {
+          "output": "paper-three-quarter.webp",
+          "source": "blog-draft/mumbai-story/sources/captures/workflow-paper-03.jpg",
+          "label": "Settle",
+          "captureProgress": 0.7
+        },
+        {
+          "output": "paper-open.webp",
+          "source": "blog-draft/mumbai-story/sources/captures/workflow-paper-04.jpg",
+          "label": "Flat",
+          "captureProgress": 1
+        }
+      ],
+      "captureMethod": "Stage buttons in threejs-portfolio/scripts/contact-paper-preview.html, which imports shared production geometry. Saved JPEGs already contain consistent x240 y135 width800 height425 crops from a 1280\u00d7720 angled browser view.",
+      "transformation": "Lossless WebP encode of each saved JPEG; no further crop, resize, drawing or pose reconstruction.",
+      "evidence": [
+        "blog-draft/mumbai-story/sources/workflow-evidence.json (cases.paper)",
+        "threejs-portfolio/scripts/contact-paper-preview.html:14-20",
+        "threejs-portfolio/scripts/contact-paper-preview.html:35-42"
+      ],
+      "note": "Filenames quarter/half/three-quarter are convenient sequence names; actual progress is 22%, 45%, 70%. These are inspection samples from one art-directed motion, not historical revisions, cloth simulation, an uncropped full-sheet view or proof of continuous clearance."
+    },
+    {
+      "outputs": [
+        "architecture.webp",
+        "architecture-mobile.webp"
+      ],
+      "source": "scripts/draw-architecture.mjs",
+      "editableSources": "sources/diagrams/",
+      "kind": "New explanatory architecture diagram",
+      "evidence": "threejs-portfolio/docs/INTERVIEW_STUDY_GUIDE.md sections2-3,13"
+    },
+    {
+      "output": "biscuit-detail.webp",
+      "source": "ChaiCodeChronicle/preview-biscuit-detail.png",
+      "kind": "Saved reimported-GLB detail render",
+      "evidence": "ChaiCodeChronicle/blog-roundtrip-validation.json",
+      "transformation": "Resize to1000px and encodeWebP."
+    },
+    {
+      "kind": "Five source-backed wrapper geometry reconstructions, current export, and labeled 20-second cycle",
+      "outputs": "wrapper-history/{corners,panels,bloom,parcel,baked}.{mp4,webp}; wrapper-evolution.{mp4,gif}",
+      "capturedOn": "2026-10-25",
+      "sources": "sources/wrapper-history/provenance.json",
+      "captureManifest": "sources/wrapper-history/capture-manifest.json",
+      "method": "125 original browser crops, 25 normalized poses per version, fixed960x600camera. Current food, artwork and lighting shared. No image retouching. MP4s hold endpoints; GIF8fps derivative.",
+      "boundary": "Earlier sources reconstructed, not period recordings; earlier timing normalized. CurrentGLB local/uncommitted/notdeployed. Lost diagonal-curl boat not fabricated.",
+      "rebuild": "scripts/prepare-wrapper-history.mjs"
+    }
+  ],
+  "credits": "sources/evidence/garage-credits.md and article Visual credits",
+  "evidence": "evidence-map.md",
+  "explanatoryVisuals": [
+    {
+      "component": "CameraOwnership.astro",
+      "kind": "Interactive rule model",
+      "basis": "src/main.js routeToken check and check-studio-routing.mjs",
+      "boundary": "Illustrative event timing, no live app state or telemetry."
+    },
+    {
+      "component": "RenderPipeline.astro",
+      "kind": "Code-native pipeline schematic",
+      "basis": "src/scene/pixelRenderer.js",
+      "boundary": "Not render-target captures, not a performance measurement."
+    },
+    {
+      "component": "HandoffEvidence.astro",
+      "kind": "Saved revision brief and reimported-GLB image",
+      "basis": "sources/evidence and biscuit-detail.webp"
+    },
+    {
+      "component": "WrapperEvolution.astro",
+      "kind": "Source-backed version timeline with optional playback; separate camera-cue schematic",
+      "basis": "Four dated Git snapshots plus frozen Oct25GLB; HANDOFF704\u2013726",
+      "boundary": "Comparison clips hold camera fixed. Six-second timingdiagram assumesassetsreadyatentry; slowloads canextendreadiness."
+    }
+  ],
+  "evidenceDownloads": [
+    {
+      "output": "evidence/biscuit-preservation.json",
+      "source": "sources/evidence/biscuit-preservation.json",
+      "kind": "Unmodified saved revision report"
+    },
+    {
+      "output": "evidence/biscuit-glb-roundtrip.json",
+      "source": "sources/evidence/biscuit-glb-roundtrip.json",
+      "kind": "Unmodified saved revision report"
+    }
+  ]
+}

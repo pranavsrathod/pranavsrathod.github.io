@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wrapper geometry history · isolated inspection</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#142927;color:#f5f1e8;font:16px/1.5 Arial,sans-serif}#render-region{width:960px;height:600px;max-width:100vw;aspect-ratio:8/5;overflow:hidden;background:#142927}canvas{display:block;width:100%;height:100%}main{max-width:960px;padding:18px 24px}h1{margin:0 0 10px;font:28px/1.2 Georgia,serif}p{margin:8px 0;color:#c5d1c8}nav{display:flex;flex-wrap:wrap;gap:8px}button{padding:10px 13px;border:1px solid #8faba0;border-radius:0;background:transparent;color:inherit;font:inherit;cursor:pointer}button[aria-pressed=true]{background:#e6c78a;color:#142927;border-color:#e6c78a}button:focus-visible,input:focus-visible{outline:3px solid #e6c78a;outline-offset:3px}button:disabled{opacity:.4;cursor:default}.playback{display:flex;gap:15px;align-items:center;flex-wrap:wrap;margin:18px 0}input{width:min(400px,50vw);accent-color:#e6c78a}label{font-weight:700}output{font-variant-numeric:tabular-nums}#status{color:#e6c78a}.notes{font-size:14px}code{font-family:ui-monospace,monospace}@media(max-width:960px){#render-region{height:auto}main{padding:16px}nav button{font-size:14px}}
+  </style>
+  <script type="importmap">{"imports":{"three":"/threejs-portfolio/node_modules/three/build/three.module.js","three/addons/":"/threejs-portfolio/node_modules/three/examples/jsm/"}}</script>
+</head>
+<body>
+  <!-- At a960px-or-wider viewport, the clean screenshot crop is exactly x0/y0/960×600. -->
+  <div id="render-region" aria-label="Common-camera wrapper render"></div>
+  <main>
+    <h1>Same camera. Different representations.</h1>
+    <nav id="stages" aria-label="Historical geometry version"></nav>
+    <div class="playback">
+      <button id="play" type="button" disabled>Play</button>
+      <label for="pose">Comparison pose</label>
+      <input id="pose" aria-label="Comparison pose" type="range" min="0" max="24" step="1" value="0" disabled>
+      <label for="pose-number">Pose number</label>
+      <input id="pose-number" aria-label="Pose number" type="number" min="0" max="24" step="1" value="0" disabled style="width:70px;padding:8px;">
+      <output id="pose-label" for="pose">0 / 24</output>
+    </div>
+    <p id="status" role="status">Loading the frozen geometry and shared artwork…</p>
+    <p id="stage-note"></p>
+    <p class="notes">Historical geometry reconstructed from saved source. Current food, artwork, lighting and camera are shared. Procedural versions use normalized opening progress; this two-second comparison clock does not reproduce their original timing. The baked version has25 held poses, not25 historical revisions.</p>
+    <p class="notes">Canvas crop: <code>x=0, y=0, width=960, height=600</code> at a viewport at least960px wide. Serve the Blender folder as the HTTP root. No application or Blender files are changed.</p>
+  </main>
+  <script type="module">
+    import * as THREE from 'three';
+    import {stages,createStage} from './adapters.mjs';
+    import {createContactFood} from './common/contactFood.js';
+
+    const region=document.querySelector('#render-region'),status=document.querySelector('#status');
+    const slider=document.querySelector('#pose'),number=document.querySelector('#pose-number'),output=document.querySelector('#pose-label'),play=document.querySelector('#play');
+    const scene=new THREE.Scene();scene.background=new THREE.Color('#142927');
+    const camera=new THREE.PerspectiveCamera(36,960/600,.01,10);
+    camera.position.copy(new THREE.Vector3(.14,.83,.62).normalize().multiplyScalar(2.5));camera.lookAt(0,.045,0);
+    const renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});
+    renderer.setPixelRatio(1);renderer.setSize(960,600);renderer.outputColorSpace=THREE.SRGBColorSpace;
+    renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.shadowMap.autoUpdate=false;
+    renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1;
+    renderer.domElement.setAttribute('aria-label','Historical wrapper geometry at one fixed camera');region.append(renderer.domElement);
+    scene.add(new THREE.HemisphereLight(0xfff4de,0x567e73,3));
+    const sun=new THREE.DirectionalLight(0xffedcf,3.2);sun.position.set(-1.2,2,.7);sun.castShadow=true;
+    sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-.8,right:.8,top:.8,bottom:-.8,near:.1,far:5});sun.shadow.bias=-.00015;sun.shadow.normalBias=.001;scene.add(sun);
+    const board=new THREE.Mesh(new THREE.BoxGeometry(1.12,.035,1.22),new THREE.MeshStandardMaterial({color:0x926642,roughness:1}));board.position.y=-.02;board.receiveShadow=true;scene.add(board);
+    const food=createContactFood();food.traverse(node=>{if(node.isMesh){node.castShadow=true;node.receiveShadow=true;}});scene.add(food);
+    const instances=new Map(),buttons=new Map();
+    let selected='corners',progress=0,playing=false,startedAt=0,dead=false,ready=false;
+    const params=new URLSearchParams(location.search);
+    if(stages.some(stage=>stage.id===params.get('stage')))selected=params.get('stage');
+    progress=THREE.MathUtils.clamp(Number(params.get('pose')??0)/24,0,1);
+    if(!Number.isFinite(progress))progress=0;
+    function draw(){renderer.shadowMap.needsUpdate=true;renderer.render(scene,camera);}
+    function pose(value){
+      progress=THREE.MathUtils.clamp(value,0,1);
+      instances.get(selected)?.setProgress(progress);
+      slider.value=number.value=String(Math.round(progress*24));output.textContent=Math.round(progress*24)+' /24 · '+Math.round(progress*100)+'%';
+      draw();
+    }
+    function stage(id){
+      if(!instances.has(id))return;
+      playing=false;play.textContent='Play';selected=id;
+      for(const [key,instance] of instances)instance.root.visible=key===id;
+      for(const [key,button] of buttons)button.setAttribute('aria-pressed',String(key===id));
+      const info=stages.find(value=>value.id===id);document.querySelector('#stage-note').textContent=info.note;
+      pose(progress);
+    }
+    for(const info of stages){
+      const button=document.createElement('button');button.type='button';button.textContent=info.label;button.dataset.stage=info.id;button.disabled=true;button.setAttribute('aria-pressed',String(info.id===selected));
+      button.addEventListener('click',()=>stage(info.id));document.querySelector('#stages').append(button);buttons.set(info.id,button);
+    }
+    slider.addEventListener('input',()=>{playing=false;play.textContent='Play';pose(Number(slider.value)/24);});
+    number.addEventListener('input',()=>{playing=false;play.textContent='Play';const value=Number(number.value);if(Number.isFinite(value))pose(Math.round(value)/24);});
+    play.addEventListener('click',()=>{
+      if(playing){playing=false;play.textContent='Play';return;}
+      if(matchMedia('(prefers-reduced-motion: reduce)').matches){pose(1);return;}
+      pose(0);startedAt=performance.now();playing=true;play.textContent='Pause';
+    });
+    window.wrapperHistory={
+      get ready(){return ready;},setStage:stage,setPose:value=>{playing=false;play.textContent='Play';pose(value/24);},setProgress:value=>{playing=false;play.textContent='Play';pose(value);},
+      get state(){return {selected,progress,pose:Math.round(progress*24),playing,ready,width:960,height:600};},
+      renderer,scene,camera,
+    };
+    try{
+      const bakedTexture=await new THREE.TextureLoader().loadAsync(new URL('./common/newspaper.png',import.meta.url).href);
+      bakedTexture.colorSpace=THREE.SRGBColorSpace;bakedTexture.flipY=false;bakedTexture.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());bakedTexture.needsUpdate=true;
+      const legacyTexture=bakedTexture.clone();legacyTexture.flipY=true;legacyTexture.needsUpdate=true;
+      await Promise.all(stages.map(async info=>{const instance=await createStage(info.id,{legacyTexture,bakedTexture});instance.root.visible=false;scene.add(instance.root);instances.set(info.id,instance);}));
+      for(const button of buttons.values())button.disabled=false;slider.disabled=false;number.disabled=false;play.disabled=false;ready=true;
+      stage(selected);status.textContent='Ready · five frozen representations · shared camera and food';document.body.dataset.ready='true';
+      renderer.setAnimationLoop(now=>{
+        if(dead)return;
+        if(playing){pose(Math.min(1,(now-startedAt)/2000));if(progress===1){playing=false;play.textContent='Play';}}
+      });
+      addEventListener('pagehide',()=>{dead=true;renderer.setAnimationLoop(null);for(const instance of instances.values())instance.dispose();bakedTexture.dispose();legacyTexture.dispose();food.traverse(node=>{node.geometry?.dispose();for(const material of[].concat(node.material??[]))material.dispose();});board.geometry.dispose();board.material.dispose();sun.shadow.map?.dispose();renderer.dispose();},{once:true});
+    }catch(error){status.textContent='Could not load comparison: '+error.message;console.error(error);document.body.dataset.ready='error';}
+  </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+# Two Wada Pavs, a Newspaper, and a City Made of Pixels
+
+*How a snack in Mumbai became an interactive portfolio, and what building it taught me about creativity, technology, and working with AI.*
+
+### It All Started With a Wada Pav
+
+Last year, while I was visiting India, I was on my way to my grandma's place when we made a quick stop for some wada pav.
+
+Naturally, I bought two.
+
+They came wrapped in newspaper, as they often do, and I got back into the car, unwrapped the first one, and started eating without giving the packaging a second thought. I mean, when there's a freshly made wada pav in front of you, your priorities are pretty clear.
+
+But when I looked down to grab the second one, something caught my eye.
+
+There was an advertisement printed on the newspaper.
+
+I don't remember exactly what it said, but for the sake of this story, let's pretend it was something along the lines of:
+
+**"WANTED: ASPIRING FILM STARS. Must be able to look dramatically out of a moving train window. No experience required."**
+
+Classic Mumbai.
+
+Now, most people would probably finish their wada pav, crumple the newspaper, and go about their day.
+
+I finished my wada pav, obviously. But for some reason, that little advertisement stuck with me.
+
+I didn't know it at the time, but it would eventually become one of the starting points for a project I hadn't even imagined yet.
+
+### A Little Nostalgia, a Lot of Pixels
+
+Fast forward a few months.
+
+I was taking a Mobile Game Development class, and I noticed just how many people were drawn to the charm of old-school pixel games. Games like *EarthBound*, *The Legend of Zelda: A Link to the Past*, and *Streets of Rage*, with their distinctive sprites, vibrant environments, and surprisingly expressive little worlds.
+
+There was something fascinating about how much personality could be packed into so few pixels.
+
+And as someone studying Computer Science with a focus on Multimedia and Creative Technologies, I kept coming back to one thought:
+
+**What if I built something that actually put the *creative* in Creative Technologist?**
+
+I started digging into pixel art, game environments, interactive websites, and ways to bring a little more personality into the experience of visiting someone's portfolio.
+
+But the deeper I went, the more questions I had.
+
+What makes a portfolio memorable? How do you turn something as ordinary as a navigation menu into an experience? What parts of my personality would I want someone to discover?
+
+And eventually, one question stood out from the increasingly chaotic word cloud in my head:
+
+**If I were to build a world about myself, wouldn't it make sense for that world to reflect where I come from?**
+
+### Bringing a Little Mumbai to the Internet
+
+I grew up in the suburbs of Mumbai, a city where there's always something happening, something moving, something to look at.
+
+Street vendors calling out to customers. Auto-rickshaws weaving through traffic. Buildings covered in signs and advertisements. Roadside stalls, chai breaks, conversations, and the kind of organized chaos that somehow makes perfect sense when you grow up around it.
+
+I was always fascinated by the little details.
+
+Remember Ishaan from *Taare Zameen Par*? That scene where he bunks school and wanders around Mumbai, completely absorbed in everything happening around him?
+
+I think that's a pretty good representation of how I've always liked experiencing the world.
+
+Just observing. Taking things in. Finding something interesting in what everyone else might walk past.
+
+And suddenly, it clicked.
+
+I already had a portfolio website. In fact, if you're reading this on my website, you've probably found it. Congratulations. You're in the right place. LOL.
+
+My existing website had this editorial, almost magazine-like aesthetic. Clean layouts, typography, photography, and individual pages for my work.
+
+I liked it. I still do.
+
+I didn't want to replace it with something completely different.
+
+Instead, I wanted to imagine what would happen if all those pages existed as **places inside a little world**.
+
+A world that was inviting, colorful, interactive, unmistakably Mumbai, and, most importantly, unmistakably me.
+
+### The Wada Pav That Became a Contact Page
+
+Remember that newspaper from the beginning?
+
+Well, I certainly did.
+
+One of the first things I wanted to rethink was my Contact page.
+
+Usually, a contact page is just a few links. An email address, LinkedIn, GitHub. Maybe a form if you're feeling fancy.
+
+But what if someone could walk up to a wada pav stall, pick up a newspaper-wrapped snack, and watch the newspaper unfold to reveal my contact information?
+
+There it was.
+
+My first little piece of the world.
+
+The wada pav stall would represent my Contact page, and the newspaper would become an interactive way of discovering how to reach me.
+
+And obviously, I couldn't just use any newspaper.
+
+So I created my own.
+
+**The Chai & Code Chronicle.**
+
+A newspaper dedicated to the most pressing issues of our time.
+
+Which, apparently, consisted mostly of me.
+
+My projects. My interests. My work. And, of course, a little advertisement inviting people to get in touch.
+
+Not going to lie, I felt a little like Oprah when I made an entire newspaper about myself.
+
+*You get a headline! You get a headline! Everybody gets a headline!*
+
+Anyway, that's beside the point.
+
+Because while I was putting this newspaper together, another idea hit me.
+
+### Wait. I Already Have a Newspaper.
+
+I had a newspaper.
+
+I had a blog.
+
+And I really, really liked chai.
+
+Do you see where this is going?
+
+What if the newspaper wasn't just a prop inside my Contact page? What if it was also an actual publication that visitors could browse?
+
+And what better place to pick up a newspaper than a little roadside chai stall?
+
+Suddenly, my Blog page had a home too.
+
+Visitors could walk up to the chai stall, browse copies of *The Chai & Code Chronicle*, and select an edition to read.
+
+Instead of clicking a navigation tab labeled "Blog," they could discover my writing as part of the environment.
+
+One ordinary newspaper wrapper had somehow turned into two completely different interactive experiences.
+
+And I was only just getting started.
+
+*[To be continued: designing the rest of the street, finding the right creative workflow, and discovering what it actually means to collaborate with AI.]*

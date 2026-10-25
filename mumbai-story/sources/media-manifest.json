@@ -1,0 +1,153 @@
+{
+  "preparedOn": "2026-10-17",
+  "timezone": "America/Los_Angeles",
+  "workspace": "/Users/pranavrathod/Desktop/Projects/Blender",
+  "publicationState": "Standalone draft; neither website nor newspaper stand integrated",
+  "media": [
+    {
+      "output": "street-now.webp",
+      "source": "sources/captures/street-now-pixel.jpg",
+      "kind": "new browser screenshot",
+      "date": "2026-10-17",
+      "note": "Current local working copy at 1440x900. Pixel rendering selected in UI; existing uncommitted application changes present."
+    },
+    {
+      "output": "newspaper.webp",
+      "source": "Newspaper/NewsPaper.png",
+      "kind": "existing newspaper artwork",
+      "transformation": "Resize to 1000px width and encode WebP."
+    },
+    {
+      "output": "places.webp",
+      "sources": [
+        "WadaPav/Stall/preview-three-quarter.png",
+        "ChaiCodeChronicle/preview-three-quarter.png",
+        "ProjectsGarage/preview-three-quarter.png"
+      ],
+      "kind": "labeled arrangement of existing Blender renders",
+      "transformation": "Contain original renders, add section labels, encode WebP. Model content unchanged."
+    },
+    {
+      "output": "handoff.png",
+      "source": "sources/generated/handoff.svg",
+      "evidence": [
+        "agents/05_REVIEW_PROTOCOL.md",
+        "chai-code-chronicle/reviews/blog-revision/revision-brief.md"
+      ],
+      "kind": "new explanatory diagram",
+      "note": "Simplified configured workflow and a documented biscuit revision, not a claim that every gate ran on every task."
+    },
+    {
+      "output": "friend-card.webp",
+      "sources": [
+        "sources/captures/friend-card-original.jpg",
+        "threejs-portfolio/public/characters/payal-walk.png",
+        "threejs-portfolio/public/characters/payal-walk.json"
+      ],
+      "kind": "labeled layout of a current UI card crop and existing sprite frames",
+      "date": "2026-10-17",
+      "transformation": "Browser card screenshot clipped to card rectangle; walking atlas frames 0,2,4 extracted, transparency trimmed, nearest-neighbor resized."
+    },
+    {
+      "output": "friend-card-mobile.webp",
+      "source": "sources/captures/friend-card-original.jpg",
+      "kind": "current browser card crop",
+      "note": "Art-directed portrait crop for narrow screens; same actual card."
+    },
+    {
+      "outputs": [
+        "newspaper-test.mp4",
+        "newspaper-test-poster.webp"
+      ],
+      "source": "Newspaper/NewspaperCrumpling-10001-0050.mp4",
+      "kind": "existing Blender animation experiment",
+      "transformation": "1280x720 H.264 encode, audio omitted; first-frame WebP poster. Original retained."
+    },
+    {
+      "outputs": [
+        "street-evolution.mp4",
+        "street-evolution.gif",
+        "evolution-poster.webp"
+      ],
+      "kind": "five real checkpoints edited into a labeled sequence",
+      "durationSeconds": 14,
+      "note": "Cuts with 2.8-second holds. No generated intermediate images, interpolation, or claimed fixed camera. Poster is labeled final checkpoint. GIF is 960x600; MP4 is 1280x800.",
+      "stages": [
+        {
+          "frame": "sources/generated/evolution/01-early.png",
+          "source": "sources/captures/street-early-original.jpg",
+          "kind": "historical source reconstruction",
+          "commit": "831726c",
+          "sourceDate": "2026-09-11",
+          "renderedOn": "2026-10-17",
+          "note": "Earliest source exported into isolated temporary folder; original models, camera and UI retained. Not an archived September screenshot."
+        },
+        {
+          "frame": "sources/generated/evolution/02-v2.png",
+          "source": "threejs-portfolio/docs/backdrop-v3/integrated-before-front.jpg",
+          "kind": "saved browser review capture",
+          "reviewDate": "2026-10-13",
+          "note": "V2 prior state captured for V3 review."
+        },
+        {
+          "frame": "sources/generated/evolution/03-v3.png",
+          "source": "threejs-portfolio/docs/backdrop-v3/integrated-after-front.jpg",
+          "kind": "saved browser review capture",
+          "reviewDate": "2026-10-13",
+          "commit": "dbdc7c6"
+        },
+        {
+          "frame": "sources/generated/evolution/04-v3-1.png",
+          "source": "threejs-portfolio/docs/backdrop-v3-1/previews/front-desktop.jpg",
+          "kind": "saved browser review capture",
+          "reviewDate": "2026-10-15",
+          "commit": "2ae2e07"
+        },
+        {
+          "frame": "sources/generated/evolution/05-now.png",
+          "source": "sources/captures/street-now-pixel.jpg",
+          "kind": "new browser screenshot",
+          "captureDate": "2026-10-17"
+        }
+      ]
+    },
+    {
+      "output": "street-early.webp",
+      "source": "sources/captures/street-early-original.jpg",
+      "kind": "optional static historical source reconstruction",
+      "note": "Not used as a standalone article figure; retained as a reusable comparison image."
+    },
+    {
+      "outputs": [
+        "origin-map.webp",
+        "origin-map-mobile.webp"
+      ],
+      "kind": "Code-native association map",
+      "source": "scripts/draw-origin-map.mjs",
+      "note": "Derived from user memories; not a development timeline."
+    },
+    {
+      "outputs": [
+        "workflow-garage.webp",
+        "workflow-biscuits.webp",
+        "workflow-paper-00.webp",
+        "workflow-paper-01.webp",
+        "workflow-paper-02.webp",
+        "workflow-paper-03.webp",
+        "workflow-paper-04.webp"
+      ],
+      "kind": "Evidence-backed interactive revision notebook",
+      "source": "sources/workflow-evidence.json"
+    }
+  ],
+  "additionalEvidence": [
+    "threejs-portfolio/AGENTS.md",
+    "threejs-portfolio/HANDOFF.md",
+    "threejs-portfolio/docs/BLOG_EXPERIENCE.md",
+    "threejs-portfolio/docs/CONTACT_EXPERIENCE.md",
+    "threejs-portfolio/content/characters/characters.json"
+  ],
+  "attribution": "Visual credits are included in article. Garage source attribution preserved in sources/garage-prop-credits.md. Street prop metadata sourced from threejs-portfolio/index.html.",
+  "revisedOn": "2026-10-19",
+  "workflowRevisionEvidence": "sources/workflow-evidence.json"
+}

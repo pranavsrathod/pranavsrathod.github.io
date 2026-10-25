@@ -1,0 +1,77 @@
+{
+  "source": "backups/pre-blog-revision/chai-code-chronicle.blend",
+  "unchanged_meshes": [
+    "Awning_Mesh",
+    "Chalkboard_Left_Mesh",
+    "Chalkboard_Right_Mesh",
+    "Counter_Mesh",
+    "Decorative_Props_Mesh",
+    "Kettle_Mesh",
+    "Laptop_Mesh",
+    "Newspaper_01_Mesh",
+    "Newspaper_02_Mesh",
+    "Newspaper_03_Mesh",
+    "Newspaper_04_Mesh",
+    "Newspaper_Rail_Mesh",
+    "Newspaper_Stacks_Mesh",
+    "PR_Logo_Panel_Mesh",
+    "Shelves_Mesh",
+    "Side_Crate_Left_Mesh",
+    "Side_Crate_Right_Mesh",
+    "Stall_Body_Mesh",
+    "Tea_Glasses_Mesh",
+    "Top_Sign_Mesh"
+  ],
+  "jar_shell_lid_base_vertices_unchanged": true,
+  "old_biscuit_islands_removed": 51,
+  "new_biscuit_count": 35,
+  "stack_containment_pass": true,
+  "stack_details": [
+    {
+      "jar": 1,
+      "biscuits": 10,
+      "height_m": 0.23,
+      "headspace_m": 0.074
+    },
+    {
+      "jar": 2,
+      "biscuits": 9,
+      "height_m": 0.252,
+      "headspace_m": 0.072
+    },
+    {
+      "jar": 2,
+      "biscuits": 9,
+      "height_m": 0.252,
+      "headspace_m": 0.072
+    },
+    {
+      "jar": 3,
+      "biscuits": 7,
+      "height_m": 0.154,
+      "headspace_m": 0.075
+    }
+  ],
+  "atlas_changed_region_only": "snack",
+  "article_slots": [
+    "chronicle-01",
+    "chronicle-02",
+    "chronicle-03",
+    "chronicle-04"
+  ],
+  "asset_report": {
+    "Triangle Count": 57666,
+    "Mesh Object Count": 21,
+    "Total Asset Nodes": 43,
+    "Material Count": 4,
+    "Texture Image Count": 2,
+    "Basecolor Atlases": 1,
+    "Max texture size": "2048 x 2048",
+    "GLB File Size Bytes": 4295728,
+    "Dimensions Blender XYZ": [
+      3.712,
+      1.974,
+      4.081
+    ]
+  }
+}

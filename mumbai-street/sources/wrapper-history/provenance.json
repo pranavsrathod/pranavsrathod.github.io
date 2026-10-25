@@ -1,0 +1,171 @@
+{
+  "snapshotDate": "2026-10-25",
+  "timezone": "America/Los_Angeles",
+  "scope": "Geometry-history inspection fixture; current application and editable Blender sources unchanged.",
+  "historicalCamera": "New common camera, lighting, current food and current corrected newspaper artwork. Re-renders reconstruct saved geometry; they are not archived website screenshots.",
+  "progress": "All stages accept normalized progress 0..1. UI exposes 25 inspection samples, not 25 historical milestones. Common playback lasts 2 seconds; only the baked stage preserves that original authored duration. Procedural stages are normalized shape-progress comparisons.",
+  "cornersAdapter": "The exact vertex formula from 707010f src/world/contact.js lines 45-50 is transplanted to adapters.mjs; its original 24x32 PlaneGeometry and +.006 paper offset are retained. This is raised side margins, not the documented lost boat revision.",
+  "baked": "Closed basis plus 24 morph targets, 25 STEP key times, 24 held intervals at12Hz over2seconds. No browser cloth solver; source is cloth-assisted with authored cleanup/sculpting.",
+  "omittedHistory": "829cb1d rolled-front variant is a known additional September19 stage; not included in this five-stage fixture. The intermediate diagonal-curl boat is documented but has no distinct recovered Git snapshot.",
+  "records": [
+    {
+      "stage": "corners",
+      "source": "src/world/contact.js",
+      "commit": "707010f391dfc33c57c9219992b392193f835d71",
+      "authorDate": "2026-09-19T14:47:06-07:00",
+      "committerDate": "2026-09-21T14:34:35-07:00",
+      "subject": "Add wada pav tabletop contact experience",
+      "output": "corners/contact.js",
+      "sha256": "ee75f13d667ae93f31883050a35ebddc8f09d576d9662e94cd8bef2f6414445c",
+      "kind": "verbatim git blob"
+    },
+    {
+      "stage": "panels",
+      "source": "src/world/contactPaper.js",
+      "commit": "467087a493e6ad27207576d8095df3ad4c6095c1",
+      "authorDate": "2026-09-30T00:41:49-07:00",
+      "committerDate": "2026-09-30T00:41:49-07:00",
+      "subject": "[UPDATE] UI and [ADD] Pedestrian walking across the sidewalk",
+      "output": "panels/contactPaper.js",
+      "sha256": "84938afe2f8e41e4c460ff739db3440fcb7a5e5ed8c7a680b36d0b91d9e15c40",
+      "kind": "verbatim git blob"
+    },
+    {
+      "stage": "panels",
+      "source": "src/world/contactLayout.js",
+      "commit": "467087a493e6ad27207576d8095df3ad4c6095c1",
+      "authorDate": "2026-09-30T00:41:49-07:00",
+      "committerDate": "2026-09-30T00:41:49-07:00",
+      "subject": "[UPDATE] UI and [ADD] Pedestrian walking across the sidewalk",
+      "output": "panels/contactLayout.js",
+      "sha256": "fde22bfeb2dd30af0cb1888d31b001370018bfb8a2e5a13b3f2d87664c86bafd",
+      "kind": "verbatim git blob"
+    },
+    {
+      "stage": "panels",
+      "source": "src/world/contact.js",
+      "commit": "467087a493e6ad27207576d8095df3ad4c6095c1",
+      "authorDate": "2026-09-30T00:41:49-07:00",
+      "committerDate": "2026-09-30T00:41:49-07:00",
+      "subject": "[UPDATE] UI and [ADD] Pedestrian walking across the sidewalk",
+      "output": "panels/contact.js",
+      "sha256": "8b847c96eebbb453cd6fc41d343abe7aa67f238ef73512fca5ed7f0e6a0adeb9",
+      "kind": "verbatim git blob"
+    },
+    {
+      "stage": "bloom",
+      "source": "src/world/contactPaper.js",
+      "commit": "8022f78b83d075470fafb59c6a6767c40da17435",
+      "authorDate": "2026-10-11T13:15:58-07:00",
+      "committerDate": "2026-10-11T13:15:58-07:00",
+      "subject": "Finish tactile resume lift and release street updates",
+      "output": "bloom/contactPaper.js",
+      "sha256": "de7f83dc8f51c54d84fead81f5f2ed7c078657054071d8f6b04d0b20537b230d",
+      "kind": "verbatim git blob"
+    },
+    {
+      "stage": "bloom",
+      "source": "src/world/contactLayout.js",
+      "commit": "8022f78b83d075470fafb59c6a6767c40da17435",
+      "authorDate": "2026-10-11T13:15:58-07:00",
+      "committerDate": "2026-10-11T13:15:58-07:00",
+      "subject": "Finish tactile resume lift and release street updates",
+      "output": "bloom/contactLayout.js",
+      "sha256": "441117bac13773efb7424a36523c3f20114c959d700d52db380b4dcfddb88a60",
+      "kind": "verbatim git blob"
+    },
+    {
+      "stage": "bloom",
+      "source": "src/world/contact.js",
+      "commit": "8022f78b83d075470fafb59c6a6767c40da17435",
+      "authorDate": "2026-10-11T13:15:58-07:00",
+      "committerDate": "2026-10-11T13:15:58-07:00",
+      "subject": "Finish tactile resume lift and release street updates",
+      "output": "bloom/contact.js",
+      "sha256": "d0dbbe96cb93805504ca73327dc5ea5f1498c3050be31d910781eef65cd2aa8e",
+      "kind": "verbatim git blob"
+    },
+    {
+      "stage": "parcel",
+      "source": "src/world/contactPaper.js",
+      "commit": "420e1a69bb573febbc7214e54738277312eaaaa3",
+      "authorDate": "2026-10-15T18:10:53-07:00",
+      "committerDate": "2026-10-15T18:10:53-07:00",
+      "subject": "Reveal wada pav from a covered newspaper parcel",
+      "output": "parcel/contactPaper.js",
+      "sha256": "de7f83dc8f51c54d84fead81f5f2ed7c078657054071d8f6b04d0b20537b230d",
+      "kind": "verbatim git blob"
+    },
+    {
+      "stage": "parcel",
+      "source": "src/world/contactLayout.js",
+      "commit": "420e1a69bb573febbc7214e54738277312eaaaa3",
+      "authorDate": "2026-10-15T18:10:53-07:00",
+      "committerDate": "2026-10-15T18:10:53-07:00",
+      "subject": "Reveal wada pav from a covered newspaper parcel",
+      "output": "parcel/contactLayout.js",
+      "sha256": "2aecb54816b62a80ac1101e4da36532907c8f946a1c8ab47c02902c3a5ac491f",
+      "kind": "verbatim git blob"
+    },
+    {
+      "stage": "parcel",
+      "source": "src/world/contact.js",
+      "commit": "420e1a69bb573febbc7214e54738277312eaaaa3",
+      "authorDate": "2026-10-15T18:10:53-07:00",
+      "committerDate": "2026-10-15T18:10:53-07:00",
+      "subject": "Reveal wada pav from a covered newspaper parcel",
+      "output": "parcel/contact.js",
+      "sha256": "c5a18ea0a09cae49b2e65d37b051ecacb40dd18968c59f500374b1ec172f7046",
+      "kind": "verbatim git blob"
+    },
+    {
+      "stage": "baked",
+      "source": "threejs-portfolio/src/world/contactWrapper.js",
+      "output": "baked/contactWrapper.js",
+      "sha256": "c74ce6ccdec49be72f5c47ca008938621788d9bc3e4175c1b236637d205157ef",
+      "kind": "frozen October 25 working-copy snapshot; no commit assigned"
+    },
+    {
+      "stage": "baked",
+      "source": "threejs-portfolio/src/world/contactLayout.js",
+      "output": "baked/contactLayout.js",
+      "sha256": "d0df736f93cb14839d98e37239413b89a98fc0a8a22b4b7d49fffee70c82e6da",
+      "kind": "frozen October 25 working-copy snapshot; no commit assigned"
+    },
+    {
+      "stage": "common",
+      "source": "threejs-portfolio/src/world/contactFood.js",
+      "output": "common/contactFood.js",
+      "sha256": "eafc271ff0347db0485437092d8b8f87c2836aadc6250b82829f03971d099d69",
+      "kind": "frozen October 25 working-copy snapshot; no commit assigned"
+    },
+    {
+      "stage": "baked",
+      "source": "threejs-portfolio/public/contact/wrapper-unwrap.glb",
+      "output": "baked/wrapper-unwrap.glb",
+      "sha256": "b49ce95e145162b5e6286625c1c5fc2650befeb3886af638f270894a9b9ae76d",
+      "kind": "frozen October 25 working-copy snapshot; no commit assigned"
+    },
+    {
+      "stage": "common",
+      "source": "threejs-portfolio/public/contact/newspaper.png",
+      "output": "common/newspaper.png",
+      "sha256": "022ed0ace0e0aaa60b406ed2350f6906b0f889760fa83427c691c7899a88101f",
+      "kind": "frozen October 25 working-copy snapshot; no commit assigned"
+    },
+    {
+      "stage": "baked",
+      "source": "Newspaper/README-contact-wrapper.md",
+      "output": "baked/README-contact-wrapper.md",
+      "sha256": "ab1c396ecaac0ce044a2167cc372d3b54ba8cb0623f90956866d3e2e36abbbdf",
+      "kind": "frozen October 25 working-copy snapshot; no commit assigned"
+    },
+    {
+      "stage": "baked",
+      "source": "Newspaper/wrapper-asset-report.json",
+      "output": "baked/wrapper-asset-report.json",
+      "sha256": "02dd6e5bccd0a7617f30c11579ddb531a669cf7a89ac88562e6703574df5e90f",
+      "kind": "frozen October 25 working-copy snapshot; no commit assigned"
+    }
+  ]
+}

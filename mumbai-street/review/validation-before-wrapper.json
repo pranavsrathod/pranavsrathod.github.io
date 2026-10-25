@@ -1,0 +1,147 @@
+{
+  "date": "2026-10-24",
+  "timezone": "America/Los_Angeles",
+  "source": "mumbai-street.mdx",
+  "status": "Unpublished decision-led case study; separate personal story preserved",
+  "checks": {
+    "actualAstroProjectLayoutAndSchema": "passed",
+    "mathDisplays": 2,
+    "localAssetReferences": 27,
+    "missingAssets": [],
+    "missingCssAssets": [],
+    "brokenAnchors": [],
+    "duplicateIds": [],
+    "imageAltAttributes": "all present",
+    "markdownExport": "static widgets, math and notebook retained; no MDX import/export leakage",
+    "reports": "unmodified source JSON;20 unchanged meshes verified",
+    "editorialAndFactualReview": "passed"
+  },
+  "browser": {
+    "phone": {
+      "viewportWidth": 390,
+      "documentWidth": 383,
+      "horizontalDocumentOverflow": false,
+      "metadata": "condensed into two columns; source order retained",
+      "notebook": "outer disclosure and coordinate topic expand;2 math displays rendered"
+    },
+    "desktop": "native theme, intro, decision index and camera model reviewed at default desktop sizes",
+    "cameraModel": [
+      "Projects1\u2192Contact2: Street retains ownership until resolve;Projects1 dropped;Contact2 acquires",
+      "Contact2\u2192Projects3: Contact remains owner until resolve;Projects3 acquires",
+      "reset/init guards checked"
+    ],
+    "otherVisuals": [
+      "phone technique-card styling retained",
+      "native Original/Pixel comparison and responsive pipeline schematic",
+      "actual saved repair + source-report links"
+    ],
+    "consoleErrors": []
+  },
+  "applicationChecks": {
+    "date": "2026-10-24",
+    "commands": [
+      {
+        "command": "node scripts/check-studio-routing.mjs",
+        "exitCode": 0
+      },
+      {
+        "command": "node scripts/check-contact.mjs",
+        "exitCode": 0
+      },
+      {
+        "command": "node scripts/check-pixels.mjs",
+        "exitCode": 0
+      }
+    ],
+    "scope": "Selected Node routing/geometry and mocked-renderer checks. No whole-suite, GPU/device-performance, packaging or deployment certification."
+  },
+  "liveCapture": {
+    "url": "https://city.pranavrathod.com/",
+    "date": "2026-10-24",
+    "source": "sources/captures/street-live-2026-10-24.jpg",
+    "scope": "Displayed live street only, not full release audit"
+  },
+  "screenshots": [
+    "decision-intro-phone.jpg",
+    "camera-decision-desktop.jpg",
+    "camera-decision-phone.jpg",
+    "handoff-evidence-phone.jpg"
+  ],
+  "media": [
+    {
+      "file": "architecture-mobile.webp",
+      "bytes": 60054,
+      "sha256": "cfd9bb43dbfbd2eec8675bcbb0f791b8a4a9098896c06bf827d3d3ebb8b0ca78"
+    },
+    {
+      "file": "architecture.webp",
+      "bytes": 56616,
+      "sha256": "710018925144442cb4f2e39c5477ff7f3d960a1a57ef3077b1c80211e1179ba1"
+    },
+    {
+      "file": "biscuit-detail.webp",
+      "bytes": 36138,
+      "sha256": "aed4a2a151c227249514cf77776f88907ee92c718b3ac97c598d21cc57bf86e4"
+    },
+    {
+      "file": "evidence/biscuit-glb-roundtrip.json",
+      "bytes": 353,
+      "sha256": "be75e118d17db03ba556add1102125531ebabbb1de2150ce665fab95a6f0f20c"
+    },
+    {
+      "file": "evidence/biscuit-preservation.json",
+      "bytes": 1658,
+      "sha256": "7650cf4c7ab0e05bb1312bb0f658fe85c48134212a37013755560cf6844dc735"
+    },
+    {
+      "file": "original.webp",
+      "bytes": 1168290,
+      "sha256": "ca72d9cd730774900cfb82c22eda2fd356d4f7f15517a040c4b721fcf7d26359"
+    },
+    {
+      "file": "paper-closed.webp",
+      "bytes": 104736,
+      "sha256": "008097953a976b59573778cc1d4762677a53c4021bb4e3e6fde2f460dccf2a86"
+    },
+    {
+      "file": "paper-half.webp",
+      "bytes": 167986,
+      "sha256": "c47f31c4c8a9c1b86e05cd5f8a544ea3fcc903982231e29fd47fbd925333df64"
+    },
+    {
+      "file": "paper-open.webp",
+      "bytes": 188012,
+      "sha256": "4b182df361803ff714add88f5730e7ac70bac9f3af6f8c55dccb688a2ed24c1e"
+    },
+    {
+      "file": "paper-quarter.webp",
+      "bytes": 107388,
+      "sha256": "7b2521d422397f12862a8887d51d7e51a97e9a942c78531f6e1127a06d9df452"
+    },
+    {
+      "file": "paper-three-quarter.webp",
+      "bytes": 191674,
+      "sha256": "203ccd15713b01d9294b1d1f574f2008ba69fa0ffbed9ff900f1a6cc2f6c11aa"
+    },
+    {
+      "file": "pixel.webp",
+      "bytes": 1003698,
+      "sha256": "5f74fb9801fc1f602d5162e467cde634616046e90a1aa000a406135f3755f60b"
+    },
+    {
+      "file": "rendering-mobile.webp",
+      "bytes": 169530,
+      "sha256": "475fcfdda851189db635ff2d662e447fa8ac291ba8f9269e9a8fd6c664e5ae05"
+    },
+    {
+      "file": "rendering.webp",
+      "bytes": 170494,
+      "sha256": "14ccbec62acc362638783e7cb80cf93423cb75b09b10ac42822277214405430f"
+    },
+    {
+      "file": "street.webp",
+      "bytes": 175500,
+      "sha256": "532cca56b3f3c3887cb401b73fdb972c2fc8d7fc9651cc6e5ca2eade7d7e44a2"
+    }
+  ]
+}

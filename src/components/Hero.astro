@@ -30,7 +30,12 @@ const hero = siteConfig.hero;
                     {hero.actions && hero.actions.length > 0 && (
                         <div class="flex flex-wrap justify-center gap-4 sm:justify-start">
                             {hero.actions.map((action) => (
-                                <Button href={action.href}>{action.text}</Button>
+                                <Button
+                                    href={action.href}
+                                    {...(action.newTab && { target: '_blank', rel: 'noopener noreferrer' })}
+                                >
+                                    {action.text}
+                                </Button>
                             ))}
                         </div>
                     )}

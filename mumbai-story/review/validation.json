@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-19",
+  "timezone": "America/Los_Angeles",
+  "source": "two-wada-pavs.mdx",
+  "articleWordsIncludingCaptionsExcludingComponentAndCollapsedDetails": 1321,
+  "acts": 3,
+  "astroBuild": "passed with existing installation; MDX and imported Astro component rendered in isolated fixture",
+  "plainMarkdownExport": "generated from same MDX; native disclosure/static image fallback",
+  "media": {
+    "localReferencesExist": true,
+    "allImagesHaveAlt": true,
+    "wrapperFrames": 5,
+    "realGeometryCrops": true
+  },
+  "browser": {
+    "caseSwitching": [
+      "paper",
+      "garage",
+      "biscuits"
+    ],
+    "keyboardRangeEnd": {
+      "value": "Flat",
+      "file": "workflow-paper-04.webp",
+      "imageLoaded": true
+    },
+    "mobile": {
+      "viewportWidth": 390,
+      "documentWidth": 375,
+      "horizontalOverflow": false,
+      "mapSource": "origin-map-mobile.webp",
+      "mapLoaded": true
+    },
+    "consoleErrors": []
+  },
+  "screenshots": [
+    "workflow-desktop.jpg",
+    "workflow-phone.jpg",
+    "origin-map-phone.jpg"
+  ],
+  "evidence": "sources/workflow-evidence.json",
+  "publication": "Standalone unpublished draft; application and site content unchanged."
+}

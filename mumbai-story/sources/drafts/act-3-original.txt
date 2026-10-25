@@ -1,0 +1,239 @@
+## Act III: Making It All Work
+
+### From Blender Files to an Actual Street
+
+So, I had my buildings.
+
+I had a wada pav stall, a chai stall, a garage, and an increasingly elaborate vision of what this little Mumbai street could become.
+
+The only small problem?
+
+They were all individual 3D models.
+
+And individual 3D models do not magically assemble themselves into an interactive website.
+
+Although, given everything I'd been asking AI to do at this point, I was beginning to think that perhaps they could.
+
+I started looking into Three.js.
+
+I'd seen some really interesting projects built with it, and the idea of rendering and interacting with 3D environments directly in a browser seemed like a good fit for what I wanted.
+
+There was just one minor detail.
+
+**I'd never actually worked with Three.js before.**
+
+But I had experience with computer graphics, game development, and 3D environments, so the underlying concepts weren't entirely foreign to me. The new challenge was figuring out how to bring those ideas into a web application.
+
+I briefly considered exploring OpenUSD for handling my 3D assets, but for this particular project, exporting my Blender models as GLB files was a more practical approach.
+
+GLB let me package geometry, materials, and textures into assets that Three.js could load into the browser.
+
+That became the bridge between my Blender models and the interactive street.
+
+And once that pipeline was established, things started getting exciting.
+
+### Giving AI the Heavy Lifting (With Some Ground Rules)
+
+By this point, I'd already spent a considerable amount of time learning how to communicate with AI tools.
+
+I'd built up Markdown handoff documents, established specific responsibilities for different agents, and started thinking about my ideas in terms of requirements, constraints, and validation.
+
+So when it came time to integrate everything into Three.js, I wasn't starting entirely from scratch.
+
+I had a workflow.
+
+I gave the AI coding tools access to the relevant web application code and Blender assets, while keeping unrelated files outside the working scope.
+
+My role was to define how I wanted the street to look, feel, and behave. I described how visitors should navigate between buildings, what should happen when they interacted with a particular stall, and how those experiences should transition back into the street.
+
+The AI handled much of the implementation.
+
+And I want to be clear about that.
+
+I didn't personally write every line of JavaScript powering this website, nor did I manually assemble every part of the Three.js scene.
+
+AI did a significant amount of the coding and asset integration.
+
+But I also wasn't simply typing "build my portfolio" and accepting whatever appeared.
+
+I was making the design decisions, providing references, defining the expected interactions, reviewing the results, and directing changes when they didn't match what I had envisioned.
+
+For the technical implementation, I gave the tools some important constraints: prioritize browser compatibility, keep the experience responsive, avoid unnecessary rendering overhead, preserve existing functionality, and validate changes before considering them complete.
+
+I wanted the website to be visually interesting, but not at the expense of actually being usable.
+
+After all, there's not much point in having a beautiful 3D portfolio if someone's laptop sounds like it's preparing for takeoff just trying to open it.
+
+And I learned to be careful about the difference between the model saying something was optimized and actually having evidence that it was.
+
+### Finding My Flow
+
+Something interesting happened once I had this process figured out.
+
+The five-hour token blackouts were still there.
+
+But instead of completely derailing my progress, they became part of how I organized my work.
+
+Whenever an idea came to mind, I found myself thinking it through more carefully before trying to implement it.
+
+How would it fit into the street? Would it feel natural? Did it connect to the larger experience? Was it contributing something meaningful, or was I adding it simply because I could?
+
+I would sketch out an idea, document the interaction, think about what could go wrong, and decide what I wanted the final result to feel like.
+
+Then I'd communicate it through the handoff documents and iterate on what came back.
+
+It became a sort of creative flow state.
+
+Not necessarily because everything worked on the first attempt. It absolutely did not.
+
+But because I was spending less time figuring out how to explain an idea halfway through implementing it.
+
+Instead, I was spending more time thinking about the idea itself.
+
+And as I saw one feature take shape, it would spark another.
+
+The newspaper became a contact experience.
+
+The chai stall became a blog.
+
+The garage became a studio that housed my projects.
+
+The street started to feel less like a collection of individual models and more like an actual place.
+
+And then I started wondering what was missing.
+
+### A Street Needs People
+
+I'd been showing the website to a few friends, including Pyle, and asking for feedback.
+
+Not just whether they thought it looked good, but how it *felt* to explore.
+
+I wanted to know whether the environment was inviting, whether the interactions made sense, and whether the world felt like somewhere you'd want to spend a little time.
+
+Their suggestions helped me refine several parts of the experience.
+
+And somewhere during that process, another idea hit me.
+
+**Wait. Why is my street so empty?**
+
+I had buildings, stalls, and a whole little Mumbai environment.
+
+But where were the people?
+
+If I wanted this to feel like a street, it needed some life.
+
+And what better way to populate my little virtual Mumbai than with people I actually knew?
+
+So I started asking my friends if they'd be interested in becoming 16-bit walking characters.
+
+A perfectly normal question to ask your friends, obviously.
+
+I used their photographs as references to create stylized pixel-art versions of them, eventually developing animated walking sprites that could move along the street.
+
+But I didn't want them to exist purely as background decoration.
+
+I wanted each person to have a little personality attached to them.
+
+And that's when another childhood memory came back.
+
+### Fifty Rupees and a Folder Full of Cricket Cards
+
+Growing up in India, I used to collect cricket trading cards.
+
+The kind you'd get in little packs for around fifty rupees, featuring different players, statistics, illustrations, and all sorts of details that made each card feel collectible.
+
+I loved them.
+
+In fact, I still have my old folder full of those cards.
+
+So when I started thinking about how people could interact with the walking characters in my street, those trading cards came to mind.
+
+What if clicking on one of my friends opened a little collectible card about them?
+
+Not a formal biography or anything particularly serious.
+
+Just something playful that gave visitors a glimpse of who they were.
+
+I asked each friend to pick a movie they loved.
+
+Not necessarily their all-time favorite, not their Letterboxd Top Four, and definitely not something carefully curated to make them appear to have impeccable taste in cinema.
+
+Just a movie they liked.
+
+Something that meant something to them.
+
+Fortunately, everyone got back to me pretty quickly, which was lovely considering I'd essentially asked them to participate in my increasingly elaborate digital arts-and-crafts project.
+
+Their choices became part of the character-card experience.
+
+And suddenly, the street felt more personal.
+
+It wasn't just about me anymore.
+
+It had little pieces of my friends in it, too.
+
+### Making the Workflow Reusable
+
+Of course, creating a new character from scratch every time someone agreed to participate wasn't going to be sustainable.
+
+Initially, I'd been generating pixel-art characters using reference images and detailed prompts describing the style, proportions, shading, and appearance.
+
+But I kept running into the same problem I'd encountered with the Blender models.
+
+I was repeating instructions.
+
+A lot of instructions.
+
+I already knew the visual language I wanted: a consistent 16-bit-inspired aesthetic, recognizable facial features, clean pixel silhouettes, and proportions that worked alongside the other characters.
+
+Why was I explaining all of that again for every single person?
+
+So I started experimenting with ComfyUI.
+
+The idea was to create a more reusable image-generation workflow, where I could provide a friend's reference photograph and adjust the person-specific details without having to rebuild the entire prompt each time.
+
+Once I had a satisfactory character image, it could become the starting point for the walking animation and collectible card.
+
+This was another interesting shift in how I thought about the project.
+
+Rather than treating every character as a completely new task, I was starting to think in terms of a pipeline.
+
+A repeatable process.
+
+Something I could refine once and then adapt for each new person.
+
+And that felt like a natural extension of everything I'd been learning about working with AI.
+
+The more structure I gave a process, the more room I had to focus on the creative differences that actually mattered.
+
+### A Little World of Its Own
+
+Looking back, it's kind of funny how this project snowballed.
+
+It started with a newspaper wrapped around two wada pavs.
+
+Then came a contact page, a chai stall, a garage, a Mumbai street, and eventually a little cast of animated characters inspired by my friends.
+
+None of that existed in a complete plan when I started.
+
+It developed through experimentation, feedback, iteration, and more than a few frustrating moments.
+
+AI helped me realize ideas that would have been considerably harder for me to execute on my own, particularly within the time and budget I had available.
+
+But it also forced me to confront an important question:
+
+**What does it actually mean to make something yourself when AI does much of the implementation?**
+
+For me, the answer came down to ownership.
+
+I was responsible for the creative direction, the requirements I established, the decisions I approved, and the quality of the experience I chose to publish.
+
+The tools could help construct the world, but they couldn't decide what memories belonged in it, why a newspaper should become a contact page, or why a fifty-rupee pack of cricket cards should inspire the way visitors meet my friends.
+
+Those decisions came from me.
+
+And perhaps that's what I enjoyed most about building this project.
+
+I wasn't trying to remove myself from the creative process by using AI.
+
+I was trying to find a way to bring more of myself into it.

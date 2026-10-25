@@ -1,0 +1,330 @@
+---
+title: 'Mumbai Street: A Spatial Portfolio'
+description: 'An explorable Mumbai street built with Three.js, Blender, and Astro: graphics, interaction systems, asset pipelines, and a structured AI-assisted workflow.'
+publishDate: '2026-10-20'
+isFeatured: false
+poster: '/ProjectPhotos/mumbai-street/street.webp'
+category: 'Creative Technology'
+role: 'Creative direction, interaction design, and AI-assisted development'
+tools:
+  - JavaScript
+  - Three.js
+  - WebGL
+  - Blender
+  - glTF / GLB
+  - Vite
+  - Astro / MDX
+  - HTML / CSS
+  - Sharp
+  - Git
+  - AI assistants
+tags:
+  - Computer Graphics
+  - Interactive Web
+  - Creative Technology
+  - AI-assisted Development
+links:
+  demo: 'https://city.pranavrathod.com/'
+  github: 'https://github.com/pranavsrathod/city'
+seo:
+  image:
+    src: '/ProjectPhotos/mumbai-street/street.webp'
+    alt: 'A Mumbai-inspired portfolio street with a garage, chai stall, wada pav counter, and illustrated pedestrians.'
+---
+
+import AgentWorkflow from './components/AgentWorkflow.astro';
+import './components/project-study.css';
+
+export const renderingScenes = [{
+  id: 'street', label: 'Street overview',
+  before: {src: '/ProjectPhotos/mumbai-street/original.webp', alt: 'The street in Original rendering mode.'},
+  after: {src: '/ProjectPhotos/mumbai-street/pixel.webp', alt: 'The same camera view in Pixel rendering mode.'}
+}];
+
+export const paperRolls = [{id: 'wrapper', label: 'One continuous sheet', frames: [
+  {image: {src: '/ProjectPhotos/mumbai-street/paper-closed.webp', alt: 'The gathered newspaper conceals the wada pavs.'}, caption: 'Wrapped · 0%', edgecode: '01 ▸ CONCEAL', title: 'A parcel, rather than a bowl', desc: 'The perimeter gathers above the food. A flat central serving area stays underneath.', formula: 'A connected sheet; original rectangular UVs', note: 'Saved development capture, not a reconstruction of an earlier version.'},
+  {image: {src: '/ProjectPhotos/mumbai-street/paper-quarter.webp', alt: 'The upper folds begin spreading away from the food.'}, caption: 'Loosen · 22%', edgecode: '02 ▸ SPREAD', title: 'Make room before lowering', desc: 'The outer paper spreads first. Lowering the covering folds immediately would cut through the food.', formula: 'spread = smootherstep((progress − delay) / 0.56)', note: 'Angular delays keep all edges from opening in perfect unison.'},
+  {image: {src: '/ProjectPhotos/mumbai-street/paper-half.webp', alt: 'The opening newspaper reveals the food and printed artwork.'}, caption: 'Spread · 45%', edgecode: '03 ▸ REVEAL', title: 'Inspect the in-between', desc: 'An acceptable first and last pose can hide an implausible middle. Intermediate-pose review exposed the earlier boat and box shapes.', formula: 'Shape review + clearance checks', note: 'These answer different questions; neither replaces the other.'},
+  {image: {src: '/ProjectPhotos/mumbai-street/paper-three-quarter.webp', alt: 'The newspaper settles around the wada pavs.'}, caption: 'Settle · 70%', edgecode: '04 ▸ FLATTEN', title: 'Settle after spreading', desc: 'A delayed flattening term lowers the folds while preserving the printed surface.', formula: 'flatten = smootherstep((progress − delay − 0.22) / 0.52)', note: 'Normals and bounds update with the deformed vertices.'},
+  {image: {src: '/ProjectPhotos/mumbai-street/paper-open.webp', alt: 'The open newspaper forms a flat contact surface beneath the food.'}, caption: 'Flat · 100%', edgecode: '05 ▸ READ', title: 'The animation ends as an interface', desc: 'The exact flat endpoint supports predictable artwork and projected HTML contact links.', formula: '3D paper surface → camera projection → HTML links', note: 'Art-directed geometry, rather than a general cloth or collision solver.'}
+]}];
+
+export const revisionCells = [
+  {title: 'Coordinate spaces', desc: 'Trace a printed contact link from the paper to an HTML hit target.', details: [{label: 'Explain', value: 'UV → deformed local point → world → clip → NDC → CSS pixels.'}, {label: 'Follow-up', value: 'Which matrix changes if the whole stall moves? Why divide by w?'}]},
+  {title: 'Asynchronous ownership', desc: 'Explain what happens when Contact interrupts the garage entrance.', details: [{label: 'Explain', value: 'Release old owner; reject stale continuations; acquire new owner; restore one street snapshot.'}, {label: 'Follow-up', value: 'What does a route token cancel, and what still needs explicit cleanup?'}]},
+  {title: 'Rendering pipeline', desc: 'Keep a sign sharp while a building still hides it.', details: [{label: 'Explain', value: 'Pixel pass → output conversion → quantization → full-resolution depth → sharp artwork.'}, {label: 'Follow-up', value: 'Why can Pixel mode cost more? How do CSS pixels differ from device pixels?'}]},
+  {title: 'Loading and lifetime', desc: 'Separate arriving assets, revealed groups, and interaction readiness.', details: [{label: 'Explain', value: 'Two async workers; ordered reveal; partial failure; owned versus shared resources.'}, {label: 'Follow-up', value: 'What happens when a texture finishes loading after its experience is disposed?'}]},
+  {title: 'Representation and validation', desc: 'Explain why a passing bounds check did not fix the wrapper.', details: [{label: 'Explain', value: 'Continuous indexed sheet, preserved UVs, delayed spread/flatten, sampled poses and visual review.'}, {label: 'Follow-up', value: 'What does disk topology prove? What would a physical cloth solver require?'}]},
+  {title: 'AI delegation', desc: 'Use the biscuit revision as a concrete example of technical leadership.', details: [{label: 'Explain', value: 'Goal, preservation rules, relevant reviewers, one scene writer, independent export evidence.'}, {label: 'Follow-up', value: 'What did I direct? What did assistants implement? How did I decide it was complete?'}]}
+];
+
+## Overview
+
+This portfolio turns my work into places on a Mumbai street. Projects live on a garage computer, blog posts become newspapers at a chai stall, my resume appears in a lift, and my contact details emerge from a newspaper wrapped around two wada pavs.
+
+It began with the wrapper. It grew into a fairly elaborate answer to “where should I put my email address?”
+
+The engineering challenge was making those places behave like one website: direct links, interrupted transitions, readable documents, touch input, responsive framing, and a reliable way back to the street.
+
+### My role
+
+I owned the concept, references, interaction direction, task briefs, and acceptance decisions. I configured specialist AI review roles and directed revisions. AI assistants performed substantial modeling, JavaScript implementation, and integration. Three.js supplies the renderer, controls, loaders, and established rendering passes.
+
+The skills I developed were in **graphics integration, asynchronous frontend design, asset contracts, technical communication, and validation**. The sections below explain the mechanisms I needed to understand to direct and evaluate that work.
+
+**Jump to:** [Architecture](#architecture-a-world-around-web-documents) · [Graphics](#1-turning-model-geometry-into-an-interface) · [AI workflow](#6-delegating-with-ai-the-brief-became-part-of-the-system) · [Interview revision](#interview-revision)
+
+## Architecture: a world around web documents
+
+The scene establishes where you are. HTML carries the content you came to read. Keeping that boundary lets an article remain selectable and scrollable while its newspaper still belongs to the street.
+
+| Layer | Tools | Responsibility |
+| --- | --- | --- |
+| Authoring | Blender, glTF / GLB | Editable assets, textures, scale, named anchors, export |
+| World | JavaScript ES modules, Three.js, WebGL | Scene graph, camera, raycasting, materials, animation, rendering |
+| Documents | Astro, MDX, HTML/CSS | Project pages, articles, accessible links and readers |
+| Build | Vite, Sharp, Git/GitHub | Bundling, image variants, manifests, versioned changes |
+
+The garage monitor hosts a same-origin project iframe. This creates an explicit boundary between scene navigation and document navigation: the street controls the camera and monitor placement; the embedded site owns its content and scrolling. The implementation also instruments semantic actions with PostHog, providing a foundation for measurement rather than evidence of an engagement gain.
+
+<figure>
+  <picture>
+    <source media="(max-width: 640px)" srcset="/ProjectPhotos/mumbai-street/architecture-mobile.webp" width="720" height="1120" />
+    <img src="/ProjectPhotos/mumbai-street/architecture.webp" alt="Blender exports GLBs and Astro builds documents; Three.js coordinates the scene, routes, HTML readers and project iframe." width="1440" height="760" loading="lazy" style="width:100%;height:auto;" />
+  </picture>
+  <figcaption>Build-time assets and documents feed a runtime coordinated by routes and experience controllers.</figcaption>
+</figure>
+
+The useful module boundaries are `stagedLoader.js` for arrival and reveal, `main.js` for route coordination, destination controllers such as `contactExperience.js` for camera/input ownership, and `pixelRenderer.js` for the optional presentation pipeline. These boundaries make a visual problem traceable to a specific responsibility.
+
+## 1. Turning model geometry into an interface
+
+### Local space, world space, screen space
+
+Moving a stall should move its paper, camera target, and clickable contact rows together. Scattered world-coordinate constants would make every placement revision a small archaeological expedition.
+
+The exported model therefore provides named markers such as `Contact_PaperAnchor`. A **scene graph** gives each object a transform relative to its parent. Composing those transforms produces its world transform. `createContactLayout()` derives positions, directions, the drag plane, and camera shots from that anchor.
+
+For a local paper point, the projection is:
+
+$$
+p_{clip}=P\,V\,M\,p_{local},\qquad
+p_{ndc}=\frac{p_{clip}.xyz}{p_{clip}.w}
+$$
+
+Here, $M$ includes the asset's parent transforms, $V$ is the inverse camera transform, and $P$ is the projection matrix. Dividing by $w$ performs the perspective divide. Normalized device coordinates then become viewport-relative CSS coordinates:
+
+```text
+screenX = (ndc.x + 1) × width / 2
+screenY = (1 − ndc.y) × height / 2
+```
+
+Screen Y increases downward, hence the reversal. A canvas offset must also be accounted for when positioning elements outside its coordinate system.
+
+The contact rows start as rectangles in the newspaper artwork's UV coordinates. Their corners follow the deformed paper, inherit the anchor transform, and project into HTML link targets. This connects a printed advertisement to a real browser interaction without painting the entire document into WebGL.
+
+### Picking is the reverse journey
+
+A pointer position is converted into normalized device coordinates; Three.js creates a camera ray and intersects scene geometry. The hit must resolve to an intended destination. Decorative foreground geometry, transparent sprite rectangles, and nested model children make “take the first intersection” an incomplete policy.
+
+Input also needs intent: a tap must not fire after a drag or pinch. The picker tracks the pressed target, rejects movement of six CSS pixels or more, and suppresses multi-pointer gestures. Destination controllers suspend street interactions while they own the view.
+
+**What I learned:** an asset is an interface contract. Names, scale, orientation, and transform inheritance matter as much as appearance. When the garage was enlarged and a neighboring stall moved, checks against exported markers and geometry helped keep screens, shutters, and camera framing aligned.
+
+<details>
+  <summary>Interview checkpoint: why anchors instead of hardcoded positions?</summary>
+  <p>An anchor expresses intent in the asset's coordinate system. Its world matrix follows placement, rotation, and scale automatically. A hardcoded world point loses that relationship. The contact checks exercise translated/rotated layouts and five aspect ratios; they do not establish physical-phone readability. A bounding box is also too coarse for testing a camera path through an empty service opening—the path check uses exported triangles.</p>
+</details>
+
+## 2. Treating the camera as a shared resource
+
+Consider this sequence: a visitor selects Projects, the garage entrance starts, and then they select Contact. If both experiences keep updating the camera, the result is a tug-of-war with easing functions.
+
+The camera needs one active owner. The route coordinator releases the old experience before allowing another to acquire it. It also uses a monotonically increasing navigation token to reject stale asynchronous continuations.
+
+Representative pseudocode, simplified from the coordinator:
+
+```js
+const request = ++routeToken;
+await releasePreviousExperience();
+if (request !== routeToken) return;
+await enterRequestedExperience();
+```
+
+The important moment is after `await`. While one request waits, another can become current. Comparing tokens prevents the older request from resuming as though nothing changed. The actual coordinator checks after its awaited releases.
+
+| Moment | Request A: Projects | Request B: Contact |
+| --- | --- | --- |
+| A begins | Receives token 1; waits for release | — |
+| B begins before A resumes | Token 1 becomes stale | Receives token 2 |
+| A resumes | Fails token check; stops | Remains current |
+| B continues | — | Enters after release and its own check |
+
+The token rejects stale continuations. Controllers still have to stop obsolete motion, release input, and restore state; underlying network work needs its own cancellation support.
+
+Nested Contact routes—paper, stall overview, and photo album—share one saved street camera position and target. Saving again at each subview would overwrite the return destination with a close-up. Reduced motion changes the transition duration while retaining the same final state.
+
+**What I learned:** camera animation is a state-management problem. Camera phase, shutter position, lighting, route, and input availability are related state dimensions; one `isOpen` boolean cannot describe them all.
+
+<details>
+  <summary>Interview checkpoint: why is releasing the previous owner not enough?</summary>
+  <p>Releasing can itself be asynchronous. A request may become obsolete during that wait, so mutual ownership and stale-request rejection solve different parts of the race. Navigation checks cover interruption, shared Contact snapshots, restoration, and reduced-motion endpoints. They do not prove all asynchronous work is aborted.</p>
+</details>
+
+## 3. Loading assets without surrendering the entrance
+
+Download order and presentation order are different concerns. The road should establish the space before shops appear, even if a small skyline file finishes first.
+
+`createStagedLoader()` runs two asynchronous workers over a priority-sorted job list. Loaded models are prepared while hidden. A separate sequence reveals road, pavement, lamps, shops, skyline, and details. Road and pavement are visual groups extracted from the same GLB.
+
+```js
+// Representative structure; details omitted.
+startTwoWorkers(prioritySortedJobs);
+
+for (const stage of presentationOrder) {
+  const results = await resultsFor(stage);
+  await reveal(successfulRoots(results));
+}
+```
+
+Shop picking becomes available after the shop reveal. Destination choreography waits for complete scene readiness, and optional traffic starts afterward. This separates **loaded**, **visible**, **interactive**, and **ready for a close-up**.
+
+A failed job records a failure and resolves its result so later stages can continue. Reduced motion preserves the sequence without the fade. Two workers are a conservative policy; they are not a measured optimum. JavaScript promises coordinate asynchronous progress—they do not create worker threads or remove decoding cost.
+
+### Resource lifetime is part of the feature
+
+Removing a mesh from the scene does not free its GPU geometry, materials, textures, or render targets. Cleanup needs ownership rules. A temporary fade material can be disposed while its shared texture remains owned by the loaded asset.
+
+The photo wall is a useful example: it borrows model meshes, creates replacement geometry/materials and an atlas, then restores borrowed state and releases its own allocations. Generation checks reject late asynchronous results after teardown; abort signals help where the loading operation supports them.
+
+**What I learned:** a feature includes its exit path. Listeners, timers, observers, GPU allocations, and late arrivals need as much attention as the entrance animation.
+
+<details>
+  <summary>Interview checkpoint: why not load everything with Promise.all()?</summary>
+  <p>Starting everything at once gives less control over concurrent work and says nothing about reveal order. The queue and presentation sequence solve separate problems. The staged-loading configuration check verifies ordering, concurrency settings, timing values, and mesh grouping; historical browser observations cover selected loading flows. Neither proves a universal load time or arbitrary network-race correctness.</p>
+</details>
+
+## 4. A pixel look with readable information
+
+Pixel mode integrates Three.js's existing `RenderPixelatedPass` and `OutputPass` with a color-quantization shader. The design problem is preserving the street's appearance while keeping selected signs and artwork useful at close range.
+
+<Compare id="mumbai-rendering" variant="film" eyebrow="Rendering study" title="Original / Pixel" beforeLabel="Original" afterLabel="Pixel" aspectRatio="8 / 5" scenes={renderingScenes} />
+
+These saved October 17 views use the same camera but different capture moments and pedestrians. The comparison shows appearance, not frame-rate performance.
+
+### Why sharp artwork still needs depth
+
+Drawing a crisp sign on top of the finished image makes it readable through a wall. The implementation instead reconstructs full-resolution depth before drawing selected artwork:
+
+```text
+Pixelated scene → output conversion → color quantization
+Clear depth → visible-geometry depth only → sharp artwork with depth testing
+```
+
+The depth-only pass disables color writes, preserving the composed image while recording nearer geometry. The sharp pass can then obey occlusion. Selected authored sprites are excluded from the coarse pass so a second pixelated silhouette does not remain behind them. A `finally` block restores the affected visibility, color-write flags, background, auto-clear, and shadow-update flag even if a pass fails.
+
+### Pixel size and color are separate controls
+
+The block size is specified in CSS pixels and multiplied by device-pixel ratio. At DPR 2, a four-CSS-pixel block spans eight device pixels. The profile uses smaller blocks for mobile and close Contact views.
+
+For a normalized color channel $c$ and $L=16$ channel levels, quantization is:
+
+$$
+q(c)=\frac{\operatorname{round}(c(L-1))}{L-1},\qquad
+c_{out}=(1-s)c+s\,q(c)
+$$
+
+Sixteen levels per RGB channel allow 4,096 combinations before blending. Because the shader blends by strength $s$, the final image is not restricted to those combinations. Tone mapping, output color-space conversion, and quantization are different operations; their ordering affects the result.
+
+**What I learned:** a low-resolution style can still require extra full-resolution work. Pixel mode adds passes, so its appearance alone says nothing about performance. The fallback returns to Original mode if the optional pipeline cannot initialize or render.
+
+<details>
+  <summary>Interview checkpoint: what would establish a performance improvement?</summary>
+  <p>A controlled comparison on the same device, viewport, DPR, camera, and asset state, with cold/warm behavior identified. CPU submission time, GPU time, and frame intervals measure different things. The recorded mock-renderer checks exercise pass order, fallback, responsive profiles, and state restoration; they cannot establish GPU visual correctness or a frame-rate gain. Later sprite-specific visual acceptance remains separately tracked.</p>
+</details>
+
+## 5. When the tests pass and the newspaper still looks wrong
+
+The wrapper was a lesson in choosing the right representation. Early corner bends and separate panels could satisfy simple bounds while looking like a boat or a cut-corner box. I was trying to serve wada pav, not launch it.
+
+The revised implementation uses one continuous indexed sheet with the newspaper's original rectangular UVs. A flat central area stays beneath the food; the outer region gathers above it when closed. During opening, angular delays stagger the folds. A spread term clears the food before a later flattening term lowers the surface.
+
+<FilmstripViewer id="mumbai-paper" eyebrow="Geometry study · select a frame, then tap it for the mechanism" title="One wrapper, five sampled poses" rolls={paperRolls} />
+
+The five October 19 captures sample one development version at 0%, 22%, 45%, 70%, and 100% opening progress. They are inspection poses, not a history of five separate implementations.
+
+The easing uses quintic smootherstep, $6t^5-15t^4+10t^3$, with $t$ clamped to $[0,1]$. Its first and second derivatives vanish at both ends, avoiding abrupt changes at the endpoints. Updating normals and bounds keeps lighting and culling consistent with the deformed geometry.
+
+Validation samples 41 poses for finite geometry, noncollapsed triangles, and food clearance. Topology checks combine connectivity, boundary/edge checks, and the disk Euler characteristic $V-E+F=1$. Visibility rays ask whether the food is concealed when closed and revealed when open.
+
+Those checks complement visual review. Disk topology alone does not rule out self-intersection; sampling does not prove every intermediate configuration; clearance does not make a fold attractive. This is deterministic, art-directed deformation, with intentional compression. A physical cloth solver would need additional material, bending, and collision constraints.
+
+**What I learned:** when repeated parameter changes cannot make a result plausible, revisit the representation and the acceptance criteria. Adding another numeric check to the wrong model can make the wrong result more confidently wrong.
+
+## 6. Delegating with AI: the brief became part of the system
+
+Usage limits gave me a five-hour waiting room. I could have bought more capacity. Instead, I became the person writing increasingly detailed Markdown documents because a virtual chai stall had exhausted my budget for improvisation.
+
+The useful change was preparing before the next interaction: inspect the current result, identify the smallest meaningful revision, gather references, state what must stay, and define the evidence needed to stop.
+
+### How the roles were set up
+
+The role documents share project context and visual rules, then divide review questions. The architect checks footprint, silhouette, placement, and sightlines. The set designer checks composition, materials, and physical support. The Blender technician checks geometry, transforms, naming, and export constraints.
+
+The configured protocol gives a World Art Director responsibility for reconciling findings into one brief. One implementer owns edits to the Blender scene, avoiding competing writers. Reviews can examine different concerns in parallel; their recommendations still need synthesis.
+
+<AgentWorkflow />
+
+These are responsibilities assigned to AI assistants, configured through Markdown instructions. I did not train specialist models or build a new agent platform. A role diagram describes the intended process; the worklog records what actually ran. One garage revision continued in the main task after usage limits interrupted the technician handoff. Narrow revisions use the relevant reviewers rather than automatically repeating every role.
+
+### A real brief: please ground the biscuits
+
+One saved revision addressed biscuits suspended inside the chai stall's jars. The bounded brief made a small visual repair testable:
+
+| Part of the brief | Concrete instruction |
+| --- | --- |
+| Change | Ground golden biscuit stacks, leave headspace, clarify the jar glass |
+| Preserve | Stall architecture, signage, newspapers, jar positions, surrounding props |
+| Reject | Extra clutter, unrelated architecture changes, a new newspaper rig |
+| Finish | Review both angles, export, validate, stop when the named criteria pass |
+
+The preservation report records unchanged surrounding meshes and jar structure. A separate GLB reimport report checks bounds, materials, and article-slot metadata. The visual review asks whether the biscuits actually look grounded. An assistant saying “done” answers none of those questions by itself.
+
+<figure>
+  <img src="/ProjectPhotos/mumbai-street/biscuit-detail.webp" alt="Golden biscuit stacks resting inside clear jars at the chai stall." width="1000" height="686" loading="lazy" style="width:100%;height:auto;" />
+  <figcaption>The saved repaired detail, rendered from the reimported GLB. Preservation and round-trip reports accompany this revision.</figcaption>
+</figure>
+
+**What I learned:** useful delegation requires a shared contract and independent evidence. The handoff carries context across sessions, limits accidental scope expansion, and makes disagreements specific enough to resolve.
+
+## Validation and remaining tradeoffs
+
+The project combines several kinds of evidence. I need to understand which question each one answers before using it as a claim.
+
+| Evidence | What it helps establish | What it does not establish |
+| --- | --- | --- |
+| Transform, geometry, routing checks | Specific invariants, sampled poses, state transitions | Comfortable interaction on every device |
+| Export/reimport reports | Selected asset structure, bounds, metadata and material preservation | The complete experience's visual quality |
+| Browser captures and visual review | Actual appearance and selected interaction flows at a recorded revision | Current release status or a performance benchmark |
+| Build checks | Content and code compile for the tested build | Universal accessibility or runtime correctness |
+
+Historical passing checks belong to their recorded revisions. Some later changes still have pending visual acceptance, and local implementation is tracked separately from deployment. Next priorities include controlled performance profiling, broader physical-device and accessibility testing, and an accessible collection entry point for the walking characters.
+
+The central design tradeoff remains deliberate: the street adds character and discovery, while readable HTML and predictable navigation carry the information. As the number of destinations grows, clearer controller and resource boundaries become more valuable.
+
+## Interview revision
+
+<Callout label="A 60-second project explanation">
+  <p>I directed an AI-assisted portfolio built as an explorable Mumbai street. Three.js handles the world, Blender supplies structured GLB assets, and Astro provides readable project documents. The difficult parts were coordinating camera and route state, keeping HTML interactions aligned with moving geometry, and preserving readability in a mixed-resolution renderer. I used bounded Markdown handoffs, specialist reviews, and export/browser evidence to guide and evaluate substantial AI implementation. The project strengthened my ability to connect graphics concepts to frontend systems and communicate acceptance criteria clearly.</p>
+</Callout>
+
+Use these as recall prompts: explain the mechanism aloud, give one concrete example, then name the limitation. The detailed answers are in the sections above.
+
+<ContactSheet id="mumbai-revision" eyebrow="Revision cards" title="Six concepts I should be able to defend" cells={revisionCells} />
+
+For a behavioral answer, the wrapper is a useful failure-and-iteration example; the biscuit brief demonstrates scope and acceptance; the interrupted garage handoff demonstrates adapting the workflow. In each case, separate what I directed from what the assistants implemented and point to the evidence used to accept the result.
+
+<details>
+  <summary>Visual credits and capture notes</summary>
+  <p>The hero and rendering comparison use saved October 17, 2026 development captures; the wrapper frames are sampled poses captured October 19. These archive images predate the later newspaper masthead correction. The architecture diagrams were drawn for this page. Small props visible in the street include adapted <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> models: <a href="https://sketchfab.com/3d-models/lego-scarlet-witch-65fd0da1a5f04b4289db423cd00c9383">LEGO Scarlet Witch</a> by Ramón Ruiz, <a href="https://sketchfab.com/3d-models/art-reference-utah-teapot-4c02605ea63541b6aa053df167befe36">Art Reference: Utah Teapot</a> by Smallpoly, and <a href="https://sketchfab.com/3d-models/chicago-cubs-8d592b64547a46e4b730b8620f389296">Chicago Cubs</a> by Laurance Animations.</p>
+</details>

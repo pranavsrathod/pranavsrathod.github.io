@@ -1,0 +1,164 @@
+---
+title: 'Mumbai Street: A Spatial Portfolio'
+description: 'Turning a personal portfolio into an explorable Mumbai street through real-time graphics, readable web interfaces, and a structured AI-assisted development workflow.'
+publishDate: '2026-10-20'
+isFeatured: false
+poster: '/ProjectPhotos/mumbai-street/street.webp'
+category: 'Creative Technology'
+role: 'Creative direction, interaction design, and AI-assisted development'
+tools:
+  - JavaScript
+  - Three.js
+  - WebGL
+  - Blender
+  - glTF / GLB
+  - Vite
+  - Astro / MDX
+  - HTML / CSS
+  - Sharp
+  - Git
+  - AI assistants
+tags:
+  - Computer Graphics
+  - Interactive Web
+  - Creative Technology
+  - AI-assisted Development
+links:
+  demo: 'https://city.pranavrathod.com/'
+  github: 'https://github.com/pranavsrathod/city'
+seo:
+  image:
+    src: '/ProjectPhotos/mumbai-street/street.webp'
+    alt: 'An interactive Mumbai-inspired portfolio street with a garage, chai stall, wada pav counter, and illustrated pedestrians.'
+---
+
+import AgentWorkflow from './components/AgentWorkflow.astro';
+
+<figure>
+  <img src="/ProjectPhotos/mumbai-street/street.webp" alt="The portfolio street: personal projects, writing, and contact information represented by Mumbai storefronts." width="1440" height="900" fetchpriority="high" style="width:100%;height:auto;" />
+  <figcaption>Street overview from a saved development capture, October 17, 2026.</figcaption>
+</figure>
+
+## A portfolio you can walk into
+
+I wanted visitors to discover my work through a place that felt personal. A newspaper wrapped around two wada pavs became the starting point: what if unwrapping it revealed my contact information? That idea grew into a Mumbai street where a garage computer holds my projects, a chai stall offers blog posts as newspapers, and a lift presents my resume.
+
+The challenge became making those experiences behave like one website: readable content, coherent navigation, direct links, responsive framing, and a reliable return to the street.
+
+### My contribution
+
+I owned the concept, visual references, interaction direction, task briefs, and acceptance decisions. I configured specialist AI review roles, directed revisions, and used the resulting models, code, and checks to evaluate the experience. AI assistants performed substantial modeling, JavaScript implementation, and asset integration.
+
+My contribution was turning a personal creative idea into specific, reviewable work—and taking responsibility for the result I approved.
+
+## The stack, and why it is split
+
+The project combines a 3D navigation layer with normal web documents. A newspaper can be a physical object in the scene while its article remains selectable, scrollable HTML.
+
+| Layer | Tools | Responsibility |
+| --- | --- | --- |
+| Interactive world | JavaScript ES modules, Three.js, WebGL | Scene graph, camera choreography, raycasting, materials, animation, and rendering effects |
+| Asset production | Blender, glTF / GLB | Editable models, textures, named interaction anchors, and browser-ready exports |
+| Written content | Astro, MDX, HTML/CSS, same-origin iframe | Project archive, readable articles, responsive layouts, and document navigation |
+| Build and delivery | Vite, Sharp, Git/GitHub, Vercel configuration | Bundling, generated photo variants/manifests, versioning, and static deployment |
+
+The implementation includes PostHog instrumentation for semantic actions such as opening a landmark or project. That gives the site a measurement foundation; I am not claiming an engagement improvement from this work.
+
+<figure>
+  <picture>
+    <source media="(max-width: 640px)" srcset="/ProjectPhotos/mumbai-street/architecture-mobile.webp" width="720" height="1120" />
+    <img src="/ProjectPhotos/mumbai-street/architecture.webp" alt="Architecture: Blender assets become GLBs; Astro and Sharp produce static content and image variants. Three.js scene controllers coordinate URL navigation with HTML readers and a same-origin project iframe." width="1440" height="760" loading="lazy" style="width:100%;height:auto;" />
+  </picture>
+  <figcaption>The scene establishes the place. HTML carries the documents and accessible controls.</figcaption>
+</figure>
+
+## Three engineering problems worth explaining
+
+### 1. Treating the camera as a shared resource
+
+What happens when someone selects Contact halfway through the garage entrance animation? Two controllers cannot keep writing the same camera.
+
+The route coordinator releases the previous experience and checks a navigation token after asynchronous work. Each destination manages its own transition state, suspends street input, and restores the saved view when it exits. Nested newspaper, counter, and photo-album routes share that street snapshot instead of repeatedly overwriting it.
+
+This taught me to reason about **state, asynchronous races, cancellation, and ownership** together. A route token rejects stale continuations; a controller still has to stop its obsolete animations and release input.
+
+### 2. Keeping the style without losing the information
+
+The optional Pixel mode combines Three.js's pixelated render pass with output conversion and a color-quantization shader. Selected artwork is drawn sharply against a full-resolution depth prepass so signs stay legible while walls can still hide them.
+
+This made **depth, render order, color handling, and device-pixel sizing** concrete. A sharp overlay drawn on top of everything would solve readability while breaking the world. Additional full-resolution passes also cost work, so a pixel look is not automatically a performance optimization.
+
+<figure>
+  <picture>
+    <source media="(max-width: 640px)" srcset="/ProjectPhotos/mumbai-street/rendering-mobile.webp" width="720" height="1050" />
+    <img src="/ProjectPhotos/mumbai-street/rendering.webp" alt="Original and Pixel rendering of the same street camera view, showing the optional change in presentation." width="1440" height="540" loading="lazy" style="width:100%;height:auto;" />
+  </picture>
+  <figcaption>Saved Original and Pixel views. Captured at different moments; this comparison demonstrates appearance, not frame-rate performance.</figcaption>
+</figure>
+
+### 3. Making a 3D asset behave like an interface
+
+The garage monitor, contact counter, and lift depend on model structure, not just appearance. Named anchors, consistent scale, and local-to-world transforms connect Blender geometry to camera shots, moving parts, and projected HTML targets.
+
+When the garage was enlarged and the neighboring stall moved, the runtime needed those shared transforms to stay aligned. Checks against actual exported geometry addressed screen corners, shutter poses, framing, and shop separation.
+
+The newspaper added a useful geometry lesson. Early folds could satisfy simple bounds while looking like a boat or a box. The revised implementation uses one continuous sheet with art-directed deformation. Intermediate-pose review and topology/clearance checks answered different questions. It is a deliberate animation approximation, not a cloth simulator.
+
+## How I delegated with AI
+
+Usage limits pushed me to prepare before starting another generation cycle. I used the waiting time to inspect existing work and write Markdown handoffs: the goal, relevant references, what must stay, the allowed change, evidence required, and a stopping condition.
+
+The specialist roles divided the review questions. The architect considered silhouette and placement; the set designer considered composition and believable supports; the Blender technician considered geometry, naming, materials, and export safety. The configured workflow gives a World Art Director role responsibility for consolidating findings into one brief, with one implementer owning edits to the Blender scene.
+
+<AgentWorkflow />
+
+These were responsibilities assigned to AI assistants. I configured a development workflow around them; I did not build or train a new agent platform. Revisions used the relevant reviewers, and the worklog records interruptions as well as completed reviews. One garage pass continued in the main task after limits interrupted the technician handoff.
+
+### A real handoff: please ground the biscuits
+
+One saved revision brief addressed biscuits suspended inside the chai stall's jars. The task was small; its boundaries made it useful.
+
+<aside class="handoff-example" aria-label="Condensed saved biscuit revision brief">
+  <p class="eyebrow">Condensed from the saved revision brief</p>
+  <dl>
+    <dt>Change</dt><dd>Ground golden biscuit stacks, leave headspace, and clarify the jar glass.</dd>
+    <dt>Preserve</dt><dd>The stall, signage, newspapers, jar positions, and surrounding props.</dd>
+    <dt>Reject</dt><dd>Extra clutter, unrelated architecture changes, and a new newspaper rig.</dd>
+    <dt>Finish</dt><dd>Review both angles, export, validate, and stop when the named criteria pass.</dd>
+  </dl>
+</aside>
+
+The preservation report records unchanged surrounding meshes and jar structure. A separate GLB reimport report checks bounds, materials, and article-slot metadata. The visual review asks whether the biscuits look right. None of those is interchangeable with an agent saying “done.”
+
+<figure>
+  <img src="/ProjectPhotos/mumbai-street/biscuit-detail.webp" alt="Saved render detail of grounded golden biscuit stacks inside the chai stall's jars." width="1000" height="686" loading="lazy" style="width:100%;max-height:460px;object-fit:contain;" />
+  <figcaption>The refined jar detail, rendered from the reimported GLB. This is the output of the bounded revision.</figcaption>
+</figure>
+
+## Skills I developed through the project
+
+| Skill | Where I practiced it |
+| --- | --- |
+| Creative direction and interaction design | Translating Mumbai memories into destinations, camera journeys, and discoverable objects |
+| Technical communication and delegation | Writing bounded briefs, reconciling reviews, preserving successful work, and defining completion |
+| Graphics and asset integration | Understanding transforms, depth, materials, exported anchors, and art-directed geometry |
+| Asynchronous frontend design | Reasoning about camera ownership, route history, interrupted transitions, and stale results |
+| Content and build pipelines | Separating Astro documents from WebGL, generating image variants, and keeping source assets distinct from served outputs |
+| Validation and engineering judgment | Combining logic checks, independent export inspection, regression tests, and visual review |
+
+My graphics background helped me recognize the underlying concepts. This project pushed me to apply them across a browser application—and to explain the decisions clearly enough that another assistant could act on them.
+
+## What the evidence supports, and what comes next
+
+The project records targeted checks for routing, camera restoration, geometry, rendering state, content builds, failure handling, and resource cleanup, alongside browser screenshots and reviews. Loading separates a two-worker asset queue from the ordered visual reveal; cleanup distinguishes owned GPU resources from shared ones.
+
+Historical passing checks are useful evidence for those revisions. They do not establish universal device support or a current performance benchmark. Some later changes still have pending visual acceptance, and production deployment is tracked separately from local implementation.
+
+My next priorities are a controlled performance pass on representative devices, broader physical-device and accessibility testing, and an accessible collection entry point for the walking characters. I would also keep tightening module boundaries as the number of destinations grows.
+
+The outcome is both a personal world and a working lesson in engineering ownership: define the experience, divide the work, and inspect what actually reaches the browser.
+
+<details>
+  <summary>Visual credits</summary>
+  <p>Images use saved project captures and newly drawn architecture diagrams. Small props visible in the scene include adapted <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> models: <a href="https://sketchfab.com/3d-models/lego-scarlet-witch-65fd0da1a5f04b4289db423cd00c9383">LEGO Scarlet Witch</a> by Ramón Ruiz, <a href="https://sketchfab.com/3d-models/art-reference-utah-teapot-4c02605ea63541b6aa053df167befe36">Art Reference: Utah Teapot</a> by Smallpoly, and <a href="https://sketchfab.com/3d-models/chicago-cubs-8d592b64547a46e4b730b8620f389296">Chicago Cubs</a> by Laurance Animations. Source attribution and the claim-to-evidence map accompany this draft.</p>
+</details>

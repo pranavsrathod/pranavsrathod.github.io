@@ -1,0 +1,67 @@
+{
+  "revisedOn": "2026-10-19",
+  "associationMap": {
+    "kind": "Editorial map of ideas from the user drafts; not a dated implementation timeline",
+    "sources": [
+      "sources/drafts/act-1-original.txt",
+      "sources/drafts/act-3-original.txt"
+    ]
+  },
+  "workflow": {
+    "source": "components/WorkflowNotebook.astro",
+    "configuredRoles": [
+      "architect",
+      "set designer",
+      "Blender technician",
+      "one scene implementer"
+    ],
+    "processEvidence": [
+      "agents/05_REVIEW_PROTOCOL.md",
+      "threejs-portfolio/docs/INTERVIEW_STUDY_GUIDE.md:505-540"
+    ],
+    "note": "Configured process is distinguished from recorded execution. Human review recurs; no token savings or speed metrics claimed."
+  },
+  "cases": [
+    {
+      "id": "paper",
+      "evidence": [
+        "threejs-portfolio/docs/CONTACT_EXPERIENCE.md:55",
+        "threejs-portfolio/docs/INTERVIEW_STUDY_GUIDE.md:318-326",
+        "threejs-portfolio/HANDOFF.md:420-442"
+      ],
+      "media": "workflow-paper-00.webp through workflow-paper-04.webp",
+      "capture": "2026-10-19; UI stage buttons Wrapped/Loosen/Spread/Settle/Flat in scripts/contact-paper-preview.html; shared production geometry. Consistent crops x240 y135 width800 height425 at1280x720 angled view. Crops are illustrative inspection views, not evidence of an entire-sheet clearance test.",
+      "note": "Art-directed motion; not cloth simulation. Earlier failure states are described, not fabricated as screenshots."
+    },
+    {
+      "id": "garage",
+      "evidence": [
+        "threejs-portfolio/docs/INTERVIEW_STUDY_GUIDE.md:518-530",
+        "threejs-portfolio/docs/STUDIO.md:41",
+        "threejs-portfolio/HANDOFF.md:176",
+        "threejs-portfolio/HANDOFF.md:214"
+      ],
+      "imageSource": "ProjectsGarage/preview-workbench.png",
+      "imageOutput": "workflow-garage.webp",
+      "note": "Saved refined asset render; not a screenshot of the failed earlier studio."
+    },
+    {
+      "id": "biscuits",
+      "evidence": [
+        "chai-code-chronicle/reviews/blog-revision/revision-brief.md",
+        "agents/05_REVIEW_PROTOCOL.md"
+      ],
+      "imageSource": "ChaiCodeChronicle/preview-biscuit-detail.png",
+      "imageOutput": "workflow-biscuits.webp",
+      "note": "Saved refined jar detail. Named preserve/change/stop boundaries paraphrased from actual revision brief."
+    }
+  ],
+  "streetRoutines": {
+    "evidence": [
+      "threejs-portfolio/docs/PEDESTRIAN_CHARACTERS_WORKLOG.md:55-63",
+      "threejs-portfolio/docs/PEDESTRIAN_CHARACTERS_WORKLOG.md:77-81",
+      "threejs-portfolio/docs/PEDESTRIAN_CHARACTERS_WORKLOG.md:89-95"
+    ],
+    "note": "Nico snack, Kartik chai, Vrishabh mural photo are implemented routines in the worklog; no claim who noticed each sprite correction."
+  }
+}

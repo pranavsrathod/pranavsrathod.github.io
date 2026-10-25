@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-25",
+  "scope": "Unpublished wrapper-history editorial artifacts",
+  "astroBuilds": "Project and personal story passed; project uses native Website layout, schema and math configuration in an isolated fixture",
+  "markdownExports": "Generated; no unresolved WrapperEvolution imports or markup",
+  "media": "Five 4-second MP4 clips and posters; 20-second labeled MP4/GIF; 125 preserved browser JPEG crops",
+  "localMediaReferences": {"project": 20, "story": 25, "missing": []},
+  "provenance": "sources/wrapper-history/provenance.json and capture-manifest.json",
+  "browser": {
+    "desktop": "1280x900",
+    "phone": "390x844",
+    "pageOverflow": false,
+    "initialVersion": "October 25 authored poses",
+    "checks": ["all five clips played and reported duration4seconds with no media error", "chronological cycle advances and pauses", "keyboard Home/End selects first/latest", "timing disclosure opens", "phone initial entry reveals selected tab", "blog uses correct media root and no obsolete paper slider"],
+    "warningsAndErrorsObserved": [],
+    "boundary": "Browser viewport checks, not physical-device testing. Reduced-motion implementation reviewed in source; OS preference not changed."
+  },
+  "applicationChecks": ["check-contact-wrapper.mjs passed for25 actual exportedposes", "check-contact-loading.mjs passed18 real-factory scenarios", "git diff --check passed"],
+  "deliverySha256": "b49ce95e145162b5e6286625c1c5fc2650befeb3886af638f270894a9b9ae76d",
+  "mirror": "Media copied into both drafts with matching filenames/sizes. An additional whole-file checksum comparison encountered a cloud-file read timeout; byte-identical mirror verification is not claimed.",
+  "release": "Current wrapper local/uncommitted. No runtime changes, Blender rebake or deployment in this editorial pass."
+}

@@ -1,0 +1,329 @@
+---
+import { randomUUID } from 'node:crypto';
+
+const { assetRoot = '/ProjectPhotos/mumbai-street/wrapper-history' } = Astro.props;
+const uid = `wrapper-evolution-${randomUUID()}`;
+const stages = [
+  {
+    id: 'corners', date: '19 Sep', fullDate: 'September 19, 2026', label: 'Raised edges',
+    title: 'Start with the edges.',
+    change: 'A first sheet with raised margins kept the food and print visible. It did not yet conceal a parcel.',
+    tension: 'I had a surface. I still needed the moment of discovery.',
+    lesson: 'The brief needed to describe the reveal, not just the shape of the paper.',
+    alt: 'The earliest recovered paper geometry, with raised outer margins and exposed food.',
+  },
+  {
+    id: 'panels', date: '30 Sep', fullDate: 'September 30, 2026', label: 'Separate flaps',
+    title: 'Four flaps. A different problem.',
+    change: 'A flat base and four folding panels made each part of the opening easier to direct.',
+    tension: 'The wrapper could open, but the separate pieces made it read like a constructed box.',
+    lesson: 'More control over the parts did not make them feel like one sheet.',
+    alt: 'The recovered version built from a flat base and four separate folding paper panels.',
+  },
+  {
+    id: 'bloom', date: '11 Oct', fullDate: 'October 11, 2026', label: 'One sheet',
+    title: 'One mesh. Lunch still visible.',
+    change: 'One connected sheet replaced the panel construction; its surface opened through procedural deformation.',
+    tension: 'The continuity helped. Its cup-like starting form still left the food exposed.',
+    lesson: 'A better representation was progress, not an automatic finish line.',
+    alt: 'The continuous procedural paper sheet opening from its cup-like starting form.',
+  },
+  {
+    id: 'parcel', date: '15 Oct', fullDate: 'October 15, 2026', label: 'Covered parcel',
+    title: 'Finally, hide the lunch.',
+    change: 'The procedural wrapper became a covered parcel, then spread into the newspaper carrying my contact details.',
+    tension: 'The reveal now made sense. Getting the folds to feel intentional remained its own project.',
+    lesson: 'I needed to direct the whole gesture, including what the camera would reveal.',
+    alt: 'The recovered covered-parcel version opening into a radial newspaper sheet.',
+  },
+  {
+    id: 'baked', date: '25 Oct', fullDate: 'October 25, 2026', label: 'Authored poses',
+    title: 'The fold I chose to keep.',
+    change: 'I moved the fold into an editable Blender source: 25 held poses, exported as a two-second GLB animation.',
+    tension: 'The chosen local version starts opening during the slow overhead camera push. Contact links wait until both are ready.',
+    lesson: 'Change the representation when tuning stops helping. Then check the geometry, timing, and final reading surface.',
+    alt: 'The selected local Blender-authored wrapper animation, peeling open around the food.',
+  },
+];
+---
+
+<section class="not-prose wrapper-evolution" data-wrapper-evolution aria-labelledby={`${uid}-title`}>
+  <noscript><style is:inline>.wrapper-evolution [data-we-video]{display:none}</style></noscript>
+  <header class="we-header">
+    <p class="we-eyebrow">Five recovered versions / One very particular lunch</p>
+    <h3 id={`${uid}-title`}>I was trying to serve lunch.</h3>
+    <p>Getting a newspaper to open convincingly became a lesson in changing the representation—and writing a better brief.</p>
+  </header>
+
+  <div class="we-controls" data-we-controls hidden>
+    <div class="we-tabs" role="tablist" aria-label="Choose a wrapper version">
+      {stages.map((stage, index) => (
+        <button
+          type="button" role="tab" id={`${uid}-tab-${stage.id}`}
+          aria-controls={`${uid}-panel-${stage.id}`} aria-selected={index === stages.length - 1 ? 'true' : 'false'}
+          tabindex={index === stages.length - 1 ? '0' : '-1'} data-we-tab={index}
+        >
+          <span class="we-tab-date">{stage.date}</span>
+          <span>{stage.label}</span>
+        </button>
+      ))}
+    </div>
+    <div class="we-playbar">
+      <button type="button" class="we-cycle" data-we-cycle aria-pressed="false">Cycle versions <span aria-hidden="true">↻</span></button>
+      <p class="we-help" data-we-help>Five seconds per version. Or choose one and press Play.</p>
+    </div>
+  </div>
+
+  <div class="we-panels">
+    {stages.map((stage, index) => (
+      <article id={`${uid}-panel-${stage.id}`} class="we-panel" data-we-panel={index} aria-label={`${stage.fullDate}: ${stage.label}`}>
+        <figure class="we-media">
+          <video
+            controls muted loop playsinline preload="none"
+            poster={`${assetRoot}/${stage.id}.webp`}
+            aria-label={`${stage.label}: ${stage.alt}`}
+            data-we-video
+          >
+            <source src={`${assetRoot}/${stage.id}.mp4`} type="video/mp4" />
+            <a href={`${assetRoot}/${stage.id}.mp4`}>Watch the {stage.label.toLowerCase()} animation.</a>
+          </video>
+          <noscript>
+            <a href={`${assetRoot}/${stage.id}.mp4`} aria-label={`Watch the ${stage.label.toLowerCase()} animation`}><img src={`${assetRoot}/${stage.id}.webp`} alt={stage.alt} width="960" height="600" loading="lazy" /></a>
+          </noscript>
+          <figcaption>
+            <span>{stage.fullDate}</span>
+            <span>{stage.id === 'baked' ? 'Selected local export · not deployed' : 'Historical source · re-rendered for comparison'}</span>
+          </figcaption>
+        </figure>
+        <div class="we-copy">
+          <p class="we-version">{String(index + 1).padStart(2, '0')} / 05</p>
+          <h4>{stage.title}</h4>
+          <p>{stage.change}</p>
+          <details class="we-iteration-notes"><summary>Brief, review &amp; timing</summary>
+          <p class="we-tension">{stage.tension}</p>
+          <div class="we-lesson"><p class="we-label">What changed in my thinking</p><p>{stage.lesson}</p></div>
+          {stage.id === 'baked' && (
+            <div class="we-timing" aria-label="Schematic normal-motion timing, assuming assets are ready at entry: approach from zero to 1.8 seconds; overhead camera push from 1.8 to 6 seconds; unwrapping from 1.8 to 3.8 seconds. Links become ready at 6 seconds, after both finish.">
+              <p class="we-label">Assets ready at entry · schematic</p>
+              <div class="we-timing-row"><span>Approach</span><span class="we-track" aria-hidden="true"><span style="left:0;width:30%"></span></span><span>0–1.8 s</span></div>
+              <div class="we-timing-row"><span>Overhead</span><span class="we-track" aria-hidden="true"><span style="left:30%;width:70%"></span></span><span>1.8–6 s</span></div>
+              <div class="we-timing-row"><span>Unwrap</span><span class="we-track" aria-hidden="true"><span style="left:30%;width:33.3333%"></span></span><span>1.8–3.8 s</span></div>
+              <p class="we-ready-cue">Links ready after <strong>paper + camera</strong> finish. Slow asset loads can extend this timing.</p>
+            </div>
+          )}
+          </details>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <p class="we-status" data-we-status role="status" aria-live="polite" aria-atomic="true"></p>
+  <p class="we-provenance">Re-rendered from saved geometry with the same camera, current artwork and food; earlier motion normalized for comparison. Latest: the local October 25 export. <a href={`#${uid}-sources`}>Source notes below.</a></p>
+  <p class="we-provenance"><a href={`${assetRoot}/wrapper-evolution.mp4`}>Watch the full 20-second sequence ↗</a> · <a href={`${assetRoot}/wrapper-evolution.gif`}>GIF version</a></p>
+  <details class="we-sources" id={`${uid}-sources`}>
+    <summary>What these versions can—and cannot—show</summary>
+    <p>These are recovered implementations, rendered again for this comparison, rather than screenshots taken on each original date. Each clip samples 25 poses from a fixed camera with the current artwork and food. Earlier motion is normalized into a two-second comparison; these clips do not preserve the original runtime timing or camera transitions.</p>
+    <dl>
+      <div><dt>September 19</dt><dd><code>707010f</code> · Raised margins; the food is deliberately visible. This is not the separately documented rejected “boat” experiment.</dd></div>
+      <div><dt>September 30</dt><dd><code>467087a</code> · First committed base-and-four-panel version; the worklog records the work on September 29.</dd></div>
+      <div><dt>October 11</dt><dd><code>8022f78</code> · The recovered continuous procedural sheet.</dd></div>
+      <div><dt>October 15</dt><dd><code>420e1a6</code> · The committed covered-parcel version, following local work recorded on October 11.</dd></div>
+      <div><dt>October 25</dt><dd>Local working copy · Blender-authored GLB with 25 held poses at 12 pose intervals per second. The camera cue belongs to the current application integration, not this fixed-camera comparison.</dd></div>
+    </dl>
+    <p>The chosen fold is an art-directed, cloth-assisted sequence. Its topology and clearance checks do not establish physically exact cloth or prove the absence of every possible self-intersection.</p>
+  </details>
+</section>
+
+<style is:inline>
+  .wrapper-evolution{--we-ink:var(--text-main,#26352d);--we-muted:var(--text-muted,#647064);--we-paper:var(--bg-main,#fffdf7);--we-wash:var(--bg-muted,#f2efe6);--we-accent:var(--accent,#187c70);box-sizing:border-box;margin:2rem 0;color:var(--we-ink);border:1px solid color-mix(in srgb,var(--we-ink) 22%,transparent);background:var(--we-paper);font:16px/1.55 var(--font-sans,Arial,sans-serif);overflow:hidden}
+  .wrapper-evolution *{box-sizing:border-box}
+  .wrapper-evolution [hidden]{display:none!important}
+  .wrapper-evolution p{margin:0;line-height:1.55}
+  .wrapper-evolution .we-header{position:static;display:block;margin:0;padding:25px 26px 22px;border:0;background:none;text-align:left}
+  .wrapper-evolution .we-eyebrow{margin:0 0 10px;font-size:11px;font-weight:650;letter-spacing:.09em;text-transform:uppercase;color:var(--we-accent)}
+  .wrapper-evolution h3{margin:0 0 12px;padding:0;border:0;font:400 clamp(28px,4vw,39px)/1.08 var(--font-serif,Georgia,serif);letter-spacing:-.04em;color:var(--we-ink)}
+  .wrapper-evolution .we-header>p:last-child{max-width:650px;color:var(--we-muted);font-size:14px}
+  .wrapper-evolution .we-controls{border-top:1px solid color-mix(in srgb,var(--we-ink) 17%,transparent)}
+  .wrapper-evolution .we-tabs{display:flex;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;border-bottom:1px solid color-mix(in srgb,var(--we-ink) 17%,transparent)}
+  .wrapper-evolution button{appearance:none;margin:0;border:0;border-radius:0;background:transparent;color:var(--we-ink);font:600 13px/1.35 var(--font-sans,Arial,sans-serif);cursor:pointer}
+  .wrapper-evolution [role=tab]{position:relative;flex:1 0 132px;min-height:73px;padding:13px 17px;text-align:left;border-right:1px solid color-mix(in srgb,var(--we-ink) 12%,transparent)}
+  .wrapper-evolution [role=tab]:last-child{border-right:0}
+  .wrapper-evolution .we-tab-date{display:block;margin-bottom:5px;color:var(--we-muted);font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase}
+  .wrapper-evolution [role=tab][aria-selected=true]{background:var(--we-wash);box-shadow:inset 0 -3px var(--we-accent)}
+  .wrapper-evolution [role=tab][aria-selected=true] .we-tab-date{color:var(--we-accent)}
+  .wrapper-evolution button:focus-visible,.wrapper-evolution summary:focus-visible,.wrapper-evolution a:focus-visible{outline:3px solid var(--we-accent);outline-offset:-4px}
+  .wrapper-evolution button:not(:disabled):hover{background:var(--we-wash)}
+  .wrapper-evolution button:disabled{opacity:.55;cursor:default}
+  .wrapper-evolution .we-playbar{display:flex;align-items:center;gap:15px;padding:11px 18px;background:var(--we-wash);border-bottom:1px solid color-mix(in srgb,var(--we-ink) 12%,transparent)}
+  .wrapper-evolution .we-cycle{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:15px;min-width:146px;min-height:40px;padding:9px 12px;border:1px solid color-mix(in srgb,var(--we-ink) 35%,transparent);background:var(--we-paper);font-size:12px}
+  .wrapper-evolution .we-cycle[aria-pressed=true]{border-color:var(--we-accent);color:var(--we-accent)}
+  .wrapper-evolution .we-help{color:var(--we-muted);font-size:11px}
+  .wrapper-evolution .we-panel{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);margin:0;padding:0;background:none;border:0;gap:0}
+  .wrapper-evolution .we-panel+.we-panel{border-top:1px solid color-mix(in srgb,var(--we-ink) 20%,transparent)}
+  .wrapper-evolution .we-media{display:flex;flex-direction:column;align-self:stretch;justify-content:center;margin:0;min-width:0;background:#142927}
+  .wrapper-evolution video,.wrapper-evolution .we-media img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:contain;margin:0;background:#142927}
+  .wrapper-evolution figcaption{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0;padding:10px 14px;color:#d5ded6;background:#142927;font:10px/1.5 var(--font-sans,Arial,sans-serif)}
+  .wrapper-evolution figcaption span:last-child{opacity:.72}
+  .wrapper-evolution .we-copy{min-width:0;padding:24px;border-left:1px solid color-mix(in srgb,var(--we-ink) 17%,transparent)}
+  .wrapper-evolution .we-version{margin-bottom:10px;font:11px/1.3 ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--we-accent)}
+  .wrapper-evolution h4{margin:0 0 12px;padding:0;color:var(--we-ink);font:400 clamp(23px,2.7vw,29px)/1.08 var(--font-serif,Georgia,serif);letter-spacing:-.025em;text-transform:none}
+  .wrapper-evolution .we-copy>p:not(.we-version){font-size:13px}
+  .wrapper-evolution .we-iteration-notes{margin:18px 0 0;padding:0;border:0;border-top:1px solid color-mix(in srgb,var(--we-ink) 19%,transparent);background:none}
+  .wrapper-evolution .we-iteration-notes>summary{padding:13px 0 0;font-size:11px}
+  .wrapper-evolution .we-tension{margin-top:12px!important;color:var(--we-muted)}
+  .wrapper-evolution .we-lesson{margin-top:21px;padding-top:15px;border-top:1px solid color-mix(in srgb,var(--we-ink) 19%,transparent)}
+  .wrapper-evolution .we-label{margin-bottom:6px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--we-accent)}
+  .wrapper-evolution .we-lesson>p:last-child{font-size:12px}
+  .wrapper-evolution .we-timing{margin-top:21px;padding-top:15px;border-top:1px solid color-mix(in srgb,var(--we-ink) 19%,transparent)}
+  .wrapper-evolution .we-timing>.we-label{margin-bottom:10px}
+  .wrapper-evolution .we-timing-row{display:grid;grid-template-columns:58px minmax(30px,1fr) 63px;gap:8px;align-items:center;margin-top:7px;font-size:10px;color:var(--we-muted);font-variant-numeric:tabular-nums}
+  .wrapper-evolution .we-timing-row>span:last-child{text-align:right}
+  .wrapper-evolution .we-track{position:relative;display:block;height:5px;background:color-mix(in srgb,var(--we-ink) 12%,transparent)}
+  .wrapper-evolution .we-track>span{position:absolute;display:block;top:0;bottom:0;background:var(--we-accent)}
+  .wrapper-evolution .we-timing-row:first-of-type .we-track>span{opacity:.45}
+  .wrapper-evolution .we-timing-row:last-of-type .we-track>span{height:9px;top:-2px;bottom:auto}
+  .wrapper-evolution .we-ready-cue{margin-top:11px;font-size:10px;color:var(--we-muted)}
+  .wrapper-evolution .we-ready-cue strong{color:var(--we-ink);font-weight:650}
+  .wrapper-evolution .we-status{margin:0;padding:0 22px;color:var(--we-accent);font-size:11px;min-height:0}
+  .wrapper-evolution .we-status:not(:empty){padding-top:11px}
+  .wrapper-evolution .we-provenance{margin:0;padding:15px 22px;color:var(--we-muted);font-size:11px;border-top:1px solid color-mix(in srgb,var(--we-ink) 16%,transparent)}
+  .wrapper-evolution a{color:var(--we-accent);text-underline-offset:3px}
+  .wrapper-evolution .we-sources{margin:0;border:0;border-top:1px solid color-mix(in srgb,var(--we-ink) 16%,transparent);border-radius:0;padding:0;background:none}
+  .wrapper-evolution summary{margin:0;padding:14px 22px;cursor:pointer;font-size:11px;font-weight:600;color:var(--we-ink)}
+  .wrapper-evolution .we-sources>p,.wrapper-evolution .we-sources>dl{margin:0 22px 16px;font-size:11px;color:var(--we-muted)}
+  .wrapper-evolution dl{display:grid;gap:9px}
+  .wrapper-evolution dl>div{display:grid;grid-template-columns:100px minmax(0,1fr);gap:8px}
+  .wrapper-evolution dt{color:var(--we-ink);font-weight:600}
+  .wrapper-evolution dd{margin:0;overflow-wrap:anywhere}
+  .wrapper-evolution code{padding:0;background:none;color:var(--we-ink);font:10px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}
+  @media(max-width:700px){
+    .wrapper-evolution .we-header{padding:22px 18px 19px}
+    .wrapper-evolution .we-panel{grid-template-columns:minmax(0,1fr)}
+    .wrapper-evolution .we-copy{padding:21px 19px;border-left:0;border-top:1px solid color-mix(in srgb,var(--we-ink) 17%,transparent)}
+    .wrapper-evolution [role=tab]{flex:0 0 130px;min-height:70px;padding:12px 15px}
+    .wrapper-evolution .we-playbar{align-items:flex-start;gap:11px;padding:12px 15px}
+    .wrapper-evolution .we-cycle{min-width:135px}
+    .wrapper-evolution .we-help{padding-top:2px;font-size:10px}
+    .wrapper-evolution .we-lesson{margin-top:17px;padding-top:12px}
+    .wrapper-evolution .we-provenance,.wrapper-evolution summary{padding-left:18px;padding-right:18px}
+    .wrapper-evolution .we-sources>p,.wrapper-evolution .we-sources>dl{margin-left:18px;margin-right:18px}
+    .wrapper-evolution dl>div{grid-template-columns:85px minmax(0,1fr)}
+  }
+  @media(prefers-reduced-motion:reduce){.wrapper-evolution *{scroll-behavior:auto!important}}
+</style>
+
+<script is:inline>
+  (() => {
+    const key = '__initializeWrapperEvolution';
+    if (window[key]) { window[key](); return; }
+
+    function initialize() {
+      document.querySelectorAll('[data-wrapper-evolution]').forEach(root => {
+        if (root.dataset.weInitialized === 'true') return;
+        root.dataset.weInitialized = 'true';
+        const tabs = [...root.querySelectorAll('[data-we-tab]')];
+        const panels = [...root.querySelectorAll('[data-we-panel]')];
+        const videos = panels.map(panel => panel.querySelector('[data-we-video]'));
+        const cycleButton = root.querySelector('[data-we-cycle]');
+        const help = root.querySelector('[data-we-help]');
+        const status = root.querySelector('[data-we-status]');
+        const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        let selected = panels.length - 1;
+        let timer = null;
+
+        function pauseVideos() { videos.forEach(video => video.pause()); }
+        function stopCycle(message = '') {
+          if (timer !== null) window.clearInterval(timer);
+          timer = null;
+          cycleButton.setAttribute('aria-pressed', 'false');
+          cycleButton.textContent = 'Cycle versions ↻';
+          pauseVideos();
+          status.textContent = message;
+        }
+        function select(index, play = false) {
+          selected = index;
+          pauseVideos();
+          tabs.forEach((tab, position) => {
+            const current = position === index;
+            tab.setAttribute('aria-selected', String(current));
+            tab.tabIndex = current ? 0 : -1;
+            panels[position].hidden = !current;
+          });
+          if (play && !motion.matches && !document.hidden) {
+            const video = videos[index];
+            try { video.currentTime = 0; } catch (_) {}
+            const playback = video.play();
+            if (playback && typeof playback.catch === 'function') playback.catch(() => {});
+          }
+        }
+        function applyMotionPreference() {
+          if (motion.matches) stopCycle('Reduced motion: choose a version and use its Play control.');
+          else if (status.textContent.startsWith('Reduced motion:')) status.textContent = '';
+          cycleButton.disabled = motion.matches;
+          help.textContent = motion.matches
+            ? 'Automatic cycling is off. Each video still has its own Play control.'
+            : 'Five seconds per version. Or choose one and press Play.';
+        }
+
+        tabs.forEach((tab, index) => {
+          panels[index].setAttribute('role', 'tabpanel');
+          panels[index].setAttribute('aria-labelledby', tab.id);
+          tab.addEventListener('click', () => {
+            stopCycle();
+            select(index);
+          });
+          tab.addEventListener('keydown', event => {
+            let next;
+            if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+            else if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
+            else if (event.key === 'Home') next = 0;
+            else if (event.key === 'End') next = tabs.length - 1;
+            if (next === undefined) return;
+            event.preventDefault();
+            stopCycle();
+            select(next);
+            tabs[next].focus();
+            tabs[next].scrollIntoView({block:'nearest', inline:'nearest', behavior:'auto'});
+          });
+        });
+        videos.forEach(video => video.addEventListener('play', () => {
+          videos.forEach(other => { if (other !== video) other.pause(); });
+        }));
+        cycleButton.addEventListener('click', () => {
+          if (timer !== null) { stopCycle('Cycle paused. Choose a version or use Play to inspect it.'); return; }
+          if (motion.matches) return;
+          cycleButton.setAttribute('aria-pressed', 'true');
+          cycleButton.textContent = 'Pause cycle Ⅱ';
+          status.textContent = 'Cycling through the recovered versions, five seconds each.';
+          select(0, true);
+          timer = window.setInterval(() => {
+            select((selected + 1) % tabs.length, true);
+          }, 5000);
+        });
+        function onVisibilityChange() {
+          if (document.hidden) stopCycle();
+        }
+        function onPageHide() { stopCycle(); }
+        function cleanup() {
+          stopCycle();
+          document.removeEventListener('visibilitychange', onVisibilityChange);
+          motion.removeEventListener('change', applyMotionPreference);
+          window.removeEventListener('pagehide', onPageHide);
+          document.removeEventListener('astro:before-swap', cleanup);
+        }
+        document.addEventListener('visibilitychange', onVisibilityChange);
+        window.addEventListener('pagehide', onPageHide);
+        document.addEventListener('astro:before-swap', cleanup);
+        motion.addEventListener('change', applyMotionPreference);
+        root.querySelector('[data-we-controls]').hidden = false;
+        select(selected);
+        const tablist = root.querySelector('.we-tabs');
+        tablist.scrollLeft = tablist.scrollWidth;
+        applyMotionPreference();
+      });
+    }
+    window[key] = initialize;
+    document.addEventListener('astro:page-load', initialize);
+    initialize();
+  })();
+</script>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1200" viewBox="0 0 800 1200" role="img" aria-labelledby="title desc">
+<title id="title">From a vague request to a reviewable handoff</title><desc id="desc">Define what changes, preserve what works, get specialist reviews, assign one implementer, and inspect the result in the street before accepting it.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="#ae4936"/></marker></defs>
+<rect width="800" height="1200" fill="#f3efe5"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#183c3c">
+<text x="48" y="49" font-size="23" letter-spacing="3" fill="#ae4936">A BETTER HANDOFF</text>
+<text x="48" y="108" font-family="Georgia,serif" font-size="46">Put the biscuits down.</text>
+<rect x="48" y="142" width="704" height="244" rx="6" fill="#fffdf6" stroke="#ccc8b8"/>
+<text x="72" y="190" font-size="29" font-weight="700">Change</text>
+<text x="72" y="233" font-size="32">Ground biscuit stacks. Clear the jars.</text>
+<line x1="72" y1="257" x2="728" y2="257" stroke="#ddd6c6"/>
+<text x="72" y="303" font-size="29" font-weight="700">Preserve</text>
+<text x="72" y="346" font-size="32">Stall, newspapers, signs, jar positions.</text>
+<path d="M400 387V430" fill="none" stroke="#ae4936" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="48" y="470" font-size="24" letter-spacing="2" fill="#ae4936">SPECIALIST REVIEWS</text>
+<rect x="48" y="495" width="704" height="86" rx="5" fill="#e2e9df"/>
+<text x="72" y="531" font-size="32" font-weight="700">Architect</text>
+<text x="72" y="565" font-size="29">Proportions &amp; placement</text>
+<rect x="48" y="592" width="704" height="86" rx="5" fill="#e2e9df"/>
+<text x="72" y="628" font-size="32" font-weight="700">Set designer</text>
+<text x="72" y="662" font-size="29">Props &amp; physical logic</text>
+<rect x="48" y="689" width="704" height="86" rx="5" fill="#e2e9df"/>
+<text x="72" y="725" font-size="32" font-weight="700">Blender technician</text>
+<text x="72" y="759" font-size="29">Geometry, textures &amp; export</text>
+<path d="M400 776V815" fill="none" stroke="#ae4936" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="48" y="832" width="704" height="108" rx="5" fill="#183c3c"/>
+<text x="400" y="876" text-anchor="middle" font-size="33" font-weight="700" fill="#f3efe5">One combined brief.</text>
+<text x="400" y="919" text-anchor="middle" font-size="33" fill="#f3efe5">One implementer.</text>
+<path d="M400 941V983" fill="none" stroke="#ae4936" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="400" y="1032" text-anchor="middle" font-size="32" font-weight="700">Render both views. Check the export.</text>
+<text x="400" y="1077" text-anchor="middle" font-size="32">Review it in the street.</text>
+<text x="400" y="1153" text-anchor="middle" font-size="24" fill="#62685e">Based on the chai stall revision brief.</text>
+</g></svg>

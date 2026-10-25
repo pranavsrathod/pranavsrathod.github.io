@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="760" viewBox="0 0 1440 760"><rect width="1440" height="760" fill="#f5f1e8"/><style>text{font-family:Arial,sans-serif;fill:#173a3a}.label{font-size:28px}.sub{font-size:22px;fill:#626b63}.title{font-family:Georgia,serif;font-size:49px}.route{fill:none;stroke-width:7;stroke-linejoin:round;stroke-linecap:round}.station{fill:#f5f1e8;stroke:#173a3a;stroke-width:5}</style>
+<text class="title" x="65" y="87">One snack. Several side quests.</text>
+<text class="sub" x="65" y="127">A local-train map of the connections in my head.</text>
+<path class="route" stroke="#a44832" d="M110 225H785Q840 225 840 180V175Q840 155 865 155H1100M785 225Q840 225 840 270V300Q840 325 865 325H1100"/>
+<circle class="station" cx="110" cy="225" r="10"/><circle class="station" cx="360" cy="225" r="10"/><circle class="station" cx="655" cy="225" r="10"/><circle class="station" cx="1100" cy="155" r="10"/><circle class="station" cx="1100" cy="325" r="10"/>
+<text class="label" x="65" y="278">Two wada pavs</text>
+<text class="label" x="274" y="278">Newspaper wrapper</text>
+<text class="label" x="556" y="278">My own newspaper</text>
+<text class="label" x="1130" y="165">Contact</text><text class="sub" x="1040" y="200">Unwrap it</text>
+<text class="label" x="1130" y="335">Blog</text><text class="sub" x="1040" y="370">Pick up an edition</text>
+<path class="route" stroke="#173a3a" d="M110 490H785Q840 490 840 470H1100M785 490Q840 490 840 540V605H1100"/>
+<circle class="station" cx="110" cy="490" r="10"/><circle class="station" cx="655" cy="490" r="10"/><circle class="station" cx="1100" cy="470" r="10"/><circle class="station" cx="1100" cy="605" r="10"/>
+<text class="label" x="65" y="543">Mumbai + pixel games</text>
+<text class="label" x="549" y="543">A street to explore</text>
+<text class="label" x="1130" y="480">Projects</text><text class="sub" x="1035" y="515">A garage studio</text>
+<text class="label" x="1130" y="615">Friends</text><text class="sub" x="912" y="656">Cricket cards → collectible neighbors</text>
+<text class="sub" x="65" y="720">A map of associations, not a build schedule.</text></svg>

@@ -1,0 +1,11 @@
+{
+  "glb_roundtrip_pass": true,
+  "maximum_bounds_error_m": 0.0,
+  "source_outer_bounds_preserved": true,
+  "tea_glass_material_unchanged": true,
+  "article_slot_extras_verified": true,
+  "newspaper_rail_parenting_preserved": true,
+  "clear_jar_alpha_blend_verified": true,
+  "finite_mesh_coordinates": true,
+  "detail_render_source": "reimported GLB"
+}

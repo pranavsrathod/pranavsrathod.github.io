@@ -1,0 +1,171 @@
+### Okay, But How Do I Actually Build This Thing?
+
+At this point, I had a newspaper, a wada pav stall in my imagination, and an increasingly ambitious list of things I wanted to create.
+
+So naturally, I started with Canva.
+
+I found a newspaper template and began putting together the first edition of *The Chai & Code Chronicle*. Once I was happy with it, I exported the design as an image and brought it into Blender, where I used it as a texture for a 3D newspaper model.
+
+Simple enough, right?
+
+Well, not exactly.
+
+Remember how I wanted the Contact page to work? You would click on Contact, and a newspaper-wrapped wada pav would appear. The newspaper would gradually unwrap, revealing two wada pavs and, conveniently, an advertisement containing my contact information.
+
+That was it. That was the entire idea.
+
+Except I couldn't get the newspaper to cooperate.
+
+I wanted it to crumple, fold, collapse, and eventually unwrap in a way that felt natural. But every attempt to deform the geometry seemed to introduce another problem.
+
+I had some beginner-level experience with Blender, but this was considerably more complicated than anything I'd tried before.
+
+I experimented with different approaches, reached out to people who knew more about Blender than I did, and tried to understand how I could manipulate the mesh to create the animation I had imagined.
+
+Meanwhile, I was also modeling the wada pav itself in Blender, because apparently giving myself one complicated task wasn't enough.
+
+Eventually, I hit a wall.
+
+I knew exactly what I wanted the animation to look like. I just couldn't figure out how to get there.
+
+And so, like many of my personal projects, this one found itself temporarily living in that very familiar folder called "I'll come back to this."
+
+### Enter AI. And a Lot of Trial and Error.
+
+Fast forward to early September.
+
+I came across a demonstration of ChatGPT Astra and its capabilities for working with software like Blender.
+
+Now, this caught my attention.
+
+I'd already been experimenting with AI tools, but the possibility of describing a 3D environment in natural language and having a model help construct it was particularly exciting.
+
+I also watched Blender Guru's review of Astra, which was a useful reality check.
+
+The results weren't necessarily as polished or seamless as the demonstrations might have led you to believe. There were limitations, inaccuracies, and plenty of room for improvement.
+
+So I went into it with a healthy amount of skepticism.
+
+I wasn't expecting to type "make me a beautiful Mumbai street" and magically receive a finished portfolio.
+
+Although, admittedly, that would have been nice.
+
+Instead, I started small.
+
+I drew rough sketches of the individual buildings and stalls I wanted along the street. I gathered visual references, thought about their proportions and personalities, and began describing them to Astra.
+
+One building at a time.
+
+One stall at a time.
+
+One increasingly specific instruction at a time.
+
+And to my surprise, it started working.
+
+I could take a rough idea, describe how I wanted it translated into a stylized 3D model, and iterate on the result.
+
+It wasn't perfect. Not even close.
+
+But for the first time, I could see the world I'd been imagining actually beginning to take shape.
+
+### The Five-Hour Waiting Room
+
+Of course, there was a catch.
+
+Tokens.
+
+So. Many. Tokens.
+
+I'd be halfway through refining a building, fixing a texture, or getting a piece of geometry to sit exactly where I wanted it, and suddenly I'd hit my usage limit.
+
+And then I'd be locked out for hours.
+
+Nothing quite humbles your creative ambitions like being told you can't continue working on the thing you were obsessively working on ten minutes ago.
+
+Initially, this was incredibly frustrating.
+
+I had momentum. I had ideas. And every time I felt like I was making real progress, I had to stop.
+
+But those interruptions also made me realize something about the way I was working.
+
+I was approaching the model as though it were a magic box.
+
+I'd describe something, hope it understood what I meant, look at the result, and then spend a bunch of additional prompts correcting things that I could have specified much earlier.
+
+And when every interaction came at the cost of limited usage, that wasn't exactly sustainable.
+
+I needed a better approach.
+
+### Learning to Delegate, Not Just Prompt
+
+Here's something I learned surprisingly quickly.
+
+Telling an AI model to "make a wada pav stall" is a lot like telling someone to "design a house."
+
+Okay. What kind of house?
+
+How big is it? What materials should it use? What's the architectural style? Where are the doors? What does the interior look like? Does it need to accommodate anything specific?
+
+The model could produce *a* result.
+
+But that didn't necessarily mean it would produce *my* result.
+
+And that distinction became increasingly important as the project grew.
+
+Each building had a purpose beyond simply looking nice. The wada pav stall needed to accommodate an interactive newspaper experience. The chai stall needed to display newspapers that visitors could browse. The garage needed to open into an interior space containing an actual interactive project archive.
+
+These weren't just decorative props. They were parts of a larger system.
+
+I realized that if I wanted the models to be coherent, I'd need to start thinking less like someone requesting an image and more like someone directing a production.
+
+So I began experimenting with specialized AI agent roles.
+
+An **architect** could review the structure, proportions, layout, and spatial relationships of a building.
+
+An **interior designer** could focus on composition, materials, objects, and whether the space actually felt believable.
+
+And a **Blender technician** could consider the underlying geometry, modeling constraints, textures, and whether the resulting asset could work inside the larger Three.js environment.
+
+Rather than asking one model to do everything at once, I could break the problem into smaller responsibilities, establish constraints, and use the different reviews to guide the next iteration.
+
+And I still had to make the final decisions.
+
+If a model looked wrong, I had to explain what was wrong. If an object was floating in midair, I had to catch it. If the architecture looked technically fine but didn't resemble the kind of Mumbai street I had in mind, I had to redirect it.
+
+The agents helped me examine the work from different perspectives, but they weren't substitutes for my own judgment.
+
+### The Creative Director Is Still Responsible
+
+I think this was one of the biggest lessons I took away from the project.
+
+**AI can help execute a creative vision, but it cannot take responsibility for that vision.**
+
+At least, not in the way I needed it to.
+
+It could misunderstand instructions. It could produce geometry that looked plausible from one angle and completely wrong from another. It could suggest changes that solved one issue while introducing three more.
+
+And sometimes, it could confidently tell me something was fixed when it absolutely wasn't.
+
+The responsibility to recognize those problems was still mine.
+
+The more I worked with these tools, the more I realized that using AI effectively wasn't just about knowing what to ask.
+
+It was about knowing how to define the problem, how to communicate constraints, how to divide responsibilities, and, perhaps most importantly, how to evaluate the result.
+
+I also began to appreciate the difference between accepting an output because it *looks finished* and accepting it because I actually understand what it does and whether it meets my requirements.
+
+If I approved a model, a design decision, or a piece of generated code, I was taking ownership of it.
+
+I couldn't simply point at the AI and say, "Well, that's what it gave me."
+
+This was still my project.
+
+My name was going on it.
+
+And I wanted to be proud of what I was putting into the world.
+
+The funny thing is, I started this project wanting to build a small pixel-inspired version of Mumbai.
+
+Somewhere along the way, I ended up learning a whole lot about delegation, communication, creative direction, and the importance of knowing when to tell a very confident AI model that it has absolutely no idea what it's talking about.
+
+*[To be continued: Turning individual Blender models into an actual interactive Three.js world, and all the things that went wrong along the way.]*

@@ -1,0 +1,198 @@
+<section id="camera-ownership-demo" class="not-prose" aria-label="Interactive route-token explanation">
+  <header>
+    <p class="co-kicker">A race you can interrupt</p>
+    <h3>One camera. The newest request.</h3>
+    <p>Request two destinations before resolving their releases. Watch which request gets the camera.</p>
+  </header>
+
+  <div class="co-rule">
+    <code>requestToken === latestToken</code>
+    <span class="co-token">Latest token <output data-latest-token>0</output></span>
+  </div>
+
+  <div class="co-map">
+    <article class="co-destination" data-destination="Projects" data-state="idle">
+      <p class="co-label">Destination</p>
+      <h4>Projects</h4>
+      <p data-request-state="Projects">No request yet.</p>
+    </article>
+    <article class="co-owner">
+      <p class="co-label">Camera owner</p>
+      <strong data-camera-owner>Street</strong>
+      <p data-camera-status>Ready for a request.</p>
+    </article>
+    <article class="co-destination" data-destination="Contact" data-state="idle">
+      <p class="co-label">Destination</p>
+      <h4>Contact</h4>
+      <p data-request-state="Contact">No request yet.</p>
+    </article>
+  </div>
+
+  <div class="co-controls" aria-label="Control the explanatory model">
+    <button type="button" data-request="Projects" disabled>Request Projects</button>
+    <button type="button" data-request="Contact" disabled>Request Contact</button>
+    <button type="button" data-resolve disabled>Resolve releases</button>
+    <button type="button" data-reset disabled>Reset</button>
+  </div>
+
+  <ol class="co-log" data-event-log role="log" aria-label="Last three model events" aria-live="polite" aria-atomic="true">
+    <li>Street owns the camera. No releases are pending.</li>
+  </ol>
+  <p class="co-fallback" data-static-explanation>The latest request may acquire the camera only after releases complete; an older token is rejected.</p>
+  <footer>
+    <p>Explanatory model of the route-token check; no live application state.</p>
+    <p>Actual controllers still stop obsolete tweens and release camera and street-input ownership elsewhere.</p>
+  </footer>
+</section>
+
+<style is:inline>
+  #camera-ownership-demo{box-sizing:border-box;max-width:1000px;margin:2.5rem auto;padding:28px;color:var(--text-main,#142d3d);background:var(--bg-main,#fffefa);border:1px solid color-mix(in srgb,var(--text-main,#142d3d) 22%,transparent);font:16px/1.45 var(--font-sans,Arial,sans-serif);overflow-wrap:anywhere}
+  #camera-ownership-demo *{box-sizing:border-box}
+  #camera-ownership-demo [hidden]{display:none!important}
+  #camera-ownership-demo header{position:static;display:block;margin:0 0 24px;padding:0;background:none;border:0;text-align:left}
+  #camera-ownership-demo p{margin:0;line-height:1.45}
+  #camera-ownership-demo .co-kicker{margin-bottom:8px;color:var(--accent,#087d80);font-size:14px;font-weight:700}
+  #camera-ownership-demo h3{margin:0 0 10px;color:var(--text-main,#142d3d);font:400 clamp(28px,3.7vw,39px)/1.12 var(--font-serif,Georgia,serif);letter-spacing:-.5px;border:0;padding:0}
+  #camera-ownership-demo header>p:last-child{max-width:640px;color:var(--text-muted,#5b686c)}
+  #camera-ownership-demo .co-rule{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 16px}
+  #camera-ownership-demo code{padding:0;background:none;color:var(--text-main,#142d3d);font:14px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}
+  #camera-ownership-demo .co-token{display:inline-flex;align-items:center;gap:10px;padding:6px 10px;border:1px solid color-mix(in srgb,var(--accent,#087d80) 50%,transparent);color:var(--accent,#087d80);font-size:14px;font-weight:700}
+  #camera-ownership-demo .co-token output{font-variant-numeric:tabular-nums;font-size:20px;line-height:1}
+  #camera-ownership-demo .co-map{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) minmax(0,1fr);gap:14px;margin-bottom:18px;align-items:stretch}
+  #camera-ownership-demo article{margin:0;padding:20px 18px;background:var(--bg-muted,#f5f3ed);border:1px solid transparent}
+  #camera-ownership-demo .co-label{margin-bottom:10px;color:var(--text-muted,#5b686c);font-size:14px}
+  #camera-ownership-demo h4{margin:0 0 10px;padding:0;color:var(--text-main,#142d3d);font:700 20px/1.2 var(--font-sans,Arial,sans-serif);letter-spacing:0;text-transform:none}
+  #camera-ownership-demo .co-destination>p:last-child{min-height:44px;font-size:15px;color:var(--text-muted,#5b686c)}
+  #camera-ownership-demo .co-destination[data-state="pending"]{border-color:var(--accent,#087d80)}
+  #camera-ownership-demo .co-destination[data-state="owner"]{border-bottom:4px solid var(--accent,#087d80)}
+  #camera-ownership-demo .co-destination[data-state="stale"]{border-style:dashed;border-color:color-mix(in srgb,var(--text-main,#142d3d) 35%,transparent)}
+  #camera-ownership-demo .co-owner{border-top:4px solid var(--accent,#087d80);text-align:center;background:color-mix(in srgb,var(--accent,#087d80) 8%,var(--bg-main,#fffefa))}
+  #camera-ownership-demo .co-owner strong{display:block;margin:0 0 10px;font:400 clamp(30px,4vw,44px)/1.1 var(--font-serif,Georgia,serif);color:var(--text-main,#142d3d)}
+  #camera-ownership-demo .co-owner>p:last-child{font-size:14px;color:var(--text-muted,#5b686c)}
+  #camera-ownership-demo .co-controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:18px}
+  #camera-ownership-demo button{appearance:none;min-height:46px;margin:0;padding:10px 12px;border:1px solid color-mix(in srgb,var(--text-main,#142d3d) 35%,transparent);border-radius:0;background:var(--bg-main,#fffefa);color:var(--text-main,#142d3d);font:600 15px/1.3 var(--font-sans,Arial,sans-serif);cursor:pointer}
+  #camera-ownership-demo button[data-resolve]{border-color:var(--accent,#087d80);color:var(--accent,#087d80)}
+  #camera-ownership-demo button:not(:disabled):hover{background:var(--bg-muted,#f5f3ed)}
+  #camera-ownership-demo button:focus-visible{outline:3px solid var(--accent,#087d80);outline-offset:3px}
+  #camera-ownership-demo button:disabled{opacity:.45;cursor:default}
+  #camera-ownership-demo .co-log{display:grid;align-content:start;gap:5px;min-height:99px;margin:0;padding:15px 18px;list-style:none;background:var(--bg-muted,#f5f3ed);border-left:3px solid var(--accent,#087d80);font-size:14px;line-height:1.45}
+  #camera-ownership-demo .co-log li{margin:0;padding:0}
+  #camera-ownership-demo .co-fallback{margin-top:14px;font-size:15px}
+  #camera-ownership-demo footer{display:block;max-width:none;margin:20px 0 0;padding:14px 0 0;border-top:1px solid color-mix(in srgb,var(--text-main,#142d3d) 20%,transparent);color:var(--text-muted,#5b686c);font:14px/1.5 var(--font-sans,Arial,sans-serif)}
+  #camera-ownership-demo footer p+p{margin-top:5px}
+  @media(max-width:650px){
+    #camera-ownership-demo{padding:22px 16px}
+    #camera-ownership-demo .co-map{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    #camera-ownership-demo .co-owner{grid-column:1/-1;grid-row:1}
+    #camera-ownership-demo article{padding:16px 13px}
+    #camera-ownership-demo .co-destination>p:last-child{min-height:65px}
+    #camera-ownership-demo .co-controls{grid-template-columns:repeat(2,minmax(0,1fr))}
+    #camera-ownership-demo .co-log{min-height:122px}
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    function initializeCameraOwnership() {
+      const root = document.getElementById('camera-ownership-demo');
+      if (!root || root.dataset.initialized === 'true') return;
+      root.dataset.initialized = 'true';
+      const requests = [...root.querySelectorAll('[data-request]')];
+      const resolveButton = root.querySelector('[data-resolve]');
+      const resetButton = root.querySelector('[data-reset]');
+      const latestOutput = root.querySelector('[data-latest-token]');
+      const ownerOutput = root.querySelector('[data-camera-owner]');
+      const ownerStatus = root.querySelector('[data-camera-status]');
+      const eventLog = root.querySelector('[data-event-log]');
+      let latestToken = 0;
+      let owner = 'Street';
+      let pending = [];
+      let decisions = new Map();
+      let events = ['Street owns the camera. No releases are pending.'];
+
+      function log(message) {
+        events.push(message);
+        events = events.slice(-3);
+      }
+      function render() {
+        latestOutput.textContent = String(latestToken);
+        ownerOutput.textContent = owner;
+        ownerStatus.textContent = pending.length
+          ? owner + ' stays owner while releases are pending.'
+          : 'No releases pending.';
+        resolveButton.disabled = pending.length === 0;
+        for (const name of ['Projects', 'Contact']) {
+          const card = root.querySelector('[data-destination="' + name + '"]');
+          const label = root.querySelector('[data-request-state="' + name + '"]');
+          const waiting = pending.filter(request => request.destination === name);
+          const decision = decisions.get(name);
+          if (waiting.length) {
+            const request = waiting[waiting.length - 1];
+            card.dataset.state = 'pending';
+            label.textContent = 'Waiting · #' + request.token + (request.token === latestToken ? ' is current.' : ' is stale.');
+          } else if (owner === name) {
+            card.dataset.state = 'owner';
+            label.textContent = 'Owns camera' + (decision ? ' · #' + decision.token : '') + '.';
+          } else if (decision && decision.result === 'stale') {
+            card.dataset.state = 'stale';
+            label.textContent = 'Dropped #' + decision.token + ' · stale token.';
+          } else {
+            card.dataset.state = 'idle';
+            label.textContent = decision ? 'Released the camera.' : 'No request yet.';
+          }
+        }
+        eventLog.replaceChildren(...events.map(message => {
+          const item = document.createElement('li');
+          item.textContent = message;
+          return item;
+        }));
+      }
+      function request(destination) {
+        const token = ++latestToken;
+        pending.push({destination, token});
+        log(destination + ' #' + token + ' waits for releases; ' + owner + ' still owns camera.');
+        render();
+      }
+      function resolveReleases() {
+        if (!pending.length) return;
+        const completed = pending;
+        pending = [];
+        for (const request of completed) {
+          if (request.token !== latestToken) {
+            decisions.set(request.destination, {token:request.token, result:'stale'});
+            log('Dropped ' + request.destination + ' #' + request.token + ': stale token.');
+          } else {
+            const previous = owner;
+            owner = request.destination;
+            decisions.set(owner, {token:request.token, result:'owner'});
+            log(previous + ' released; ' + owner + ' #' + request.token + ' acquired camera.');
+          }
+        }
+        render();
+      }
+      function reset() {
+        latestToken = 0;
+        owner = 'Street';
+        pending = [];
+        decisions = new Map();
+        events = ['Reset: Street owns the camera.'];
+        render();
+      }
+      for (const button of requests) {
+        button.disabled = false;
+        button.addEventListener('click', () => request(button.dataset.request));
+      }
+      resolveButton.addEventListener('click', resolveReleases);
+      resetButton.disabled = false;
+      resetButton.addEventListener('click', reset);
+      root.querySelector('[data-static-explanation]').hidden = true;
+      render();
+    }
+    document.addEventListener('astro:page-load', initializeCameraOwnership);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeCameraOwnership, {once:true});
+    } else {
+      initializeCameraOwnership();
+    }
+  })();
+</script>

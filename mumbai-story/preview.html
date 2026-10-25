@@ -1,0 +1,158 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Two Wada Pavs, a Newspaper, and a City Made of Pixels — Draft</title><meta name="description" content="Two wada pavs, an uncooperative newspaper, and a suspiciously well-documented chai stall. How I built a little Mumbai, one side quest at a time."><style>:root{color-scheme:light;--paper:#f5f1e8;--ink:#173a3a;--muted:#626b63;--rule:#c7cabb;--red:#a44832}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,'Times New Roman',serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:4px}
+a:hover{color:var(--red)}
+.masthead{max-width:1160px;margin:auto;padding:27px 36px 20px;display:flex;justify-content:space-between;gap:20px;border-bottom:1px solid var(--ink);font:11px/1.5 Arial,Helvetica,sans-serif;letter-spacing:1.6px;text-transform:uppercase}
+.masthead strong{font-weight:700;letter-spacing:1.8px}
+.masthead span{color:var(--red)}
+header.story-header{max-width:1000px;margin:0 auto;padding:65px 30px 36px}
+.eyebrow{font:11px/1.5 Arial,Helvetica,sans-serif;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin:0 0 20px}
+h1{max-width:940px;margin:0;font-size:clamp(40px,5.4vw,73px);line-height:1.035;letter-spacing:-2px;font-weight:500;text-wrap:balance}
+.dek{max-width:680px;margin:25px 0 28px;font-size:21px;line-height:1.55;color:#4d6058}
+.act-nav{display:flex;flex-wrap:wrap;gap:10px 25px;font:11px/1.6 Arial,Helvetica,sans-serif;letter-spacing:.5px;text-transform:uppercase}
+.act-nav a{text-decoration:none;border-bottom:1px solid var(--rule);padding:4px 0}
+.article{max-width:1040px;margin:0 auto;padding:0 20px 65px;font-size:19px;line-height:1.72}
+.article>p,.article>h2,.article>h3,.article>blockquote,.article>ul,.article>ol,.article>details{max-width:680px;margin-left:auto;margin-right:auto}
+.article>p{margin-top:0;margin-bottom:23px}
+.article h2{font-size:38px;line-height:1.17;font-weight:500;letter-spacing:-.7px;margin-top:70px;margin-bottom:30px;padding-top:25px;border-top:1px solid var(--rule);text-wrap:balance}
+.article h3{font-size:26px;line-height:1.2;margin-top:35px;margin-bottom:19px;font-weight:500}
+.article strong{font-weight:700}
+figure{margin:35px auto 40px;break-inside:avoid}
+figure:first-child{margin-top:0}
+img,video{display:block;max-width:100%;height:auto}
+figure>img,figure>picture>img{margin:0 auto}
+img[src*="newspaper.webp"]{max-width:440px}
+img[src*="handoff.png"]{max-width:640px}
+figcaption{max-width:760px;margin:12px auto 0;color:var(--muted);font:12px/1.6 Arial,Helvetica,sans-serif;text-align:center}
+video{background:#e4e1d7;outline:1px solid #d4d3c6;outline-offset:-1px}
+details{border-block:1px solid var(--rule);margin-top:32px;margin-bottom:30px;padding:15px 0;font:14px/1.6 Arial,Helvetica,sans-serif}
+summary{cursor:pointer;font-weight:600}
+details figure{margin:20px 0 8px}
+footer{max-width:1080px;margin:0 auto;padding:24px 20px 40px;border-top:1px solid var(--ink);display:flex;justify-content:space-between;gap:20px;color:var(--muted);font:11px/1.6 Arial,Helvetica,sans-serif}
+:focus-visible{outline:2px solid var(--red);outline-offset:5px}
+@media(max-width:640px){.masthead{padding:20px;gap:12px;font-size:9px;letter-spacing:.8px}.masthead>div:last-child{text-align:right}header.story-header{padding:40px 22px 27px}h1{font-size:43px;letter-spacing:-1px}.dek{font-size:18px;margin-top:22px}.act-nav{gap:10px 18px;font-size:10px}.article{padding-inline:20px;font-size:18px;line-height:1.7}.article h2{font-size:31px;margin-top:50px;margin-bottom:24px;padding-top:21px}.article h3{font-size:24px}.article p{margin-bottom:21px}figure{margin:28px auto 30px}figcaption{font-size:11px;line-height:1.65}footer{margin-inline:20px;padding-inline:0;flex-direction:column;gap:8px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{.masthead span,.act-nav,footer{display:none}body{background:white;color:black}.article{font-size:11pt;max-width:100%}h1{font-size:32pt}.article h2{font-size:22pt}figure{max-width:85%}details{display:none}video{max-height:320px}}
+</style></head> <body> <div class="masthead"><div><strong>Chai &amp; Code Chronicle</strong><br>Notes from the neighborhood</div><div><span>Unpublished draft</span><br>Pranav Rathod · Revised 19 October 2026</div></div> <header class="story-header"><p class="eyebrow">Creativity / Mumbai / Working with AI</p><h1>Two Wada Pavs, a Newspaper, and a City Made of Pixels</h1><p class="dek">Two wada pavs, an uncooperative newspaper, and a suspiciously well-documented chai stall. How I built a little Mumbai, one side quest at a time.</p><nav class="act-nav" aria-label="The three acts"><a href="#act-i-naturally-i-bought-two">I · The spark</a><a href="#act-ii-the-five-hour-waiting-room">II · The waiting room</a><a href="#act-iii-a-street-needs-people">III · The neighborhood</a></nav></header> <main><article class="article"><figure><img src="./public/BlogPhotos/mumbai-story/street-now.webp" alt="The Mumbai portfolio street, with its garage, newspaper kiosk, wada pav stall, and illustrated pedestrians." width="1440" height="900" fetchpriority="high" style="width:100%;height:auto;"/><figcaption>A little Mumbai on the internet. Captured from the local build on October 17, 2026.</figcaption></figure>
+<h2 id="act-i-naturally-i-bought-two">Act I: Naturally, I Bought Two</h2>
+<p>Last year, while visiting India, I was on my way to my grandma’s place when we stopped for wada pav.</p>
+<p>Naturally, I bought two.</p>
+<p>They came wrapped in newspaper. I ate the first one without giving the packaging a second thought. When there’s a freshly made wada pav in front of you, your priorities are pretty clear.</p>
+<p>But when I reached for the second, an advertisement caught my eye. I don’t remember what it said. I do remember that, for some reason, it stayed with me after the snack was gone.</p>
+<p>A few months later, in a Mobile Game Development class, I kept noticing the personality packed into games like <em>EarthBound</em>, <em>A Link to the Past</em>, and <em>Streets of Rage</em>. Tiny sprites. Expressive worlds. An unreasonable amount of affection for a collection of squares.</p>
+<p>I was studying Computer Science with a focus on Multimedia and Creative Technologies. I wanted to make something that put the <em>creative</em> in Creative Technologist.</p>
+<p>And if I was building a little world about myself, shouldn’t it reflect where I came from?</p>
+<p>I grew up in the suburbs of Mumbai: roadside stalls, rickshaws, crowded signs, chai breaks, and a thousand things happening at once.</p>
+<p>Remember Ishaan in <em>Taare Zameen Par</em>, wandering around Mumbai, completely absorbed in everything happening around him? That’s a pretty good description of how I’ve always liked experiencing the world. Finding something interesting in what everyone else might walk past.</p>
+<p>My existing portfolio already had an editorial, magazine-like feel. I liked it. I just started wondering what would happen if its pages also existed as places.</p>
+<p>Usually, Contact is a few links. Email, LinkedIn, GitHub. Maybe a form if you’re feeling fancy.</p>
+<p>I wanted mine wrapped around a wada pav.</p>
+<p>Obviously, this required my own newspaper: <strong>The Chai &amp; Code Chronicle</strong>. My projects. My interests. My work. Apparently, the most pressing news of the day consisted mostly of me.</p>
+<p>Not going to lie, I felt a little like Oprah.</p>
+<p><em>You get a headline! Everybody gets a headline!</em></p>
+<figure><img src="./public/BlogPhotos/mumbai-story/newspaper.webp" alt="The Chai &#38; Code Chronicle newspaper artwork, with personal stories and a contact advertisement." width="1000" height="1333" loading="lazy" style="width:100%;max-height:680px;object-fit:contain;"/><figcaption>An entire newspaper about myself. A very modest first step.</figcaption></figure>
+<p>Then I realized I had a newspaper, a blog, and a fairly serious interest in chai. The blog could live at a tea stall. My projects could occupy a garage studio.</p>
+<p>This is roughly how a snack became a neighborhood.</p>
+<figure><picture><source media="(max-width: 640px)" srcset="./public/BlogPhotos/mumbai-story/origin-map-mobile.webp" width="720" height="1120"/><img src="./public/BlogPhotos/mumbai-story/origin-map.webp" alt="A route map of creative associations: a wada pav wrapper becomes the Chronicle, Contact and Blog; Mumbai and pixel games suggest a street; friends and cricket cards suggest collectibles." width="1440" height="760" loading="lazy" style="width:100%;height:auto;"/></picture><figcaption>No master plan. Just one idea finding an excuse to become another.</figcaption></figure>
+<h2 id="act-ii-the-five-hour-waiting-room">Act II: The Five-Hour Waiting Room</h2>
+<p>I started in Canva, using a newspaper template, then brought the exported image into Blender as a texture. All I needed was for it to fold, crumple, and unwrap around two wada pavs.</p>
+<p>The newspaper had other plans.</p>
+<p>I had beginner-level Blender experience. Natural-looking deformation was beyond what I could manage, even after experimenting and asking people for help. The project entered that familiar folder: <em>I’ll come back to this.</em></p>
+<p>In early September, I saw Astra working with Blender. I wasn’t expecting “make me a beautiful Mumbai street” to produce a finished portfolio. Although, admittedly, that would have been nice.</p>
+<p>I gathered references, drew rough sketches, and worked through one building at a time. For the first time, the place in my head was beginning to exist outside it.</p>
+<p>Then I hit my usage limit.</p>
+<h3 id="a-budget-becomes-a-brief">A Budget Becomes a Brief</h3>
+<p>I called these interruptions the <strong>five-hour token blackout</strong>. Ten minutes earlier, I’d been obsessing over a model. Now I was sitting in the waiting room.</p>
+<p>There was technically a solution: pay for more usage.</p>
+<p>But I was working with my existing ChatGPT Plus subscription, and I was absolutely not about to justify an upgrade because I couldn’t get a virtual chai stall to look right.</p>
+<p>I’d already committed to building Mumbai on the internet. I needed to draw the line somewhere.</p>
+<p>So I started using the waiting time to review, sketch, and write things down.</p>
+<p>Increasingly extensive Markdown things.</p>
+<p>What should change? What should stay? Which references mattered? What would count as finished? I’d spent too many interactions explaining decisions halfway through making them. Writing a handoff forced me to notice decisions I hadn’t made at all.</p>
+<p>I learned to write better documentation because I was too stubborn to pay for more tokens.</p>
+<h3 id="my-imaginary-chai-stall-gets-a-production-department">My Imaginary Chai Stall Gets a Production Department</h3>
+<p>Those documents gave specialized AI reviewers something specific to examine: an architect for proportions and placement, a set designer for composition and props, and a Blender technician for geometry and exports. One implementer could work from a combined brief, instead of several agents editing the same scene.</p>
+<p>At one point, the biscuits were floating inside their jars.</p>
+<p>This was not the atmosphere I was going for.</p>
+<p>The next brief asked for grounded golden stacks, clearer glass, and room below the lids. Keep the stall. Keep the newspapers. Please put the biscuits down.</p>
+<p>The garage taught me a different lesson. A cleaner studio had started looking like a room behind a shutter. I wanted a converted Mumbai workshop. Supports, tools, conduit, and hanging headphones helped bring that character back.</p>
+<p>“Fixed” and “feels right” were becoming two different questions.</p>
+<section data-workflow-notebook aria-label="Creative revision notebook"> <header data-notebook-header> <p data-kicker>Notes from my imaginary production department</p> <h3>The loop behind the little world.</h3> <ol data-loop aria-label="Creative revision loop"> <li><span>I notice</span><b aria-hidden="true">→</b></li> <li><span>I write the brief</span><b aria-hidden="true">→</b></li> <li><span>AI builds &amp; checks</span><b aria-hidden="true">→</b></li> <li><span>I look again</span><b aria-hidden="true">↶</b></li> </ol> <p data-roles>Architect · Set designer · Blender technician. One scene writer. My judgment comes back around.</p> </header> <div data-case-buttons hidden aria-label="Choose a revision story"> <button type="button" data-case-button="paper" aria-pressed="true">Paper problems</button><button type="button" data-case-button="garage" aria-pressed="false">Garage identity</button><button type="button" data-case-button="biscuits" aria-pressed="false">Biscuit gravity</button> </div> <div data-case-container> <details data-case="paper" open> <summary>The newspaper had other plans</summary> <div data-case-inner> <div data-receipt> <h4>The newspaper had other plans</h4> <dl> <dt>The idea</dt><dd>A wrapper opens around two wada pavs, then becomes readable contact information.</dd> <dt>The surprise</dt><dd>Corner curls made a boat. Separate panels made a box. An open surround still left the food visible.</dd> <dt>The smaller brief</dt><dd>One continuous sheet. Hide the pavs first. Spread unevenly, then settle flat.</dd> <dt>What I inspected</dt><dd>Inspect the motion between endpoints, not just the final pose. Topology and clearance checks help; my eyes still get a vote.</dd> </dl> </div> <figure data-inspection> <img data-case-image src="./public/BlogPhotos/mumbai-story/workflow-paper-00.webp" alt="Real production newspaper geometry gathered over the wada pavs." width="800" height="425" loading="lazy"> <div data-scrub hidden> <label for="paper-pose-slider">Inspect the wrapper <output data-pose-name>Wrapped</output></label> <input id="paper-pose-slider" aria-label="Newspaper inspection pose" type="range" min="0" max="4" value="0" step="1" aria-valuetext="Wrapped"> <div data-pose-ends aria-hidden="true"><span>Wrapped</span><span>Flat</span></div> <p data-pose-note aria-live="polite">Does the parcel actually hide both pavs?</p> </div> <figcaption>Five captured poses from the actual browser geometry, October 19. Art-directed motion, not simulated cloth.</figcaption> </figure> </div> <details data-evidence><summary>From the project notebook</summary><p>CONTACT_EXPERIENCE.md, line 55; INTERVIEW_STUDY_GUIDE.md, lines 318–326; HANDOFF.md, lines 420–442.</p></details> </details><details data-case="garage"> <summary>The garage identity crisis</summary> <div data-case-inner> <div data-receipt> <h4>The garage identity crisis</h4> <dl> <dt>The idea</dt><dd>A Mumbai garage converted into my creative workspace.</dd> <dt>The surprise</dt><dd>The cleaner studio started reading as a room behind a shutter.</dd> <dt>The smaller brief</dt><dd>Keep the facade, footprint, and monitor. Bring back workshop supports, conduit, tools, and hanging headphones.</dd> <dt>What I inspected</dt><dd>Inspect furniture joins, supported props, and the actual monitor camera path. A valid export still has to feel like this place.</dd> </dl> </div> <figure data-inspection> <img data-case-image src="./public/BlogPhotos/mumbai-story/workflow-garage.webp" alt="Saved Blender render of the converted garage studio workbench with tools, supports and personal objects." width="1000" height="1000" loading="lazy">  <figcaption>Saved model render of the refined workspace. This is not a screenshot of the earlier failure.</figcaption> </figure> </div> <details data-evidence><summary>From the project notebook</summary><p>INTERVIEW_STUDY_GUIDE.md, lines 518–530; STUDIO.md, line 41; HANDOFF.md, lines 176 and 214.</p></details> </details><details data-case="biscuits"> <summary>Biscuits versus gravity</summary> <div data-case-inner> <div data-receipt> <h4>Biscuits versus gravity</h4> <dl> <dt>The idea</dt><dd>A lived-in chai counter, with biscuits you could recognize through the jars.</dd> <dt>The surprise</dt><dd>Biscuit pieces were floating inside their jars.</dd> <dt>The smaller brief</dt><dd>Ground golden stacks on the jar bases. Leave headspace. Clarify the glass. Keep the rest of the stall.</dd> <dt>What I inspected</dt><dd>Review both render angles, preserve the newspapers and jar positions, then export and validate. Stop when the named change is done.</dd> </dl> </div> <figure data-inspection> <img data-case-image src="./public/BlogPhotos/mumbai-story/workflow-biscuits.webp" alt="Saved model detail of grounded golden biscuit stacks in the chai stall jars." width="1000" height="686" loading="lazy">  <figcaption>Saved biscuit-jar detail after refinement.</figcaption> </figure> </div> <details data-evidence><summary>From the project notebook</summary><p>chai-code-chronicle/reviews/blog-revision/revision-brief.md, lines 1–37; agents/05_REVIEW_PROTOCOL.md.</p></details> </details> </div> <p data-process-note>Specialist roles describe the documented workflow; the worklog records which reviews actually ran. A check passing and another agent agreeing are different kinds of evidence.</p> </section> <style>
+[data-workflow-notebook]{margin:38px auto 44px;padding:30px 28px;background:#eceade;color:#173a3a;font:16px/1.5 Arial,Helvetica,sans-serif;border-block:1px solid #bcc5b7;max-width:1000px;box-sizing:border-box}
+[data-workflow-notebook] *{box-sizing:border-box}
+[data-workflow-notebook] [hidden]{display:none!important}
+[data-workflow-notebook] [data-kicker]{font:11px/1.6 Arial,sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:#a44832;margin:0 0 9px}
+[data-workflow-notebook] h3{font:400 34px/1.1 Georgia,serif;letter-spacing:-.5px;margin:0 0 26px;border:0;padding:0}
+[data-workflow-notebook] [data-loop]{display:flex;list-style:none;margin:0;padding:0;gap:10px;justify-content:space-between}
+[data-workflow-notebook] [data-loop] li{display:flex;align-items:center;gap:13px;font-size:15px;font-weight:600}
+[data-workflow-notebook] [data-loop] b{font-size:24px;color:#a44832;font-weight:400}
+[data-workflow-notebook] [data-roles]{font-size:13px;line-height:1.6;color:#59675b;margin:16px 0 25px;max-width:100%}
+[data-workflow-notebook] [data-case-buttons]{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+[data-workflow-notebook] button{appearance:none;background:transparent;color:#173a3a;border:1px solid #a8b1a3;font:14px/1.3 Arial,sans-serif;padding:12px 15px;cursor:pointer;min-height:44px}
+[data-workflow-notebook] button[aria-pressed=true]{background:#173a3a;color:#f5f1e8;border-color:#173a3a}
+[data-workflow-notebook] button:focus-visible,[data-workflow-notebook] input:focus-visible,[data-workflow-notebook] summary:focus-visible{outline:2px solid #a44832;outline-offset:4px}
+[data-workflow-notebook] details{font:inherit;max-width:none;margin:0 0 16px;border:0;padding:0}
+[data-workflow-notebook] summary{cursor:pointer;padding:10px 0;font-weight:600}
+[data-workflow-notebook][data-enhanced] [data-case]>summary{display:none}
+[data-workflow-notebook] [data-case-inner]{display:grid;grid-template-columns:1fr 1.05fr;gap:24px;align-items:start;background:#faf7ee;padding:23px}
+[data-workflow-notebook] h4{font:400 26px/1.15 Georgia,serif;margin:0 0 21px}
+[data-workflow-notebook] dl{margin:0}
+[data-workflow-notebook] dt{font:600 11px/1.5 Arial,sans-serif;letter-spacing:1px;text-transform:uppercase;color:#a44832;margin:15px 0 5px}
+[data-workflow-notebook] dt:first-child{margin-top:0}
+[data-workflow-notebook] dd{margin:0;font-size:15px;line-height:1.55}
+[data-workflow-notebook] figure{margin:0;min-width:0}
+[data-workflow-notebook] img{width:100%;height:auto;display:block;margin:0}
+[data-workflow-notebook] figcaption{font:12px/1.5 Arial,sans-serif;margin:12px 0 0;text-align:left;color:#626b63}
+[data-workflow-notebook] [data-scrub]{margin-top:16px}
+[data-workflow-notebook] label{display:flex;justify-content:space-between;gap:12px;font-size:13px;font-weight:600}
+[data-workflow-notebook] output{font-weight:400;color:#a44832}
+[data-workflow-notebook] input{display:block;width:100%;height:32px;margin:5px 0 0;accent-color:#173a3a;cursor:ew-resize}
+[data-workflow-notebook] [data-pose-ends]{display:flex;justify-content:space-between;color:#626b63;font-size:11px}
+[data-workflow-notebook] [data-pose-note]{font:15px/1.5 Georgia,serif;margin:14px 0 0;min-height:45px}
+[data-workflow-notebook] [data-evidence]{margin:0;padding:10px 23px;background:#faf7ee;border-top:1px solid #dbdfd1}
+[data-workflow-notebook] [data-evidence] summary{font:12px/1.5 Arial,sans-serif;padding:0}
+[data-workflow-notebook] [data-evidence] p{font-size:12px;overflow-wrap:anywhere;margin:10px 0 0}
+[data-workflow-notebook] [data-process-note]{font:12px/1.65 Arial,sans-serif;margin:17px 0 0;color:#59675b;max-width:100%}
+@media(max-width:680px){[data-workflow-notebook]{padding:23px 17px}[data-workflow-notebook] h3{font-size:29px}[data-workflow-notebook] [data-loop]{display:grid;grid-template-columns:1fr 1fr;gap:10px 15px}[data-workflow-notebook] [data-loop] li{justify-content:space-between;font-size:14px}[data-workflow-notebook] [data-case-inner]{grid-template-columns:1fr;padding:18px;gap:23px}[data-workflow-notebook] dd{font-size:16px}[data-workflow-notebook] button{font-size:13px;padding:11px 10px}[data-workflow-notebook] [data-evidence]{padding:12px 18px}[data-workflow-notebook] h4{font-size:27px}[data-workflow-notebook] [data-roles]{font-size:13px}}
+@media print{[data-workflow-notebook] [data-case-buttons],[data-workflow-notebook] input{display:none!important}[data-workflow-notebook] [data-case]{display:block!important}[data-workflow-notebook] [data-case-inner]{break-inside:avoid}}
+</style> <script>
+(()=>{
+ const labels=['Wrapped','Loosen','Spread','Settle','Flat'];
+ const notes=['Does the parcel actually hide both pavs?','The folds should open without turning into a boat.','One connected sheet, with an uneven bloom.','Move the paper clear of the food before lowering it.','Readable artwork, with the contact links revealed at the end.'];
+ for(const root of document.querySelectorAll('[data-workflow-notebook]:not([data-enhanced])')){
+   const entries=[...root.querySelectorAll('[data-case]')],buttons=[...root.querySelectorAll('[data-case-button]')];
+   function select(id){for(const entry of entries){entry.hidden=entry.dataset.case!==id;entry.open=true;}for(const button of buttons)button.setAttribute('aria-pressed',String(button.dataset.caseButton===id));}
+   for(const button of buttons)button.addEventListener('click',()=>select(button.dataset.caseButton));
+   root.querySelector('[data-case-buttons]').hidden=false;root.dataset.enhanced='true';select('paper');
+   const slider=root.querySelector('input[type=range]'),image=root.querySelector('[data-case=paper] img');
+   const base=image.getAttribute('src').replace('workflow-paper-00.webp','');
+   const update=()=>{const i=Number(slider.value);image.src=base+'workflow-paper-'+String(i).padStart(2,'0')+'.webp';image.alt='Actual newspaper inspection pose: '+labels[i]+'.';slider.setAttribute('aria-valuetext',labels[i]);root.querySelector('[data-pose-name]').textContent=labels[i];root.querySelector('[data-pose-note]').textContent=notes[i];};
+   slider.addEventListener('input',update);root.querySelector('[data-scrub]').hidden=false;
+ }
+})();
+</script>
+<p>The notebook below the cheerful little world was full of these loops. Sometimes the brief needed to change. Sometimes the implementation did. Sometimes another agent agreed with the first one and they were both confidently missing the point.</p>
+<p>I still had to look.</p>
+<details><summary>From the original newspaper experiments</summary><figure><video aria-label="Early Blender newspaper animation test" controls playsinline preload="none" poster="./public/BlogPhotos/mumbai-story/newspaper-test-poster.webp" width="1280" height="720" style="width:100%;height:auto;"><source src="./public/BlogPhotos/mumbai-story/newspaper-test.mp4" type="video/mp4"/><a href="./public/BlogPhotos/mumbai-story/newspaper-test.mp4">Watch the newspaper test.</a></video><figcaption>A saved Blender experiment from before the browser interaction. The paper and I had a long relationship.</figcaption></figure></details>
+<h2 id="act-iii-a-street-needs-people">Act III: A Street Needs People</h2>
+<p>Individual Blender models still weren’t a website. Exporting them as GLB files gave Three.js the geometry, materials, and textures it needed to assemble the street.</p>
+<p>I’d never worked with Three.js before. Graphics and game-development experience gave me somewhere to start; AI handled a substantial amount of the coding and asset integration. I supplied the direction, references, constraints, and corrections.</p>
+<p>The wrapper became Contact. The garage monitor opened my project archive. The chai stall’s newspapers became entry points to actual articles. Returning needed to feel like stepping back onto the same street.</p>
+<figure><video aria-label="Five checkpoints in the Mumbai street's development" controls playsinline preload="none" poster="./public/BlogPhotos/mumbai-story/evolution-poster.webp" width="1280" height="800" style="width:100%;height:auto;"><source src="./public/BlogPhotos/mumbai-story/street-evolution.mp4" type="video/mp4"/><a href="./public/BlogPhotos/mumbai-story/street-evolution.gif">View the street’s evolution as a GIF.</a></video><figcaption>Five checkpoints: reconstructed September 11 source, saved October 13 and 15 review captures, and the October 17 local view. Framing varies. The first frame was rendered October 17 from commit 831726c. <a href="./public/BlogPhotos/mumbai-story/street-evolution.gif">GIF version</a>.</figcaption></figure>
+<p>Friends helped me think about how it felt to explore. Eventually, I noticed something fairly obvious.</p>
+<p>Where were the people?</p>
+<p>So I started asking my friends whether they’d like to become walking pixel characters.</p>
+<p>A perfectly normal question, obviously.</p>
+<p>Their photographs became references for illustrated sprites. But I wanted visitors to discover something about each person, too. That brought back the cricket trading cards I collected growing up: little packs for around fifty rupees, players, statistics, and a folder I still have.</p>
+<p>Clicking a friend could open a collectible card. I asked everyone to choose a movie they liked. Not necessarily their all-time favorite. Not their Letterboxd Top Four. Definitely not something selected to demonstrate impeccable taste in cinema.</p>
+<p>Just a movie they liked.</p>
+<p>Fortunately, people replied quickly, considering I’d essentially recruited them into my increasingly elaborate digital arts-and-crafts project.</p>
+<figure><picture><source media="(max-width: 640px)" srcset="./public/BlogPhotos/mumbai-story/friend-card-mobile.webp" width="464" height="649"/><img src="./public/BlogPhotos/mumbai-story/friend-card.webp" alt="Payal's walking sprite and collectible card, pairing her pixel portrait with personal favorites against Mumbai's seafront." width="1440" height="900" loading="lazy" style="width:100%;height:auto;"/></picture><figcaption>Familiar faces, small personal details, and absolutely no requirement for impeccable taste in cinema.</figcaption></figure>
+<p>The characters acquired little routines, too. Nico stops for wada pav. Kartik drinks chai. Vrishabh photographs the mural. The street was becoming somewhere people had a reason to stop.</p>
+<p>None of this arrived as a complete plan. A wrapper suggested a newspaper. The newspaper needed a stall. The street needed my friends.</p>
+<p>AI helped me build far more of it than I could have managed alone in the same time. If I approved something and put my name on it, though, I was responsible for what visitors experienced.</p>
+<p>The tools could help construct the world. They couldn’t decide which memories belonged in it.</p>
+<p>I started with two wada pavs. Somewhere along the way, I found a way to bring more of myself into the work.</p>
+<details><summary>Visual credits</summary><p>Images show this project’s saved artwork, model renders, and browser captures. The maps and revision notebook were prepared for this story. Small props visible in the street and garage use adapted <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> models: <a href="https://sketchfab.com/3d-models/tuk-tuk-rikshaw-0bdfdf97a0f248008806840f7188367c">Tuk Tuk Rikshaw</a> by alnmathew; <a href="https://sketchfab.com/3d-models/dog-3a5c0b06db3d4fbea9af691827081043">Dog</a> by sv.stats; <a href="https://sketchfab.com/3d-models/lego-scarlet-witch-65fd0da1a5f04b4289db423cd00c9383">LEGO Scarlet Witch</a> by Ramón Ruiz; <a href="https://sketchfab.com/3d-models/art-reference-utah-teapot-4c02605ea63541b6aa053df167befe36">Art Reference: Utah Teapot</a> by Smallpoly; and <a href="https://sketchfab.com/3d-models/chicago-cubs-8d592b64547a46e4b730b8620f389296">Chicago Cubs</a> by Laurance Animations.</p></details></article></main> <footer><span>A personal story in three acts. Prepared for Astro.</span><span><a href="./two-wada-pavs.mdx">MDX source</a> · <a href="./two-wada-pavs.md">Plain Markdown</a> · <a href="./public/BlogPhotos/mumbai-story/street-evolution.gif">Evolution GIF</a></span></footer> </body></html>

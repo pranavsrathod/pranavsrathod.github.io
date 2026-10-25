@@ -1,0 +1,113 @@
+---
+const cases=[
+ {id:'paper',title:'The newspaper had other plans',wanted:'A wrapper opens around two wada pavs, then becomes readable contact information.',wrong:'Corner curls made a boat. Separate panels made a box. An open surround still left the food visible.',brief:'One continuous sheet. Hide the pavs first. Spread unevenly, then settle flat.',check:'Inspect the motion between endpoints, not just the final pose. Topology and clearance checks help; my eyes still get a vote.',image:'workflow-paper-00.webp',alt:'Real production newspaper geometry gathered over the wada pavs.',caption:'Five captured poses from the actual browser geometry, October 19. Art-directed motion, not simulated cloth.',sources:'CONTACT_EXPERIENCE.md, line 55; INTERVIEW_STUDY_GUIDE.md, lines 318–326; HANDOFF.md, lines 420–442.'},
+ {id:'garage',title:'The garage identity crisis',wanted:'A Mumbai garage converted into my creative workspace.',wrong:'The cleaner studio started reading as a room behind a shutter.',brief:'Keep the facade, footprint, and monitor. Bring back workshop supports, conduit, tools, and hanging headphones.',check:'Inspect furniture joins, supported props, and the actual monitor camera path. A valid export still has to feel like this place.',image:'workflow-garage.webp',alt:'Saved Blender render of the converted garage studio workbench with tools, supports and personal objects.',caption:'Saved model render of the refined workspace. This is not a screenshot of the earlier failure.',sources:'INTERVIEW_STUDY_GUIDE.md, lines 518–530; STUDIO.md, line 41; HANDOFF.md, lines 176 and 214.'},
+ {id:'biscuits',title:'Biscuits versus gravity',wanted:'A lived-in chai counter, with biscuits you could recognize through the jars.',wrong:'Biscuit pieces were floating inside their jars.',brief:'Ground golden stacks on the jar bases. Leave headspace. Clarify the glass. Keep the rest of the stall.',check:'Review both render angles, preserve the newspapers and jar positions, then export and validate. Stop when the named change is done.',image:'workflow-biscuits.webp',alt:'Saved model detail of grounded golden biscuit stacks in the chai stall jars.',caption:'Saved biscuit-jar detail after refinement.',sources:'chai-code-chronicle/reviews/blog-revision/revision-brief.md, lines 1–37; agents/05_REVIEW_PROTOCOL.md.'}
+];
+const poses=[
+ {name:'Wrapped',detail:'Does the parcel actually hide both pavs?'},
+ {name:'Loosen',detail:'The folds should open without turning into a boat.'},
+ {name:'Spread',detail:'One connected sheet, with an uneven bloom.'},
+ {name:'Settle',detail:'Move the paper clear of the food before lowering it.'},
+ {name:'Flat',detail:'Readable artwork, with the contact links revealed at the end.'}
+];
+---
+<section data-workflow-notebook aria-label="Creative revision notebook">
+  <header data-notebook-header>
+    <p data-kicker>Notes from my imaginary production department</p>
+    <h3>The loop behind the little world.</h3>
+    <ol data-loop aria-label="Creative revision loop">
+      <li><span>I notice</span><b aria-hidden="true">→</b></li>
+      <li><span>I write the brief</span><b aria-hidden="true">→</b></li>
+      <li><span>AI builds &amp; checks</span><b aria-hidden="true">→</b></li>
+      <li><span>I look again</span><b aria-hidden="true">↶</b></li>
+    </ol>
+    <p data-roles>Architect · Set designer · Blender technician. One scene writer. My judgment comes back around.</p>
+  </header>
+  <div data-case-buttons hidden aria-label="Choose a revision story">
+    {cases.map((entry,i)=><button type="button" data-case-button={entry.id} aria-pressed={i===0}>{['Paper problems','Garage identity','Biscuit gravity'][i]}</button>)}
+  </div>
+  <div data-case-container>
+    {cases.map((entry,i)=><details data-case={entry.id} open={i===0}>
+      <summary>{entry.title}</summary>
+      <div data-case-inner>
+        <div data-receipt>
+          <h4>{entry.title}</h4>
+          <dl>
+            <dt>The idea</dt><dd>{entry.wanted}</dd>
+            <dt>The surprise</dt><dd>{entry.wrong}</dd>
+            <dt>The smaller brief</dt><dd>{entry.brief}</dd>
+            <dt>What I inspected</dt><dd>{entry.check}</dd>
+          </dl>
+        </div>
+        <figure data-inspection>
+          <img data-case-image src={'/BlogPhotos/mumbai-story/'+entry.image} alt={entry.alt} width={entry.id==='paper'?800:1000} height={entry.id==='paper'?425:entry.id==='garage'?1000:686} loading="lazy" />
+          {entry.id==='paper'&&<div data-scrub hidden>
+            <label for="paper-pose-slider">Inspect the wrapper <output data-pose-name>Wrapped</output></label>
+            <input id="paper-pose-slider" aria-label="Newspaper inspection pose" type="range" min="0" max="4" value="0" step="1" aria-valuetext="Wrapped"/>
+            <div data-pose-ends aria-hidden="true"><span>Wrapped</span><span>Flat</span></div>
+            <p data-pose-note aria-live="polite">{poses[0].detail}</p>
+          </div>}
+          <figcaption>{entry.caption}</figcaption>
+        </figure>
+      </div>
+      <details data-evidence><summary>From the project notebook</summary><p>{entry.sources}</p></details>
+    </details>)}
+  </div>
+  <p data-process-note>Specialist roles describe the documented workflow; the worklog records which reviews actually ran. A check passing and another agent agreeing are different kinds of evidence.</p>
+</section>
+<style is:inline>
+[data-workflow-notebook]{margin:38px auto 44px;padding:30px 28px;background:#eceade;color:#173a3a;font:16px/1.5 Arial,Helvetica,sans-serif;border-block:1px solid #bcc5b7;max-width:1000px;box-sizing:border-box}
+[data-workflow-notebook] *{box-sizing:border-box}
+[data-workflow-notebook] [hidden]{display:none!important}
+[data-workflow-notebook] [data-kicker]{font:11px/1.6 Arial,sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:#a44832;margin:0 0 9px}
+[data-workflow-notebook] h3{font:400 34px/1.1 Georgia,serif;letter-spacing:-.5px;margin:0 0 26px;border:0;padding:0}
+[data-workflow-notebook] [data-loop]{display:flex;list-style:none;margin:0;padding:0;gap:10px;justify-content:space-between}
+[data-workflow-notebook] [data-loop] li{display:flex;align-items:center;gap:13px;font-size:15px;font-weight:600}
+[data-workflow-notebook] [data-loop] b{font-size:24px;color:#a44832;font-weight:400}
+[data-workflow-notebook] [data-roles]{font-size:13px;line-height:1.6;color:#59675b;margin:16px 0 25px;max-width:100%}
+[data-workflow-notebook] [data-case-buttons]{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+[data-workflow-notebook] button{appearance:none;background:transparent;color:#173a3a;border:1px solid #a8b1a3;font:14px/1.3 Arial,sans-serif;padding:12px 15px;cursor:pointer;min-height:44px}
+[data-workflow-notebook] button[aria-pressed=true]{background:#173a3a;color:#f5f1e8;border-color:#173a3a}
+[data-workflow-notebook] button:focus-visible,[data-workflow-notebook] input:focus-visible,[data-workflow-notebook] summary:focus-visible{outline:2px solid #a44832;outline-offset:4px}
+[data-workflow-notebook] details{font:inherit;max-width:none;margin:0 0 16px;border:0;padding:0}
+[data-workflow-notebook] summary{cursor:pointer;padding:10px 0;font-weight:600}
+[data-workflow-notebook][data-enhanced] [data-case]>summary{display:none}
+[data-workflow-notebook] [data-case-inner]{display:grid;grid-template-columns:1fr 1.05fr;gap:24px;align-items:start;background:#faf7ee;padding:23px}
+[data-workflow-notebook] h4{font:400 26px/1.15 Georgia,serif;margin:0 0 21px}
+[data-workflow-notebook] dl{margin:0}
+[data-workflow-notebook] dt{font:600 11px/1.5 Arial,sans-serif;letter-spacing:1px;text-transform:uppercase;color:#a44832;margin:15px 0 5px}
+[data-workflow-notebook] dt:first-child{margin-top:0}
+[data-workflow-notebook] dd{margin:0;font-size:15px;line-height:1.55}
+[data-workflow-notebook] figure{margin:0;min-width:0}
+[data-workflow-notebook] img{width:100%;height:auto;display:block;margin:0}
+[data-workflow-notebook] figcaption{font:12px/1.5 Arial,sans-serif;margin:12px 0 0;text-align:left;color:#626b63}
+[data-workflow-notebook] [data-scrub]{margin-top:16px}
+[data-workflow-notebook] label{display:flex;justify-content:space-between;gap:12px;font-size:13px;font-weight:600}
+[data-workflow-notebook] output{font-weight:400;color:#a44832}
+[data-workflow-notebook] input{display:block;width:100%;height:32px;margin:5px 0 0;accent-color:#173a3a;cursor:ew-resize}
+[data-workflow-notebook] [data-pose-ends]{display:flex;justify-content:space-between;color:#626b63;font-size:11px}
+[data-workflow-notebook] [data-pose-note]{font:15px/1.5 Georgia,serif;margin:14px 0 0;min-height:45px}
+[data-workflow-notebook] [data-evidence]{margin:0;padding:10px 23px;background:#faf7ee;border-top:1px solid #dbdfd1}
+[data-workflow-notebook] [data-evidence] summary{font:12px/1.5 Arial,sans-serif;padding:0}
+[data-workflow-notebook] [data-evidence] p{font-size:12px;overflow-wrap:anywhere;margin:10px 0 0}
+[data-workflow-notebook] [data-process-note]{font:12px/1.65 Arial,sans-serif;margin:17px 0 0;color:#59675b;max-width:100%}
+@media(max-width:680px){[data-workflow-notebook]{padding:23px 17px}[data-workflow-notebook] h3{font-size:29px}[data-workflow-notebook] [data-loop]{display:grid;grid-template-columns:1fr 1fr;gap:10px 15px}[data-workflow-notebook] [data-loop] li{justify-content:space-between;font-size:14px}[data-workflow-notebook] [data-case-inner]{grid-template-columns:1fr;padding:18px;gap:23px}[data-workflow-notebook] dd{font-size:16px}[data-workflow-notebook] button{font-size:13px;padding:11px 10px}[data-workflow-notebook] [data-evidence]{padding:12px 18px}[data-workflow-notebook] h4{font-size:27px}[data-workflow-notebook] [data-roles]{font-size:13px}}
+@media print{[data-workflow-notebook] [data-case-buttons],[data-workflow-notebook] input{display:none!important}[data-workflow-notebook] [data-case]{display:block!important}[data-workflow-notebook] [data-case-inner]{break-inside:avoid}}
+</style>
+<script is:inline>
+(()=>{
+ const labels=['Wrapped','Loosen','Spread','Settle','Flat'];
+ const notes=['Does the parcel actually hide both pavs?','The folds should open without turning into a boat.','One connected sheet, with an uneven bloom.','Move the paper clear of the food before lowering it.','Readable artwork, with the contact links revealed at the end.'];
+ for(const root of document.querySelectorAll('[data-workflow-notebook]:not([data-enhanced])')){
+   const entries=[...root.querySelectorAll('[data-case]')],buttons=[...root.querySelectorAll('[data-case-button]')];
+   function select(id){for(const entry of entries){entry.hidden=entry.dataset.case!==id;entry.open=true;}for(const button of buttons)button.setAttribute('aria-pressed',String(button.dataset.caseButton===id));}
+   for(const button of buttons)button.addEventListener('click',()=>select(button.dataset.caseButton));
+   root.querySelector('[data-case-buttons]').hidden=false;root.dataset.enhanced='true';select('paper');
+   const slider=root.querySelector('input[type=range]'),image=root.querySelector('[data-case=paper] img');
+   const base=image.getAttribute('src').replace('workflow-paper-00.webp','');
+   const update=()=>{const i=Number(slider.value);image.src=base+'workflow-paper-'+String(i).padStart(2,'0')+'.webp';image.alt='Actual newspaper inspection pose: '+labels[i]+'.';slider.setAttribute('aria-valuetext',labels[i]);root.querySelector('[data-pose-name]').textContent=labels[i];root.querySelector('[data-pose-note]').textContent=notes[i];};
+   slider.addEventListener('input',update);root.querySelector('[data-scrub]').hidden=false;
+ }
+})();
+</script>

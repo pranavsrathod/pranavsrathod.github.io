@@ -1,0 +1,64 @@
+<section class="not-prose" data-agent-workflow aria-label="Configured modeling workflow">
+  <header>
+    <h3>Configured modeling workflow</h3>
+    <p class="aw-intro">Clear responsibilities, one scene writer, and a reviewable result.</p>
+  </header>
+
+  <div class="aw-owner">
+    <h4>I set the brief</h4>
+    <p>Intent, references, preservation rules, acceptance criteria.</p>
+  </div>
+  <p class="aw-arrow" aria-hidden="true">↓</p>
+
+  <p class="aw-caption">Three review lenses · review only</p>
+  <ul class="aw-roles">
+    <li><h4>Architect</h4><p>Placement, silhouette, sightlines.</p></li>
+    <li><h4>Set designer</h4><p>Composition, props, physical support.</p></li>
+    <li><h4>Blender technician</h4><p>Geometry, transforms, export contract.</p></li>
+  </ul>
+  <p class="aw-arrow" aria-hidden="true">↓</p>
+
+  <div class="aw-director">
+    <h4>World Art Director</h4>
+    <p>Resolve conflicts. Consolidate one bounded brief.</p>
+  </div>
+  <p class="aw-arrow" aria-hidden="true">↓</p>
+
+  <ol class="aw-delivery">
+    <li><h4>One scene implementer</h4><p>Apply the agreed changes.</p></li>
+    <li><h4>Export + visual checks</h4><p>Reimport, inspect, test interactions.</p></li>
+    <li><h4>I accept or revise</h4><p>Revisions return to the brief <span aria-hidden="true">↺</span></p></li>
+  </ol>
+
+  <footer>Revisions use the relevant specialists; the worklog records actual execution.</footer>
+</section>
+
+<style is:inline>
+  [data-agent-workflow]{box-sizing:border-box;width:100%;max-width:1000px;margin:2.5rem auto;padding:28px;background:var(--bg-muted, #f5f3ed);color:var(--text-main, #142d3d);border:1px solid color-mix(in srgb, var(--border-main, #142d3d) 22%, transparent);font:16px/1.45 var(--font-sans, Arial, sans-serif);overflow-wrap:anywhere}
+  [data-agent-workflow] *{box-sizing:border-box}
+  [data-agent-workflow] header{position:static;display:block;margin:0 0 25px;padding:0;text-align:left;background:none;border:0}
+  [data-agent-workflow] h3{margin:0 0 7px;padding:0;border:0;color:var(--text-main, #142d3d);font:400 clamp(25px,3.5vw,34px)/1.15 var(--font-serif, Georgia, serif);letter-spacing:-.4px}
+  [data-agent-workflow] h4{margin:0 0 6px;padding:0;color:var(--text-main, #142d3d);font:700 16px/1.3 var(--font-sans, Arial, sans-serif);letter-spacing:0;text-transform:none}
+  [data-agent-workflow] p{margin:0;font-size:16px;line-height:1.45}
+  [data-agent-workflow] .aw-intro{color:var(--text-muted, #4a5c63)}
+  [data-agent-workflow] .aw-owner,[data-agent-workflow] .aw-director{max-width:560px;margin:0 auto;padding:15px 20px;border-left:4px solid var(--accent, #087d80);background:color-mix(in srgb, var(--accent, #087d80) 8%, var(--bg-main, #fffefa))}
+  [data-agent-workflow] .aw-arrow{margin:6px 0;color:var(--accent, #087d80);text-align:center;font-size:25px;line-height:1.1}
+  [data-agent-workflow] .aw-caption{margin:0 0 9px;color:var(--accent, #087d80);text-align:center;font-size:14px;font-weight:700}
+  [data-agent-workflow] .aw-roles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0;padding:0;list-style:none}
+  [data-agent-workflow] .aw-roles li{margin:0;padding:16px 18px;border-top:3px solid var(--accent, #087d80);background:var(--bg-main, #fffefa)}
+  [data-agent-workflow] .aw-delivery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px;margin:0;padding:0;list-style:none}
+  [data-agent-workflow] .aw-delivery li{position:relative;margin:0;padding:15px 18px;border:1px solid color-mix(in srgb, var(--border-main, #142d3d) 30%, transparent);background:var(--bg-main, #fffefa)}
+  [data-agent-workflow] .aw-delivery li:not(:last-child)::after{position:absolute;top:50%;right:-26px;transform:translateY(-50%);color:var(--accent, #087d80);content:'→';font-size:24px;line-height:1}
+  [data-agent-workflow] footer{display:block;max-width:none;margin:22px 0 0;padding:14px 0 0;border-top:1px solid color-mix(in srgb, var(--border-main, #142d3d) 22%, transparent);color:var(--text-muted, #4a5c63);font:14px/1.5 var(--font-sans, Arial, sans-serif)}
+  @media(max-width:650px){
+    [data-agent-workflow]{padding:20px 16px}
+    [data-agent-workflow] header{margin-bottom:20px}
+    [data-agent-workflow] h4,[data-agent-workflow] p{font-size:15px}
+    [data-agent-workflow] .aw-caption,[data-agent-workflow] footer{font-size:14px}
+    [data-agent-workflow] .aw-roles{grid-template-columns:minmax(0,1fr);gap:8px}
+    [data-agent-workflow] .aw-roles li{padding:12px 15px;border-top:0;border-left:3px solid var(--accent, #087d80)}
+    [data-agent-workflow] .aw-delivery{grid-template-columns:minmax(0,1fr);gap:24px}
+    [data-agent-workflow] .aw-delivery li{padding:13px 15px}
+    [data-agent-workflow] .aw-delivery li:not(:last-child)::after{top:auto;right:auto;bottom:-24px;left:50%;transform:translateX(-50%);content:'↓';font-size:23px}
+  }
+</style>

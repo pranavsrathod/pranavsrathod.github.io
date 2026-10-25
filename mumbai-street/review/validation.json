@@ -1,0 +1,90 @@
+{
+  "validatedOn": "2026-10-25",
+  "scope": "Wrapper evolution editorial artifacts; local and unpublished",
+  "build": "Actual MDX Astro build passed; project uses native Website layout/schema/math in isolated fixture",
+  "static": {
+    "localMediaReferences": 20,
+    "missing": [],
+    "unresolvedMdx": false,
+    "mirrorCopy": "fs.copyFile completed; matching filenames and sizes"
+  },
+  "media": [
+    {
+      "id": "corners",
+      "width": 960,
+      "height": 600,
+      "fps": "12/1",
+      "seconds": 4,
+      "bytes": 97187
+    },
+    {
+      "id": "panels",
+      "width": 960,
+      "height": 600,
+      "fps": "12/1",
+      "seconds": 4,
+      "bytes": 94191
+    },
+    {
+      "id": "bloom",
+      "width": 960,
+      "height": 600,
+      "fps": "12/1",
+      "seconds": 4,
+      "bytes": 132532
+    },
+    {
+      "id": "parcel",
+      "width": 960,
+      "height": 600,
+      "fps": "12/1",
+      "seconds": 4,
+      "bytes": 154695
+    },
+    {
+      "id": "baked",
+      "width": 960,
+      "height": 600,
+      "fps": "12/1",
+      "seconds": 4,
+      "bytes": 119975
+    },
+    {
+      "id": "wrapper-evolution",
+      "width": 960,
+      "height": 680,
+      "fps": "12/1",
+      "seconds": 20,
+      "bytes": 527215
+    }
+  ],
+  "browser": {
+    "desktop": "1280×900",
+    "phone": "390×844",
+    "pageOverflow": false,
+    "selectedInitialVersion": "October25 authoredposes",
+    "verified": [
+      "all five clips loaded and played, duration4seconds each",
+      "cycle starts first recovered version; advances; pauses",
+      "keyboard Home/End selects first/latest",
+      "per-version disclosure reveals timing",
+      "phone initialentry scrolls selectedtab into view",
+      "correct blog assetroot; old paper slider removed",
+      "zero warning/error consolelogs observed"
+    ],
+    "screenshots": [
+      "wrapper-evolution-desktop.jpg",
+      "wrapper-evolution-phone.jpg"
+    ],
+    "boundary": "Browserviewport checks, not physicalphone testing. Reducedmotion branch inspected in source, not OS-setting emulation."
+  },
+  "applicationEvidence": {
+    "checks": [
+      "check-contact-wrapper.mjs:PASS actual25 exportedposes",
+      "check-contact-loading.mjs:PASS18 real-factory lifecyclecases"
+    ],
+    "assetSha256": "b49ce95e145162b5e6286625c1c5fc2650befeb3886af638f270894a9b9ae76d",
+    "boundary": "Existing localimplementation; no runtime/code/model changes in this editorialpass; no FPS/GPUbenchmark or deployment"
+  },
+  "provenance": "project-draft/mumbai-street/sources/wrapper-history/{provenance,capture-manifest}.json"
+}

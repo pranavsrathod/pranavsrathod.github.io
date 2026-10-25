@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-20",
+  "timezone": "America/Los_Angeles",
+  "source": "mumbai-street.mdx",
+  "draftStatus": "Standalone unpublished project page, separate from personal blog and live site",
+  "checks": {
+    "realAstroMdxBuild": "passed",
+    "localMediaReferences": "all exist",
+    "imageAltText": "all present",
+    "navigationAnchors": "all resolve",
+    "evidenceMapFiles": "all exist",
+    "sourceAndAttributionPeerReview": "passed after narrowing PostHog wording to implementation scope"
+  },
+  "browser": {
+    "desktop": "Layout and agent workflow reviewed at default viewport",
+    "phone": {
+      "viewportWidth": 390,
+      "documentWidth": 375,
+      "horizontalOverflow": false,
+      "architectureMobileImage": "loaded architecture-mobile.webp",
+      "skillsTable": "Reviewed final 13px type with wider skill column; no split words or horizontal overflow."
+    },
+    "screenshots": [
+      "desktop.jpg",
+      "agents-desktop.jpg",
+      "agents-phone.jpg",
+      "architecture-phone.jpg",
+      "skills-phone.jpg"
+    ],
+    "consoleErrors": []
+  },
+  "applicationValidation": "Historical checks are referenced; the current full street suite was not rerun for this writing task.",
+  "media": [
+    {
+      "file": "architecture-mobile.webp",
+      "bytes": 60054,
+      "sha256": "cfd9bb43dbfbd2eec8675bcbb0f791b8a4a9098896c06bf827d3d3ebb8b0ca78"
+    },
+    {
+      "file": "architecture.webp",
+      "bytes": 56616,
+      "sha256": "710018925144442cb4f2e39c5477ff7f3d960a1a57ef3077b1c80211e1179ba1"
+    },
+    {
+      "file": "biscuit-detail.webp",
+      "bytes": 36138,
+      "sha256": "aed4a2a151c227249514cf77776f88907ee92c718b3ac97c598d21cc57bf86e4"
+    },
+    {
+      "file": "rendering-mobile.webp",
+      "bytes": 169530,
+      "sha256": "475fcfdda851189db635ff2d662e447fa8ac291ba8f9269e9a8fd6c664e5ae05"
+    },
+    {
+      "file": "rendering.webp",
+      "bytes": 170494,
+      "sha256": "14ccbec62acc362638783e7cb80cf93423cb75b09b10ac42822277214405430f"
+    },
+    {
+      "file": "street.webp",
+      "bytes": 132070,
+      "sha256": "5bfdbe6a457bc43d86b0052451e4052058b2ea6a33cfcb91a6b7d88fa1e620a9"
+    }
+  ]
+}
