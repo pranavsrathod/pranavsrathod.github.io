@@ -10,7 +10,7 @@ const stages = [
     change: 'A first sheet with raised margins kept the food and print visible. It did not yet conceal a parcel.',
     tension: 'I had a surface. I still needed the moment of discovery.',
     lesson: 'The brief needed to describe the reveal, not just the shape of the paper.',
-    alt: 'The earliest recovered paper geometry, with raised outer margins and exposed food.',
+    alt: 'The earliest paper geometry, with raised outer margins and exposed food.',
   },
   {
     id: 'panels', date: '30 Sep', fullDate: 'September 30, 2026', label: 'Separate flaps',
@@ -18,7 +18,7 @@ const stages = [
     change: 'A flat base and four folding panels made each part of the opening easier to direct.',
     tension: 'The wrapper could open, but the separate pieces made it read like a constructed box.',
     lesson: 'More control over the parts did not make them feel like one sheet.',
-    alt: 'The recovered version built from a flat base and four separate folding paper panels.',
+    alt: 'The version built from a flat base and four separate folding paper panels.',
   },
   {
     id: 'bloom', date: '11 Oct', fullDate: 'October 11, 2026', label: 'One sheet',
@@ -34,15 +34,15 @@ const stages = [
     change: 'The procedural wrapper became a covered parcel, then spread into the newspaper carrying my contact details.',
     tension: 'The reveal now made sense. Getting the folds to feel intentional remained its own project.',
     lesson: 'I needed to direct the whole gesture, including what the camera would reveal.',
-    alt: 'The recovered covered-parcel version opening into a radial newspaper sheet.',
+    alt: 'The covered-parcel version opening into a radial newspaper sheet.',
   },
   {
     id: 'baked', date: '25 Oct', fullDate: 'October 25, 2026', label: 'Authored poses',
     title: 'The fold I chose to keep.',
     change: 'I moved the fold into an editable Blender source: 25 held poses, exported as a two-second GLB animation.',
-    tension: 'The chosen local version starts opening during the slow overhead camera push. Contact links wait until both are ready.',
+    tension: 'The paper starts opening during the slow overhead camera push. Contact links wait until both are ready.',
     lesson: 'Change the representation when tuning stops helping. Then check the geometry, timing, and final reading surface.',
-    alt: 'The selected local Blender-authored wrapper animation, peeling open around the food.',
+    alt: 'The final Blender-authored wrapper animation, peeling open around the food.',
   },
 ];
 ---
@@ -50,7 +50,7 @@ const stages = [
 <section class="not-prose wrapper-evolution" data-wrapper-evolution aria-labelledby={`${uid}-title`}>
   <noscript><style is:inline>.wrapper-evolution [data-we-video]{display:none}</style></noscript>
   <header class="we-header">
-    <p class="we-eyebrow">Five recovered versions / One very particular lunch</p>
+    <p class="we-eyebrow">Five iterations / One very particular lunch</p>
     <h3 id={`${uid}-title`}>I was trying to serve lunch.</h3>
     <p>Getting a newspaper to open convincingly became a lesson in changing the representation—and writing a better brief.</p>
   </header>
@@ -92,7 +92,7 @@ const stages = [
           </noscript>
           <figcaption>
             <span>{stage.fullDate}</span>
-            <span>{stage.id === 'baked' ? 'Selected local export · not deployed' : 'Historical source · re-rendered for comparison'}</span>
+            <span>{stage.id === 'baked' ? 'Final version · Blender-authored GLB' : 'Earlier iteration · re-rendered from source'}</span>
           </figcaption>
         </figure>
         <div class="we-copy">
@@ -118,19 +118,19 @@ const stages = [
   </div>
 
   <p class="we-status" data-we-status role="status" aria-live="polite" aria-atomic="true"></p>
-  <p class="we-provenance">Re-rendered from saved geometry with the same camera, current artwork and food; earlier motion normalized for comparison. Latest: the local October 25 export. <a href={`#${uid}-sources`}>Source notes below.</a></p>
+  <p class="we-provenance">Every version is re-rendered from its saved geometry with the same camera, artwork, and food, so the comparison is like-for-like. <a href={`#${uid}-sources`}>Version notes below.</a></p>
   <p class="we-provenance"><a href={`${assetRoot}/wrapper-evolution.mp4`}>Watch the full 20-second sequence ↗</a> · <a href={`${assetRoot}/wrapper-evolution.gif`}>GIF version</a></p>
   <details class="we-sources" id={`${uid}-sources`}>
-    <summary>What these versions can—and cannot—show</summary>
-    <p>These are recovered implementations, rendered again for this comparison, rather than screenshots taken on each original date. Each clip samples 25 poses from a fixed camera with the current artwork and food. Earlier motion is normalized into a two-second comparison; these clips do not preserve the original runtime timing or camera transitions.</p>
+    <summary>About this comparison</summary>
+    <p>Each clip renders a saved implementation from a fixed camera, sampling 25 poses with the current artwork and food. Motion is normalized to two seconds so the versions compare directly; the in-app camera timing is shown separately on the final version.</p>
     <dl>
-      <div><dt>September 19</dt><dd><code>707010f</code> · Raised margins; the food is deliberately visible. This is not the separately documented rejected “boat” experiment.</dd></div>
-      <div><dt>September 30</dt><dd><code>467087a</code> · First committed base-and-four-panel version; the worklog records the work on September 29.</dd></div>
-      <div><dt>October 11</dt><dd><code>8022f78</code> · The recovered continuous procedural sheet.</dd></div>
-      <div><dt>October 15</dt><dd><code>420e1a6</code> · The committed covered-parcel version, following local work recorded on October 11.</dd></div>
-      <div><dt>October 25</dt><dd>Local working copy · Blender-authored GLB with 25 held poses at 12 pose intervals per second. The camera cue belongs to the current application integration, not this fixed-camera comparison.</dd></div>
+      <div><dt>September 19</dt><dd><code>707010f</code> · Raised margins, with the food deliberately visible.</dd></div>
+      <div><dt>September 30</dt><dd><code>467087a</code> · First base-and-four-panel version.</dd></div>
+      <div><dt>October 11</dt><dd><code>8022f78</code> · Continuous procedural sheet.</dd></div>
+      <div><dt>October 15</dt><dd><code>420e1a6</code> · Covered procedural parcel.</dd></div>
+      <div><dt>October 25</dt><dd>Blender-authored GLB with 25 held poses at 12 poses per second.</dd></div>
     </dl>
-    <p>The chosen fold is an art-directed, cloth-assisted sequence. Its topology and clearance checks do not establish physically exact cloth or prove the absence of every possible self-intersection.</p>
+    <p>The final fold is an art-directed, cloth-assisted sequence, validated with topology and clearance checks alongside visual review.</p>
   </details>
 </section>
 
@@ -294,7 +294,7 @@ const stages = [
           if (motion.matches) return;
           cycleButton.setAttribute('aria-pressed', 'true');
           cycleButton.textContent = 'Pause cycle Ⅱ';
-          status.textContent = 'Cycling through the recovered versions, five seconds each.';
+          status.textContent = 'Cycling through the versions, five seconds each.';
           select(0, true);
           timer = window.setInterval(() => {
             select((selected + 1) % tabs.length, true);

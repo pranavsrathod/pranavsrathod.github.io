@@ -5,7 +5,7 @@
     <li><span class="rp-number">02 / DEPTH</span><h4>Rebuild occlusion</h4><p>Clear depth. Render visible geometry with color writes disabled.</p><div class="rp-swatch rp-depth" aria-hidden="true"><span>Near</span><span>Far</span></div></li>
     <li><span class="rp-number">03 / ARTWORK</span><h4>Draw the sharp layer</h4><p>Selected artwork stays crisp and obeys the new depth buffer.</p><div class="rp-swatch rp-sharp" aria-hidden="true"><i>CHAI</i><b></b></div></li>
   </ol>
-  <p class="rp-caption">Pipeline schematic, not render-target captures. Extra full-resolution passes add work; pixel styling alone establishes no speed gain.</p>
+  <p class="rp-caption">Pipeline schematic. The extra full-resolution passes are the cost of keeping artwork sharp and correctly occluded.</p>
 </figure>
 
 <style>

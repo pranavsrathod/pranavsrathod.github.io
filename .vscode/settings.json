@@ -2,6 +2,12 @@
     "editor.tabSize": 4,
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": ["source.organizeImports", "source.fixAll"],
+    "[mdx]": {
+        "editor.codeActionsOnSave": {}
+    },
+    "[markdown]": {
+        "editor.codeActionsOnSave": {}
+    },
     "typescript.tsdk": "node_modules/typescript/lib",
     "files.associations": { "*.css": "tailwindcss" }
 }

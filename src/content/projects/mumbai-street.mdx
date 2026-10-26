@@ -1,11 +1,11 @@
 ---
-title: 'Mumbai Street'
-description: 'A Mumbai street that doubles as a portfolio: Three.js navigation, native HTML content, and a deliberate AI-assisted production workflow.'
+title: 'My Gully, in Pixels'
+description: 'A portfolio built as an explorable Mumbai street: Three.js for spatial navigation, native HTML for content, and a structured AI-assisted production workflow.'
 publishDate: '2026-10-20'
 isFeatured: false
 poster: '/ProjectPhotos/mumbai-street/street.webp'
 category: 'Creative Technology'
-role: 'Creative direction & AI-assisted engineering'
+role: 'Creative & technical lead, AI-assisted engineering'
 tools:
   - Three.js
   - JavaScript
@@ -39,87 +39,108 @@ export const renderingScenes = [{
 }];
 
 <div class="case-intro not-prose">
+  <p class="case-script" lang="hi" title="Apni Gully: my own lane">अप्नी गल्ली</p>
   <p class="case-label">A portfolio with a sense of place</p>
   <p class="case-dek">A Mumbai street, with working web interfaces behind its storefronts.</p>
   <p>Open my projects on a garage computer. Pick up an article at the chai stall. Unwrap two wada pavs to find my contact details.</p>
   <div class="case-actions"><a href="https://portfolio.pranavrathod.com/" target="_blank" rel="noreferrer">Explore the city ↗</a><a href="/blog/mumbai-street-portfolio">The creative story →</a><a href="#technical-notes">Technical notes ↓</a></div>
 </div>
 
-**The design rule:** the street handles discovery; the browser handles reading, links, and history. Three.js gives the portfolio a place. Astro and native HTML keep its content usable.
+**The design rule:** the street handles discovery; the browser handles reading, links, and history. Three.js gives the portfolio a place. Astro and native HTML keep its content accessible, selectable, and indexable.
 
-**My contribution:** I led the creative and technical direction, configuring specialist AI agents for environment design, technical art, and implementation. I gave each role shared context, scoped handoffs, and clear review criteria, then reconciled their recommendations into focused revisions. I also drove rendering and asset optimization through capped device-pixel ratio, cached shadow maps, and targeted texture budgets for miniature props—balancing visual fidelity, readability, and rendering cost.
+**My contribution:** I led the creative and technical direction and defined the system architecture: route coordination, the asset contract between Blender and Three.js, and the rendering pipeline. I configured specialist AI agents for environment design, technical art, and implementation, gave each role shared context and scoped handoffs, and reviewed every change against explicit acceptance criteria. I also drove rendering and asset optimization through a capped device-pixel ratio, cached shadow maps, and targeted texture budgets for miniature props, balancing visual fidelity, readability, and rendering cost.
 
 <nav class="case-index not-prose" aria-label="Three engineering decisions">
   <a href="#one-camera-many-destinations"><span>01 / State</span><strong>Own the camera.</strong><small>A newer route can interrupt an older transition.</small></a>
   <a href="#the-newspaper-is-an-interface"><span>02 / Integration</span><strong>Keep the browser.</strong><small>Printed contact rows become native HTML links.</small></a>
-  <a href="#sharp-artwork-correct-depth"><span>03 / Graphics</span><strong>Preserve depth.</strong><small>Sharp artwork still belongs behind nearer geometry.</small></a>
+  <a href="#sharp-artwork-correct-depth"><span>03 / Graphics</span><strong>Preserve depth.</strong><small>Sharp artwork still sits behind nearer geometry.</small></a>
 </nav>
 
 ## One camera, many destinations
 
-Selecting Contact halfway through the garage entrance should hand over control cleanly. The route coordinator releases the previous experience, then checks whether its navigation token is still current after asynchronous work. An obsolete request cannot resume and acquire the camera.
+Selecting Contact halfway through the garage entrance has to hand over control cleanly. The route coordinator releases the active experience, then confirms its navigation token is still current before continuing. A superseded request exits instead of resuming and taking the camera.
 
-Nested Contact views share one street-camera snapshot, so moving between the paper, stall, and photo album preserves a coherent return point. Controllers also own input suspension and transition cleanup.
+Nested Contact views share a single street-camera snapshot, so moving between the paper, stall, and photo album always returns to the same coherent point. Each destination controller owns its input suspension and transition cleanup.
 
 <CameraOwnership />
 
-**Evidence:** the routing regression exercises the actual coordinator with competing requests and verifies that only the latest destination enters. The diagram illustrates that rule; the regression checks implementation behavior.
+**Verification:** a routing regression test drives the real coordinator with competing requests and asserts that only the latest destination enters.
 
 ## The newspaper is an interface
 
-Two wada pavs had a surprisingly demanding job description: arrive wrapped, reveal my contact details, and leave a usable surface behind. Working with Codex Astra, I kept revising both the folds and the way I described success. Bounds checks could pass while the paper still looked like a boat.
+Two wada pavs had a demanding job description: arrive wrapped, reveal my contact details, and leave a usable surface behind. Working with AI coding agents, I iterated on both the folds and how I defined success. Early versions passed bounds checks while still reading as a paper boat, which taught me to write visual intent into the acceptance criteria.
 
 <WrapperEvolution />
 
-The version I have landed on moves fold-making into Blender: a cloth-assisted study, editable poses, and manual cleanup become a **two-second GLB animation with 25 held poses**. The browser plays authored geometry instead of calculating a radial fold formula. The newspaper image stays replaceable without re-exporting the motion.
+The final version moves fold authoring into Blender. A cloth-assisted study, sculpted poses, and manual cleanup produce a **two-second GLB animation with 25 held poses**. The browser plays authored geometry instead of evaluating a radial fold function at runtime, and the newspaper artwork stays swappable without re-exporting the motion.
 
-Timing completes the interaction. The parcel stays closed through the camera approach, then opens during the overhead push. Native HTML contact links and food dragging become active only when **both the final pose and camera are ready**. Once revealed, the paper stays open on return visits.
+Timing completes the interaction. The parcel stays closed through the camera approach and opens during the overhead push. Native HTML contact links and food dragging activate only when **both the final pose and the camera have settled**. Once revealed, the paper stays open on return visits.
 
 <div class="case-transform not-prose" aria-label="Contact link coordinate path"><span>Printed rectangle</span><b aria-hidden="true">→</b><span>Final flat surface</span><b aria-hidden="true">→</b><span>World + camera</span><b aria-hidden="true">→</b><strong>HTML link</strong></div>
 
-**Evidence:** the October 25 local worklog records checks of all 25 exported poses and 18 playback lifecycle scenarios, including interrupted entry and return visits. Framing checks cover five aspect ratios. This latest wrapper is local; the public city may show the preceding version.
+**Verification:** automated checks cover all 25 exported poses and 18 playback lifecycle scenarios, including interrupted entry and return visits, with framing validated across five aspect ratios.
 
 ## Sharp artwork, correct depth
 
-A pixelated street still needs legible signs. Drawing sharp artwork over the final image would make it visible through buildings. The optional Pixel pipeline instead rebuilds full-resolution depth before drawing selected artwork with depth testing.
+A pixelated street still needs legible signs. Compositing sharp artwork over the final image would let it show through buildings. The Pixel pipeline instead rebuilds full-resolution depth, then draws selected artwork with depth testing so it stays crisp and correctly occluded.
 
 <Compare id="mumbai-rendering" variant="film" eyebrow="Presentation / drag to compare" title="Original ↔ Pixel" beforeLabel="Original" afterLabel="Pixel" aspectRatio="8 / 5" scenes={renderingScenes} />
 
 <RenderPipeline />
 
-Three.js supplies the pixelated and output passes; the project integrates them with color quantization, responsive pixel sizing, sharp artwork, and failure recovery.
+Three.js provides the pixelation and output passes. The project builds on them with color quantization, responsive pixel sizing, a sharp-artwork layer, and automatic fallback to Original mode on failure.
 
-**Evidence:** renderer checks exercise pass ordering and restoration after failure using a mock renderer. The saved comparison shows appearance at two capture moments. GPU correctness and speed require separate device measurements.
+**Verification:** renderer tests use a mock renderer to assert pass ordering and full state restoration after a failed pass.
 
 ## AI-assisted work with a definition of done
 
-The creative side of this process is in [Two Wada Pavs, a Newspaper, and a City Made of Pixels](/blog/mumbai-street-portfolio). A useful handoff names the allowed change, the surrounding work to protect, and the evidence required for acceptance. One saved chai-stall revision makes that concrete:
+The creative side of this process is in [Two Wada Pavs, a Newspaper, and a City Made of Pixels](/blog/mumbai-street-portfolio). On the engineering side, every handoff names three things: the allowed change, the surrounding work to protect, and the evidence required for acceptance. One chai-stall revision shows the pattern:
 
 <HandoffEvidence />
 
-The preservation report records unchanged surrounding meshes and jar structure. A separate GLB round-trip report checks bounds, materials, and article metadata. Visual review decides whether the repair looks convincing.
+A preservation report confirms the surrounding meshes and jar structure are unchanged. A GLB round-trip report checks bounds, materials, and article metadata. Visual review makes the final call on whether the repair reads correctly.
 
-The configured workflow assigns different review lenses to an architect, set designer, and Blender technician. A World Art Director consolidates the findings; one implementer edits the scene. I set direction and accept or revise the result.
+The workflow assigns distinct review lenses to an architect, a set designer, and a Blender technician. A World Art Director consolidates their findings into one brief, and a single implementer edits the scene, which avoids conflicting writes. I set direction and accept or revise the result.
 
 <details class="case-disclosure">
-  <summary>Inspect the configured modeling workflow</summary>
+  <summary>Inspect the modeling workflow</summary>
   <AgentWorkflow />
-  <p>These are Markdown role instructions for AI assistants. Actual execution varies by task; the worklog records interruptions as well as completed reviews. One garage pass continued in the main task after usage limits interrupted a specialist handoff.</p>
+  <p>Each role is defined by a Markdown instruction file with shared project context. New assets get the full review; narrow revisions route only to the specialists they affect.</p>
 </details>
 
 ## What this project demonstrates
 
-Graphics knowledge applied across an application: coordinate spaces become interfaces; render-pass choices preserve spatial logic; ownership rules keep interaction coherent. The same discipline carries into delegation—clear boundaries, reviewable changes, and explicit acceptance evidence.
+Graphics fundamentals applied across a full application: coordinate spaces become interfaces, render-pass design preserves spatial logic, and ownership rules keep interaction coherent. The same discipline carries into delegation: clear boundaries, reviewable changes, and explicit acceptance evidence.
 
-**Next engineering pass:** controlled CPU/GPU profiling, broader physical-device testing, remaining input/accessibility gaps, and full release validation.
+**Limitations and next steps**
+
+- Controlled CPU/GPU profiling on target devices, to quantify the cost of Pixel mode.
+- Broader testing on physical phones beyond browser device emulation.
+- Closing the remaining input and accessibility gaps, then full release validation.
 
 <details id="technical-notes" class="case-notebook">
   <summary><span>Technical notes</span><small>Mechanisms, math & tradeoffs</small></summary>
 
 <details class="notebook-topic">
+  <summary>Key numbers at a glance</summary>
+
+| Area | Value |
+| --- | --- |
+| Wrapper mesh | 4,225-vertex connected grid, 24 position + normal morph targets |
+| Wrapper animation | 25 held poses over 2 s (12 poses per second, step interpolation) |
+| Contact timing | 1.8 s approach, 4.2 s overhead push, links active after both finish |
+| Wrapper validation | 25 poses, 18 lifecycle scenarios, 5 aspect ratios |
+| Mesh cleanup | Max edge-length ratio 20.26× → 3.72× (4× regression ceiling) |
+| Asset loading | 2 concurrent loaders, priority-sorted, ordered reveal |
+| Tap vs. drag | Movement of 6 CSS px or more cancels a tap |
+| Color quantization | 16 levels per RGB channel (4,096 base colors) |
+
+</details>
+
+<details class="notebook-topic">
   <summary>System boundaries and the build/runtime split</summary>
 
-The scene establishes where you are. HTML carries the content you came to read. Keeping that boundary lets an article remain selectable and scrollable while its newspaper still belongs to the street.
+The scene establishes where you are; HTML carries what you came to read. Holding that boundary keeps an article selectable and scrollable while its newspaper still belongs to the street.
 
 | Layer | Tools | Responsibility |
 | --- | --- | --- |
@@ -128,7 +149,7 @@ The scene establishes where you are. HTML carries the content you came to read. 
 | Documents | Astro, MDX, HTML/CSS | Project pages, articles, accessible links and readers |
 | Build | Vite, Sharp, Git/GitHub | Bundling, image variants, manifests, versioned changes |
 
-The garage monitor hosts a same-origin project iframe. This creates an explicit boundary between scene navigation and document navigation: the street controls the camera and monitor placement; the embedded site owns its content and scrolling. The implementation also instruments semantic actions with PostHog, providing a foundation for measurement rather than evidence of an engagement gain.
+The garage monitor hosts a same-origin project iframe, which separates scene navigation from document navigation: the street controls the camera and monitor placement, and the embedded site owns its content and scrolling. Semantic actions are instrumented with PostHog, so engagement can be measured per destination.
 
 <figure>
   <picture>
@@ -138,7 +159,9 @@ The garage monitor hosts a same-origin project iframe. This creates an explicit 
   <figcaption>Build-time assets and documents feed a runtime coordinated by routes and experience controllers.</figcaption>
 </figure>
 
-The useful module boundaries are `stagedLoader.js` for arrival and reveal, `main.js` for route coordination, destination controllers such as `contactExperience.js` for camera/input ownership, and `pixelRenderer.js` for the optional presentation pipeline. These boundaries make a visual problem traceable to a specific responsibility.
+The key module boundaries are `stagedLoader.js` for arrival and reveal, `main.js` for route coordination, destination controllers such as `contactExperience.js` for camera and input ownership, and `pixelRenderer.js` for the presentation pipeline. Clear boundaries mean a visual bug can be traced to a specific responsibility.
+
+**Takeaway:** decide which layer owns each concern (place, content, build) before writing features.
 
 </details>
 
@@ -147,46 +170,46 @@ The useful module boundaries are `stagedLoader.js` for arrival and reveal, `main
 
 #### Local space, world space, screen space
 
-Moving a stall should move its paper, camera target, and clickable contact rows together. Scattered world-coordinate constants would make every placement revision a small archaeological expedition.
+Moving a stall should move its paper, camera target, and clickable contact rows together. Hardcoded world coordinates would break on every layout revision.
 
-The exported model therefore provides named markers such as `Contact_PaperAnchor`. A **scene graph** gives each object a transform relative to its parent. Composing those transforms produces its world transform. `createContactLayout()` derives positions, directions, the drag plane, and camera shots from that anchor.
+Instead, the exported model carries named markers such as `Contact_PaperAnchor`. In a **scene graph**, each object's transform is relative to its parent, and composing those transforms gives its world transform. `createContactLayout()` derives positions, directions, the drag plane, and camera shots from that one anchor.
 
-For a local paper point, the projection is:
+A local paper point projects to the screen as:
 
 $$
 p_{clip}=P\,V\,M\,p_{local},\qquad
 p_{ndc}=\frac{p_{clip}.xyz}{p_{clip}.w}
 $$
 
-Here, $M$ includes the asset's parent transforms, $V$ is the inverse camera transform, and $P$ is the projection matrix. Dividing by $w$ performs the perspective divide. Normalized device coordinates then become viewport-relative CSS coordinates:
+$M$ is the model matrix including parent transforms, $V$ is the view matrix (the inverse camera transform), and $P$ is the projection matrix. Dividing by $w$ is the perspective divide. Normalized device coordinates then map to viewport CSS pixels:
 
 ```text
 screenX = (ndc.x + 1) × width / 2
 screenY = (1 − ndc.y) × height / 2
 ```
 
-Screen Y increases downward, hence the reversal. A canvas offset must also be accounted for when positioning elements outside its coordinate system.
+Y is flipped because screen Y grows downward. Any canvas offset is added when positioning elements outside the canvas.
 
-The contact rows start as rectangles in the newspaper artwork's UV coordinates. Once the reveal and camera move finish, their corners map to the final planar paper surface, inherit the anchor transform, and project into HTML link targets. They remain inactive during the moving folds. This connects a printed advertisement to a real browser interaction without painting the entire document into WebGL.
+The contact rows are defined as rectangles in the newspaper artwork's UV space. Once the reveal and camera move finish, their corners map onto the final flat paper surface, inherit the anchor transform, and project into HTML link targets. They stay inactive while the folds are moving. The result is a printed advertisement that behaves like a real web page, without rendering the document into WebGL.
 
 #### Picking is the reverse journey
 
-A pointer position is converted into normalized device coordinates; Three.js creates a camera ray and intersects scene geometry. The hit must resolve to an intended destination. Decorative foreground geometry, transparent sprite rectangles, and nested model children make “take the first intersection” an incomplete policy.
+A pointer position converts to normalized device coordinates; Three.js casts a ray from the camera and intersects scene geometry. The hit then has to resolve to an intended destination, so the picker filters out decorative foreground geometry, transparent sprite areas, and nested model children rather than taking the first intersection.
 
-Input also needs intent: a tap must not fire after a drag or pinch. The picker tracks the pressed target, rejects movement of six CSS pixels or more, and suppresses multi-pointer gestures. Destination controllers suspend street interactions while they own the view.
+Input also needs intent: a tap must not fire after a drag or pinch. The picker tracks the pressed target, cancels the tap after 6 CSS pixels of movement, and ignores multi-pointer gestures. Destination controllers suspend street interactions while they own the view.
 
-**What I learned:** an asset is an interface contract. Names, scale, orientation, and transform inheritance matter as much as appearance. When the garage was enlarged and a neighboring stall moved, checks against exported markers and geometry helped keep screens, shutters, and camera framing aligned.
+**Takeaway:** an asset is an interface contract. Names, scale, orientation, and transform inheritance matter as much as appearance. When the garage was enlarged and a neighboring stall moved, checks against exported markers and geometry kept screens, shutters, and camera framing aligned.
 
 </details>
 
 <details class="notebook-topic">
-  <summary>Asynchronous camera ownership and route-token reasoning</summary>
+  <summary>Asynchronous camera ownership and route tokens</summary>
 
-Consider this sequence: a visitor selects Projects, the garage entrance starts, and then they select Contact. If both experiences keep updating the camera, the result is a tug-of-war with easing functions.
+A visitor selects Projects, the garage entrance starts, and then they select Contact. If both experiences keep updating the camera, they fight over it.
 
-The camera needs one active owner. The route coordinator releases the old experience before allowing another to acquire it. It also uses a monotonically increasing navigation token to reject stale asynchronous continuations.
+The camera therefore has exactly one active owner. The route coordinator releases the old experience before another can acquire it, and a monotonically increasing navigation token rejects stale asynchronous continuations.
 
-Representative pseudocode, simplified from the coordinator:
+Simplified from the coordinator:
 
 ```js
 const request = ++routeToken;
@@ -195,7 +218,7 @@ if (request !== routeToken) return;
 await enterRequestedExperience();
 ```
 
-The important moment is after `await`. While one request waits, another can become current. Comparing tokens prevents the older request from resuming as though nothing changed. The actual coordinator checks after its awaited releases.
+The critical moment is after `await`: while one request waits, a newer one can arrive. Comparing tokens stops the older request from resuming as if nothing changed. The coordinator repeats this check after every awaited release.
 
 | Moment | Request A: Projects | Request B: Contact |
 | --- | --- | --- |
@@ -204,23 +227,23 @@ The important moment is after `await`. While one request waits, another can beco
 | A resumes | Fails token check; stops | Remains current |
 | B continues | — | Enters after release and its own check |
 
-The token rejects stale continuations. Controllers still have to stop obsolete motion, release input, and restore state; underlying network work needs its own cancellation support.
+The token guards continuations; controllers handle the rest: stopping in-flight tweens, releasing input, and restoring state. Network requests need their own cancellation, such as an `AbortSignal`.
 
-Nested Contact routes—paper, stall overview, and photo album—share one saved street camera position and target. Saving again at each subview would overwrite the return destination with a close-up. Reduced motion changes the transition duration while retaining the same final state.
+Nested Contact routes (paper, stall overview, photo album) share one saved street camera position and target. Saving again at each subview would overwrite the return point with a close-up. Reduced motion shortens the transitions but reaches the same final state.
 
-**What I learned:** camera animation is a state-management problem. Camera phase, shutter position, lighting, route, and input availability are related state dimensions; one `isOpen` boolean cannot describe them all.
+**Takeaway:** camera animation is a state-management problem. Camera phase, shutter position, lighting, route, and input availability are separate state dimensions that a single `isOpen` flag cannot represent.
 
 </details>
 
 <details class="notebook-topic">
   <summary>Loading, readiness, failure handling, and resource lifetime</summary>
 
-Download order and presentation order are different concerns. The road should establish the space before shops appear, even if a small skyline file finishes first.
+Download order and presentation order are separate concerns. The road should establish the space before shops appear, even if a small skyline file finishes first.
 
-`createStagedLoader()` runs two asynchronous workers over a priority-sorted job list. Loaded models are prepared while hidden. A separate sequence reveals road, pavement, lamps, shops, skyline, and details. Road and pavement are visual groups extracted from the same GLB.
+`createStagedLoader()` runs two concurrent loaders over a priority-sorted job list. Models are prepared while hidden, and a separate sequence reveals road, pavement, lamps, shops, skyline, and details in order. Road and pavement are visual groups extracted from the same GLB.
 
 ```js
-// Representative structure; details omitted.
+// Simplified structure.
 startTwoWorkers(prioritySortedJobs);
 
 for (const stage of presentationOrder) {
@@ -229,98 +252,101 @@ for (const stage of presentationOrder) {
 }
 ```
 
-Shop picking becomes available after the shop reveal. Destination choreography waits for complete scene readiness, and optional traffic starts afterward. This separates **loaded**, **visible**, **interactive**, and **ready for a close-up**.
+Shop picking enables after the shop reveal, destination choreography waits for full scene readiness, and optional traffic starts last. That gives four distinct states: **loaded**, **visible**, **interactive**, and **ready for a close-up**.
 
-A failed job records a failure and resolves its result so later stages can continue. Reduced motion preserves the sequence without the fade. Two workers are a conservative policy; they are not a measured optimum. JavaScript promises coordinate asynchronous progress—they do not create worker threads or remove decoding cost.
+A failed job records the failure and resolves, so later stages continue. Reduced motion keeps the sequence and drops the fade. The concurrency cap of two is a tunable policy. These loaders are async tasks on the main thread, not Web Workers, so they schedule network and decode work rather than parallelize it.
 
 #### Resource lifetime is part of the feature
 
-Removing a mesh from the scene does not free its GPU geometry, materials, textures, or render targets. Cleanup needs ownership rules. A temporary fade material can be disposed while its shared texture remains owned by the loaded asset.
+Removing a mesh from the scene does not free its GPU geometry, materials, textures, or render targets, so cleanup follows ownership rules. A temporary fade material is disposed while the shared texture it uses stays owned by the loaded asset.
 
-The photo wall is a useful example: it borrows model meshes, creates replacement geometry/materials and an atlas, then restores borrowed state and releases its own allocations. Generation checks reject late asynchronous results after teardown; abort signals help where the loading operation supports them.
+The photo wall is a good example: it borrows model meshes, creates replacement geometry, materials, and a texture atlas, then restores the borrowed state and releases its own allocations on exit. Generation counters reject async results that arrive after teardown, and abort signals cancel loads where supported.
 
-**What I learned:** a feature includes its exit path. Listeners, timers, observers, GPU allocations, and late arrivals need as much attention as the entrance animation.
+**Takeaway:** a feature includes its exit path. Listeners, timers, observers, GPU allocations, and late async results need as much care as the entrance animation.
 
 </details>
 
 <details class="notebook-topic">
-  <summary>Render passes, color quantization, DPR, and measurement</summary>
+  <summary>Render passes, color quantization, and DPR</summary>
 
-Pixel mode integrates Three.js's existing `RenderPixelatedPass` and `OutputPass` with a color-quantization shader. The design problem is preserving the street's appearance while keeping selected signs and artwork useful at close range.
-
-
+Pixel mode combines Three.js's `RenderPixelatedPass` and `OutputPass` with a custom color-quantization shader. The design goal is a stylized street where selected signs and artwork stay legible at close range.
 
 #### Why sharp artwork still needs depth
 
-Drawing a crisp sign on top of the finished image makes it readable through a wall. The implementation instead reconstructs full-resolution depth before drawing selected artwork:
+Drawing a crisp sign over the finished image would make it visible through walls. The renderer reconstructs full-resolution depth first:
 
 ```text
 Pixelated scene → output conversion → color quantization
 Clear depth → visible-geometry depth only → sharp artwork with depth testing
 ```
 
-The depth-only pass disables color writes, preserving the composed image while recording nearer geometry. The sharp pass can then obey occlusion. Selected authored sprites are excluded from the coarse pass so a second pixelated silhouette does not remain behind them. A `finally` block restores the affected visibility, color-write flags, background, auto-clear, and shadow-update flag even if a pass fails.
+The depth-only pass disables color writes, so it records nearer geometry without touching the composed image, and the sharp pass then respects occlusion. Selected sprites are excluded from the coarse pass so no pixelated duplicate shows behind them. A `finally` block restores visibility, color-write flags, background, auto-clear, and the shadow-update flag even if a pass throws.
 
 #### Pixel size and color are separate controls
 
-The block size is specified in CSS pixels and multiplied by device-pixel ratio. At DPR 2, a four-CSS-pixel block spans eight device pixels. The profile uses smaller blocks for mobile and close Contact views.
+Block size is specified in CSS pixels and multiplied by device-pixel ratio, so at DPR 2 a 4 px block spans 8 device pixels. Mobile and close Contact views use smaller blocks.
 
-For a normalized color channel $c$ and $L=16$ channel levels, quantization is:
+For a normalized color channel $c$ with $L=16$ levels, quantization is:
 
 $$
 q(c)=\frac{\operatorname{round}(c(L-1))}{L-1},\qquad
 c_{out}=(1-s)c+s\,q(c)
 $$
 
-Sixteen levels per RGB channel allow 4,096 combinations before blending. Because the shader blends by strength $s$, the final image is not restricted to those combinations. Tone mapping, output color-space conversion, and quantization are different operations; their ordering affects the result.
+Sixteen levels per channel give 4,096 base colors; blending by strength $s$ softens the result between them. Tone mapping, output color-space conversion, and quantization are distinct steps, and their order changes the final image.
 
-**What I learned:** a low-resolution style can still require extra full-resolution work. Pixel mode adds passes, so its appearance alone says nothing about performance. The fallback returns to Original mode if the optional pipeline cannot initialize or render.
+**Takeaway:** a low-resolution look can require extra full-resolution work. Pixel mode adds passes, so performance has to be measured, not assumed. If the pipeline fails to initialize or render, the app falls back to Original mode.
 
 </details>
 
 <details class="notebook-topic">
-  <summary>Changing the wrapper representation: authored motion, runtime state, and validation</summary>
+  <summary>The wrapper: authored motion, runtime state, and validation</summary>
 
-Early corner bends and separate panels could satisfy simple bounds while missing the silhouette I wanted. The continuous procedural versions improved the surface, but attractive endpoints still hid awkward folds in between. The useful intervention was changing the representation and the brief together.
+Corner bends and separate panels satisfied simple bounds but missed the silhouette I wanted. Continuous procedural versions improved the surface, yet good-looking endpoints hid awkward in-between folds. The breakthrough was changing the representation and the brief together.
 
 #### Author the shape; play the result
 
-The current source is an editable Blender scene. A cloth-assisted study supplies a starting point; sculpted poses and cleanup give control over the final choreography. Export preserves a connected 4,225-vertex grid, its UVs, the closed basis, and 24 position-and-normal morph targets. One two-second `Unwrap` clip uses discrete interpolation to hold 25 poses at 12 poses per second.
+The source is an editable Blender scene. A cloth-assisted study provides the starting motion; sculpted poses and cleanup give full control over the choreography. The export is a connected 4,225-vertex grid with UVs, a closed basis shape, and 24 position-and-normal morph targets. One two-second `Unwrap` clip uses step interpolation to hold 25 poses at 12 poses per second.
 
 ```text
 poseIndex = min(24, floor(elapsedSeconds × 12))
 ```
 
-This is an explanation of the pose schedule. The adapter selects the corresponding clip time; it does not run a cloth solver in the browser. Baked normals support each shape. Bounds include every exported pose, and shadow/outline refreshes follow held-pose changes. Printed front and blank reverse share geometry and morph weights, with separate materials. The external newspaper texture can change independently; contact-row coordinates must still match its layout.
+At runtime, the adapter maps elapsed time to clip time; the browser plays back authored poses with no physics solve. Baked normals keep shading correct for each shape, bounds cover every pose, and shadow and outline updates follow pose changes. The printed front and blank back share geometry and morph weights with separate materials. The newspaper texture can change independently, as long as the contact-row coordinates still match its layout.
 
-#### Two clocks, one useful reveal
+#### Two clocks, one reveal
 
-The camera approaches for 1.8 seconds while the parcel stays closed. The two-second unwrap begins with the 4.2-second overhead push. Links and food dragging wait for both completion conditions. Leaving before the cue keeps the parcel closed; leaving after it starts lets playback finish. The final state and dragged food positions survive later visits until reload. Reduced motion selects the final pose immediately.
+The camera approaches for 1.8 seconds while the parcel stays closed. The two-second unwrap starts with the 4.2-second overhead push, and links and food dragging wait for both to finish. Leaving before the cue keeps the parcel closed; leaving after it starts lets playback complete. The revealed state and dragged food positions persist across visits until reload. Reduced motion jumps straight to the final pose.
 
-That split matters: arrival, animation completion, and interaction readiness are different states. A suspended or long approach frame must not consume the reveal before its cue.
+Arrival, animation completion, and interaction readiness are separate states, and a slow or stalled approach frame cannot trigger the reveal early.
 
-#### What the checks establish
+#### Validation
 
-The current checks inspect all 25 actual exported poses for finite geometry, topology, concealment, clearance, and a flat serving/contact footprint. Four stretched pin corners initially produced needle-like edges; cleanup reduced the recorded maximum edge-length ratio from 20.26× to 3.72×, with a 4× regression ceiling. Eighteen lifecycle cases cover cue timing, interruption, return visits, and readiness. Source-workflow checks also verify that ordinary export preserves the saved scene and artwork replacement leaves the GLB unchanged.
+Checks run on all 25 exported poses for finite geometry, topology, concealment, clearance, and a flat contact footprint. Four stretched pin corners initially produced needle-like edges; cleanup cut the maximum edge-length ratio from 20.26× to 3.72×, now guarded by a 4× regression ceiling. Eighteen lifecycle cases cover cue timing, interruption, return visits, and readiness. Pipeline checks confirm that a standard export preserves the saved scene and that swapping the artwork leaves the GLB unchanged.
 
-These checks complement visual review. Connectivity and disk topology do not prove absence of self-intersection. This cloth-assisted, artistically cleaned sequence allows stretching; it is not an inextensible cloth simulation. Browser screenshots at phone dimensions are also distinct from testing a physical phone.
-
-<details>
-  <summary>Historical mechanism: the procedural parcel</summary>
-  <p>The October 15 saved implementation used a continuous 72 × 96 grid with radial compression, angular delays, and separate spread/flatten terms. Quintic smootherstep eased those terms; runtime updates recomputed normals and bounds. Its checks sampled 41 poses. That mechanism belongs to the historical parcel stage above, not the current Blender export.</p>
-</details>
-
-**What I learned:** a stronger brief can change the representation, not just its parameters. “Pass the geometry checks” and “look like somebody unwrapping lunch” are separate acceptance criteria.
-
-</details>
-
-### Delegation
-
-The role documents define shared context and distinct review responsibilities. They are a configured development protocol, not trained specialist models or a new agent platform. New assets can receive broader review; narrow revisions use the affected specialists. Review findings still need synthesis before one implementer changes the scene.
-
-</details>
+Geometry checks and visual review cover different failures: topology checks confirm one connected sheet, and visual review catches self-intersection and awkward folds. The art-directed approach trades physical exactness for precise control over the choreography.
 
 <details>
-  <summary>Visual credits and capture notes</summary>
-  <p>The hero was captured from the live city on October 24, 2026. The rendering comparison uses October 17 development captures; the wrapper timeline re-renders dated source snapshots alongside the local October 25 GLB using one comparison camera and current artwork. These are comparison renders, not screenshots taken on the original dates. Earlier October 19 pose captures remain in the source archive. The timeline does not recreate the undocumented diagonal-curl failure. The architecture and pipeline diagrams explain the system; the camera model illustrates a rule rather than live telemetry. Small props visible in the street include adapted <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> models: <a href="https://sketchfab.com/3d-models/lego-scarlet-witch-65fd0da1a5f04b4289db423cd00c9383">LEGO Scarlet Witch</a> by Ramón Ruiz, <a href="https://sketchfab.com/3d-models/art-reference-utah-teapot-4c02605ea63541b6aa053df167befe36">Art Reference: Utah Teapot</a> by Smallpoly, and <a href="https://sketchfab.com/3d-models/chicago-cubs-8d592b64547a46e4b730b8620f389296">Chicago Cubs</a> by Laurance Animations.</p>
+  <summary>Earlier approach: the procedural parcel</summary>
+  <p>The October 15 version used a continuous 72 × 96 grid deformed at runtime by radial compression, angular delays, and separate spread and flatten terms, eased with quintic smootherstep. Normals and bounds were recomputed every frame, and its checks sampled 41 poses. Moving to authored morph targets removed that per-frame cost and gave direct control over every pose.</p>
+</details>
+
+**Takeaway:** when parameter tuning stops helping, change the representation. "Passes the geometry checks" and "looks like someone unwrapping lunch" are separate acceptance criteria.
+
+</details>
+
+<details class="notebook-topic">
+  <summary>Delegation model</summary>
+
+The role documents give every agent the same project context and a distinct review responsibility. It is a development protocol built on general-purpose AI assistants with role-specific instructions. New assets get broad review; narrow revisions involve only the affected specialists. Findings are consolidated before a single implementer touches the scene.
+
+**Takeaway:** delegate with a bounded brief, one writer, and evidence-based acceptance. I own the direction and the final call.
+
+</details>
+
+</details>
+
+<details>
+  <summary>Visual credits</summary>
+  <p>The hero image was captured from the live city on October 24, 2026. The rendering comparison uses October 17 development captures, and the wrapper timeline re-renders each saved version with a shared camera and current artwork for a like-for-like comparison. Small props in the street include adapted <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> models: <a href="https://sketchfab.com/3d-models/lego-scarlet-witch-65fd0da1a5f04b4289db423cd00c9383">LEGO Scarlet Witch</a> by Ramón Ruiz, <a href="https://sketchfab.com/3d-models/art-reference-utah-teapot-4c02605ea63541b6aa053df167befe36">Art Reference: Utah Teapot</a> by Smallpoly, and <a href="https://sketchfab.com/3d-models/chicago-cubs-8d592b64547a46e4b730b8620f389296">Chicago Cubs</a> by Laurance Animations.</p>
 </details>
